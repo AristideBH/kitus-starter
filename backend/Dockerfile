@@ -14,6 +14,8 @@ RUN /etc/init.d/postgresql start && \
 
 # Switch back to root
 USER root
+RUN service postgresql start && \
+    yarn directus bootstrap
 
 # Set environment variables
 ENV KEY=${DIRECTUS_KEY}
