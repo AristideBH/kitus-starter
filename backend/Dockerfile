@@ -14,8 +14,13 @@ RUN /etc/init.d/postgresql start && \
 
 # Switch back to root
 USER root
-RUN service postgresql start && \
-    yarn directus bootstrap
+UN service postgresql start && \
+    DB_CLIENT=pg \
+    DB_HOST=localhost \
+    DB_PORT=5432 \
+    DB_DATABASE=directus \
+    DB_USER=directus \
+    DB_PASSWORD=directus \
 
 # Set environment variables
 ENV KEY=${DIRECTUS_KEY}
