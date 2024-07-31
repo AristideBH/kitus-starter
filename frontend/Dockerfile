@@ -5,7 +5,7 @@ ARG TZ=Europe/Paris
 ARG PUBLIC_DIRECTUS_URL
 ARG PUBLIC_COOKIE_DOMAIN
 
-COPY . /usr/src/app
+COPY ./frontend /usr/src/app
 RUN apk --no-cache add curl tzdata
 RUN cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN npm install --force
