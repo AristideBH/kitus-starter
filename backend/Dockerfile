@@ -1,12 +1,10 @@
 FROM node:18-bullseye
 
-# Install PostgreSQL and Redis
-RUN apt-get update && apt-get install -y postgresql redis-server
+# Install PostgreSQL, Redis, and Yarn
+RUN apt-get update && apt-get install -y postgresql redis-server yarn
 
-# Clear npm cache and install Directus
-RUN npm cache clean --force && \
-    npm init -y && \
-    npm install directus
+# Install Directus using Yarn
+RUN yarn init -y && yarn add directus
 
 # Set up PostgreSQL
 USER postgres
@@ -42,4 +40,4 @@ VOLUME /data
 EXPOSE 8055 5432 6379
 
 # Start PostgreSQL, Redis, and Directus
-CMD service postgresql start && service redis-server start && npx directus start
+CMD service postgresql start && service redis-server start && yarn directus start
