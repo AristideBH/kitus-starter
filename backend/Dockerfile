@@ -14,7 +14,7 @@ RUN /etc/init.d/postgresql start && \
 
 # Switch back to root
 USER root
-UN service postgresql start && \
+RUN service postgresql start && \
     DB_CLIENT=pg \
     DB_HOST=localhost \
     DB_PORT=5432 \
