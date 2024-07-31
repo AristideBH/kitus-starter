@@ -1,29 +1,40 @@
 FROM directus/directus:latest
 
+# Install PostgreSQL and Redis
+RUN apt-get update && apt-get install -y postgresql redis-server
+
+# Set up PostgreSQL
+USER postgres
+RUN /etc/init.d/postgresql start && \
+    psql --command "CREATE USER directus WITH SUPERUSER PASSWORD 'directus';" && \
+    createdb -O directus directus
+
+# Switch back to root
+USER root
+
 # Set environment variables
 ENV KEY=${DIRECTUS_KEY}
 ENV SECRET=${DIRECTUS_SECRET}
-ENV PUBLIC_URL=${PUBLIC_URL}
-ENV DB_CLIENT=mysql
-ENV DB_HOST=${DB_HOST}
-ENV DB_PORT=${DB_PORT}
-ENV DB_DATABASE=${MYSQL_DATABASE}
-ENV DB_USER=${MYSQL_USER}
-ENV DB_PASSWORD=${MYSQL_PASSWORD}
+ENV DB_CLIENT=pg
+ENV DB_HOST=localhost
+ENV DB_PORT=5432
+ENV DB_DATABASE=directus
+ENV DB_USER=directus
+ENV DB_PASSWORD=directus
 ENV CACHE_ENABLED=true
 ENV CACHE_STORE=redis
-ENV CACHE_AUTO_PURGE=${CACHE_AUTO_PURGE}
-ENV CACHE_TTL=${CACHE_TTL}
-ENV REDIS=${REDIS_URL}
+ENV REDIS=redis://localhost:6379
 ENV ADMIN_EMAIL=${ADMIN_EMAIL}
 ENV ADMIN_PASSWORD=${ADMIN_PASSWORD}
 
 # Create volumes
 VOLUME /directus/uploads
 VOLUME /directus/extensions
+VOLUME /var/lib/postgresql/data
+VOLUME /data
 
-# Expose Directus port
-EXPOSE 8055
+# Expose ports
+EXPOSE 8055 5432 6379
 
-# Start Directus
-CMD ["npx", "directus", "start"]
+# Start PostgreSQL, Redis, and Directus
+CMD service postgresql start && service redis-server start && npx directus start
