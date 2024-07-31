@@ -12,7 +12,7 @@ ARG DB_PASSWORD
 
 
 # Install PostgreSQL, Redis, and Yarn
-RUN apt-get update && apt-get install -y postgresql redis-server yarn
+RUN apt-get update && apt-get install -y postgresql redis-server yarn postgis postgresql-13-postgis-3
 
 # Install Directus using Yarn
 RUN yarn init -y && yarn add directus && yarn add sharp --ignore-engines
