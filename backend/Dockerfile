@@ -10,7 +10,6 @@ ARG DB_NAME
 ARG DB_USER
 ARG DB_PASSWORD
 
-
 # Install PostgreSQL, Redis, and Yarn
 RUN apt-get update && apt-get install -y postgresql redis-server yarn postgis postgresql-13-postgis-3
 
@@ -21,7 +20,8 @@ RUN yarn init -y && yarn add directus && yarn add sharp --ignore-engines
 USER postgres
 RUN /etc/init.d/postgresql start && \
     psql --command "CREATE USER directus WITH SUPERUSER PASSWORD 'directus';" && \
-    createdb -O directus directus
+    createdb -O directus directus && \
+    psql -d directus -c "CREATE EXTENSION postgis;"
 
 # Switch back to root
 USER root
