@@ -1,7 +1,13 @@
 FROM directus/directus:latest
 
-# Install pnpm
-RUN npm install -g pnpm
+# Switch to root user to install pnpm
+USER root
+
+# Install pnpm with --unsafe-perm flag
+RUN npm install -g pnpm --unsafe-perm
+
+# Switch back to the node user
+USER node
 
 # Set working directory
 WORKDIR /directus
