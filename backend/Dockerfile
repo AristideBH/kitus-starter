@@ -1,5 +1,12 @@
 FROM node:18-bullseye
 
+ARG ADMIN_EMAIL
+ARG ADMIN_PASSWORD
+ARG CAPROVER_GIT_COMMIT_SHA
+ARG DIRECTUS_KEY
+ARG DIRECTUS_SECRET
+ARG PUBLIC_URL
+
 # Install PostgreSQL, Redis, and Yarn
 RUN apt-get update && apt-get install -y postgresql redis-server yarn
 
