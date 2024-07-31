@@ -3,8 +3,10 @@ FROM node:18-bullseye
 # Install PostgreSQL and Redis
 RUN apt-get update && apt-get install -y postgresql redis-server
 
-# Install Directus
-RUN npm init -y && npm install directus
+# Clear npm cache and install Directus
+RUN npm cache clean --force && \
+    npm init -y && \
+    npm install directus
 
 # Set up PostgreSQL
 USER postgres
