@@ -1,0 +1,17 @@
+{
+  "name": "starter_caprover-sveltekit-directus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:backend": "pnpm --filter backend run dev",
+    "dev:frontend": "pnpm --filter frontend run dev",
+    "build:backend": "pnpm --filter backend run build",
+    "build:frontend": "pnpm --filter frontend run build",
+    "start:backend": "pnpm --filter backend run start",
+    "start:frontend": "pnpm --filter frontend run start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
