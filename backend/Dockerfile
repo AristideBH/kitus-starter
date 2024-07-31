@@ -6,6 +6,10 @@ ARG CAPROVER_GIT_COMMIT_SHA
 ARG DIRECTUS_KEY
 ARG DIRECTUS_SECRET
 ARG PUBLIC_URL
+ARG DB_NAME
+ARG DB_USER
+ARG DB_PASSWORD
+
 
 # Install PostgreSQL, Redis, and Yarn
 RUN apt-get update && apt-get install -y postgresql redis-server yarn
@@ -22,12 +26,12 @@ RUN /etc/init.d/postgresql start && \
 # Switch back to root
 USER root
 RUN service postgresql start && \
-    DB_CLIENT=pg \
-    DB_HOST=localhost \
-    DB_PORT=5432 \
-    DB_DATABASE=directus \
-    DB_USER=directus \
-    DB_PASSWORD=directus \
+    DB_CLIENT=$DB_CLIENT \
+    DB_HOST=$DB_HOST \
+    DB_PORT=$DB_PORT \
+    DB_DATABASE=$DB_DATABASE \
+    DB_USER=$DB_USER \
+    DB_PASSWORD=$DB_PASSWORD \
     yarn directus bootstrap
 
 # Set environment variables
@@ -36,9 +40,9 @@ ENV SECRET=${DIRECTUS_SECRET}
 ENV DB_CLIENT=pg
 ENV DB_HOST=localhost
 ENV DB_PORT=5432
-ENV DB_DATABASE=directus
-ENV DB_USER=directus
-ENV DB_PASSWORD=directus
+ENV DB_DATABASE=${DB_NAME}
+ENV DB_USER=${DB_USER}
+ENV DB_PASSWORD=${DB_PASSWORD}
 ENV CACHE_ENABLED=true
 ENV CACHE_STORE=redis
 ENV REDIS=redis://localhost:6379
