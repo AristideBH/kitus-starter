@@ -26,9 +26,9 @@ RUN /etc/init.d/postgresql start && \
 # Switch back to root
 USER root
 RUN service postgresql start && \
-    DB_CLIENT=$DB_CLIENT \
-    DB_HOST=$DB_HOST \
-    DB_PORT=$DB_PORT \
+    DB_CLIENT=pg \
+    DB_HOST=localhost \
+    DB_PORT=5432 \
     DB_DATABASE=$DB_DATABASE \
     DB_USER=$DB_USER \
     DB_PASSWORD=$DB_PASSWORD \
