@@ -4,7 +4,7 @@ FROM node:18-bullseye
 RUN apt-get update && apt-get install -y postgresql redis-server yarn
 
 # Install Directus using Yarn
-RUN yarn init -y && yarn add directus
+RUN yarn init -y && yarn add directus && yarn add sharp --ignore-engines
 
 # Set up PostgreSQL
 USER postgres
