@@ -21,6 +21,7 @@ RUN service postgresql start && \
     DB_DATABASE=directus \
     DB_USER=directus \
     DB_PASSWORD=directus \
+    yarn directus bootstrap
 
 # Set environment variables
 ENV KEY=${DIRECTUS_KEY}
