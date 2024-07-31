@@ -12,7 +12,7 @@ ARG DB_PASSWORD
 
 
 # Install PostgreSQL, Redis, and Yarn
-RUN apt-get update && apt-get install -y postgresql redis-server yarn
+RUN apt-get update && apt-get install -y postgresql redis-server yarn postgis postgresql-13-postgis-3
 
 # Install Directus using Yarn
 RUN yarn init -y && yarn add directus && yarn add sharp --ignore-engines
@@ -57,6 +57,15 @@ VOLUME /data
 
 # Expose ports
 EXPOSE 8055 5432 6379
+
+RUN mkdir -p /directus/uploads /directus/extensions && \
+    chown -R node:node /directus/uploads /directus/extensions && \
+    chmod -R 755 /directus/uploads /directus/extensions
+
+USER node
+
+WORKDIR /directus
+
 
 # Start PostgreSQL, Redis, and Directus
 CMD service postgresql start && service redis-server start && yarn directus start
