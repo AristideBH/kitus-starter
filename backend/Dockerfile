@@ -1,29 +1,38 @@
 FROM directus/directus:latest
 
-# Switch to root user to install pnpm
-USER root
-
-# Install pnpm with --unsafe-perm flag
-RUN npm install -g pnpm --unsafe-perm
-
-# Switch back to the node user
-USER node
-
-# Set working directory
-WORKDIR /directus
+# Install MySQL and Redis
+RUN apt-get update && apt-get install -y mysql-server redis-server
 
 # Copy configuration files
-COPY package.json .
-COPY pnpm-lock.yaml .
+COPY my.cnf /etc/mysql/my.cnf
+COPY redis.conf /etc/redis/redis.conf
 
-# Install dependencies
-RUN pnpm install
+# Set up environment variables
+ENV KEY=${DIRECTUS_KEY}
+ENV SECRET=${DIRECTUS_SECRET}
+ENV PUBLIC_URL=${PUBLIC_URL}
+ENV DB_CLIENT=mysql
+ENV DB_HOST=localhost
+ENV DB_PORT=3306
+ENV DB_DATABASE=${MYSQL_DATABASE}
+ENV DB_USER=${MYSQL_USER}
+ENV DB_PASSWORD=${MYSQL_PASSWORD}
+ENV CACHE_ENABLED=true
+ENV CACHE_STORE=redis
+ENV CACHE_AUTO_PURGE=${CACHE_AUTO_PURGE}
+ENV CACHE_TTL=${CACHE_TTL}
+ENV REDIS=redis://localhost:6379
+ENV ADMIN_EMAIL=${ADMIN_EMAIL}
+ENV ADMIN_PASSWORD=${ADMIN_PASSWORD}
 
-# Copy the rest of your backend files
-COPY ./backend .
+# Create volumes
+VOLUME /directus/uploads
+VOLUME /directus/extensions
+VOLUME /var/lib/mysql
+VOLUME /var/lib/redis
 
-# Expose the port Directus runs on
-EXPOSE 8055
+# Expose ports
+EXPOSE 8055 3306 6379
 
-# Start Directus
-CMD ["npx", "directus", "start"]
+# Start MySQL, Redis, and Directus
+CMD service mysql start && service redis-server start && npx directus start
