@@ -58,11 +58,6 @@ VOLUME /data
 # Expose ports
 EXPOSE 8055 5432 6379
 
-RUN mkdir -p /uploads /extensions && \
-    chown -R node:node /uploads /extensions && \
-    chmod -R 755 /uploads /extensions
-
-USER node
 
 # Start PostgreSQL, Redis, and Directus
 CMD service postgresql start && service redis-server start && yarn directus start
