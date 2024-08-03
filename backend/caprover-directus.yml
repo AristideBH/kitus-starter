@@ -57,6 +57,8 @@ services:
       ADMIN_EMAIL: $$cap_admin_email
       ADMIN_PASSWORD: $$cap_admin_password
 
+      MARKETPLACE_TRUST: "all"
+
       # Check more docs https://docs.directus.io/self-hosted/config-options.html#email
       EMAIL_FROM: noreply@example.com
       EMAIL_TRANSPORT: smtp
