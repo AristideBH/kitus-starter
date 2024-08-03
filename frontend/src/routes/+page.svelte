@@ -7,6 +7,12 @@
 	<li>Types sync</li>
 	<li>Authentification</li>
 	<li>Tailwind and Shadcn-svelte</li>
-	<li>Pages transition</li>
-	<li><ul></ul></li>
+	<li>Pages transitions</li>
+	<li>
+		<ul>
+			<li>Image component</li>
+			<li>Pagination component</li>
+			<li>Load preprocessor</li>
+		</ul>
+	</li>
 </ul>
