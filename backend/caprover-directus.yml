@@ -58,12 +58,12 @@ services:
       ADMIN_PASSWORD: $$cap_admin_password
 
       # Check more docs https://docs.directus.io/self-hosted/config-options.html#email
-      EMAIL_FROM: hello@aristide-bh.com
+      EMAIL_FROM: noreply@example.com
       EMAIL_TRANSPORT: smtp
       EMAIL_SMTP_HOST: smtp.hostinger.com
       EMAIL_SMTP_PORT: 465
-      EMAIL_SMTP_USER: hello@aristide-bh.com
-      EMAIL_SMTP_PASSWORD: BHaristide2501@
+      EMAIL_SMTP_USER: mail@example.com
+      EMAIL_SMTP_PASSWORD: yourpassword
       EMAIL_SMTP_POOL: true
       EMAIL_TEMPLATES_PATH: ./templates
 

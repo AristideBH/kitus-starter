@@ -1,2 +1,12 @@
-<h1>Welcome to starterkit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<h1>Welcome to Starterkit</h1>
+<p>A custom boilerplate for Sveltekit and Directus</p>
+
+<ul>
+	<li>Sveltekit</li>
+	<li>Directus</li>
+	<li>Types sync</li>
+	<li>Authentification</li>
+	<li>Tailwind and Shadcn-svelte</li>
+	<li>Pages transition</li>
+	<li><ul></ul></li>
+</ul>
