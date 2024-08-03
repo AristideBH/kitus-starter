@@ -1,0 +1,58 @@
+captainVersion: 4
+caproverOneClickApp:
+  instructions:
+    start: Custom Directus installation.
+    end: Directus is ready.
+######
+version: "3"
+services:
+  database:
+    image: postgis/postgis:13-master
+    volumes:
+      - ./data/database:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "directus"
+      POSTGRES_PASSWORD: "directus"
+      POSTGRES_DB: "directus"
+
+  cache:
+    image: redis:6
+
+  directus:
+    # Check latest release : https://hub.docker.com/r/directus/directus/tags
+    image: directus/directus:10.13.1
+    ports:
+      - 8055:8055
+    volumes:
+      - ./database:/directus/database
+      - ./uploads:/directus/uploads
+      - ./extensions:/directus/extensions
+      - ./templates:/directus/templates
+    depends_on:
+      - cache
+      - database
+    environment:
+      # Get a random hex string : https://www.browserling.com/tools/random-hex
+      SECRET: "a861b5c61fb38ff8"
+
+      DB_CLIENT: "pg"
+      DB_HOST: "srv-captain--database" # NOTICE : keep the prefix "srv-captain--"
+      DB_PORT: "5432"
+      DB_DATABASE: "directus"
+      DB_USER: "directus"
+      DB_PASSWORD: "directus"
+
+      CACHE_ENABLED: "true"
+      CACHE_AUTO_PURGE: "true"
+      CACHE_STORE: "redis"
+      REDIS: "redis://srv-captain--cache:6379" # NOTICE : keep the prefix "srv-captain--"
+
+      ADMIN_EMAIL: "aristide.bruneau@gmail.com"
+      ADMIN_PASSWORD: "BHaristide2501@"
+
+      # Make sure to set this in production
+      # PUBLIC_URL: "https://directus.example.com"
+
+    # Environment variables can also be defined in a file (for example `.env`):
+    # env_file:
+    #	  - .env
