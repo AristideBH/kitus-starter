@@ -15,6 +15,10 @@ importers:
         version: 10.13.1(@types/node@22.0.0)(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(encoding@0.1.13)(lodash@4.17.21)(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(terser@5.31.3)(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4))
 
   frontend:
+    dependencies:
+      mode-watcher:
+        specifier: ^0.4.1
+        version: 0.4.1(svelte@5.0.0-next.221)
     devDependencies:
       '@directus/sdk':
         specifier: ^17.0.0
@@ -4437,6 +4441,11 @@ packages:
   mnemonist@0.39.8:
     resolution: {integrity: sha512-vyWo2K3fjrUw8YeeZ1zF0fy6Mu59RHokURlld8ymdUPjMlD9EC9ov1/YPqTgqRvUN9nTr3Gqfz29LYAmu0PHPQ==}
 
+  mode-watcher@0.4.1:
+    resolution: {integrity: sha512-bNC+1NXmwEFZtziCdZSgP7HFQTpqJPcQn9GwwJQGSf6SBF3neEPYV1uRwkYuAQwbsvsXIYtzaqgedDzJ7D1mhg==}
+    peerDependencies:
+      svelte: ^4.0.0 || ^5.0.0-next.1
+
   mri@1.1.4:
     resolution: {integrity: sha512-6y7IjGPm8AzlvoUrwAaw1tLnUBudaS3752vcd8JtrpGGQn+rXIe63LFVHm/YMwtqAuh+LJPCFdlLYPWM1nYn6w==}
     engines: {node: '>=4'}
@@ -6378,10 +6387,10 @@ snapshots:
       '@aws-crypto/sha1-browser': 3.0.0
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/client-sso-oidc': 3.569.0
-      '@aws-sdk/client-sts': 3.569.0(@aws-sdk/client-sso-oidc@3.569.0)
+      '@aws-sdk/client-sso-oidc': 3.569.0(@aws-sdk/client-sts@3.569.0)
+      '@aws-sdk/client-sts': 3.569.0
       '@aws-sdk/core': 3.567.0
-      '@aws-sdk/credential-provider-node': 3.569.0(@aws-sdk/client-sso-oidc@3.569.0)(@aws-sdk/client-sts@3.569.0(@aws-sdk/client-sso-oidc@3.569.0))
+      '@aws-sdk/credential-provider-node': 3.569.0(@aws-sdk/client-sso-oidc@3.569.0(@aws-sdk/client-sts@3.569.0))(@aws-sdk/client-sts@3.569.0)
       '@aws-sdk/middleware-bucket-endpoint': 3.568.0
       '@aws-sdk/middleware-expect-continue': 3.567.0
       '@aws-sdk/middleware-flexible-checksums': 3.567.0
@@ -6483,13 +6492,13 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/client-sso-oidc@3.569.0':
+  '@aws-sdk/client-sso-oidc@3.569.0(@aws-sdk/client-sts@3.569.0)':
     dependencies:
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/client-sts': 3.569.0(@aws-sdk/client-sso-oidc@3.569.0)
+      '@aws-sdk/client-sts': 3.569.0
       '@aws-sdk/core': 3.567.0
-      '@aws-sdk/credential-provider-node': 3.569.0(@aws-sdk/client-sso-oidc@3.569.0)(@aws-sdk/client-sts@3.569.0(@aws-sdk/client-sso-oidc@3.569.0))
+      '@aws-sdk/credential-provider-node': 3.569.0(@aws-sdk/client-sso-oidc@3.569.0(@aws-sdk/client-sts@3.569.0))(@aws-sdk/client-sts@3.569.0)
       '@aws-sdk/middleware-host-header': 3.567.0
       '@aws-sdk/middleware-logger': 3.568.0
       '@aws-sdk/middleware-recursion-detection': 3.567.0
@@ -6526,6 +6535,7 @@ snapshots:
       '@smithy/util-utf8': 2.3.0
       tslib: 2.6.3
     transitivePeerDependencies:
+      - '@aws-sdk/client-sts'
       - aws-crt
 
   '@aws-sdk/client-sso-oidc@3.600.0':
@@ -6705,13 +6715,13 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/client-sts@3.569.0(@aws-sdk/client-sso-oidc@3.569.0)':
+  '@aws-sdk/client-sts@3.569.0':
     dependencies:
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/client-sso-oidc': 3.569.0
+      '@aws-sdk/client-sso-oidc': 3.569.0(@aws-sdk/client-sts@3.569.0)
       '@aws-sdk/core': 3.567.0
-      '@aws-sdk/credential-provider-node': 3.569.0(@aws-sdk/client-sso-oidc@3.569.0)(@aws-sdk/client-sts@3.569.0(@aws-sdk/client-sso-oidc@3.569.0))
+      '@aws-sdk/credential-provider-node': 3.569.0(@aws-sdk/client-sso-oidc@3.569.0(@aws-sdk/client-sts@3.569.0))(@aws-sdk/client-sts@3.569.0)
       '@aws-sdk/middleware-host-header': 3.567.0
       '@aws-sdk/middleware-logger': 3.568.0
       '@aws-sdk/middleware-recursion-detection': 3.567.0
@@ -6748,7 +6758,6 @@ snapshots:
       '@smithy/util-utf8': 2.3.0
       tslib: 2.6.3
     transitivePeerDependencies:
-      - '@aws-sdk/client-sso-oidc'
       - aws-crt
 
   '@aws-sdk/client-sts@3.600.0':
@@ -6854,13 +6863,13 @@ snapshots:
       '@smithy/util-stream': 3.1.3
       tslib: 2.6.3
 
-  '@aws-sdk/credential-provider-ini@3.568.0(@aws-sdk/client-sso-oidc@3.569.0)(@aws-sdk/client-sts@3.569.0(@aws-sdk/client-sso-oidc@3.569.0))':
+  '@aws-sdk/credential-provider-ini@3.568.0(@aws-sdk/client-sso-oidc@3.569.0(@aws-sdk/client-sts@3.569.0))(@aws-sdk/client-sts@3.569.0)':
     dependencies:
-      '@aws-sdk/client-sts': 3.569.0(@aws-sdk/client-sso-oidc@3.569.0)
+      '@aws-sdk/client-sts': 3.569.0
       '@aws-sdk/credential-provider-env': 3.568.0
       '@aws-sdk/credential-provider-process': 3.568.0
-      '@aws-sdk/credential-provider-sso': 3.568.0(@aws-sdk/client-sso-oidc@3.569.0)
-      '@aws-sdk/credential-provider-web-identity': 3.568.0(@aws-sdk/client-sts@3.569.0(@aws-sdk/client-sso-oidc@3.569.0))
+      '@aws-sdk/credential-provider-sso': 3.568.0(@aws-sdk/client-sso-oidc@3.569.0(@aws-sdk/client-sts@3.569.0))
+      '@aws-sdk/credential-provider-web-identity': 3.568.0(@aws-sdk/client-sts@3.569.0)
       '@aws-sdk/types': 3.567.0
       '@smithy/credential-provider-imds': 2.3.0
       '@smithy/property-provider': 2.2.0
@@ -6907,14 +6916,14 @@ snapshots:
       - '@aws-sdk/client-sso-oidc'
       - aws-crt
 
-  '@aws-sdk/credential-provider-node@3.569.0(@aws-sdk/client-sso-oidc@3.569.0)(@aws-sdk/client-sts@3.569.0(@aws-sdk/client-sso-oidc@3.569.0))':
+  '@aws-sdk/credential-provider-node@3.569.0(@aws-sdk/client-sso-oidc@3.569.0(@aws-sdk/client-sts@3.569.0))(@aws-sdk/client-sts@3.569.0)':
     dependencies:
       '@aws-sdk/credential-provider-env': 3.568.0
       '@aws-sdk/credential-provider-http': 3.568.0
-      '@aws-sdk/credential-provider-ini': 3.568.0(@aws-sdk/client-sso-oidc@3.569.0)(@aws-sdk/client-sts@3.569.0(@aws-sdk/client-sso-oidc@3.569.0))
+      '@aws-sdk/credential-provider-ini': 3.568.0(@aws-sdk/client-sso-oidc@3.569.0(@aws-sdk/client-sts@3.569.0))(@aws-sdk/client-sts@3.569.0)
       '@aws-sdk/credential-provider-process': 3.568.0
-      '@aws-sdk/credential-provider-sso': 3.568.0(@aws-sdk/client-sso-oidc@3.569.0)
-      '@aws-sdk/credential-provider-web-identity': 3.568.0(@aws-sdk/client-sts@3.569.0(@aws-sdk/client-sso-oidc@3.569.0))
+      '@aws-sdk/credential-provider-sso': 3.568.0(@aws-sdk/client-sso-oidc@3.569.0(@aws-sdk/client-sts@3.569.0))
+      '@aws-sdk/credential-provider-web-identity': 3.568.0(@aws-sdk/client-sts@3.569.0)
       '@aws-sdk/types': 3.567.0
       '@smithy/credential-provider-imds': 2.3.0
       '@smithy/property-provider': 2.2.0
@@ -6980,10 +6989,10 @@ snapshots:
       '@smithy/types': 3.3.0
       tslib: 2.6.3
 
-  '@aws-sdk/credential-provider-sso@3.568.0(@aws-sdk/client-sso-oidc@3.569.0)':
+  '@aws-sdk/credential-provider-sso@3.568.0(@aws-sdk/client-sso-oidc@3.569.0(@aws-sdk/client-sts@3.569.0))':
     dependencies:
       '@aws-sdk/client-sso': 3.568.0
-      '@aws-sdk/token-providers': 3.568.0(@aws-sdk/client-sso-oidc@3.569.0)
+      '@aws-sdk/token-providers': 3.568.0(@aws-sdk/client-sso-oidc@3.569.0(@aws-sdk/client-sts@3.569.0))
       '@aws-sdk/types': 3.567.0
       '@smithy/property-provider': 2.2.0
       '@smithy/shared-ini-file-loader': 2.4.0
@@ -7019,9 +7028,9 @@ snapshots:
       - '@aws-sdk/client-sso-oidc'
       - aws-crt
 
-  '@aws-sdk/credential-provider-web-identity@3.568.0(@aws-sdk/client-sts@3.569.0(@aws-sdk/client-sso-oidc@3.569.0))':
+  '@aws-sdk/credential-provider-web-identity@3.568.0(@aws-sdk/client-sts@3.569.0)':
     dependencies:
-      '@aws-sdk/client-sts': 3.569.0(@aws-sdk/client-sso-oidc@3.569.0)
+      '@aws-sdk/client-sts': 3.569.0
       '@aws-sdk/types': 3.567.0
       '@smithy/property-provider': 2.2.0
       '@smithy/types': 2.12.0
@@ -7191,9 +7200,9 @@ snapshots:
       '@smithy/types': 2.12.0
       tslib: 2.6.3
 
-  '@aws-sdk/token-providers@3.568.0(@aws-sdk/client-sso-oidc@3.569.0)':
+  '@aws-sdk/token-providers@3.568.0(@aws-sdk/client-sso-oidc@3.569.0(@aws-sdk/client-sts@3.569.0))':
     dependencies:
-      '@aws-sdk/client-sso-oidc': 3.569.0
+      '@aws-sdk/client-sso-oidc': 3.569.0(@aws-sdk/client-sts@3.569.0)
       '@aws-sdk/types': 3.567.0
       '@smithy/property-provider': 2.2.0
       '@smithy/shared-ini-file-loader': 2.4.0
@@ -7467,9 +7476,9 @@ snapshots:
       '@directus/constants': 11.0.4
       '@directus/env': 1.3.0(vue@3.4.27(typescript@5.5.4))
       '@directus/errors': 0.3.3
-      '@directus/extensions': 1.0.9(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(knex@3.1.0(pg@8.12.0))(mysql@2.18.1)(pg@8.12.0)(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(pino@9.2.0)(sqlite3@5.1.7)(tedious@18.2.0)(vue@3.4.27(typescript@5.5.4))
-      '@directus/extensions-registry': 1.0.9(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(knex@3.1.0(pg@8.12.0))(mysql@2.18.1)(pg@8.12.0)(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(pino@9.2.0)(sqlite3@5.1.7)(tedious@18.2.0)(vue@3.4.27(typescript@5.5.4))
-      '@directus/extensions-sdk': 11.0.9(@types/node@22.0.0)(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(knex@3.1.0(pg@8.12.0))(mysql@2.18.1)(pg@8.12.0)(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(pino@9.2.0)(sqlite3@5.1.7)(tedious@18.2.0)(terser@5.31.3)(typescript@5.5.4)
+      '@directus/extensions': 1.0.9(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(knex@3.1.0(mysql@2.18.1)(pg@8.12.0)(sqlite3@5.1.7)(tedious@18.2.0))(mysql@2.18.1)(pg@8.12.0)(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(pino@9.2.0)(sqlite3@5.1.7)(tedious@18.2.0)(vue@3.4.27(typescript@5.5.4))
+      '@directus/extensions-registry': 1.0.9(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(knex@3.1.0(mysql@2.18.1)(pg@8.12.0)(sqlite3@5.1.7)(tedious@18.2.0))(mysql@2.18.1)(pg@8.12.0)(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(pino@9.2.0)(sqlite3@5.1.7)(tedious@18.2.0)(vue@3.4.27(typescript@5.5.4))
+      '@directus/extensions-sdk': 11.0.9(@types/node@22.0.0)(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(knex@3.1.0(mysql@2.18.1)(pg@8.12.0)(sqlite3@5.1.7)(tedious@18.2.0))(mysql@2.18.1)(pg@8.12.0)(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(pino@9.2.0)(sqlite3@5.1.7)(tedious@18.2.0)(terser@5.31.3)(typescript@5.5.4)
       '@directus/format-title': 10.1.2
       '@directus/memory': 1.0.10(vue@3.4.27(typescript@5.5.4))
       '@directus/pressure': 1.0.21(vue@3.4.27(typescript@5.5.4))
@@ -7690,10 +7699,10 @@ snapshots:
       '@directus/storage': 10.1.0
       ms: 2.1.3
 
-  '@directus/extensions-registry@1.0.9(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(knex@3.1.0(pg@8.12.0))(mysql@2.18.1)(pg@8.12.0)(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(pino@9.2.0)(sqlite3@5.1.7)(tedious@18.2.0)(vue@3.4.27(typescript@5.5.4))':
+  '@directus/extensions-registry@1.0.9(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(knex@3.1.0(mysql@2.18.1)(pg@8.12.0)(sqlite3@5.1.7)(tedious@18.2.0))(mysql@2.18.1)(pg@8.12.0)(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(pino@9.2.0)(sqlite3@5.1.7)(tedious@18.2.0)(vue@3.4.27(typescript@5.5.4))':
     dependencies:
       '@directus/errors': 0.3.3
-      '@directus/extensions': 1.0.9(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(knex@3.1.0(pg@8.12.0))(mysql@2.18.1)(pg@8.12.0)(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(pino@9.2.0)(sqlite3@5.1.7)(tedious@18.2.0)(vue@3.4.27(typescript@5.5.4))
+      '@directus/extensions': 1.0.9(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(knex@3.1.0(mysql@2.18.1)(pg@8.12.0)(sqlite3@5.1.7)(tedious@18.2.0))(mysql@2.18.1)(pg@8.12.0)(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(pino@9.2.0)(sqlite3@5.1.7)(tedious@18.2.0)(vue@3.4.27(typescript@5.5.4))
       '@directus/utils': 11.0.10(vue@3.4.27(typescript@5.5.4))
       ky: 1.3.0
       lodash-es: 4.17.21
@@ -7715,13 +7724,13 @@ snapshots:
       - vue
       - vue-router
 
-  '@directus/extensions-sdk@11.0.9(@types/node@22.0.0)(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(knex@3.1.0(pg@8.12.0))(mysql@2.18.1)(pg@8.12.0)(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(pino@9.2.0)(sqlite3@5.1.7)(tedious@18.2.0)(terser@5.31.3)(typescript@5.5.4)':
+  '@directus/extensions-sdk@11.0.9(@types/node@22.0.0)(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(knex@3.1.0(mysql@2.18.1)(pg@8.12.0)(sqlite3@5.1.7)(tedious@18.2.0))(mysql@2.18.1)(pg@8.12.0)(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(pino@9.2.0)(sqlite3@5.1.7)(tedious@18.2.0)(terser@5.31.3)(typescript@5.5.4)':
     dependencies:
       '@directus/composables': 10.1.15(vue@3.4.27(typescript@5.5.4))
       '@directus/constants': 11.0.4
-      '@directus/extensions': 1.0.9(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(knex@3.1.0(pg@8.12.0))(mysql@2.18.1)(pg@8.12.0)(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(pino@9.2.0)(sqlite3@5.1.7)(tedious@18.2.0)(vue@3.4.27(typescript@5.5.4))
+      '@directus/extensions': 1.0.9(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(knex@3.1.0(mysql@2.18.1)(pg@8.12.0)(sqlite3@5.1.7)(tedious@18.2.0))(mysql@2.18.1)(pg@8.12.0)(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(pino@9.2.0)(sqlite3@5.1.7)(tedious@18.2.0)(vue@3.4.27(typescript@5.5.4))
       '@directus/themes': 0.3.10(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(vue@3.4.27(typescript@5.5.4))
-      '@directus/types': 11.2.0(knex@3.1.0(pg@8.12.0))(mysql@2.18.1)(pg@8.12.0)(sqlite3@5.1.7)(tedious@18.2.0)(vue@3.4.27(typescript@5.5.4))
+      '@directus/types': 11.2.0(knex@3.1.0(mysql@2.18.1)(pg@8.12.0)(sqlite3@5.1.7)(tedious@18.2.0))(mysql@2.18.1)(pg@8.12.0)(sqlite3@5.1.7)(tedious@18.2.0)(vue@3.4.27(typescript@5.5.4))
       '@directus/utils': 11.0.10(vue@3.4.27(typescript@5.5.4))
       '@rollup/plugin-commonjs': 25.0.8(rollup@3.29.4)
       '@rollup/plugin-json': 6.1.0(rollup@3.29.4)
@@ -7766,11 +7775,11 @@ snapshots:
       - typescript
       - vue-router
 
-  '@directus/extensions@1.0.9(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(knex@3.1.0(pg@8.12.0))(mysql@2.18.1)(pg@8.12.0)(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(pino@9.2.0)(sqlite3@5.1.7)(tedious@18.2.0)(vue@3.4.27(typescript@5.5.4))':
+  '@directus/extensions@1.0.9(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(knex@3.1.0(mysql@2.18.1)(pg@8.12.0)(sqlite3@5.1.7)(tedious@18.2.0))(mysql@2.18.1)(pg@8.12.0)(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(pino@9.2.0)(sqlite3@5.1.7)(tedious@18.2.0)(vue@3.4.27(typescript@5.5.4))':
     dependencies:
       '@directus/constants': 11.0.4
       '@directus/themes': 0.3.10(@unhead/vue@1.9.16(vue@3.4.27(typescript@5.5.4)))(pinia@2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4)))(vue@3.4.27(typescript@5.5.4))
-      '@directus/types': 11.2.0(knex@3.1.0(pg@8.12.0))(mysql@2.18.1)(pg@8.12.0)(sqlite3@5.1.7)(tedious@18.2.0)(vue@3.4.27(typescript@5.5.4))
+      '@directus/types': 11.2.0(knex@3.1.0(mysql@2.18.1)(pg@8.12.0)(sqlite3@5.1.7)(tedious@18.2.0))(mysql@2.18.1)(pg@8.12.0)(sqlite3@5.1.7)(tedious@18.2.0)(vue@3.4.27(typescript@5.5.4))
       '@directus/utils': 11.0.10(vue@3.4.27(typescript@5.5.4))
       '@types/express': 4.17.21
       fs-extra: 11.2.0
@@ -7899,7 +7908,7 @@ snapshots:
       pinia: 2.2.0(typescript@5.5.4)(vue@3.4.27(typescript@5.5.4))
       vue: 3.4.27(typescript@5.5.4)
 
-  '@directus/types@11.2.0(knex@3.1.0(pg@8.12.0))(mysql@2.18.1)(pg@8.12.0)(sqlite3@5.1.7)(tedious@18.2.0)(vue@3.4.27(typescript@5.5.4))':
+  '@directus/types@11.2.0(knex@3.1.0(mysql@2.18.1)(pg@8.12.0)(sqlite3@5.1.7)(tedious@18.2.0))(mysql@2.18.1)(pg@8.12.0)(sqlite3@5.1.7)(tedious@18.2.0)(vue@3.4.27(typescript@5.5.4))':
     dependencies:
       '@directus/constants': 11.0.4
       '@directus/schema': 11.0.3(mysql@2.18.1)(pg@8.12.0)(sqlite3@5.1.7)(tedious@18.2.0)
@@ -11874,6 +11883,10 @@ snapshots:
   mnemonist@0.39.8:
     dependencies:
       obliterator: 2.0.4
+
+  mode-watcher@0.4.1(svelte@5.0.0-next.221):
+    dependencies:
+      svelte: 5.0.0-next.221
 
   mri@1.1.4: {}
 

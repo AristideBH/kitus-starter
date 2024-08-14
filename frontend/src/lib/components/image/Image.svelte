@@ -1,33 +1,41 @@
 <script lang="ts">
-	import { onMount, type Snippet } from 'svelte';
+	import { client, type Client, type DirectusImagePreset } from '$lib/logic/directus';
+	import type { CustomDirectusFile } from '$types/custom';
+	import { onMount, getContext } from 'svelte';
 	import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
-	import type { DirectusImagePreset } from '$lib/logic/directus';
+	import { readFile, readItem } from '@directus/sdk';
+	const directus = getContext('directus') as Client;
 
 	let {
-		directusId,
+		directusFile,
 		alt,
-		width,
-		height,
 		preset,
 		transformations,
 		lazy,
-		className,
-		placeholderSnippet
+		className
 	}: {
-		directusId: string;
-		alt: string;
-		width?: number;
-		height?: number;
+		directusFile: CustomDirectusFile;
+		alt?: string;
 		preset?: DirectusImagePreset;
 		transformations?: Record<string, string | number> | null;
 		lazy?: boolean;
 		className?: string;
-		placeholderSnippet?: Snippet;
 	} = $props();
 
 	let loaded = $state(false);
 	let inView = $state(false);
 	let imgElement: HTMLElement;
+	let id: string | undefined;
+
+	const fetchFileInfo = async (id: string) => {
+		return await directus.request(readFile(id, { fields: ['id', 'title', 'width', 'height', 'focal_point_y', 'focal_point_x', 'thumbhash', 'description'] })); 
+	};
+
+	if (typeof directusFile === 'string') {
+		id = directusFile;
+	} else {
+		id = directusFile?.id;
+	}
 
 	const getImgUrl = (
 		id: string,
@@ -51,7 +59,7 @@
 		return `${baseUrl}${id}`;
 	};
 
-	let src = $state(getImgUrl(directusId, preset ?? null, transformations ?? null));
+	let src = $state(getImgUrl(id ?? '', preset ?? null, transformations ?? null));
 
 	onMount(() => {
 		if (!lazy) {
@@ -63,7 +71,6 @@
 			([entry]) => {
 				if (entry.isIntersecting) {
 					inView = true;
-					console.log('🩺 > onMount > inView:', inView);
 					observer.unobserve(entry.target);
 				}
 			},
@@ -78,13 +85,15 @@
 	const handleLoad = () => (loaded = true);
 </script>
 
+{#await fetchFileInfo(id) then value}
+	<pre>{JSON.stringify(value, null, 2)}</pre>
+{/await}
+
 <figure class={`${className}`} bind:this={imgElement}>
 	{#if inView}
 		<img {src} {alt} loading={lazy ? 'lazy' : 'eager'} onload={() => handleLoad} />
-	{:else if placeholderSnippet}
-		<div class="placeholder">
-			{@render placeholderSnippet()}
-		</div>
+	{:else}
+		<div class="placeholder">loading</div>
 	{/if}
 </figure>
 
@@ -95,7 +104,7 @@
 
 	img {
 		display: block;
-		width: 100%;
+		/* width: 100%; */
 		height: auto;
 	}
 
