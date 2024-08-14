@@ -1,5 +1,7 @@
 <script>
-	import '../app.css';
+	import '../app.pcss';
 </script>
 
-<slot></slot>
+<div class="container" role="main">
+	<slot></slot>
+</div>

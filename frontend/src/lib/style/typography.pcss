@@ -1,0 +1,183 @@
+@layer base {
+	/* Fontface */
+	@font-face {
+		font-family: 'Changa';
+		src: url('/fonts/workavec-medium-webfont.eot');
+		src:
+			url('/fonts/Changa-Regular.eot?#iefix') format('embedded-opentype'),
+			url('/fonts/Changa-Regular.woff') format('woff'),
+			url('/fonts/Changa-Regular.ttf') format('truetype'),
+			url('/fonts/Changa-Regular.svg#Changa-Regular') format('svg');
+		font-weight: 500; /* Medium */
+		font-style: normal;
+	}
+	@font-face {
+		font-family: 'workavec';
+		src: url('/fonts/workavec-medium-webfont.eot');
+		src:
+			url('/fonts/workavec-medium-webfont.eot?#iefix') format('embedded-opentype'),
+			url('/fonts/workavec-medium-webfont.woff') format('woff'),
+			url('/fonts/workavec-medium-webfont.ttf') format('truetype'),
+			url('/fonts/workavec-medium-webfont.svg#workavec-medium-webfont') format('svg');
+		font-weight: 500; /* Medium */
+		font-style: normal;
+	}
+
+	/* TYPOGRAPHY */
+	/*- Headings */
+	h1 {
+		@apply scroll-m-20 text-6xl font-extrabold tracking-tight lg:text-7xl;
+	}
+
+	h2 {
+		@apply mb-3 mt-10 scroll-m-20 border-b pb-2 text-4xl font-semibold tracking-normal transition-colors first:mt-0 lg:text-5xl;
+	}
+
+	h3 {
+		@apply mt-6 scroll-m-20 text-2xl font-semibold lg:text-3xl;
+	}
+
+	h4 {
+		@apply mt-3 scroll-m-20 font-semibold uppercase text-primary;
+	}
+
+	h5 {
+		@apply mt-3 scroll-m-20 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground;
+	}
+
+	/*- Paragraph */
+	h1,
+	h2,
+	h3,
+	h4 {
+		@apply font-heading text-balance;
+	}
+	h4,
+	h5 {
+		@apply mt-8;
+	}
+	h1,
+	h2 {
+		+ p {
+			@apply mt-8;
+		}
+	}
+
+	h3,
+	h4,
+	h5 {
+		+ p {
+			@apply mt-4;
+		}
+	}
+
+	ul,
+	ol,
+	blockquote {
+		+ p {
+			@apply mt-6;
+		}
+	}
+
+	p {
+		@apply text-balance text-lg leading-6;
+		+ p {
+			@apply mt-6;
+		}
+	}
+	p + button {
+		@apply mt-6;
+	}
+
+	/*- Links */
+	a {
+		@apply font-medium underline decoration-primary underline-offset-4;
+
+		&[rel='footnote'] {
+			@apply no-underline;
+		}
+	}
+
+	sup + sup {
+		@apply ms-0.5;
+	}
+
+	/*- Lists */
+	ul,
+	ol {
+		@apply my-1 ms-6 flex flex-col gap-2;
+	}
+
+	ul {
+		@apply list-disc;
+	}
+
+	ol {
+		@apply ms-[3ch] list-decimal;
+		li::marker {
+			@apply font-mono font-semibold;
+		}
+	}
+
+	/*- Format elements */
+	blockquote {
+		@apply mt-6 text-balance border-s-2 border-primary ps-6 italic;
+	}
+
+	/* code {
+        @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+    } */
+
+	pre {
+		@apply rounded border bg-muted px-[0.3rem] py-[0.2rem] text-sm font-semibold text-muted-foreground;
+	}
+
+	/*- Utilities */
+	.lead {
+		@apply max-w-[69ch] text-balance text-2xl text-muted-foreground;
+	}
+
+	.small {
+		@apply text-sm font-medium leading-none;
+	}
+
+	/*- Text selection */
+	::moz-selection {
+		background: hsla(var(--primary) / 0.8);
+		color: hsl(var(--primary-foreground));
+	}
+
+	::selection {
+		background: hsla(var(--primary) / 0.8);
+		color: hsl(var(--primary-foreground));
+	}
+
+	/*- Table */
+	table {
+		width: 100%;
+		text-align: left;
+		border-collapse: collapse;
+		@apply mt-4 w-full bg-background text-sm;
+	}
+	table caption {
+		@apply mb-2 font-bold;
+	}
+	table td,
+	table th {
+		@apply h-12 border-b px-4 text-left align-middle font-medium text-muted-foreground [&:last-of-type]:border-b-0;
+	}
+	table tbody {
+		@apply [&_tr:last-child]:border-0;
+	}
+	table tbody td {
+		@apply p-4 align-middle;
+	}
+	table thead {
+		@apply [&_tr]:border-b;
+	}
+
+	table tfoot {
+	}
+	table tfoot td {
+	}
+}
