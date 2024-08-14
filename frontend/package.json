@@ -46,6 +46,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"mode-watcher": "^0.4.1"
+		"mode-watcher": "^0.4.1",
+		"thumbhash": "^0.1.1"
 	}
 }

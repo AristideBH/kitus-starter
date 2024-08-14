@@ -1,20 +1,20 @@
 <script lang="ts">
-	import { client, type Client, type DirectusImagePreset } from '$lib/logic/directus';
+	import { type Client, type DirectusImagePreset } from '$lib/logic/directus';
 	import type { CustomDirectusFile } from '$types/custom';
 	import { onMount, getContext } from 'svelte';
-	import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
-	import { readFile, readItem } from '@directus/sdk';
+	import { fetchFileInfo, getImgUrl } from '.';
+
 	const directus = getContext('directus') as Client;
 
 	let {
-		directusFile,
+		item,
 		alt,
 		preset,
 		transformations,
-		lazy,
+		lazy = true,
 		className
 	}: {
-		directusFile: CustomDirectusFile;
+		item: CustomDirectusFile;
 		alt?: string;
 		preset?: DirectusImagePreset;
 		transformations?: Record<string, string | number> | null;
@@ -24,44 +24,21 @@
 
 	let loaded = $state(false);
 	let inView = $state(false);
+	let fetchedFile = $state<CustomDirectusFile | undefined>(undefined);
 	let imgElement: HTMLElement;
-	let id: string | undefined;
-
-	const fetchFileInfo = async (id: string) => {
-		return await directus.request(readFile(id, { fields: ['id', 'title', 'width', 'height', 'focal_point_y', 'focal_point_x', 'thumbhash', 'description'] })); 
-	};
-
-	if (typeof directusFile === 'string') {
-		id = directusFile;
-	} else {
-		id = directusFile?.id;
-	}
-
-	const getImgUrl = (
-		id: string,
-		preset?: string | null,
-		transformations?: Record<string, string | number> | null
-	) => {
-		const baseUrl = `${PUBLIC_DIRECTUS_URL}/assets/`;
-
-		if (preset) {
-			return `${baseUrl}${id}?key=${preset}`;
-		}
-
-		if (transformations) {
-			const params = new URLSearchParams();
-			for (const [key, value] of Object.entries(transformations)) {
-				params.append(key, value.toString());
-			}
-			return `${baseUrl}${id}?${params.toString()}`;
-		}
-
-		return `${baseUrl}${id}`;
-	};
+	let id = typeof item === 'string' ? item : item?.id;
 
 	let src = $state(getImgUrl(id ?? '', preset ?? null, transformations ?? null));
 
 	onMount(() => {
+		if (typeof id === 'string') {
+			fetchFileInfo(directus, id).then((data) => {
+				fetchedFile = data;
+			});
+		} else {
+			fetchedFile = item;
+		}
+
 		if (!lazy) {
 			inView = true;
 			return;
@@ -85,15 +62,16 @@
 	const handleLoad = () => (loaded = true);
 </script>
 
-{#await fetchFileInfo(id) then value}
-	<pre>{JSON.stringify(value, null, 2)}</pre>
-{/await}
-
-<figure class={`${className}`} bind:this={imgElement}>
+<figure class={`${className ?? ''}`} bind:this={imgElement}>
 	{#if inView}
-		<img {src} {alt} loading={lazy ? 'lazy' : 'eager'} onload={() => handleLoad} />
-	{:else}
-		<div class="placeholder">loading</div>
+		<img
+			{src}
+			alt={alt ?? (typeof fetchedFile !== 'string' ? fetchedFile?.description : '')}
+			loading={lazy ? 'lazy' : 'eager'}
+			onload={() => handleLoad}
+			width={fetchedFile?.width}
+			height={fetchedFile?.height}
+		/>
 	{/if}
 </figure>
 

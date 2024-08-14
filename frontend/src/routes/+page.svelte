@@ -5,7 +5,7 @@
 	let { img } = data;
 </script>
 
-<h1 class="small">Welcome to Starterkit</h1>
+<h1 class="lead">Welcome to Starterkit</h1>
 
 <summary>
 	<details>
@@ -28,6 +28,7 @@
 		</ul>
 	</details>
 </summary>
+
 <pre>{JSON.stringify(img, null, 2)}</pre>
 
-<Image directusFile={img} preset="768" lazy={true} />
+<Image item={img} />
