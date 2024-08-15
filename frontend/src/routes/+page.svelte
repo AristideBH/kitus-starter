@@ -1,34 +1,55 @@
 <script lang="ts">
-	import Image from '$lib/components/image/Image.svelte';
+	import { Image } from '$lib/components/image/';
 	export let data;
 
 	let { img } = data;
 </script>
 
-<h1 class="lead">Welcome to Starterkit</h1>
+<section class="grid gap-6">
+	<h3>Welcome to Starterkit</h3>
 
-<summary>
-	<details>
-		<p>A custom boilerplate for Sveltekit and Directus</p>
-		<ul>
-			<li>Sveltekit</li>
-			<li>Directus</li>
-			<li>Types sync</li>
-			<li>Authentification</li>
-			<li>Tailwind and Shadcn-svelte</li>
-			<li>Pages transitions</li>
-			<li>
-				Components
-				<ul>
-					<li>Image</li>
-					<li>Pagination</li>
-					<li>Load preprocessor</li>
-				</ul>
-			</li>
-		</ul>
-	</details>
-</summary>
+	<summary>
+		<details open>
+			<p>A custom boilerplate for Sveltekit and Directus</p>
+			<ul>
+				<li>Sveltekit</li>
+				<li>Directus</li>
+				<li>Types sync</li>
+				<li>Authentification</li>
+				<li>Tailwind and Shadcn-svelte</li>
+				<li>Pages transitions</li>
+				<li>
+					Components
+					<ul>
+						<li>Image</li>
+						<li>Pagination</li>
+						<li>Load preprocessor</li>
+					</ul>
+				</li>
+			</ul>
+		</details>
+		<details open>
+			<p>A custom boilerplate for Sveltekit and Directus</p>
+			<ul>
+				<li>Sveltekit</li>
+				<li>Directus</li>
+				<li>Types sync</li>
+				<li>Authentification</li>
+				<li>Tailwind and Shadcn-svelte</li>
+				<li>Pages transitions</li>
+				<li>
+					Components
+					<ul>
+						<li>Image</li>
+						<li>Pagination</li>
+						<li>Load preprocessor</li>
+					</ul>
+				</li>
+			</ul>
+		</details>
+	</summary>
 
-<pre>{JSON.stringify(img, null, 2)}</pre>
+	<!-- <pre>{JSON.stringify(img, null, 2)}</pre> -->
 
-<Image item={img} />
+	<Image item={img} class="mb-8" showCaption={true} alt="Image" preset="50" />
+</section>

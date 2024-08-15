@@ -40,7 +40,7 @@ export type Client = ReturnType<typeof client>;
 // * Utils functions
 // * ////////////////////////////////////////////////////////////////////////////////
 
-const PixelSizes = ['50', '320', '480', '768', '1024', '1440', '1920', '2560'] as const;
+export const PixelSizes = ['50', '320', '480', '768', '1024', '1440', '1920'] as const;
 export type DirectusImagePreset = typeof PixelSizes[number];
 
 /**

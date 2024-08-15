@@ -1,8 +1,17 @@
+import Image from "./Image.svelte";
 import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
-import { type Client } from "$lib/logic/directus";
+import { handleDirectusErrors, PixelSizes, type Client, type DirectusImagePreset } from "$lib/logic/directus";
 import { readFile } from "@directus/sdk";
+import { thumbHashToDataURL } from 'thumbhash';
 
-export const fetchFileInfo = async (client: Client, id: string) => {
+/**
+ * Fetches file information from the Directus API.
+ * @param client The Directus client instance.
+ * @param id The ID of the file to fetch.
+ * @returns A promise that resolves to the file information.
+ * @throws Will throw an error if the API request fails.
+ */
+const fetchFileInfo = async (client: Client, id: string) => {
     return await client.request(
         readFile(id, {
             fields: [
@@ -16,15 +25,26 @@ export const fetchFileInfo = async (client: Client, id: string) => {
                 'description'
             ]
         })
-    );
+    )
 };
+const baseUrl = `${PUBLIC_DIRECTUS_URL}/assets/`;
 
-export const getImgUrl = (
+const getImgSrcSet = (
+    id: string
+) => {
+    const srcSet = [];
+    for (const size of PixelSizes)
+        srcSet.push(`${baseUrl}${id}?key=${size} ${size.replace('px', '')}w`)
+    return srcSet.join(', ');
+}
+
+
+const getImgUrl = (
     id: string,
-    preset?: string | null,
+    preset?: DirectusImagePreset | null,
     transformations?: Record<string, string | number> | null
 ) => {
-    const baseUrl = `${PUBLIC_DIRECTUS_URL}/assets/`;
+
 
     if (preset) {
         return `${baseUrl}${id}?key=${preset}`;
@@ -40,3 +60,36 @@ export const getImgUrl = (
 
     return `${baseUrl}${id}`;
 };
+
+
+const getThumbhashUrl = (thumbhash: string) => {
+    return thumbHashToDataURL(Uint8Array.from(atob(thumbhash ?? ''), (c) => c.charCodeAt(0)));
+};
+
+function setupIntersectionObserver(element: HTMLElement, callback: () => void) {
+    const observer = new IntersectionObserver(
+        ([entry]) => {
+            if (entry.isIntersecting) {
+                callback();
+                observer.unobserve(entry.target);
+            }
+        },
+        { rootMargin: '-50px' }
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+}
+
+
+export {
+    // Component
+    Image,
+    // Functions
+    fetchFileInfo,
+    getImgUrl,
+    getImgSrcSet,
+    getThumbhashUrl,
+    setupIntersectionObserver
+}
