@@ -2,16 +2,15 @@
 	import { Image } from '$lib/components/image/';
 
 	let { data } = $props();
-	let { img } = data;
 </script>
 
 <section class="grid gap-6 py-8">
 	<h2>Welcome to Starterkit</h2>
 
 	<p>A custom boilerplate for Sveltekit and Directus</p>
-	<summary class="list-none">
+	<summary class="bg-muted list-none rounded-sm p-4">
 		<details open>
-			<ul>
+			<ul class="mt-4">
 				<li>Sveltekit</li>
 				<li>Directus</li>
 				<li>Types sync</li>
@@ -30,7 +29,5 @@
 		</details>
 	</summary>
 
-	<!-- <pre>{JSON.stringify(img, null, 2)}</pre> -->
-
-	<Image item={img} />
+	<Image item={data.img} />
 </section>

@@ -1,4 +1,5 @@
 import type { Cookies, Handle } from '@sveltejs/kit';
+import type { JwtPayload } from 'jsonwebtoken';
 
 import jwt from "jsonwebtoken";
 import { redirect } from '@sveltejs/kit';
@@ -30,8 +31,9 @@ async function refreshAccessToken(cookies: Cookies) {
     cookies.set("access_token", data.access_token, constructCookieOpts(Math.floor(data.expires / 1000)));
 }
 
-function isTokenExpired(jwtPayload: boolean | (jwt.Jwt & jwt.JwtPayload) | null) {
-    return jwtPayload?.exp < Math.floor(Date.now() / 1000) + TOKEN_EXPIRATION_BUFFER;
+function isTokenExpired(jwtPayload: JwtPayload | null) {
+    return jwtPayload?.exp ? jwtPayload.exp < Math.floor(Date.now() / 1000) + TOKEN_EXPIRATION_BUFFER : true;
+
 }
 
 function shouldProtectRoute(url: string) {
@@ -42,14 +44,13 @@ export const handle: Handle = async ({ event, resolve }) => {
     const { cookies, url } = event
 
     if (cookies.get('access_token') || cookies.get('refresh_token')) {
-        let jwtPayload = cookies.get('access_token') ? jwt.decode(cookies.get('access_token') || '') : null;
+        let jwtPayload = cookies.get('access_token') ? jwt.decode(cookies.get('access_token') || '') as jwt.JwtPayload | null : null;
 
-        //check if token is expired and renew it if necessary
         if (isTokenExpired(jwtPayload) || !cookies.get('access_token')) {
             try {
                 await refreshAccessToken(cookies);
-                jwtPayload = cookies.get('access_token') ? jwt.decode(cookies.get('access_token') || '') : null;
-            } catch (err) {
+                jwtPayload = cookies.get('access_token') ? jwt.decode(cookies.get('access_token') || '') as jwt.JwtPayload | null : null;
+            } catch {
                 cookies.delete('refresh_token', { path: '/' });
                 cookies.delete('access_token', { path: '/' });
             }

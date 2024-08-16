@@ -12,7 +12,7 @@ Props:
 - `showCaption`: A boolean that determines whether to show the image caption.
 - `loading`: The loading strategy for the image, either "lazy" or "eager".
 
-The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhashUrl`, and `setupIntersectionObserver` functions to fetch and display the image. It also uses an intersection observer to detect when the image container is in the viewport and load the image accordingly.
+The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhashUrl`, and `setIntersectionObserver` functions to fetch and display the image. It also uses an intersection observer to detect when the image container is in the viewport and load the image accordingly.
 -->
 
 <script lang="ts">

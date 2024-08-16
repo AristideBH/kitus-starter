@@ -1,8 +1,7 @@
 import type { Schema, Collections, Types } from '$lib/types/client';
-
 import type { CookieSerializeOptions } from 'cookie';
-import { createDirectus, rest, authentication } from '@directus/sdk';
-import { readFile } from '@directus/sdk';
+
+import { createDirectus, rest, authentication, readFile } from '@directus/sdk';
 import { PUBLIC_DIRECTUS_URL, PUBLIC_COOKIE_DOMAIN } from '$env/static/public';
 import { error } from '@sveltejs/kit';
 import { toast } from 'svelte-sonner';
@@ -86,7 +85,6 @@ export const getImageURL = (
 };
 
 
-// - API FUNCTIONS 
 export const getImgData = async (uuid: string | null | undefined | Collections.DirectusFile) => {
     if (!uuid || typeof uuid === "object") return
     const directus = client(fetch);
