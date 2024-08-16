@@ -1,0 +1,26 @@
+[
+  {
+    "role": null,
+    "collection": "directus_files",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "c8037e0b-d94b-4842-83ab-67794cb8a6d3"
+  },
+  {
+    "role": null,
+    "collection": "homepage",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "2960b757-d0f3-4573-b265-2a532f19cf57"
+  }
+]
