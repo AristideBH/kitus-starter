@@ -1,8 +1,21 @@
 import Image from "./Image.svelte";
-import { PUBLIC_DIRECTUS_URL } from '$env/static/public';
-import { handleDirectusErrors, PixelSizes, type Client, type DirectusImagePreset } from "$lib/logic/directus";
+import { PixelSizes, type DirectusClient, type DirectusImagePreset, assetBaseUrl, type CustomDirectusFile } from "$lib/logic/directus";
 import { readFile } from "@directus/sdk";
 import { thumbHashToDataURL } from 'thumbhash';
+import type { Types } from "$lib/types/client";
+
+export type ImageProps = {
+    item: CustomDirectusFile | Types.Optional<string>;
+    alt?: string;
+    title?: string;
+    preset?: DirectusImagePreset;
+    transformations?: Record<string, string | number> | null;
+    class?: string;
+    showCaption?: boolean;
+    loading?: 'lazy' | 'eager';
+
+};
+
 
 /**
  * Fetches file information from the Directus API.
@@ -11,7 +24,7 @@ import { thumbHashToDataURL } from 'thumbhash';
  * @returns A promise that resolves to the file information.
  * @throws Will throw an error if the API request fails.
  */
-const fetchFileInfo = async (client: Client, id: string) => {
+const getFileInfos = async (client: DirectusClient, id: string) => {
     return await client.request(
         readFile(id, {
             fields: [
@@ -27,14 +40,14 @@ const fetchFileInfo = async (client: Client, id: string) => {
         })
     )
 };
-const baseUrl = `${PUBLIC_DIRECTUS_URL}/assets/`;
+
 
 const getImgSrcSet = (
     id: string
 ) => {
     const srcSet = [];
     for (const size of PixelSizes)
-        srcSet.push(`${baseUrl}${id}?key=${size} ${size.replace('px', '')}w`)
+        srcSet.push(`${assetBaseUrl}${id}?key=${size} ${size.replace('px', '')}w`)
     return srcSet.join(', ');
 }
 
@@ -44,21 +57,17 @@ const getImgUrl = (
     preset?: DirectusImagePreset | null,
     transformations?: Record<string, string | number> | null
 ) => {
-
-
-    if (preset) {
-        return `${baseUrl}${id}?key=${preset}`;
-    }
+    if (preset) return `${assetBaseUrl}${id}?key=${preset}`
 
     if (transformations) {
         const params = new URLSearchParams();
         for (const [key, value] of Object.entries(transformations)) {
             params.append(key, value.toString());
         }
-        return `${baseUrl}${id}?${params.toString()}`;
+        return `${assetBaseUrl}${id}?${params.toString()}`;
     }
 
-    return `${baseUrl}${id}`;
+    return `${assetBaseUrl}${id}`;
 };
 
 
@@ -66,7 +75,8 @@ const getThumbhashUrl = (thumbhash: string) => {
     return thumbHashToDataURL(Uint8Array.from(atob(thumbhash ?? ''), (c) => c.charCodeAt(0)));
 };
 
-function setupIntersectionObserver(element: HTMLElement, callback: () => void) {
+
+const setIntersectionObserver = (element: HTMLElement, callback: () => void) => {
     const observer = new IntersectionObserver(
         ([entry]) => {
             if (entry.isIntersecting) {
@@ -87,9 +97,9 @@ export {
     // Component
     Image,
     // Functions
-    fetchFileInfo,
+    getFileInfos,
     getImgUrl,
     getImgSrcSet,
     getThumbhashUrl,
-    setupIntersectionObserver
+    setIntersectionObserver
 }

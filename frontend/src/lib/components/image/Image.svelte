@@ -1,33 +1,32 @@
 <!-- 
 @component
-The `<Image/>` component is a Svelte component that renders an image with various customization options, specially developed with Directus API in mind.
+The `<Image/>` component is a Svelte component that renders an image with various custDirectusCliention options, specially developed with Directus API in mind.
 
 Props:
 - `item`: A `CustomDirectusFile` object or a string representing the ID of the image file.
 - `alt`: The alternative text for the image.
 - `title`: The title of the image.
-- `preset`: A `DirectusImagePreset` object that defines the image preset to be used.
+- `preset`: A `DirectusImagePreset` object that DirectusClients the image preset to be used.
 - `transformations`: An object that defines any transformations to be applied to the image.
 - `class`: The CSS class to be applied to the image container.
 - `showCaption`: A boolean that determines whether to show the image caption.
 - `loading`: The loading strategy for the image, either "lazy" or "eager".
 
-The component uses the `fetchFileInfo`, `getImgSrcSet`, `getImgUrl`, `getThumbhashUrl`, and `setupIntersectionObserver` functions to fetch and display the image. It also uses an intersection observer to detect when the image container is in the viewport and load the image accordingly.
+The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhashUrl`, and `setupIntersectionObserver` functions to fetch and display the image. It also uses an intersection observer to detect when the image container is in the viewport and load the image accordingly.
 -->
 
 <script lang="ts">
-	import { type Client, type DirectusImagePreset } from '$lib/logic/directus';
-	import type { CustomDirectusFile } from '$types/custom';
+	import type { CustomDirectusFile, DirectusClient } from '$lib/logic/directus';
 	import { onMount, getContext } from 'svelte';
 	import {
-		fetchFileInfo,
+		getFileInfos,
 		getImgSrcSet,
 		getImgUrl,
 		getThumbhashUrl,
-		setupIntersectionObserver
+		setIntersectionObserver,
+		type ImageProps
 	} from '.';
-	import type { Types } from '$lib/types/client';
-	const directus = getContext('directus') as Client;
+	const directus = getContext('directus') as DirectusClient;
 
 	// * COMPONENTS PROPS
 	let {
@@ -39,16 +38,7 @@ The component uses the `fetchFileInfo`, `getImgSrcSet`, `getImgUrl`, `getThumbha
 		class: className,
 		showCaption = false,
 		loading = 'lazy'
-	}: {
-		item: CustomDirectusFile | Types.Optional<string>;
-		alt?: string;
-		title?: string;
-		preset?: DirectusImagePreset;
-		transformations?: Record<string, string | number> | null;
-		class?: string;
-		showCaption?: boolean;
-		loading?: 'lazy' | 'eager';
-	} = $props();
+	}: ImageProps = $props();
 
 	// * COMPONENTS STATE
 	let inView = $state(false);
@@ -59,10 +49,11 @@ The component uses the `fetchFileInfo`, `getImgSrcSet`, `getImgUrl`, `getThumbha
 	let srcset = $state('');
 	let thumbhashUrl = $state('');
 
+	// * COMPONENTS INITIALIZATION
 	onMount(() => {
 		if (typeof id === 'string') {
 			// Get full file informations if provided id is a string
-			fetchFileInfo(directus, id).then((data) => {
+			getFileInfos(directus, id).then((data) => {
 				fetchedFile = data;
 			});
 		} else {
@@ -78,12 +69,13 @@ The component uses the `fetchFileInfo`, `getImgSrcSet`, `getImgUrl`, `getThumbha
 
 		// Run intersection observer to detect if ImgContainer is in viewport
 		if (imgContainer) {
-			return setupIntersectionObserver(imgContainer, () => {
+			return setIntersectionObserver(imgContainer, () => {
 				inView = true;
 			});
 		}
 	});
 
+	// * COMPONENTS EFFECTS
 	$effect(() => {
 		if (!inView && fetchedFile?.thumbhash) {
 			// By default, set src to thumbhash url

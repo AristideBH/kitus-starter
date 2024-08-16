@@ -1,4 +1,5 @@
-import type { Schema, Collections } from '$lib/types/client';
+import type { Schema, Collections, Types } from '$lib/types/client';
+
 import type { CookieSerializeOptions } from 'cookie';
 import { createDirectus, rest, authentication } from '@directus/sdk';
 import { readFile } from '@directus/sdk';
@@ -7,21 +8,37 @@ import { error } from '@sveltejs/kit';
 import { toast } from 'svelte-sonner';
 
 
-type Fetch = {
+// * ////////////////////////////////////////////////////////////////////////////////
+// * Types & definitions
+// * ////////////////////////////////////////////////////////////////////////////////
+
+export type Fetch = {
     (input: URL | RequestInfo | string, init?: RequestInit | undefined): Promise<Response>;
 };
 
+export type DirectusClient = ReturnType<typeof client>;
+
+export type CustomDirectusFile = Partial<Types.Optional<Collections.DirectusFile>>
+export const assetBaseUrl = `${PUBLIC_DIRECTUS_URL}/assets/`;
+export const PixelSizes = ['50', '320', '480', '768', '1024', '1440', '1920'] as const;
+export type DirectusImagePreset = typeof PixelSizes[number];
+
+export type DirectusTokens = {
+    access_token: string,
+    refresh_token: string,
+    expires: number
+}
 
 // * ////////////////////////////////////////////////////////////////////////////////
 // * Client
 // * ////////////////////////////////////////////////////////////////////////////////
 /**
  * Creates a Directus client instance with authentication and REST helpers.
- *
- * @param fetch - Fetch function to use for requests.
- * @param token - Auth token to use.
- * @returns The Directus client instance.
- */
+*
+* @param fetch - Fetch function to use for requests.
+* @param token - Auth token to use.
+* @returns The Directus client instance.
+*/
 export function client(fetch: Fetch, token?: string | null) {
     //@ts-expect-error we pass the function not to execute it
     const options = fetch ? { globals: { fetch } } : {};
@@ -33,15 +50,10 @@ export function client(fetch: Fetch, token?: string | null) {
     return directus;
 }
 
-export type Client = ReturnType<typeof client>;
-
 
 // * ////////////////////////////////////////////////////////////////////////////////
 // * Utils functions
 // * ////////////////////////////////////////////////////////////////////////////////
-
-export const PixelSizes = ['50', '320', '480', '768', '1024', '1440', '1920'] as const;
-export type DirectusImagePreset = typeof PixelSizes[number];
 
 /**
  * Generates a Directus image URL for the given image file or ID, with optional resizing.
@@ -83,7 +95,7 @@ export const getImgData = async (uuid: string | null | undefined | Collections.D
 }
 
 
-export const handleDirectusErrors = (err: unknown, showToast: boolean = false) => {
+export const directusError = (err: unknown, showToast: boolean = false) => {
     if (typeof err === 'string') {
         const parsedErr = JSON.parse(err);
         if (showToast) toast.error(parsedErr.errors[0].message);
@@ -97,12 +109,6 @@ export const handleDirectusErrors = (err: unknown, showToast: boolean = false) =
 // * ////////////////////////////////////////////////////////////////////////////////
 // * Authentication
 // * ////////////////////////////////////////////////////////////////////////////////
-
-export type DirectusTokens = {
-    access_token: string,
-    refresh_token: string,
-    expires: number
-}
 
 /**
  * Logs in a user by making a request to the Directus API login endpoint.
