@@ -50,7 +50,7 @@
 	h2,
 	h3,
 	h4 {
-		@apply font-heading text-balance;
+		@apply text-balance font-heading;
 	}
 	h4,
 	h5 {
@@ -110,6 +110,9 @@
 
 	ul {
 		@apply list-disc;
+		& ul {
+			list-style-type: circle;
+		}
 	}
 
 	ol {
