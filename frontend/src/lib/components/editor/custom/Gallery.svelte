@@ -1,0 +1,101 @@
+<script lang="ts">
+	import type { Collections } from '$lib/types/client';
+	import type { CarouselAPI } from '$lib/components/ui/carousel/context.js';
+
+	import * as Carousel from '$lib/components/ui/carousel/index.js';
+	import { getImgData } from '$lib/logic/directus';
+	import Masonry from '$lib/components/layout/Masonry.svelte';
+	import HorizontalScroll from '$lib/components/layout/HorizontalScroll.svelte';
+	import Image from '$lib/components/image/Image.svelte';
+
+	// - Masonry settings
+	let outerWidth: number | undefined = $state();
+	let colWidth: string | undefined = $state();
+
+	$effect(() => {
+		if (outerWidth && outerWidth > 768 && outerWidth < 1280) {
+			colWidth = 'minmax(min(17.5em, 100%), 2fr)';
+		} else if (outerWidth && outerWidth > 1280) {
+			colWidth = 'minmax(min(20em, 100%), 1fr)';
+		} else {
+			colWidth = 'minmax(min(200px, 100%), 1fr)';
+		}
+	});
+
+	// - Carousel settings
+	let api: CarouselAPI | undefined = $state();
+	let count = 0;
+	let current = $state(0);
+
+	$effect(() => {
+		if (api) {
+			count = api.scrollSnapList().length;
+			current = api.selectedScrollSnap() + 1;
+
+			api.on('select', () => {
+				if (api) current = api.selectedScrollSnap() + 1;
+			});
+		}
+	});
+
+	let { content }: { content: Collections.Gallery } = $props();
+</script>
+
+{#snippet img(image: Collections.GalleryFiles)}
+	{#await getImgData(image.directus_files_id) then res}
+		{#if res}
+			<Image item={res} />
+		{/if}
+	{/await}
+{/snippet}
+
+<svelte:window bind:outerWidth />
+
+{#if content.images.length === 1}
+	<Image item={content.images[0].directus_files_id} />
+{:else if content.images.length > 1}
+	{#if content.type === 'slider'}
+		<Carousel.Root bind:api class="group" opts={{ align: 'start' }}>
+			<Carousel.Content>
+				{#each content.images as image}
+					<Carousel.Item class="basis-5/6 ">
+						{@render img(image)}
+					</Carousel.Item>
+				{/each}
+			</Carousel.Content>
+			<Carousel.Previous class="bottom-0 left-4" />
+			<Carousel.Next class="bottom-0 right-4" />
+
+			<!-- Pagination -->
+			<div
+				class="absolute bottom-4 left-1/2 flex -translate-y-1/2 items-center justify-center gap-2 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+			>
+				{#each content.images as _, i}
+					<span
+						class="border-muted-foreground/30 bg-muted h-2 w-2 rounded border"
+						class:shadow={i + 1 === current}
+						class:bg-primary={i + 1 === current}
+					></span>
+				{/each}
+			</div>
+		</Carousel.Root>
+	{:else if content.type === 'masonry'}
+		<Masonry {colWidth}>
+			{#each content.images as image}
+				{#if image && typeof image != 'string'}
+					<span>
+						{@render img(image)}
+					</span>
+				{/if}
+			{/each}
+		</Masonry>
+	{:else if content.type === 'scroll'}
+		<HorizontalScroll>
+			{#each content.images as image}
+				{#if image && typeof image != 'string'}
+					{@render img(image)}
+				{/if}
+			{/each}
+		</HorizontalScroll>
+	{/if}
+{/if}

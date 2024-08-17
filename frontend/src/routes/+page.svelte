@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Image } from '$lib/components/image/';
+	import Render from '$lib/components/editor/Render.svelte';
 
 	let { data } = $props();
 </script>
@@ -15,7 +16,7 @@
 				<li>Directus SDK and decicated functions</li>
 				<li>Client Types & Schema sync</li>
 				<li>Authentification & account page</li>
-				<li>Tailwind and shadcn-svelte</li>
+				<li>Tailwind, shadcn-svelte and fluid plugin</li>
 				<li>Pages transitions</li>
 				<li>
 					Components :
@@ -29,5 +30,7 @@
 		</details>
 	</summary>
 
-	<Image item={data.img} />
+	<!-- <pre>{JSON.stringify(data.page, null, 2)}</pre> -->
+	<Render editor={data.page.editor}></Render>
+	<!-- <Image item={data.img} /> -->
 </section>

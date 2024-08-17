@@ -29,5 +29,10 @@ export default [
 	},
 	{
 		ignores: ['build/', '.svelte-kit/', 'dist/']
+	}, {
+		rules: {
+			"@typescript-eslint/no-namespace": "off",
+			"@typescript-eslint/no-empty-object-type": "off"
+		}
 	}
 ];

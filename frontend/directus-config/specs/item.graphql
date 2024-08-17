@@ -1,10 +1,109 @@
 type Query {
+  directus_sync_id_map(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_sync_id_map!]!
+  directus_sync_id_map_by_id(id: ID!, version: String): directus_sync_id_map
+  directus_sync_id_map_aggregated(groupBy: [String], filter: directus_sync_id_map_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_sync_id_map_aggregated!]!
+  directus_sync_id_map_by_version(version: String!, id: ID!): version_directus_sync_id_map
   homepage(version: String): homepage
   homepage_by_version(version: String!): version_homepage
+  pages(filter: pages_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [pages!]!
+  pages_by_id(id: ID!, version: String): pages
+  pages_aggregated(groupBy: [String], filter: pages_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [pages_aggregated!]!
+  pages_by_version(version: String!, id: ID!): version_pages
+  section_editor_nodes(filter: section_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [section_editor_nodes!]!
+  section_editor_nodes_by_id(id: ID!, version: String): section_editor_nodes
+  section_editor_nodes_aggregated(groupBy: [String], filter: section_editor_nodes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [section_editor_nodes_aggregated!]!
+  section_editor_nodes_by_version(version: String!, id: ID!): version_section_editor_nodes
+  quote(filter: quote_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [quote!]!
+  quote_by_id(id: ID!, version: String): quote
+  quote_aggregated(groupBy: [String], filter: quote_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [quote_aggregated!]!
+  quote_by_version(version: String!, id: ID!): version_quote
+  image(filter: image_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [image!]!
+  image_by_id(id: ID!, version: String): image
+  image_aggregated(groupBy: [String], filter: image_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [image_aggregated!]!
+  image_by_version(version: String!, id: ID!): version_image
+  pages_editor_nodes(filter: pages_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [pages_editor_nodes!]!
+  pages_editor_nodes_by_id(id: ID!, version: String): pages_editor_nodes
+  pages_editor_nodes_aggregated(groupBy: [String], filter: pages_editor_nodes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [pages_editor_nodes_aggregated!]!
+  pages_editor_nodes_by_version(version: String!, id: ID!): version_pages_editor_nodes
+  section(filter: section_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [section!]!
+  section_by_id(id: ID!, version: String): section
+  section_aggregated(groupBy: [String], filter: section_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [section_aggregated!]!
+  section_by_version(version: String!, id: ID!): version_section
+  gallery_files(filter: gallery_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [gallery_files!]!
+  gallery_files_by_id(id: ID!, version: String): gallery_files
+  gallery_files_aggregated(groupBy: [String], filter: gallery_files_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [gallery_files_aggregated!]!
+  gallery_files_by_version(version: String!, id: ID!): version_gallery_files
+  gallery(filter: gallery_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [gallery!]!
+  gallery_by_id(id: ID!, version: String): gallery
+  gallery_aggregated(groupBy: [String], filter: gallery_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [gallery_aggregated!]!
+  gallery_by_version(version: String!, id: ID!): version_gallery
 }
 
 type Mutation {
+  create_directus_sync_id_map_items(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_sync_id_map_input!]): [directus_sync_id_map!]!
+  create_directus_sync_id_map_item(data: create_directus_sync_id_map_input!): directus_sync_id_map
+  create_pages_items(filter: pages_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_pages_input!]): [pages!]!
+  create_pages_item(data: create_pages_input!): pages
+  create_section_editor_nodes_items(filter: section_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_section_editor_nodes_input!]): [section_editor_nodes!]!
+  create_section_editor_nodes_item(data: create_section_editor_nodes_input!): section_editor_nodes
+  create_quote_items(filter: quote_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_quote_input!]): [quote!]!
+  create_quote_item(data: create_quote_input!): quote
+  create_image_items(filter: image_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_image_input!]): [image!]!
+  create_image_item(data: create_image_input!): image
+  create_pages_editor_nodes_items(filter: pages_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_pages_editor_nodes_input!]): [pages_editor_nodes!]!
+  create_pages_editor_nodes_item(data: create_pages_editor_nodes_input!): pages_editor_nodes
+  create_section_items(filter: section_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_section_input!]): [section!]!
+  create_section_item(data: create_section_input!): section
+  create_gallery_files_items(filter: gallery_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_gallery_files_input!]): [gallery_files!]!
+  create_gallery_files_item(data: create_gallery_files_input!): gallery_files
+  create_gallery_items(filter: gallery_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_gallery_input!]): [gallery!]!
+  create_gallery_item(data: create_gallery_input!): gallery
+  update_directus_sync_id_map_items(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_sync_id_map_input!): [directus_sync_id_map!]!
+  update_directus_sync_id_map_batch(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_sync_id_map_input!]): [directus_sync_id_map!]!
+  update_directus_sync_id_map_item(id: ID!, data: update_directus_sync_id_map_input!): directus_sync_id_map
   update_homepage(data: update_homepage_input!): homepage
+  update_pages_items(filter: pages_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_pages_input!): [pages!]!
+  update_pages_batch(filter: pages_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_pages_input!]): [pages!]!
+  update_pages_item(id: ID!, data: update_pages_input!): pages
+  update_section_editor_nodes_items(filter: section_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_section_editor_nodes_input!): [section_editor_nodes!]!
+  update_section_editor_nodes_batch(filter: section_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_section_editor_nodes_input!]): [section_editor_nodes!]!
+  update_section_editor_nodes_item(id: ID!, data: update_section_editor_nodes_input!): section_editor_nodes
+  update_quote_items(filter: quote_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_quote_input!): [quote!]!
+  update_quote_batch(filter: quote_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_quote_input!]): [quote!]!
+  update_quote_item(id: ID!, data: update_quote_input!): quote
+  update_image_items(filter: image_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_image_input!): [image!]!
+  update_image_batch(filter: image_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_image_input!]): [image!]!
+  update_image_item(id: ID!, data: update_image_input!): image
+  update_pages_editor_nodes_items(filter: pages_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_pages_editor_nodes_input!): [pages_editor_nodes!]!
+  update_pages_editor_nodes_batch(filter: pages_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_pages_editor_nodes_input!]): [pages_editor_nodes!]!
+  update_pages_editor_nodes_item(id: ID!, data: update_pages_editor_nodes_input!): pages_editor_nodes
+  update_section_items(filter: section_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_section_input!): [section!]!
+  update_section_batch(filter: section_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_section_input!]): [section!]!
+  update_section_item(id: ID!, data: update_section_input!): section
+  update_gallery_files_items(filter: gallery_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_gallery_files_input!): [gallery_files!]!
+  update_gallery_files_batch(filter: gallery_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_gallery_files_input!]): [gallery_files!]!
+  update_gallery_files_item(id: ID!, data: update_gallery_files_input!): gallery_files
+  update_gallery_items(filter: gallery_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_gallery_input!): [gallery!]!
+  update_gallery_batch(filter: gallery_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_gallery_input!]): [gallery!]!
+  update_gallery_item(id: ID!, data: update_gallery_input!): gallery
+  delete_directus_sync_id_map_items(ids: [ID]!): delete_many
+  delete_directus_sync_id_map_item(id: ID!): delete_one
+  delete_pages_items(ids: [ID]!): delete_many
+  delete_pages_item(id: ID!): delete_one
+  delete_section_editor_nodes_items(ids: [ID]!): delete_many
+  delete_section_editor_nodes_item(id: ID!): delete_one
+  delete_quote_items(ids: [ID]!): delete_many
+  delete_quote_item(id: ID!): delete_one
+  delete_image_items(ids: [ID]!): delete_many
+  delete_image_item(id: ID!): delete_one
+  delete_pages_editor_nodes_items(ids: [ID]!): delete_many
+  delete_pages_editor_nodes_item(id: ID!): delete_one
+  delete_section_items(ids: [ID]!): delete_many
+  delete_section_item(id: ID!): delete_one
+  delete_gallery_files_items(ids: [ID]!): delete_many
+  delete_gallery_files_item(id: ID!): delete_one
+  delete_gallery_items(ids: [ID]!): delete_many
+  delete_gallery_item(id: ID!): delete_one
 }
 
 type Subscription {
@@ -16,8 +115,8 @@ type Subscription {
   directus_presets_mutated(event: EventEnum): directus_presets_mutated
   directus_users_mutated(event: EventEnum): directus_users_mutated
   directus_revisions_mutated(event: EventEnum): directus_revisions_mutated
-  directus_webhooks_mutated(event: EventEnum): directus_webhooks_mutated
   directus_settings_mutated(event: EventEnum): directus_settings_mutated
+  directus_webhooks_mutated(event: EventEnum): directus_webhooks_mutated
   directus_panels_mutated(event: EventEnum): directus_panels_mutated
   directus_notifications_mutated(event: EventEnum): directus_notifications_mutated
   directus_shares_mutated(event: EventEnum): directus_shares_mutated
@@ -26,7 +125,16 @@ type Subscription {
   directus_dashboards_mutated(event: EventEnum): directus_dashboards_mutated
   directus_translations_mutated(event: EventEnum): directus_translations_mutated
   directus_versions_mutated(event: EventEnum): directus_versions_mutated
+  directus_sync_id_map_mutated(event: EventEnum): directus_sync_id_map_mutated
   homepage_mutated(event: EventEnum): homepage_mutated
+  pages_mutated(event: EventEnum): pages_mutated
+  section_editor_nodes_mutated(event: EventEnum): section_editor_nodes_mutated
+  quote_mutated(event: EventEnum): quote_mutated
+  image_mutated(event: EventEnum): image_mutated
+  pages_editor_nodes_mutated(event: EventEnum): pages_editor_nodes_mutated
+  section_mutated(event: EventEnum): section_mutated
+  gallery_files_mutated(event: EventEnum): gallery_files_mutated
+  gallery_mutated(event: EventEnum): gallery_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -34,6 +142,11 @@ scalar Boolean
 
 """ISO8601 Date values"""
 scalar Date
+
+"""
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
+"""
+scalar Float
 
 """BigInt value"""
 scalar GraphQLBigInt
@@ -70,6 +183,10 @@ enum EventEnum {
   delete
 }
 
+union pages_editor_nodes_item_union = section
+
+union section_editor_nodes_item_union = image | gallery | quote
+
 type count_functions {
   count: Int
 }
@@ -83,6 +200,14 @@ type datetime_functions {
   hour: Int
   minute: Int
   second: Int
+}
+
+type delete_many {
+  ids: [ID]!
+}
+
+type delete_one {
+  id: ID!
 }
 
 type directus_activity {
@@ -181,6 +306,11 @@ type directus_flows {
   date_created: Date
   date_created_func: datetime_functions
   user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  flow_manager_category: String
+  flow_manager_order: Int
+  flow_manager_last_run_at: Date
+  flow_manager_last_run_at_func: datetime_functions
+  flow_manager_run_counter: Int
   operations(filter: directus_operations_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [directus_operations]
   operations_func: count_functions
 }
@@ -403,6 +533,8 @@ type directus_settings {
   """$t:fields.directus_settings.public_registration_email_filter_note"""
   public_registration_email_filter: JSON
   public_registration_email_filter_func: count_functions
+  flow_manager_categories: JSON
+  flow_manager_categories_func: count_functions
 }
 
 type directus_settings_mutated {
@@ -441,6 +573,46 @@ type directus_shares_mutated {
   key: ID!
   event: EventEnum
   data: directus_shares
+}
+
+type directus_sync_id_map {
+  id: ID!
+  table: String!
+  sync_id: String!
+  local_id: String!
+  created_at: Date
+  created_at_func: datetime_functions
+}
+
+type directus_sync_id_map_aggregated {
+  group: JSON
+  countAll: Int
+  count: directus_sync_id_map_aggregated_count
+  countDistinct: directus_sync_id_map_aggregated_count
+  avg: directus_sync_id_map_aggregated_fields
+  sum: directus_sync_id_map_aggregated_fields
+  avgDistinct: directus_sync_id_map_aggregated_fields
+  sumDistinct: directus_sync_id_map_aggregated_fields
+  min: directus_sync_id_map_aggregated_fields
+  max: directus_sync_id_map_aggregated_fields
+}
+
+type directus_sync_id_map_aggregated_count {
+  id: Int
+  table: Int
+  sync_id: Int
+  local_id: Int
+  created_at: Int
+}
+
+type directus_sync_id_map_aggregated_fields {
+  id: Float
+}
+
+type directus_sync_id_map_mutated {
+  key: ID!
+  event: EventEnum
+  data: directus_sync_id_map
 }
 
 type directus_translations {
@@ -538,6 +710,69 @@ type directus_webhooks_mutated {
   data: directus_webhooks
 }
 
+type gallery {
+  id: ID!
+  type: String
+  images(filter: gallery_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [gallery_files]
+  images_func: count_functions
+}
+
+type gallery_aggregated {
+  group: JSON
+  countAll: Int
+  count: gallery_aggregated_count
+  countDistinct: gallery_aggregated_count
+}
+
+type gallery_aggregated_count {
+  id: Int
+  type: Int
+
+  """Please only select image files (jpg, png, etc.)"""
+  images: Int
+}
+
+type gallery_files {
+  id: ID!
+  gallery_id(filter: gallery_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): gallery
+  directus_files_id(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+}
+
+type gallery_files_aggregated {
+  group: JSON
+  countAll: Int
+  count: gallery_files_aggregated_count
+  countDistinct: gallery_files_aggregated_count
+  avg: gallery_files_aggregated_fields
+  sum: gallery_files_aggregated_fields
+  avgDistinct: gallery_files_aggregated_fields
+  sumDistinct: gallery_files_aggregated_fields
+  min: gallery_files_aggregated_fields
+  max: gallery_files_aggregated_fields
+}
+
+type gallery_files_aggregated_count {
+  id: Int
+  gallery_id: Int
+  directus_files_id: Int
+}
+
+type gallery_files_aggregated_fields {
+  id: Float
+}
+
+type gallery_files_mutated {
+  key: ID!
+  event: EventEnum
+  data: gallery_files
+}
+
+type gallery_mutated {
+  key: ID!
+  event: EventEnum
+  data: gallery
+}
+
 type homepage {
   id: ID!
   status: String
@@ -556,6 +791,229 @@ type homepage_mutated {
   data: homepage
 }
 
+type image {
+  id: ID!
+  sort: Int
+  image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+}
+
+type image_aggregated {
+  group: JSON
+  countAll: Int
+  count: image_aggregated_count
+  countDistinct: image_aggregated_count
+  avg: image_aggregated_fields
+  sum: image_aggregated_fields
+  avgDistinct: image_aggregated_fields
+  sumDistinct: image_aggregated_fields
+  min: image_aggregated_fields
+  max: image_aggregated_fields
+}
+
+type image_aggregated_count {
+  id: Int
+  sort: Int
+  image: Int
+}
+
+type image_aggregated_fields {
+  sort: Float
+}
+
+type image_mutated {
+  key: ID!
+  event: EventEnum
+  data: image
+}
+
+type pages {
+  id: ID!
+  status: String
+  sort: Int
+  user_created(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_created: Date
+  date_created_func: datetime_functions
+  user_updated(filter: directus_users_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_users
+  date_updated: Date
+  date_updated_func: datetime_functions
+  title: String!
+  parent(filter: pages_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): pages
+  permalink: String
+  slug: String
+  editor: JSON
+  editor_func: count_functions
+  editor_nodes(filter: pages_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [pages_editor_nodes]
+  editor_nodes_func: count_functions
+}
+
+type pages_aggregated {
+  group: JSON
+  countAll: Int
+  count: pages_aggregated_count
+  countDistinct: pages_aggregated_count
+  avg: pages_aggregated_fields
+  sum: pages_aggregated_fields
+  avgDistinct: pages_aggregated_fields
+  sumDistinct: pages_aggregated_fields
+  min: pages_aggregated_fields
+  max: pages_aggregated_fields
+}
+
+type pages_aggregated_count {
+  id: Int
+  status: Int
+  sort: Int
+  user_created: Int
+  date_created: Int
+  user_updated: Int
+  date_updated: Int
+  title: Int
+  parent: Int
+  permalink: Int
+  slug: Int
+  editor: Int
+  editor_nodes: Int
+}
+
+type pages_aggregated_fields {
+  sort: Float
+}
+
+type pages_editor_nodes {
+  id: ID!
+  pages_id(filter: pages_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): pages
+  item: pages_editor_nodes_item_union
+  collection: String
+}
+
+type pages_editor_nodes_aggregated {
+  group: JSON
+  countAll: Int
+  count: pages_editor_nodes_aggregated_count
+  countDistinct: pages_editor_nodes_aggregated_count
+}
+
+type pages_editor_nodes_aggregated_count {
+  id: Int
+  pages_id: Int
+  item: Int
+  collection: Int
+}
+
+type pages_editor_nodes_mutated {
+  key: ID!
+  event: EventEnum
+  data: pages_editor_nodes
+}
+
+type pages_mutated {
+  key: ID!
+  event: EventEnum
+  data: pages
+}
+
+type quote {
+  id: ID!
+  text: String
+  author: String
+}
+
+type quote_aggregated {
+  group: JSON
+  countAll: Int
+  count: quote_aggregated_count
+  countDistinct: quote_aggregated_count
+}
+
+type quote_aggregated_count {
+  id: Int
+  text: Int
+  author: Int
+}
+
+type quote_mutated {
+  key: ID!
+  event: EventEnum
+  data: quote
+}
+
+type section {
+  id: ID!
+  editor: JSON
+  editor_func: count_functions
+  editor_nodes(filter: section_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [section_editor_nodes]
+  editor_nodes_func: count_functions
+}
+
+type section_aggregated {
+  group: JSON
+  countAll: Int
+  count: section_aggregated_count
+  countDistinct: section_aggregated_count
+}
+
+type section_aggregated_count {
+  id: Int
+  editor: Int
+  editor_nodes: Int
+}
+
+type section_editor_nodes {
+  id: ID!
+  section_id(filter: section_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): section
+  item: section_editor_nodes_item_union
+  collection: String
+}
+
+type section_editor_nodes_aggregated {
+  group: JSON
+  countAll: Int
+  count: section_editor_nodes_aggregated_count
+  countDistinct: section_editor_nodes_aggregated_count
+}
+
+type section_editor_nodes_aggregated_count {
+  id: Int
+  section_id: Int
+  item: Int
+  collection: Int
+}
+
+type section_editor_nodes_mutated {
+  key: ID!
+  event: EventEnum
+  data: section_editor_nodes
+}
+
+type section_mutated {
+  key: ID!
+  event: EventEnum
+  data: section
+}
+
+""""""
+type version_directus_sync_id_map {
+  id: ID
+  table: String
+  sync_id: String
+  local_id: String
+  created_at: Date
+}
+
+""""""
+type version_gallery {
+  id: ID
+  type: String
+  images: JSON
+}
+
+""""""
+type version_gallery_files {
+  id: ID
+  gallery_id: JSON
+  directus_files_id: JSON
+}
+
 """"""
 type version_homepage {
   id: ID
@@ -565,6 +1023,60 @@ type version_homepage {
   user_updated: JSON
   date_updated: Date
   img: JSON
+}
+
+""""""
+type version_image {
+  id: ID
+  sort: Int
+  image: JSON
+}
+
+""""""
+type version_pages {
+  id: ID
+  status: String
+  sort: Int
+  user_created: JSON
+  date_created: Date
+  user_updated: JSON
+  date_updated: Date
+  title: String
+  parent: JSON
+  permalink: String
+  slug: String
+  editor: JSON
+  editor_nodes: JSON
+}
+
+""""""
+type version_pages_editor_nodes {
+  id: ID
+  pages_id: JSON
+  item: String
+  collection: String
+}
+
+""""""
+type version_quote {
+  id: ID
+  text: String
+  author: String
+}
+
+""""""
+type version_section {
+  id: ID
+  editor: JSON
+  editor_nodes: JSON
+}
+
+""""""
+type version_section_editor_nodes {
+  id: ID
+  section_id: JSON
+  item: String
+  collection: String
 }
 
 input big_int_filter_operators {
@@ -591,6 +1103,150 @@ input boolean_filter_operators {
 
 input count_function_filter_operators {
   count: number_filter_operators
+}
+
+input create_directus_files_input {
+  id: ID
+  storage: String!
+  filename_disk: String
+  filename_download: String!
+  title: String
+  type: String
+  folder: create_directus_folders_input
+  uploaded_by: create_directus_users_input
+  uploaded_on: Date
+  modified_by: create_directus_users_input
+  modified_on: Date
+  charset: String
+  filesize: GraphQLBigInt
+  width: Int
+  height: Int
+  duration: Int
+  embed: String
+  description: String
+  location: String
+  tags: JSON
+  metadata: JSON
+  focal_point_x: Int
+  focal_point_y: Int
+  tus_id: String
+  tus_data: JSON
+  thumbhash: String
+}
+
+input create_directus_folders_input {
+  id: ID
+  name: String!
+  parent: create_directus_folders_input
+}
+
+input create_directus_roles_input {
+  id: ID
+  name: String!
+  icon: String
+  description: String
+  ip_access: [String]
+  enforce_tfa: Boolean!
+  admin_access: Boolean!
+  app_access: Boolean
+  users: [create_directus_users_input]
+}
+
+input create_directus_sync_id_map_input {
+  id: ID
+  table: String!
+  sync_id: String!
+  local_id: String!
+  created_at: Date
+}
+
+input create_directus_users_input {
+  id: ID
+  first_name: String
+  last_name: String
+  email: String
+  password: Hash
+  location: String
+  title: String
+  description: String
+  tags: JSON
+  avatar: create_directus_files_input
+  language: String
+  tfa_secret: Hash
+  status: String
+  role: create_directus_roles_input
+  token: Hash
+  last_access: Date
+  last_page: String
+  provider: String
+  external_identifier: String
+  auth_data: JSON
+  email_notifications: Boolean
+  appearance: String
+  theme_dark: String
+  theme_light: String
+  theme_light_overrides: JSON
+  theme_dark_overrides: JSON
+}
+
+input create_gallery_files_input {
+  id: ID
+  gallery_id: create_gallery_input
+  directus_files_id: create_directus_files_input
+}
+
+input create_gallery_input {
+  id: ID
+  type: String
+  images: [create_gallery_files_input]
+}
+
+input create_image_input {
+  id: ID
+  sort: Int
+  image: create_directus_files_input
+}
+
+input create_pages_editor_nodes_input {
+  id: ID
+  pages_id: create_pages_input
+  item: String
+  collection: String
+}
+
+input create_pages_input {
+  id: ID
+  status: String
+  sort: Int
+  user_created: create_directus_users_input
+  date_created: Date
+  user_updated: create_directus_users_input
+  date_updated: Date
+  title: String!
+  parent: create_pages_input
+  permalink: String
+  slug: String
+  editor: JSON
+  editor_nodes: [create_pages_editor_nodes_input]
+}
+
+input create_quote_input {
+  id: ID
+  text: String
+  author: String
+}
+
+input create_section_editor_nodes_input {
+  id: ID
+  section_id: create_section_input
+  item: String
+  collection: String
+}
+
+input create_section_input {
+  id: ID
+  editor: JSON
+  editor_nodes: [create_section_editor_nodes_input]
 }
 
 input date_filter_operators {
@@ -703,6 +1359,11 @@ input directus_flows_filter {
   date_created: date_filter_operators
   date_created_func: datetime_function_filter_operators
   user_created: directus_users_filter
+  flow_manager_category: string_filter_operators
+  flow_manager_order: number_filter_operators
+  flow_manager_last_run_at: date_filter_operators
+  flow_manager_last_run_at_func: datetime_function_filter_operators
+  flow_manager_run_counter: number_filter_operators
   operations: directus_operations_filter
   operations_func: count_function_filter_operators
   _and: [directus_flows_filter]
@@ -788,6 +1449,17 @@ input directus_roles_filter {
   _or: [directus_roles_filter]
 }
 
+input directus_sync_id_map_filter {
+  id: number_filter_operators
+  table: string_filter_operators
+  sync_id: string_filter_operators
+  local_id: string_filter_operators
+  created_at: date_filter_operators
+  created_at_func: datetime_function_filter_operators
+  _and: [directus_sync_id_map_filter]
+  _or: [directus_sync_id_map_filter]
+}
+
 input directus_users_filter {
   id: string_filter_operators
   first_name: string_filter_operators
@@ -841,11 +1513,36 @@ input directus_versions_filter {
   _or: [directus_versions_filter]
 }
 
+input gallery_files_filter {
+  id: number_filter_operators
+  gallery_id: gallery_filter
+  directus_files_id: directus_files_filter
+  _and: [gallery_files_filter]
+  _or: [gallery_files_filter]
+}
+
+input gallery_filter {
+  id: string_filter_operators
+  type: string_filter_operators
+  images: gallery_files_filter
+  images_func: count_function_filter_operators
+  _and: [gallery_filter]
+  _or: [gallery_filter]
+}
+
 input hash_filter_operators {
   _null: Boolean
   _nnull: Boolean
   _empty: Boolean
   _nempty: Boolean
+}
+
+input image_filter {
+  id: string_filter_operators
+  sort: number_filter_operators
+  image: directus_files_filter
+  _and: [image_filter]
+  _or: [image_filter]
 }
 
 input number_filter_operators {
@@ -861,6 +1558,66 @@ input number_filter_operators {
   _nnull: Boolean
   _between: [GraphQLStringOrFloat]
   _nbetween: [GraphQLStringOrFloat]
+}
+
+input pages_editor_nodes_filter {
+  id: string_filter_operators
+  pages_id: pages_filter
+  collection: string_filter_operators
+  _and: [pages_editor_nodes_filter]
+  _or: [pages_editor_nodes_filter]
+  item__section: section_filter
+}
+
+input pages_filter {
+  id: string_filter_operators
+  status: string_filter_operators
+  sort: number_filter_operators
+  user_created: directus_users_filter
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  user_updated: directus_users_filter
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  title: string_filter_operators
+  parent: pages_filter
+  permalink: string_filter_operators
+  slug: string_filter_operators
+  editor: string_filter_operators
+  editor_func: count_function_filter_operators
+  editor_nodes: pages_editor_nodes_filter
+  editor_nodes_func: count_function_filter_operators
+  _and: [pages_filter]
+  _or: [pages_filter]
+}
+
+input quote_filter {
+  id: string_filter_operators
+  text: string_filter_operators
+  author: string_filter_operators
+  _and: [quote_filter]
+  _or: [quote_filter]
+}
+
+input section_editor_nodes_filter {
+  id: string_filter_operators
+  section_id: section_filter
+  collection: string_filter_operators
+  _and: [section_editor_nodes_filter]
+  _or: [section_editor_nodes_filter]
+  item__image: image_filter
+  item__gallery: gallery_filter
+  item__quote: quote_filter
+}
+
+input section_filter {
+  id: string_filter_operators
+  editor: string_filter_operators
+  editor_func: count_function_filter_operators
+  editor_nodes: section_editor_nodes_filter
+  editor_nodes_func: count_function_filter_operators
+  _and: [section_filter]
+  _or: [section_filter]
 }
 
 input string_filter_operators {
@@ -932,6 +1689,14 @@ input update_directus_roles_input {
   users: [update_directus_users_input]
 }
 
+input update_directus_sync_id_map_input {
+  id: ID
+  table: String
+  sync_id: String
+  local_id: String
+  created_at: Date
+}
+
 input update_directus_users_input {
   id: ID
   first_name: String
@@ -961,6 +1726,18 @@ input update_directus_users_input {
   theme_dark_overrides: JSON
 }
 
+input update_gallery_files_input {
+  id: ID
+  gallery_id: update_gallery_input
+  directus_files_id: update_directus_files_input
+}
+
+input update_gallery_input {
+  id: ID
+  type: String
+  images: [update_gallery_files_input]
+}
+
 input update_homepage_input {
   id: ID
   status: String
@@ -969,4 +1746,52 @@ input update_homepage_input {
   user_updated: update_directus_users_input
   date_updated: Date
   img: update_directus_files_input
+}
+
+input update_image_input {
+  id: ID
+  sort: Int
+  image: update_directus_files_input
+}
+
+input update_pages_editor_nodes_input {
+  id: ID
+  pages_id: update_pages_input
+  item: String
+  collection: String
+}
+
+input update_pages_input {
+  id: ID
+  status: String
+  sort: Int
+  user_created: update_directus_users_input
+  date_created: Date
+  user_updated: update_directus_users_input
+  date_updated: Date
+  title: String
+  parent: update_pages_input
+  permalink: String
+  slug: String
+  editor: JSON
+  editor_nodes: [update_pages_editor_nodes_input]
+}
+
+input update_quote_input {
+  id: ID
+  text: String
+  author: String
+}
+
+input update_section_editor_nodes_input {
+  id: ID
+  section_id: update_section_input
+  item: String
+  collection: String
+}
+
+input update_section_input {
+  id: ID
+  editor: JSON
+  editor_nodes: [update_section_editor_nodes_input]
 }

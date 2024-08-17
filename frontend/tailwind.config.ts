@@ -1,6 +1,6 @@
 import { fontFamily } from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
-import fluid, { extract } from 'fluid-tailwind'
+import fluid, { extract, screens, fontSize } from 'fluid-tailwind'
 
 const config: Config = {
 	darkMode: ["class"],
@@ -62,7 +62,9 @@ const config: Config = {
 				sans: [...fontFamily.sans],
 				heading: ['Changa', ...fontFamily.sans],
 			}
-		}
+		},
+		screens,
+		fontSize
 	},
 	plugins: [fluid]
 };

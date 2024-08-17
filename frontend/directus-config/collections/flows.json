@@ -1,1 +1,63 @@
-[]
+[
+  {
+    "name": "GetParentID",
+    "icon": "bolt",
+    "color": null,
+    "description": null,
+    "status": "active",
+    "trigger": "operation",
+    "accountability": "all",
+    "options": {
+      "return": "$all"
+    },
+    "operation": "1d708328-8234-4dba-91d4-7791e26e78e5",
+    "flow_manager_category": "9bf69ba8-0ccd-44f8-a440-699be7c90b68",
+    "flow_manager_order": 1,
+    "flow_manager_last_run_at": "2024-08-17T11:14:20",
+    "flow_manager_run_counter": 21,
+    "_syncId": "3ed6ae89-18cf-415c-a872-9ea9999e8777"
+  },
+  {
+    "name": "Permalink update/create trigger",
+    "icon": "bolt",
+    "color": null,
+    "description": null,
+    "status": "active",
+    "trigger": "event",
+    "accountability": "all",
+    "options": {
+      "type": "action",
+      "scope": [
+        "items.create",
+        "items.update"
+      ],
+      "collections": [
+        "pages"
+      ]
+    },
+    "operation": "2e8825d7-5f7a-4497-8df1-bedf1f143eb5",
+    "flow_manager_category": "tRxMZbM7iP",
+    "flow_manager_order": 1,
+    "flow_manager_last_run_at": "2024-08-17T14:41:23",
+    "flow_manager_run_counter": 24,
+    "_syncId": "628d9225-e75b-458c-ac50-a16843b14171"
+  },
+  {
+    "name": "Permalink Generator",
+    "icon": "link",
+    "color": null,
+    "description": "Generate an unique permalink from the title field ",
+    "status": "active",
+    "trigger": "operation",
+    "accountability": "all",
+    "options": {
+      "return": "$all"
+    },
+    "operation": "4a51136b-5012-450f-a79c-df435d2dd673",
+    "flow_manager_category": "628d9225-e75b-458c-ac50-a16843b14171",
+    "flow_manager_order": 1,
+    "flow_manager_last_run_at": "2024-08-17T14:41:23",
+    "flow_manager_run_counter": 70,
+    "_syncId": "9bf69ba8-0ccd-44f8-a440-699be7c90b68"
+  }
+]

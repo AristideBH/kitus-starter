@@ -26,67 +26,82 @@
 	/* TYPOGRAPHY */
 	/*- Headings */
 	h1 {
-		@apply scroll-m-20 text-6xl font-extrabold tracking-tight lg:text-7xl;
+		@apply ~text-4xl/6xl font-bold tracking-tight;
 	}
 
 	h2 {
-		@apply mb-3 mt-10 scroll-m-20 border-b pb-2 text-4xl font-semibold tracking-normal transition-colors first:mt-0 lg:text-5xl;
+		@apply ~text-2xl/4xl font-semibold tracking-normal;
 	}
 
 	h3 {
-		@apply mt-6 scroll-m-20 text-2xl font-semibold lg:text-3xl;
+		@apply ~text-xl/3xl font-semibold;
 	}
 
 	h4 {
-		@apply mt-3 scroll-m-20 font-semibold uppercase text-primary;
+		@apply ~text-base/lg font-semibold uppercase tracking-wide;
 	}
 
 	h5 {
-		@apply mt-3 scroll-m-20 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground;
+		@apply font-semibold uppercase text-muted-foreground;
+	}
+	h6 {
+		@apply ~text-sm/base uppercase text-muted-foreground;
 	}
 
 	/*- Paragraph */
 	h1,
 	h2,
 	h3,
-	h4 {
-		@apply text-balance font-heading;
-	}
 	h4,
-	h5 {
-		@apply mt-8;
-	}
-	h1,
-	h2 {
-		+ p {
-			@apply mt-8;
-		}
-	}
-
-	h3,
-	h4,
-	h5 {
-		+ p {
-			@apply mt-4;
+	h5,
+	h6 {
+		@apply my-2 scroll-m-20 text-balance font-heading;
+		&:first-of-type {
+			@apply mt-0;
 		}
 	}
 
 	ul,
 	ol,
-	blockquote {
+	blockquote,
+	menu {
 		+ p {
 			@apply mt-6;
 		}
 	}
 
 	p {
-		@apply text-balance text-lg leading-6;
-		+ p {
-			@apply mt-6;
+		@apply mb-4 text-balance text-lg leading-6;
+
+		& + p {
+			@apply mt-2;
+		}
+
+		& + h1,
+		& + h2,
+		& + h3,
+		& + h4,
+		& + h5 {
+			@apply !mt-[1.75rem];
+		}
+		&:last-of-type {
+			@apply mb-0;
 		}
 	}
+
 	p + button {
 		@apply mt-6;
+	}
+
+	acronym,
+	abbr {
+		@apply underline-offset-4;
+	}
+	q {
+		@apply italic;
+	}
+	samp {
+		@apply px-1.5;
 	}
 
 	/*- Links */
@@ -127,9 +142,9 @@
 		@apply mt-6 text-balance border-s-2 border-primary ps-6 italic;
 	}
 
-	/* code {
-        @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
-    } */
+	code {
+		@apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+	}
 
 	pre {
 		@apply rounded border bg-muted px-[0.3rem] py-[0.2rem] text-sm font-semibold text-muted-foreground;
@@ -167,7 +182,7 @@
 	}
 	table td,
 	table th {
-		@apply h-12 border-b px-4 text-left align-middle font-medium text-muted-foreground [&:last-of-type]:border-b-0;
+		@apply h-12 border-b px-4 text-left align-middle font-medium [&:last-of-type]:border-b-0;
 	}
 	table tbody {
 		@apply [&_tr:last-child]:border-0;

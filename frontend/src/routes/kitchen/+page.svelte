@@ -4,37 +4,34 @@
 </script>
 
 <section>
-	<div class="layout-content-left lg:row-span-full" in:fly={{ y: 100 }}>
-		<label for="longContent">
-			<input
-				class="mb-12"
-				id="longContent"
-				type="checkbox"
-				name="checkbox"
-				bind:checked={longContent}
-			/>
-			LongContent
-		</label>
-		<h1>This is 1st level heading</h1>
-		<p>This is a test paragraph.</p>
-		<h2>This is 2nd level heading</h2>
-		<p>This is a test paragraph.</p>
-	</div>
-	<div class="layout-side-right lg:row-span-full" in:fly={{ y: 100 }}>
-		<h3>This is 3rd level heading</h3>
-		<p>This is a test paragraph.</p>
-		<h4>This is 4th level heading</h4>
-		<p>This is a test paragraph.</p>
-		<h5>This is 5th level heading</h5>
-		<p>This is a test paragraph.</p>
-		<h6>This is 6th level heading</h6>
-		<p>This is a test paragraph.</p>
-	</div>
+	<label for="longContent">
+		<input
+			class="mb-12"
+			id="longContent"
+			type="checkbox"
+			name="checkbox"
+			bind:checked={longContent}
+		/>
+		LongContent
+	</label>
+	<h1>This is 1st level heading</h1>
+	<p>This is a test paragraph.</p>
+	<h2>This is 2nd level heading</h2>
+	<p>This is a test paragraph.</p>
+	<h3>This is 3rd level heading</h3>
+	<p>This is a test paragraph.</p>
+	<h4>This is 4th level heading</h4>
+	<p>This is a test paragraph.</p>
+	<h5>This is 5th level heading</h5>
+	<p>This is a test paragraph.</p>
+	<h6>This is 6th level heading</h6>
+	<p>This is a test paragraph.</p>
+	<p>This is a test paragraph.</p>
 </section>
 
 {#if longContent}
 	<section>
-		<div in:fly={{ y: 100, delay: 140 }} class="layout-bleed-left bg-muted/50 grid py-16 pe-6">
+		<div in:fly={{ y: 100, delay: 140 }} class="layout-bleed-left bg-muted/50 grid p-6">
 			<h2 class="">Basic block level elements</h2>
 			<div>
 				<p>

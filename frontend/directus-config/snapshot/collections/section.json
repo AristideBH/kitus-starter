@@ -1,0 +1,28 @@
+{
+  "collection": "section",
+  "meta": {
+    "accountability": "all",
+    "archive_app_filter": true,
+    "archive_field": null,
+    "archive_value": null,
+    "collapse": "open",
+    "collection": "section",
+    "color": null,
+    "display_template": "{{editor}}",
+    "group": "editor",
+    "hidden": false,
+    "icon": "subtitles",
+    "item_duplication_fields": null,
+    "note": null,
+    "preview_url": null,
+    "singleton": false,
+    "sort": 1,
+    "sort_field": null,
+    "translations": null,
+    "unarchive_value": null,
+    "versioning": false
+  },
+  "schema": {
+    "name": "section"
+  }
+}

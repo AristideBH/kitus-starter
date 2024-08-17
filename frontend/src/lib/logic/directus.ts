@@ -54,42 +54,12 @@ export function client(fetch: Fetch, token?: string | null) {
 // * Utils functions
 // * ////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Generates a Directus image URL for the given image file or ID, with optional resizing.
- *
- * @param image - The image file object or ID string
- * @param size - Optional image size preset or 'srcset' for responsive images
- * @returns The Directus URL for the image at the given size
- */
-export const getImageURL = (
-    image: Partial<Collections.DirectusFile> | string,
-    size?: DirectusImagePreset | 'srcset'
-) => {
-    const baseURL = (id: string | Partial<Collections.DirectusFile>) => {
-        let uuid;
-        if (typeof id === "string") { uuid = id } else { uuid = id.id }
-        return `${PUBLIC_DIRECTUS_URL}/assets/${uuid}`
-    };
-
-    const srcSet = [];
-    for (const size of PixelSizes)
-        srcSet.push(`${baseURL(image)}?key=${size} ${size.replace('px', '')}w`)
-
-    if (typeof image === 'string') return baseURL(image)
-
-    if (!size) return baseURL(image.id!);
-
-    if (size != 'srcset') return `${baseURL(image.id!)}?key=${size}`;
-
-    return srcSet.join(', ');
-};
-
 
 export const getImgData = async (uuid: string | null | undefined | Collections.DirectusFile) => {
     if (!uuid || typeof uuid === "object") return
     const directus = client(fetch);
     const data = await directus.request(readFile(uuid))
-    return data
+    return data as CustomDirectusFile
 }
 
 
