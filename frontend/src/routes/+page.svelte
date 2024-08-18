@@ -31,6 +31,6 @@
 	</summary>
 
 	<!-- <pre>{JSON.stringify(data.page, null, 2)}</pre> -->
-	<Render editor={data.page.editor}></Render>
+	<!-- <Render editor={data.page.editor}></Render> -->
 	<!-- <Image item={data.img} /> -->
 </section>

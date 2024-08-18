@@ -29,9 +29,10 @@ export const load = (async ({ params, fetch }) => {
         }
     ))
 
-    if (pages.length === 0 || !pages) {
+    if (pages.length === 0) {
         error(404, "Page not found");
     }
+
     return {
         page: pages[0]
     };

@@ -1,8 +1,12 @@
 <script lang="ts">
-	import { client, type DirectusClient } from '$lib/logic/directus';
 	import '../app.pcss';
-	import { ModeWatcher } from 'mode-watcher';
+	import { client, type DirectusClient } from '$lib/logic/directus';
 	import { setContext } from 'svelte';
+
+	import { ModeWatcher } from 'mode-watcher';
+	import Navigation from '$lib/components/navigation/Navigation.svelte';
+	import { page } from '$app/stores';
+	console.log('🩺 > page:', $page);
 
 	const directus = client(fetch);
 	setContext<DirectusClient>('directus', directus);
@@ -12,6 +16,10 @@
 
 <ModeWatcher />
 
-<div class="container grid gap-12 py-20" role="main">
-	{@render children()}
-</div>
+<Navigation></Navigation>
+
+{#key $page.data.pathname}
+	<div class="container grid gap-12 py-20" role="main">
+		{@render children()}
+	</div>
+{/key}
