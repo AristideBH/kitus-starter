@@ -1,8 +1,4 @@
 <script lang="ts">
-	import { Image } from '$lib/components/image/';
-	import Render from '$lib/components/editor/Render.svelte';
-
-	let { data } = $props();
 </script>
 
 <section class="grid gap-6 py-8">
@@ -29,8 +25,4 @@
 			</ul>
 		</details>
 	</summary>
-
-	<!-- <pre>{JSON.stringify(data.page, null, 2)}</pre> -->
-	<!-- <Render editor={data.page.editor}></Render> -->
-	<!-- <Image item={data.img} /> -->
 </section>

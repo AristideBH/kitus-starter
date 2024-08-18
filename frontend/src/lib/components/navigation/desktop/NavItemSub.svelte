@@ -2,15 +2,17 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import type { Collections } from '$lib/types/client';
 	import NavItemFragment from '../NavItemFragment.svelte';
-	export let item: Collections.MenuItems;
+
+	let { item }: { item: Collections.MenuItems } = $props();
+	let { label, children } = item;
 </script>
 
 <DropdownMenu.Sub>
 	<DropdownMenu.SubTrigger class="gap-2">
-		{item.label}
+		{label}
 	</DropdownMenu.SubTrigger>
 	<DropdownMenu.SubContent>
-		{#each item.children as child}
+		{#each children as child}
 			{#if child.type === 'list'}
 				<svelte:self item={child} />
 			{:else}

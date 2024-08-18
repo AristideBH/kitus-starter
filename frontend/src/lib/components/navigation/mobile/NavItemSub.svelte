@@ -2,18 +2,19 @@
 	import type { Collections } from '$types/client';
 	import * as Accordion from '$lib/components/ui/accordion/index.js';
 	import * as Sheet from '$lib/components/ui/sheet';
-
 	import NavItemFragment from '../NavItemFragment.svelte';
-	export let item: Collections.MenuItems;
+
+	let { item }: { item: Collections.MenuItems } = $props();
+	let { label, children } = item;
 </script>
 
 <Accordion.Root>
-	<Accordion.Item value="item-{item.label}" class="border-none">
+	<Accordion.Item value="item-{label}" class="border-none">
 		<Accordion.Trigger>
-			{item.label}
+			{label}
 		</Accordion.Trigger>
 		<Accordion.Content>
-			{#each item.children as child}
+			{#each children as child}
 				{#if child.type === 'list'}
 					<svelte:self item={child} />
 				{:else}

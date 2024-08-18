@@ -1,15 +1,14 @@
 <script lang="ts">
-	export let href: string;
-	export let text: string;
 	import { page } from '$app/stores';
+
+	let { href, text }: { href: string; text: string } = $props();
 </script>
 
-<li class="w-fit font-heading">
+<li class="font-heading w-fit">
 	<a
-		on:click
 		{href}
 		class:decoration-4={$page.url.pathname === href}
-		class="transition-all duration-300 underline-offset-8 hover:decoration-4"
+		class="underline-offset-8 transition-all duration-300 hover:decoration-4"
 	>
 		{text}
 	</a>

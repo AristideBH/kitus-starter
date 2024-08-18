@@ -17223,7 +17223,8 @@
         "options": {
           "iconLeft": "link",
           "trim": true,
-          "slug": true
+          "slug": true,
+          "font": "monospace"
         },
         "display": "extension-display-link",
         "display_options": {

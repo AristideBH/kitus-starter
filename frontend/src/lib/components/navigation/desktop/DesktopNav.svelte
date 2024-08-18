@@ -4,14 +4,14 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import NavItemFragment from '../NavItemFragment.svelte';
 	import NavItemSub from './NavItemSub.svelte';
-	import { ChevronDown } from 'lucide-svelte';
+	import ChevronDown from 'lucide-svelte/icons/chevron-down';
 
 	let { menu }: { menu: Collections.Menus } = $props();
 </script>
 
 <div class="flex gap-6 xl:gap-8">
 	{#each menu.items as item}
-		{#if item.type === 'list'}
+		<!-- {#if item.type === 'list'}
 			<DropdownMenu.Root>
 				<DropdownMenu.Trigger class="flex items-center gap-1">
 					{item.label}
@@ -23,14 +23,14 @@
 							<NavItemSub item={child} />
 						{:else}
 							<DropdownMenu.Item>
-								<NavItemFragment item={child} />
+								<NavItemFragment item={child} class="no-underline" />
 							</DropdownMenu.Item>
 						{/if}
 					{/each}
 				</DropdownMenu.Content>
 			</DropdownMenu.Root>
-		{:else}
-			<NavItemFragment {item} class="top no-underline" />
-		{/if}
+		{:else} -->
+		<NavItemFragment {item} class="top no-underline" />
+		<!-- {/if} -->
 	{/each}
 </div>

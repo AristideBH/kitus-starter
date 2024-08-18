@@ -26,7 +26,7 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 		setIntersectionObserver,
 		type ImageProps
 	} from '.';
-	const directus = getContext('directus') as DirectusClient;
+	const directus = getContext<DirectusClient>('directus');
 
 	// * COMPONENTS PROPS
 	let {
