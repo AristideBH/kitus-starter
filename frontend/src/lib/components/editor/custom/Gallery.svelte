@@ -24,7 +24,7 @@
 
 	// - Carousel settings
 	let api: CarouselAPI | undefined = $state();
-	let count = 0;
+	let count = $state(0);
 	let current = $state(0);
 
 	$effect(() => {

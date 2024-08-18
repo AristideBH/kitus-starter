@@ -54,7 +54,7 @@
 					<Quote {content} />
 				{:else if 'images' in content}
 					<Gallery {content} />
-					<!-- todo MENULINKS  -->c
+					<!-- todo MENULINKS  -->
 					<!-- {:else if 'label' in content}
 					{@const { type, url, label, page } = content}
 					<section>
