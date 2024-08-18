@@ -39,6 +39,7 @@
 	});
 
 	let { content }: { content: Collections.Gallery } = $props();
+	let { images, type } = content;
 </script>
 
 {#snippet img(image: Collections.GalleryFiles)}
@@ -51,13 +52,13 @@
 
 <svelte:window bind:outerWidth />
 
-{#if content.images.length === 1}
-	<Image item={content.images[0].directus_files_id} />
-{:else if content.images.length > 1}
-	{#if content.type === 'slider'}
+{#if images.length === 1}
+	<Image item={images[0].directus_files_id} />
+{:else if images.length > 1}
+	{#if type === 'slider'}
 		<Carousel.Root bind:api class="group" opts={{ align: 'start' }}>
 			<Carousel.Content>
-				{#each content.images as image}
+				{#each images as image}
 					<Carousel.Item class="basis-5/6 ">
 						{@render img(image)}
 					</Carousel.Item>
@@ -70,7 +71,7 @@
 			<div
 				class="absolute bottom-4 left-1/2 flex -translate-y-1/2 items-center justify-center gap-2 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
 			>
-				{#each content.images as _, i}
+				{#each images as _, i}
 					<span
 						class="border-muted-foreground/30 bg-muted h-2 w-2 rounded border"
 						class:shadow={i + 1 === current}
@@ -79,9 +80,9 @@
 				{/each}
 			</div>
 		</Carousel.Root>
-	{:else if content.type === 'masonry'}
+	{:else if type === 'masonry'}
 		<Masonry {colWidth}>
-			{#each content.images as image}
+			{#each images as image}
 				{#if image && typeof image != 'string'}
 					<span>
 						{@render img(image)}
@@ -89,9 +90,9 @@
 				{/if}
 			{/each}
 		</Masonry>
-	{:else if content.type === 'scroll'}
+	{:else if type === 'scroll'}
 		<HorizontalScroll>
-			{#each content.images as image}
+			{#each images as image}
 				{#if image && typeof image != 'string'}
 					{@render img(image)}
 				{/if}

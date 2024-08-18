@@ -13,6 +13,7 @@
     "hidden": true,
     "icon": null,
     "item_duplication_fields": [
+      "collection",
       "item:gallery.images",
       "item:gallery.type",
       "item:gallery_files.directus_files_id",
@@ -22,7 +23,8 @@
       "item:image.width",
       "item:quote.align",
       "item:quote.author",
-      "item:quote.text"
+      "item:quote.text",
+      "item:section"
     ],
     "note": null,
     "preview_url": null,

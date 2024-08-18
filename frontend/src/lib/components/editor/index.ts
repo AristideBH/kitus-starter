@@ -1,5 +1,8 @@
 // - Types
 import type { Mark, LinkMark, GenericMark, CustomAttrs, EditorNodesCollections } from './index.d';
+import { readItem } from '@directus/sdk';
+import type { DirectusClient } from '$lib/logic/directus';
+import type { Collections } from '$lib/types/client';
 
 // - COMPONENTS
 // Defaults
@@ -13,9 +16,6 @@ import TaskList from './defaults/TaskList.svelte';
 import Quote from './custom/Quote.svelte';
 import Gallery from './custom/Gallery.svelte';
 import Image from './custom/Image.svelte';
-import { readItem } from '@directus/sdk';
-import type { DirectusClient } from '$lib/logic/directus';
-import type { Collections } from '$lib/types/client';
 
 export {
     BulletList, Heading, Paragraph, OrderedList, Blockquote, TaskList,
@@ -23,38 +23,6 @@ export {
 }
 
 // - FUNCTIONS
-// Logic
-const findMark = <T extends Mark>(marks: Mark[], type: string): T | null => {
-    return marks.find((mark) => mark.type === type) as T | null;
-};
-
-export const findLink = (marks: Mark[]): LinkMark | null => {
-    return findMark<LinkMark>(marks, 'link');
-};
-
-export const findCode = (marks: Mark[]): GenericMark | null => {
-    return findMark<GenericMark>(marks, 'code');
-};
-
-// Layout
-export const setMarks = (marks: Mark[]) => {
-    const c: string[] = [];
-    marks.forEach((mark) => {
-        const { type } = mark;
-        if (type === 'bold') {
-            c.push(`font-${type}`);
-        } else if (type === 'italic') {
-            c.push(type);
-        } else if (type === 'strike') {
-            c.push('line-through');
-        }
-    });
-
-    return c.join(' ');
-};
-
-
-
 export const elementQuery = async (client: DirectusClient, attrs: CustomAttrs | undefined) => {
     if (!attrs) throw new Error('Attributes are undefined');
     try {
@@ -88,4 +56,34 @@ export const elementQuery = async (client: DirectusClient, attrs: CustomAttrs | 
         console.error('Someting wrong happened querying the data:', error);
         throw error;
     }
+};
+// Logic
+const findMark = <T extends Mark>(marks: Mark[], type: string): T | null => {
+    return marks.find((mark) => mark.type === type) as T | null;
+};
+
+export const findLink = (marks: Mark[]): LinkMark | null => {
+    return findMark<LinkMark>(marks, 'link');
+};
+
+export const findCode = (marks: Mark[]): GenericMark | null => {
+    return findMark<GenericMark>(marks, 'code');
+};
+
+
+// Layout
+export const setMarks = (marks: Mark[]) => {
+    const c: string[] = [];
+    marks.forEach((mark) => {
+        const { type } = mark;
+        if (type === 'bold') {
+            c.push(`font-${type}`);
+        } else if (type === 'italic') {
+            c.push(type);
+        } else if (type === 'strike') {
+            c.push('line-through');
+        }
+    });
+
+    return c.join(' ');
 };

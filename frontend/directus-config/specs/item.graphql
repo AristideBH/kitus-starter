@@ -17,14 +17,14 @@ type Query {
   quote_by_id(id: ID!, version: String): quote
   quote_aggregated(groupBy: [String], filter: quote_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [quote_aggregated!]!
   quote_by_version(version: String!, id: ID!): version_quote
-  image(filter: image_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [image!]!
-  image_by_id(id: ID!, version: String): image
-  image_aggregated(groupBy: [String], filter: image_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [image_aggregated!]!
-  image_by_version(version: String!, id: ID!): version_image
   pages_editor_nodes(filter: pages_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [pages_editor_nodes!]!
   pages_editor_nodes_by_id(id: ID!, version: String): pages_editor_nodes
   pages_editor_nodes_aggregated(groupBy: [String], filter: pages_editor_nodes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [pages_editor_nodes_aggregated!]!
   pages_editor_nodes_by_version(version: String!, id: ID!): version_pages_editor_nodes
+  image(filter: image_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [image!]!
+  image_by_id(id: ID!, version: String): image
+  image_aggregated(groupBy: [String], filter: image_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [image_aggregated!]!
+  image_by_version(version: String!, id: ID!): version_image
   section(filter: section_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [section!]!
   section_by_id(id: ID!, version: String): section
   section_aggregated(groupBy: [String], filter: section_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [section_aggregated!]!
@@ -48,10 +48,10 @@ type Mutation {
   create_section_editor_nodes_item(data: create_section_editor_nodes_input!): section_editor_nodes
   create_quote_items(filter: quote_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_quote_input!]): [quote!]!
   create_quote_item(data: create_quote_input!): quote
-  create_image_items(filter: image_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_image_input!]): [image!]!
-  create_image_item(data: create_image_input!): image
   create_pages_editor_nodes_items(filter: pages_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_pages_editor_nodes_input!]): [pages_editor_nodes!]!
   create_pages_editor_nodes_item(data: create_pages_editor_nodes_input!): pages_editor_nodes
+  create_image_items(filter: image_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_image_input!]): [image!]!
+  create_image_item(data: create_image_input!): image
   create_section_items(filter: section_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_section_input!]): [section!]!
   create_section_item(data: create_section_input!): section
   create_gallery_files_items(filter: gallery_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_gallery_files_input!]): [gallery_files!]!
@@ -71,12 +71,12 @@ type Mutation {
   update_quote_items(filter: quote_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_quote_input!): [quote!]!
   update_quote_batch(filter: quote_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_quote_input!]): [quote!]!
   update_quote_item(id: ID!, data: update_quote_input!): quote
-  update_image_items(filter: image_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_image_input!): [image!]!
-  update_image_batch(filter: image_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_image_input!]): [image!]!
-  update_image_item(id: ID!, data: update_image_input!): image
   update_pages_editor_nodes_items(filter: pages_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_pages_editor_nodes_input!): [pages_editor_nodes!]!
   update_pages_editor_nodes_batch(filter: pages_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_pages_editor_nodes_input!]): [pages_editor_nodes!]!
   update_pages_editor_nodes_item(id: ID!, data: update_pages_editor_nodes_input!): pages_editor_nodes
+  update_image_items(filter: image_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_image_input!): [image!]!
+  update_image_batch(filter: image_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_image_input!]): [image!]!
+  update_image_item(id: ID!, data: update_image_input!): image
   update_section_items(filter: section_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_section_input!): [section!]!
   update_section_batch(filter: section_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_section_input!]): [section!]!
   update_section_item(id: ID!, data: update_section_input!): section
@@ -94,10 +94,10 @@ type Mutation {
   delete_section_editor_nodes_item(id: ID!): delete_one
   delete_quote_items(ids: [ID]!): delete_many
   delete_quote_item(id: ID!): delete_one
-  delete_image_items(ids: [ID]!): delete_many
-  delete_image_item(id: ID!): delete_one
   delete_pages_editor_nodes_items(ids: [ID]!): delete_many
   delete_pages_editor_nodes_item(id: ID!): delete_one
+  delete_image_items(ids: [ID]!): delete_many
+  delete_image_item(id: ID!): delete_one
   delete_section_items(ids: [ID]!): delete_many
   delete_section_item(id: ID!): delete_one
   delete_gallery_files_items(ids: [ID]!): delete_many
@@ -130,8 +130,8 @@ type Subscription {
   pages_mutated(event: EventEnum): pages_mutated
   section_editor_nodes_mutated(event: EventEnum): section_editor_nodes_mutated
   quote_mutated(event: EventEnum): quote_mutated
-  image_mutated(event: EventEnum): image_mutated
   pages_editor_nodes_mutated(event: EventEnum): pages_editor_nodes_mutated
+  image_mutated(event: EventEnum): image_mutated
   section_mutated(event: EventEnum): section_mutated
   gallery_files_mutated(event: EventEnum): gallery_files_mutated
   gallery_mutated(event: EventEnum): gallery_mutated
@@ -795,6 +795,7 @@ type image {
   id: ID!
   sort: Int
   image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  show_caption: Boolean
 }
 
 type image_aggregated {
@@ -814,6 +815,7 @@ type image_aggregated_count {
   id: Int
   sort: Int
   image: Int
+  show_caption: Int
 }
 
 type image_aggregated_fields {
@@ -839,7 +841,6 @@ type pages {
   title: String!
   parent(filter: pages_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): pages
   permalink: String
-  slug: String
   editor: JSON
   editor_func: count_functions
   editor_nodes(filter: pages_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [pages_editor_nodes]
@@ -870,7 +871,6 @@ type pages_aggregated_count {
   title: Int
   parent: Int
   permalink: Int
-  slug: Int
   editor: Int
   editor_nodes: Int
 }
@@ -1030,6 +1030,7 @@ type version_image {
   id: ID
   sort: Int
   image: JSON
+  show_caption: Boolean
 }
 
 """"""
@@ -1044,7 +1045,6 @@ type version_pages {
   title: String
   parent: JSON
   permalink: String
-  slug: String
   editor: JSON
   editor_nodes: JSON
 }
@@ -1205,6 +1205,7 @@ input create_image_input {
   id: ID
   sort: Int
   image: create_directus_files_input
+  show_caption: Boolean
 }
 
 input create_pages_editor_nodes_input {
@@ -1225,7 +1226,6 @@ input create_pages_input {
   title: String!
   parent: create_pages_input
   permalink: String
-  slug: String
   editor: JSON
   editor_nodes: [create_pages_editor_nodes_input]
 }
@@ -1541,6 +1541,7 @@ input image_filter {
   id: string_filter_operators
   sort: number_filter_operators
   image: directus_files_filter
+  show_caption: boolean_filter_operators
   _and: [image_filter]
   _or: [image_filter]
 }
@@ -1582,7 +1583,6 @@ input pages_filter {
   title: string_filter_operators
   parent: pages_filter
   permalink: string_filter_operators
-  slug: string_filter_operators
   editor: string_filter_operators
   editor_func: count_function_filter_operators
   editor_nodes: pages_editor_nodes_filter
@@ -1752,6 +1752,7 @@ input update_image_input {
   id: ID
   sort: Int
   image: update_directus_files_input
+  show_caption: Boolean
 }
 
 input update_pages_editor_nodes_input {
@@ -1772,7 +1773,6 @@ input update_pages_input {
   title: String
   parent: update_pages_input
   permalink: String
-  slug: String
   editor: JSON
   editor_nodes: [update_pages_editor_nodes_input]
 }

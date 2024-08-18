@@ -13,7 +13,32 @@
     "interface": "flexible-editor-interface",
     "note": null,
     "options": {
-      "m2aField": "editor_nodes"
+      "displayFormat": true,
+      "editorHeight": "height-grow",
+      "m2aField": "editor_nodes",
+      "tools": [
+        "autolink",
+        "blockquote",
+        "bold",
+        "bulletList",
+        "code",
+        "fullscreen",
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "horizontalRule",
+        "italic",
+        "link",
+        "orderedList",
+        "paragraph",
+        "redo",
+        "removeLink",
+        "strike",
+        "undo"
+      ]
     },
     "readonly": false,
     "required": false,

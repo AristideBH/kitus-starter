@@ -234,8 +234,8 @@ type Subscription {
   pages_mutated(event: EventEnum): pages_mutated
   section_editor_nodes_mutated(event: EventEnum): section_editor_nodes_mutated
   quote_mutated(event: EventEnum): quote_mutated
-  image_mutated(event: EventEnum): image_mutated
   pages_editor_nodes_mutated(event: EventEnum): pages_editor_nodes_mutated
+  image_mutated(event: EventEnum): image_mutated
   section_mutated(event: EventEnum): section_mutated
   gallery_files_mutated(event: EventEnum): gallery_files_mutated
   gallery_mutated(event: EventEnum): gallery_mutated
@@ -1504,6 +1504,7 @@ type image {
   id: ID!
   sort: Int
   image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  show_caption: Boolean
 }
 
 type image_mutated {
@@ -1525,7 +1526,6 @@ type pages {
   title: String!
   parent(filter: pages_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): pages
   permalink: String
-  slug: String
   editor: JSON
   editor_func: count_functions
   editor_nodes(filter: pages_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [pages_editor_nodes]
@@ -2389,6 +2389,7 @@ input image_filter {
   id: string_filter_operators
   sort: number_filter_operators
   image: directus_files_filter
+  show_caption: boolean_filter_operators
   _and: [image_filter]
   _or: [image_filter]
 }
@@ -2430,7 +2431,6 @@ input pages_filter {
   title: string_filter_operators
   parent: pages_filter
   permalink: string_filter_operators
-  slug: string_filter_operators
   editor: string_filter_operators
   editor_func: count_function_filter_operators
   editor_nodes: pages_editor_nodes_filter

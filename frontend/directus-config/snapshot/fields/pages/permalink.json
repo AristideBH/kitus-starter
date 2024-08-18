@@ -5,13 +5,14 @@
   "meta": {
     "collection": "pages",
     "conditions": null,
-    "display": "extension-display-link",
+    "display": "formatted-value",
     "display_options": {
-      "prefix": "https://test-frontend.aristide-bh.com/"
+      "prefix": "https://test-frontend.aristide-bh.com/",
+      "showPrefix": true
     },
     "field": "permalink",
     "group": null,
-    "hidden": true,
+    "hidden": false,
     "interface": "input",
     "note": null,
     "options": {
@@ -21,12 +22,12 @@
     },
     "readonly": true,
     "required": false,
-    "sort": 10,
+    "sort": 11,
     "special": null,
     "translations": null,
     "validation": null,
     "validation_message": null,
-    "width": "full"
+    "width": "half"
   },
   "schema": {
     "name": "permalink",

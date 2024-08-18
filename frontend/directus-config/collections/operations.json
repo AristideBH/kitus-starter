@@ -1,150 +1,76 @@
 [
   {
-    "name": "HasParent?",
-    "key": "condition_2xhx",
-    "type": "condition",
-    "position_x": 24,
-    "position_y": 17,
+    "name": "Run Script",
+    "key": "exec_v529h",
+    "type": "exec",
+    "position_x": 35,
+    "position_y": 1,
     "options": {
-      "filter": {
-        "$last": {
-          "parent": {
-            "_nnull": true
-          }
-        }
-      }
+      "code": "const slugify = (text) => {\n  if (typeof text !== 'string') return '';\n\n  const from = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìıİłḿñńǹňôöòóœøōõőṕŕřśşšșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'\n  const to   = 'aaaaaaaaaacccddeeeeeeeegghiiiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'\n\n  return text\n    .toLowerCase()\n    .trim()\n    .replace(/\\s+/g, '-')\n    .replace(new RegExp(`[${from}]`, 'g'), (char) => to[from.indexOf(char)] || '-')\n    .replace(/&/g, '-and-')\n    .replace(/[^\\w\\-]+/g, '')\n    .replace(/\\-\\-+/g, '-')\n    .replace(/^-+/, '')\n    .replace(/-+$/, '')\n    .substring(0, 100);\n};\n\nmodule.exports = async function(data) {\n  const obj = data.$last;\n  \n  async function createSlugPath(node) {\n    const parts = [];\n    \n    async function traverse(currentNode) {\n      if (currentNode.parent) {\n        await traverse(currentNode.parent);\n      }\n      parts.push(slugify(currentNode.title));\n    }\n    \n    await traverse(node);\n    return parts.join('/') + '/';\n  }\n\n  return await createSlugPath(obj);\n};"
     },
-    "resolve": "fcad0748-2d95-4e68-873f-0e2e7e93631b",
-    "reject": "cf9ac449-6170-4174-80f1-c24b8823b9f9",
-    "flow": "9bf69ba8-0ccd-44f8-a440-699be7c90b68",
-    "_syncId": "fc631ff3-784f-4f9b-a013-370cd6b1c9d6"
-  },
-  {
-    "name": "Slugify",
-    "key": "directus_operation_slugify_k9jui",
-    "type": "directus-operation-slugify",
-    "position_x": 42,
-    "position_y": 27,
-    "options": {
-      "value": "{{item_read_ahzcy.title}}",
-      "replacements": null
-    },
-    "resolve": "b4a73695-7389-4889-8f6a-d47ddf745555",
+    "resolve": "8325e95b-10f6-4155-b0ee-7dc14d86b84a",
     "reject": null,
-    "flow": "9bf69ba8-0ccd-44f8-a440-699be7c90b68",
-    "_syncId": "cf9ac449-6170-4174-80f1-c24b8823b9f9"
+    "flow": "628d9225-e75b-458c-ac50-a16843b14171",
+    "_syncId": "416e1b3b-1039-4f71-9fca-f6db162bb6b4"
   },
   {
-    "name": "Get object data",
-    "key": "item_read_ahzcy",
+    "name": "Read Data",
+    "key": "item_read_iqmhi",
     "type": "item-read",
-    "position_x": 6,
-    "position_y": 17,
+    "position_x": 18,
+    "position_y": 1,
     "options": {
       "collection": "pages",
+      "key": [
+        "{{$trigger.keys[0]}}"
+      ],
       "query": {
         "fields": [
           "title",
-          "id",
-          "parent"
+          "parent.title",
+          "parent.parent.title",
+          "parent.parent.parent.title"
         ]
-      },
-      "emitEvents": true,
-      "key": [
-        "{{$trigger.data.keys[0]}}"
-      ]
+      }
     },
-    "resolve": "fc631ff3-784f-4f9b-a013-370cd6b1c9d6",
+    "resolve": "416e1b3b-1039-4f71-9fca-f6db162bb6b4",
     "reject": null,
-    "flow": "9bf69ba8-0ccd-44f8-a440-699be7c90b68",
-    "_syncId": "4a51136b-5012-450f-a79c-df435d2dd673"
+    "flow": "628d9225-e75b-458c-ac50-a16843b14171",
+    "_syncId": "2894d282-6d16-469b-8c75-69ae40b95c44"
   },
   {
-    "name": "Apply permalink",
-    "key": "item_update_cztmy",
+    "name": "Update Data",
+    "key": "item_update_az9ho",
     "type": "item-update",
-    "position_x": 60,
-    "position_y": 27,
-    "options": {
-      "collection": "pages",
-      "payload": {
-        "permalink": "{{$last.slug}}/"
-      },
-      "key": [
-        "{{$trigger.data.keys[0]}}"
-      ]
-    },
-    "resolve": null,
-    "reject": null,
-    "flow": "9bf69ba8-0ccd-44f8-a440-699be7c90b68",
-    "_syncId": "b4a73695-7389-4889-8f6a-d47ddf745555"
-  },
-  {
-    "name": "Log to Console",
-    "key": "log_vaart",
-    "type": "log",
-    "position_x": 21,
+    "position_x": 53,
     "position_y": 1,
     "options": {
-      "message": "{{$trigger.data}}"
+      "collection": "{{$trigger.collection}}",
+      "key": [
+        "{{$trigger.keys[0]}}"
+      ],
+      "payload": {
+        "permalink": "{{$last}}"
+      }
     },
     "resolve": null,
     "reject": null,
-    "flow": "9bf69ba8-0ccd-44f8-a440-699be7c90b68",
-    "_syncId": "3f8e7449-890e-4a3d-9659-559a6d4d9473"
+    "flow": "628d9225-e75b-458c-ac50-a16843b14171",
+    "_syncId": "8325e95b-10f6-4155-b0ee-7dc14d86b84a"
   },
   {
     "name": "Trigger Flow",
     "key": "trigger_em5lr",
     "type": "trigger",
-    "position_x": 19,
-    "position_y": 1,
+    "position_x": 17,
+    "position_y": 24,
     "options": {
-      "payload": {
-        "user": "{{ $accountability.user }}",
-        "data": "{{ $last }}"
-      },
+      "payload": "{{ $last }}",
       "flow": "9bf69ba8-0ccd-44f8-a440-699be7c90b68"
     },
     "resolve": null,
     "reject": null,
     "flow": "628d9225-e75b-458c-ac50-a16843b14171",
     "_syncId": "2e8825d7-5f7a-4497-8df1-bedf1f143eb5"
-  },
-  {
-    "name": "Trigger Flow",
-    "key": "trigger_lgpd2",
-    "type": "trigger",
-    "position_x": 19,
-    "position_y": 1,
-    "options": {
-      "flow": "9bf69ba8-0ccd-44f8-a440-699be7c90b68",
-      "payload": {
-        "user": "{{ $accountability.user }}",
-        "data": "{{ $last }}"
-      }
-    },
-    "resolve": null,
-    "reject": null,
-    "flow": "3ed6ae89-18cf-415c-a872-9ea9999e8777",
-    "_syncId": "1d708328-8234-4dba-91d4-7791e26e78e5"
-  },
-  {
-    "name": "Trigger Flow",
-    "key": "trigger_o6kv3",
-    "type": "trigger",
-    "position_x": 42,
-    "position_y": 12,
-    "options": {
-      "flow": "3ed6ae89-18cf-415c-a872-9ea9999e8777",
-      "payload": {
-        "user": "{{ $accountability.user }}",
-        "data": "{{ item_read_ahzcy.parent }}"
-      }
-    },
-    "resolve": null,
-    "reject": null,
-    "flow": "9bf69ba8-0ccd-44f8-a440-699be7c90b68",
-    "_syncId": "fcad0748-2d95-4e68-873f-0e2e7e93631b"
   }
 ]

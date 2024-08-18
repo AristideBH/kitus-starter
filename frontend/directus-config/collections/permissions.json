@@ -13,6 +13,30 @@
   },
   {
     "role": null,
+    "collection": "gallery_files",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "f779524b-e9ae-49c5-b415-a1954713cf86"
+  },
+  {
+    "role": null,
+    "collection": "gallery",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "52232495-5b9c-4070-a0f8-91d3c16de9a8"
+  },
+  {
+    "role": null,
     "collection": "homepage",
     "action": "read",
     "permissions": {},
@@ -22,5 +46,77 @@
       "*"
     ],
     "_syncId": "2960b757-d0f3-4573-b265-2a532f19cf57"
+  },
+  {
+    "role": null,
+    "collection": "image",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "3a3cd5d1-9f87-4fff-a551-53b5c05e226a"
+  },
+  {
+    "role": null,
+    "collection": "pages_editor_nodes",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "6ec5cb32-aea0-49c8-b418-063580b65f62"
+  },
+  {
+    "role": null,
+    "collection": "pages",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "2d1de207-3eda-40db-8b10-9677483a94a9"
+  },
+  {
+    "role": null,
+    "collection": "quote",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "403d0210-b79a-456a-b912-6123b5b67602"
+  },
+  {
+    "role": null,
+    "collection": "section_editor_nodes",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "f96e79df-ea10-4f5b-82ba-b46719af79b6"
+  },
+  {
+    "role": null,
+    "collection": "section",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "600912ba-79b1-4487-b487-ce2435bac745"
   }
 ]

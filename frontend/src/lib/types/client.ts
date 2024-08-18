@@ -229,7 +229,6 @@ export namespace Collections {
    */
   export interface Homepage {
     id: Types.PrimaryKey<Types.UUID>;
-    status: "archived" | "draft" | "published" | Types.String;
     user_created: Types.Optional<Types.UUID | Collections.DirectusUser>;
     date_created: Types.Optional<Types.DateTime>;
     user_updated: Types.Optional<Types.UUID | Collections.DirectusUser>;
@@ -244,6 +243,32 @@ export namespace Collections {
     id: Types.PrimaryKey<Types.UUID>;
     sort: Types.Optional<Types.Integer>;
     image: Types.Optional<Types.UUID | Collections.DirectusFile>;
+    show_caption: Types.Optional<Types.Boolean>;
+  }
+
+  /**
+   * The menu items collection.
+   */
+  export interface MenuItems {
+    id: Types.PrimaryKey<Types.UUID>;
+    menu: Types.Optional<Types.String | Collections.Menus>;
+    sort: Types.Optional<Types.Integer>;
+    label: Types.Optional<Types.String>;
+    type: Types.Optional<Types.String>;
+    page: Types.Optional<Types.UUID | Collections.Pages>;
+    children: Collections.MenuItems[];
+    url: Types.Optional<Types.String>;
+    open_in_new_tab: Types.Optional<Types.Boolean>;
+    parent: Types.Optional<Types.UUID | Collections.MenuItems>;
+  }
+
+  /**
+   * The menus collection.
+   */
+  export interface Menus {
+    title: Types.PrimaryKey<Types.String>;
+    items: Collections.MenuItems[];
+    sort: Types.Optional<Types.Integer>;
   }
 
   /**
@@ -260,9 +285,9 @@ export namespace Collections {
     title: Types.String;
     parent: Types.Optional<Types.UUID | Collections.Pages>;
     permalink: Types.Optional<Types.String>;
-    slug: Types.Optional<Types.String>;
     editor: Types.Optional<Types.JSON | Types.JSON>;
     editor_nodes: Collections.PagesEditorNodes[];
+    seo_detail: Types.Optional<Types.Integer | Collections.SeoDetail>;
   }
 
   /**
@@ -303,6 +328,120 @@ export namespace Collections {
       Types.String | Collections.Image | Collections.Gallery | Collections.Quote
     >;
     collection: Types.Optional<Types.String>;
+  }
+
+  /**
+   * The seo advanced setting collection.
+   */
+  export interface SeoAdvancedSetting {
+    collection: Types.PrimaryKey<Types.String>;
+    enabled: Types.Optional<Types.Boolean>;
+    is_static: Types.Optional<Types.Boolean>;
+    translations: Types.UnknownType<{
+      schema: {
+        raw: {
+          collection: "seo_advanced_setting";
+          field: "translations";
+          type: "alias";
+          schema: null;
+          meta: {
+            id: 129;
+            collection: "seo_advanced_setting";
+            field: "translations";
+            special: ["translations"];
+            interface: "translations";
+            options: null;
+            display: null;
+            display_options: null;
+            readonly: false;
+            hidden: false;
+            sort: 4;
+            width: "full";
+            translations: null;
+            note: null;
+            conditions: null;
+            required: false;
+            group: null;
+            validation: null;
+            validation_message: null;
+          };
+        };
+        raw_relation: null;
+      };
+      meta: {
+        id: 129;
+        collection: "seo_advanced_setting";
+        field: "translations";
+        special: ["translations"];
+        interface: "translations";
+        options: null;
+        display: null;
+        display_options: null;
+        readonly: false;
+        hidden: false;
+        sort: 4;
+        width: "full";
+        translations: null;
+        note: null;
+        conditions: null;
+        required: false;
+        group: null;
+        validation: null;
+        validation_message: null;
+      };
+    }>;
+  }
+
+  /**
+   * The seo detail collection.
+   */
+  export interface SeoDetail {
+    id: Types.PrimaryKey<Types.Integer>;
+    meta_title: Types.Optional<Types.String>;
+    meta_description: Types.Optional<Types.String>;
+    meta_keywords: Types.Optional<Types.String>;
+    schema_type: Types.Optional<
+      | "software"
+      | "service"
+      | "person"
+      | "video"
+      | "restaurant"
+      | "recipe"
+      | "product"
+      | "music"
+      | "jobposting"
+      | "event"
+      | "course"
+      | "book"
+      | "article"
+      | ""
+      | Types.String
+    >;
+    meta_robots: Types.Optional<Types.JSON | Types.JSON>;
+    meta_social: Types.Optional<Types.String>;
+    image_share: Types.Optional<Types.String>;
+    facebook_image: Types.Optional<Types.UUID>;
+    twitter_image: Types.Optional<Types.UUID>;
+  }
+
+  /**
+   * The seo redirection collection.
+   */
+  export interface SeoRedirection {
+    id: Types.PrimaryKey<Types.Integer>;
+    date_created: Types.Optional<Types.DateTime>;
+    date_updated: Types.Optional<Types.DateTime>;
+    status: Types.Optional<Types.String>;
+    old_url: Types.Optional<Types.String>;
+    new_url: Types.Optional<Types.String>;
+  }
+
+  /**
+   * The seo setting collection.
+   */
+  export interface SeoSetting {
+    key: Types.PrimaryKey<Types.String>;
+    value: Types.Optional<Types.JSON | Types.JSON>;
   }
 
   /**
@@ -489,6 +628,16 @@ export interface Schema extends System {
   image: Collections.Image[];
 
   /**
+   * The menu items collection.
+   */
+  menu_items: Collections.MenuItems[];
+
+  /**
+   * The menus collection.
+   */
+  menus: Collections.Menus[];
+
+  /**
    * The pages collection.
    */
   pages: Collections.Pages[];
@@ -512,6 +661,26 @@ export interface Schema extends System {
    * The section editor nodes collection.
    */
   section_editor_nodes: Collections.SectionEditorNodes[];
+
+  /**
+   * The seo advanced setting collection.
+   */
+  seo_advanced_setting: Collections.SeoAdvancedSetting[];
+
+  /**
+   * The seo detail collection.
+   */
+  seo_detail: Collections.SeoDetail[];
+
+  /**
+   * The seo redirection collection.
+   */
+  seo_redirection: Collections.SeoRedirection[];
+
+  /**
+   * The seo setting collection.
+   */
+  seo_setting: Collections.SeoSetting[];
 
   /**
    * The directus sync id map collection.
@@ -1401,6 +1570,522 @@ export class ImageItem
     key: string | number,
   ): Promise<void> {
     return await this.client.request(deleteImageItem(key));
+  }
+}
+
+/**
+ * Create many menu items items.
+ */
+export function createMenuItemsItems<
+  const Query extends Directus.Query<Schema, Collections.MenuItems[]>,
+>(items: Partial<Collections.MenuItems>[], query?: Query) {
+  return DirectusSDK.createItems<Schema, "menu_items", Query>(
+    "menu_items",
+    items,
+    query,
+  );
+}
+
+/**
+ * Create a single menu items item.
+ */
+export function createMenuItemsItem<
+  const Query extends DirectusSDK.Query<Schema, Collections.MenuItems[]>, // Is this a mistake? Why []?
+>(item: Partial<Collections.MenuItems>, query?: Query) {
+  return DirectusSDK.createItem<Schema, "menu_items", Query>(
+    "menu_items",
+    item,
+    query,
+  );
+}
+
+/**
+ * Read many menu items items.
+ */
+export function readMenuItemsItems<
+  const Query extends Directus.Query<Schema, Collections.MenuItems>,
+>(query?: Query) {
+  return DirectusSDK.readItems<Schema, "menu_items", Query>(
+    "menu_items",
+    query,
+  );
+}
+
+/**
+ * Read many menu items items.
+ */
+export const listMenuItems = readMenuItemsItems;
+
+/**
+ * Gets a single known menu items item by id.
+ */
+export function readMenuItemsItem<
+  const Query extends Directus.Query<Schema, Collections.MenuItems>,
+>(key: string | number, query?: Query) {
+  return DirectusSDK.readItem<Schema, "menu_items", Query>(
+    "menu_items",
+    key,
+    query,
+  );
+}
+
+/**
+ * Gets a single known menu items item by id.
+ */
+export const readMenuItems = readMenuItemsItem;
+
+/**
+ * Read many menu items items.
+ */
+export function updateMenuItemsItems<
+  const Query extends Directus.Query<Schema, Collections.MenuItems[]>,
+>(
+  keys: string[] | number[],
+  patch: Partial<Collections.MenuItems>,
+  query?: Query,
+) {
+  return DirectusSDK.updateItems<Schema, "menu_items", Query>(
+    "menu_items",
+    keys,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Gets a single known menu items item by id.
+ */
+export function updateMenuItemsItem<
+  const Query extends Directus.Query<Schema, Collections.MenuItems[]>,
+>(key: string | number, patch: Partial<Collections.MenuItems>, query?: Query) {
+  return DirectusSDK.updateItem<Schema, "menu_items", Query>(
+    "menu_items",
+    key,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Deletes many menu items items.
+ */
+export function deleteMenuItemsItems<
+  const Query extends Directus.Query<Schema, Collections.MenuItems[]>,
+>(keys: string[] | number[]) {
+  return DirectusSDK.deleteItems<Schema, "menu_items", Query>(
+    "menu_items",
+    keys,
+  );
+}
+
+/**
+ * Deletes a single known menu items item by id.
+ */
+export function deleteMenuItemsItem(key: string | number) {
+  return DirectusSDK.deleteItem<Schema, "menu_items">("menu_items", key);
+}
+
+export class MenuItemsItems
+  implements TypedCollectionItemsWrapper<Collections.MenuItems>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Creates many items in the collection.
+   */
+  async create<
+    const Query extends DirectusSDK.Query<Schema, Collections.MenuItems>,
+  >(
+    items: Partial<Collections.MenuItems>[],
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.MenuItems,
+      Query["fields"]
+    >[]
+  > {
+    return (await this.client.request(
+      createMenuItemsItems(items, query as any),
+    )) as any; // Seems like a bug in the SDK.
+  }
+
+  /**
+   * Read many items from the collection.
+   */
+  async query<
+    const Query extends Directus.Query<Schema, Collections.MenuItems>,
+  >(
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.MenuItems,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(readMenuItemsItems(query));
+  }
+
+  /**
+   * Read the first item from the collection matching the query.
+   */
+  async find<const Query extends Directus.Query<Schema, Collections.MenuItems>>(
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.MenuItems,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    const items = await this.client.request(
+      readMenuItemsItems({
+        ...query,
+        limit: 1,
+      }),
+    );
+    return items?.[0] as any; // TODO: fix
+  }
+
+  /**
+   * Update many items in the collection.
+   */
+  async update<
+    const Query extends Directus.Query<Schema, Collections.MenuItems[]>,
+  >(
+    keys: string[] | number[],
+    patch: Partial<Collections.MenuItems>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.MenuItems,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(updateMenuItemsItems(keys, patch, query));
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.MenuItems>,
+  >(keys: string[] | number[]): Promise<void> {}
+}
+
+export class MenuItemsItem
+  implements TypedCollectionItemWrapper<Collections.MenuItems>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Create a single item in the collection.
+   */
+  async create<
+    const Query extends Directus.Query<Schema, Collections.MenuItems>,
+  >(
+    item: Partial<Collections.MenuItems>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<Schema, Collections.MenuItems, Query["fields"]>
+  > {
+    return (await this.client.request(
+      createMenuItemsItem(item, query as any),
+    )) as any;
+  }
+
+  /**
+   * Read a single item from the collection.
+   */
+  async get<const Query extends Directus.Query<Schema, Collections.MenuItems>>(
+    key: string | number,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.MenuItems,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return await this.client.request(readMenuItemsItem(key, query));
+  }
+
+  /**
+   * Update a single item from the collection.
+   */
+  async update<
+    const Query extends Directus.Query<Schema, Collections.MenuItems>,
+  >(
+    key: string | number,
+    patch: Partial<Collections.MenuItems>,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.MenuItems,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return (await this.client.request(
+      updateMenuItemsItem(key, patch, query as any),
+    )) as any;
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.MenuItems>,
+  >(key: string | number): Promise<void> {
+    return await this.client.request(deleteMenuItemsItem(key));
+  }
+}
+
+/**
+ * Create many menus items.
+ */
+export function createMenusItems<
+  const Query extends Directus.Query<Schema, Collections.Menus[]>,
+>(items: Partial<Collections.Menus>[], query?: Query) {
+  return DirectusSDK.createItems<Schema, "menus", Query>("menus", items, query);
+}
+
+/**
+ * Create a single menus item.
+ */
+export function createMenusItem<
+  const Query extends DirectusSDK.Query<Schema, Collections.Menus[]>, // Is this a mistake? Why []?
+>(item: Partial<Collections.Menus>, query?: Query) {
+  return DirectusSDK.createItem<Schema, "menus", Query>("menus", item, query);
+}
+
+/**
+ * Read many menus items.
+ */
+export function readMenusItems<
+  const Query extends Directus.Query<Schema, Collections.Menus>,
+>(query?: Query) {
+  return DirectusSDK.readItems<Schema, "menus", Query>("menus", query);
+}
+
+/**
+ * Read many menus items.
+ */
+export const listMenus = readMenusItems;
+
+/**
+ * Gets a single known menus item by id.
+ */
+export function readMenusItem<
+  const Query extends Directus.Query<Schema, Collections.Menus>,
+>(key: string | number, query?: Query) {
+  return DirectusSDK.readItem<Schema, "menus", Query>("menus", key, query);
+}
+
+/**
+ * Gets a single known menus item by id.
+ */
+export const readMenus = readMenusItem;
+
+/**
+ * Read many menus items.
+ */
+export function updateMenusItems<
+  const Query extends Directus.Query<Schema, Collections.Menus[]>,
+>(keys: string[] | number[], patch: Partial<Collections.Menus>, query?: Query) {
+  return DirectusSDK.updateItems<Schema, "menus", Query>(
+    "menus",
+    keys,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Gets a single known menus item by id.
+ */
+export function updateMenusItem<
+  const Query extends Directus.Query<Schema, Collections.Menus[]>,
+>(key: string | number, patch: Partial<Collections.Menus>, query?: Query) {
+  return DirectusSDK.updateItem<Schema, "menus", Query>(
+    "menus",
+    key,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Deletes many menus items.
+ */
+export function deleteMenusItems<
+  const Query extends Directus.Query<Schema, Collections.Menus[]>,
+>(keys: string[] | number[]) {
+  return DirectusSDK.deleteItems<Schema, "menus", Query>("menus", keys);
+}
+
+/**
+ * Deletes a single known menus item by id.
+ */
+export function deleteMenusItem(key: string | number) {
+  return DirectusSDK.deleteItem<Schema, "menus">("menus", key);
+}
+
+export class MenusItems
+  implements TypedCollectionItemsWrapper<Collections.Menus>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Creates many items in the collection.
+   */
+  async create<
+    const Query extends DirectusSDK.Query<Schema, Collections.Menus>,
+  >(
+    items: Partial<Collections.Menus>[],
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<Schema, Collections.Menus, Query["fields"]>[]
+  > {
+    return (await this.client.request(
+      createMenusItems(items, query as any),
+    )) as any; // Seems like a bug in the SDK.
+  }
+
+  /**
+   * Read many items from the collection.
+   */
+  async query<const Query extends Directus.Query<Schema, Collections.Menus>>(
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<Schema, Collections.Menus, Query["fields"]>[]
+  > {
+    return await this.client.request(readMenusItems(query));
+  }
+
+  /**
+   * Read the first item from the collection matching the query.
+   */
+  async find<const Query extends Directus.Query<Schema, Collections.Menus>>(
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<Schema, Collections.Menus, Query["fields"]>
+    | undefined
+  > {
+    const items = await this.client.request(
+      readMenusItems({
+        ...query,
+        limit: 1,
+      }),
+    );
+    return items?.[0] as any; // TODO: fix
+  }
+
+  /**
+   * Update many items in the collection.
+   */
+  async update<const Query extends Directus.Query<Schema, Collections.Menus[]>>(
+    keys: string[] | number[],
+    patch: Partial<Collections.Menus>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<Schema, Collections.Menus, Query["fields"]>[]
+  > {
+    return await this.client.request(updateMenusItems(keys, patch, query));
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<const Query extends Directus.Query<Schema, Collections.Menus>>(
+    keys: string[] | number[],
+  ): Promise<void> {}
+}
+
+export class MenusItem
+  implements TypedCollectionItemWrapper<Collections.Menus>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Create a single item in the collection.
+   */
+  async create<const Query extends Directus.Query<Schema, Collections.Menus>>(
+    item: Partial<Collections.Menus>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<Schema, Collections.Menus, Query["fields"]>
+  > {
+    return (await this.client.request(
+      createMenusItem(item, query as any),
+    )) as any;
+  }
+
+  /**
+   * Read a single item from the collection.
+   */
+  async get<const Query extends Directus.Query<Schema, Collections.Menus>>(
+    key: string | number,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<Schema, Collections.Menus, Query["fields"]>
+    | undefined
+  > {
+    return await this.client.request(readMenusItem(key, query));
+  }
+
+  /**
+   * Update a single item from the collection.
+   */
+  async update<const Query extends Directus.Query<Schema, Collections.Menus>>(
+    key: string | number,
+    patch: Partial<Collections.Menus>,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<Schema, Collections.Menus, Query["fields"]>
+    | undefined
+  > {
+    return (await this.client.request(
+      updateMenusItem(key, patch, query as any),
+    )) as any;
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<const Query extends Directus.Query<Schema, Collections.Menus>>(
+    key: string | number,
+  ): Promise<void> {
+    return await this.client.request(deleteMenusItem(key));
   }
 }
 
@@ -2725,6 +3410,1195 @@ export class SectionEditorNodesItem
 }
 
 /**
+ * Create many seo advanced setting items.
+ */
+export function createSeoAdvancedSettingItems<
+  const Query extends Directus.Query<Schema, Collections.SeoAdvancedSetting[]>,
+>(items: Partial<Collections.SeoAdvancedSetting>[], query?: Query) {
+  return DirectusSDK.createItems<Schema, "seo_advanced_setting", Query>(
+    "seo_advanced_setting",
+    items,
+    query,
+  );
+}
+
+/**
+ * Create a single seo advanced setting item.
+ */
+export function createSeoAdvancedSettingItem<
+  const Query extends DirectusSDK.Query<
+    Schema,
+    Collections.SeoAdvancedSetting[]
+  >, // Is this a mistake? Why []?
+>(item: Partial<Collections.SeoAdvancedSetting>, query?: Query) {
+  return DirectusSDK.createItem<Schema, "seo_advanced_setting", Query>(
+    "seo_advanced_setting",
+    item,
+    query,
+  );
+}
+
+/**
+ * Read many seo advanced setting items.
+ */
+export function readSeoAdvancedSettingItems<
+  const Query extends Directus.Query<Schema, Collections.SeoAdvancedSetting>,
+>(query?: Query) {
+  return DirectusSDK.readItems<Schema, "seo_advanced_setting", Query>(
+    "seo_advanced_setting",
+    query,
+  );
+}
+
+/**
+ * Read many seo advanced setting items.
+ */
+export const listSeoAdvancedSetting = readSeoAdvancedSettingItems;
+
+/**
+ * Gets a single known seo advanced setting item by id.
+ */
+export function readSeoAdvancedSettingItem<
+  const Query extends Directus.Query<Schema, Collections.SeoAdvancedSetting>,
+>(key: string | number, query?: Query) {
+  return DirectusSDK.readItem<Schema, "seo_advanced_setting", Query>(
+    "seo_advanced_setting",
+    key,
+    query,
+  );
+}
+
+/**
+ * Gets a single known seo advanced setting item by id.
+ */
+export const readSeoAdvancedSetting = readSeoAdvancedSettingItem;
+
+/**
+ * Read many seo advanced setting items.
+ */
+export function updateSeoAdvancedSettingItems<
+  const Query extends Directus.Query<Schema, Collections.SeoAdvancedSetting[]>,
+>(
+  keys: string[] | number[],
+  patch: Partial<Collections.SeoAdvancedSetting>,
+  query?: Query,
+) {
+  return DirectusSDK.updateItems<Schema, "seo_advanced_setting", Query>(
+    "seo_advanced_setting",
+    keys,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Gets a single known seo advanced setting item by id.
+ */
+export function updateSeoAdvancedSettingItem<
+  const Query extends Directus.Query<Schema, Collections.SeoAdvancedSetting[]>,
+>(
+  key: string | number,
+  patch: Partial<Collections.SeoAdvancedSetting>,
+  query?: Query,
+) {
+  return DirectusSDK.updateItem<Schema, "seo_advanced_setting", Query>(
+    "seo_advanced_setting",
+    key,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Deletes many seo advanced setting items.
+ */
+export function deleteSeoAdvancedSettingItems<
+  const Query extends Directus.Query<Schema, Collections.SeoAdvancedSetting[]>,
+>(keys: string[] | number[]) {
+  return DirectusSDK.deleteItems<Schema, "seo_advanced_setting", Query>(
+    "seo_advanced_setting",
+    keys,
+  );
+}
+
+/**
+ * Deletes a single known seo advanced setting item by id.
+ */
+export function deleteSeoAdvancedSettingItem(key: string | number) {
+  return DirectusSDK.deleteItem<Schema, "seo_advanced_setting">(
+    "seo_advanced_setting",
+    key,
+  );
+}
+
+export class SeoAdvancedSettingItems
+  implements TypedCollectionItemsWrapper<Collections.SeoAdvancedSetting>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Creates many items in the collection.
+   */
+  async create<
+    const Query extends DirectusSDK.Query<
+      Schema,
+      Collections.SeoAdvancedSetting
+    >,
+  >(
+    items: Partial<Collections.SeoAdvancedSetting>[],
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.SeoAdvancedSetting,
+      Query["fields"]
+    >[]
+  > {
+    return (await this.client.request(
+      createSeoAdvancedSettingItems(items, query as any),
+    )) as any; // Seems like a bug in the SDK.
+  }
+
+  /**
+   * Read many items from the collection.
+   */
+  async query<
+    const Query extends Directus.Query<Schema, Collections.SeoAdvancedSetting>,
+  >(
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.SeoAdvancedSetting,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(readSeoAdvancedSettingItems(query));
+  }
+
+  /**
+   * Read the first item from the collection matching the query.
+   */
+  async find<
+    const Query extends Directus.Query<Schema, Collections.SeoAdvancedSetting>,
+  >(
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.SeoAdvancedSetting,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    const items = await this.client.request(
+      readSeoAdvancedSettingItems({
+        ...query,
+        limit: 1,
+      }),
+    );
+    return items?.[0] as any; // TODO: fix
+  }
+
+  /**
+   * Update many items in the collection.
+   */
+  async update<
+    const Query extends Directus.Query<
+      Schema,
+      Collections.SeoAdvancedSetting[]
+    >,
+  >(
+    keys: string[] | number[],
+    patch: Partial<Collections.SeoAdvancedSetting>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.SeoAdvancedSetting,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(
+      updateSeoAdvancedSettingItems(keys, patch, query),
+    );
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.SeoAdvancedSetting>,
+  >(keys: string[] | number[]): Promise<void> {}
+}
+
+export class SeoAdvancedSettingItem
+  implements TypedCollectionItemWrapper<Collections.SeoAdvancedSetting>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Create a single item in the collection.
+   */
+  async create<
+    const Query extends Directus.Query<Schema, Collections.SeoAdvancedSetting>,
+  >(
+    item: Partial<Collections.SeoAdvancedSetting>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.SeoAdvancedSetting,
+      Query["fields"]
+    >
+  > {
+    return (await this.client.request(
+      createSeoAdvancedSettingItem(item, query as any),
+    )) as any;
+  }
+
+  /**
+   * Read a single item from the collection.
+   */
+  async get<
+    const Query extends Directus.Query<Schema, Collections.SeoAdvancedSetting>,
+  >(
+    key: string | number,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.SeoAdvancedSetting,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return await this.client.request(readSeoAdvancedSettingItem(key, query));
+  }
+
+  /**
+   * Update a single item from the collection.
+   */
+  async update<
+    const Query extends Directus.Query<Schema, Collections.SeoAdvancedSetting>,
+  >(
+    key: string | number,
+    patch: Partial<Collections.SeoAdvancedSetting>,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.SeoAdvancedSetting,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return (await this.client.request(
+      updateSeoAdvancedSettingItem(key, patch, query as any),
+    )) as any;
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.SeoAdvancedSetting>,
+  >(key: string | number): Promise<void> {
+    return await this.client.request(deleteSeoAdvancedSettingItem(key));
+  }
+}
+
+/**
+ * Create many seo detail items.
+ */
+export function createSeoDetailItems<
+  const Query extends Directus.Query<Schema, Collections.SeoDetail[]>,
+>(items: Partial<Collections.SeoDetail>[], query?: Query) {
+  return DirectusSDK.createItems<Schema, "seo_detail", Query>(
+    "seo_detail",
+    items,
+    query,
+  );
+}
+
+/**
+ * Create a single seo detail item.
+ */
+export function createSeoDetailItem<
+  const Query extends DirectusSDK.Query<Schema, Collections.SeoDetail[]>, // Is this a mistake? Why []?
+>(item: Partial<Collections.SeoDetail>, query?: Query) {
+  return DirectusSDK.createItem<Schema, "seo_detail", Query>(
+    "seo_detail",
+    item,
+    query,
+  );
+}
+
+/**
+ * Read many seo detail items.
+ */
+export function readSeoDetailItems<
+  const Query extends Directus.Query<Schema, Collections.SeoDetail>,
+>(query?: Query) {
+  return DirectusSDK.readItems<Schema, "seo_detail", Query>(
+    "seo_detail",
+    query,
+  );
+}
+
+/**
+ * Read many seo detail items.
+ */
+export const listSeoDetail = readSeoDetailItems;
+
+/**
+ * Gets a single known seo detail item by id.
+ */
+export function readSeoDetailItem<
+  const Query extends Directus.Query<Schema, Collections.SeoDetail>,
+>(key: string | number, query?: Query) {
+  return DirectusSDK.readItem<Schema, "seo_detail", Query>(
+    "seo_detail",
+    key,
+    query,
+  );
+}
+
+/**
+ * Gets a single known seo detail item by id.
+ */
+export const readSeoDetail = readSeoDetailItem;
+
+/**
+ * Read many seo detail items.
+ */
+export function updateSeoDetailItems<
+  const Query extends Directus.Query<Schema, Collections.SeoDetail[]>,
+>(
+  keys: string[] | number[],
+  patch: Partial<Collections.SeoDetail>,
+  query?: Query,
+) {
+  return DirectusSDK.updateItems<Schema, "seo_detail", Query>(
+    "seo_detail",
+    keys,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Gets a single known seo detail item by id.
+ */
+export function updateSeoDetailItem<
+  const Query extends Directus.Query<Schema, Collections.SeoDetail[]>,
+>(key: string | number, patch: Partial<Collections.SeoDetail>, query?: Query) {
+  return DirectusSDK.updateItem<Schema, "seo_detail", Query>(
+    "seo_detail",
+    key,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Deletes many seo detail items.
+ */
+export function deleteSeoDetailItems<
+  const Query extends Directus.Query<Schema, Collections.SeoDetail[]>,
+>(keys: string[] | number[]) {
+  return DirectusSDK.deleteItems<Schema, "seo_detail", Query>(
+    "seo_detail",
+    keys,
+  );
+}
+
+/**
+ * Deletes a single known seo detail item by id.
+ */
+export function deleteSeoDetailItem(key: string | number) {
+  return DirectusSDK.deleteItem<Schema, "seo_detail">("seo_detail", key);
+}
+
+export class SeoDetailItems
+  implements TypedCollectionItemsWrapper<Collections.SeoDetail>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Creates many items in the collection.
+   */
+  async create<
+    const Query extends DirectusSDK.Query<Schema, Collections.SeoDetail>,
+  >(
+    items: Partial<Collections.SeoDetail>[],
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.SeoDetail,
+      Query["fields"]
+    >[]
+  > {
+    return (await this.client.request(
+      createSeoDetailItems(items, query as any),
+    )) as any; // Seems like a bug in the SDK.
+  }
+
+  /**
+   * Read many items from the collection.
+   */
+  async query<
+    const Query extends Directus.Query<Schema, Collections.SeoDetail>,
+  >(
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.SeoDetail,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(readSeoDetailItems(query));
+  }
+
+  /**
+   * Read the first item from the collection matching the query.
+   */
+  async find<const Query extends Directus.Query<Schema, Collections.SeoDetail>>(
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.SeoDetail,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    const items = await this.client.request(
+      readSeoDetailItems({
+        ...query,
+        limit: 1,
+      }),
+    );
+    return items?.[0] as any; // TODO: fix
+  }
+
+  /**
+   * Update many items in the collection.
+   */
+  async update<
+    const Query extends Directus.Query<Schema, Collections.SeoDetail[]>,
+  >(
+    keys: string[] | number[],
+    patch: Partial<Collections.SeoDetail>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.SeoDetail,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(updateSeoDetailItems(keys, patch, query));
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.SeoDetail>,
+  >(keys: string[] | number[]): Promise<void> {}
+}
+
+export class SeoDetailItem
+  implements TypedCollectionItemWrapper<Collections.SeoDetail>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Create a single item in the collection.
+   */
+  async create<
+    const Query extends Directus.Query<Schema, Collections.SeoDetail>,
+  >(
+    item: Partial<Collections.SeoDetail>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<Schema, Collections.SeoDetail, Query["fields"]>
+  > {
+    return (await this.client.request(
+      createSeoDetailItem(item, query as any),
+    )) as any;
+  }
+
+  /**
+   * Read a single item from the collection.
+   */
+  async get<const Query extends Directus.Query<Schema, Collections.SeoDetail>>(
+    key: string | number,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.SeoDetail,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return await this.client.request(readSeoDetailItem(key, query));
+  }
+
+  /**
+   * Update a single item from the collection.
+   */
+  async update<
+    const Query extends Directus.Query<Schema, Collections.SeoDetail>,
+  >(
+    key: string | number,
+    patch: Partial<Collections.SeoDetail>,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.SeoDetail,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return (await this.client.request(
+      updateSeoDetailItem(key, patch, query as any),
+    )) as any;
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.SeoDetail>,
+  >(key: string | number): Promise<void> {
+    return await this.client.request(deleteSeoDetailItem(key));
+  }
+}
+
+/**
+ * Create many seo redirection items.
+ */
+export function createSeoRedirectionItems<
+  const Query extends Directus.Query<Schema, Collections.SeoRedirection[]>,
+>(items: Partial<Collections.SeoRedirection>[], query?: Query) {
+  return DirectusSDK.createItems<Schema, "seo_redirection", Query>(
+    "seo_redirection",
+    items,
+    query,
+  );
+}
+
+/**
+ * Create a single seo redirection item.
+ */
+export function createSeoRedirectionItem<
+  const Query extends DirectusSDK.Query<Schema, Collections.SeoRedirection[]>, // Is this a mistake? Why []?
+>(item: Partial<Collections.SeoRedirection>, query?: Query) {
+  return DirectusSDK.createItem<Schema, "seo_redirection", Query>(
+    "seo_redirection",
+    item,
+    query,
+  );
+}
+
+/**
+ * Read many seo redirection items.
+ */
+export function readSeoRedirectionItems<
+  const Query extends Directus.Query<Schema, Collections.SeoRedirection>,
+>(query?: Query) {
+  return DirectusSDK.readItems<Schema, "seo_redirection", Query>(
+    "seo_redirection",
+    query,
+  );
+}
+
+/**
+ * Read many seo redirection items.
+ */
+export const listSeoRedirection = readSeoRedirectionItems;
+
+/**
+ * Gets a single known seo redirection item by id.
+ */
+export function readSeoRedirectionItem<
+  const Query extends Directus.Query<Schema, Collections.SeoRedirection>,
+>(key: string | number, query?: Query) {
+  return DirectusSDK.readItem<Schema, "seo_redirection", Query>(
+    "seo_redirection",
+    key,
+    query,
+  );
+}
+
+/**
+ * Gets a single known seo redirection item by id.
+ */
+export const readSeoRedirection = readSeoRedirectionItem;
+
+/**
+ * Read many seo redirection items.
+ */
+export function updateSeoRedirectionItems<
+  const Query extends Directus.Query<Schema, Collections.SeoRedirection[]>,
+>(
+  keys: string[] | number[],
+  patch: Partial<Collections.SeoRedirection>,
+  query?: Query,
+) {
+  return DirectusSDK.updateItems<Schema, "seo_redirection", Query>(
+    "seo_redirection",
+    keys,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Gets a single known seo redirection item by id.
+ */
+export function updateSeoRedirectionItem<
+  const Query extends Directus.Query<Schema, Collections.SeoRedirection[]>,
+>(
+  key: string | number,
+  patch: Partial<Collections.SeoRedirection>,
+  query?: Query,
+) {
+  return DirectusSDK.updateItem<Schema, "seo_redirection", Query>(
+    "seo_redirection",
+    key,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Deletes many seo redirection items.
+ */
+export function deleteSeoRedirectionItems<
+  const Query extends Directus.Query<Schema, Collections.SeoRedirection[]>,
+>(keys: string[] | number[]) {
+  return DirectusSDK.deleteItems<Schema, "seo_redirection", Query>(
+    "seo_redirection",
+    keys,
+  );
+}
+
+/**
+ * Deletes a single known seo redirection item by id.
+ */
+export function deleteSeoRedirectionItem(key: string | number) {
+  return DirectusSDK.deleteItem<Schema, "seo_redirection">(
+    "seo_redirection",
+    key,
+  );
+}
+
+export class SeoRedirectionItems
+  implements TypedCollectionItemsWrapper<Collections.SeoRedirection>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Creates many items in the collection.
+   */
+  async create<
+    const Query extends DirectusSDK.Query<Schema, Collections.SeoRedirection>,
+  >(
+    items: Partial<Collections.SeoRedirection>[],
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.SeoRedirection,
+      Query["fields"]
+    >[]
+  > {
+    return (await this.client.request(
+      createSeoRedirectionItems(items, query as any),
+    )) as any; // Seems like a bug in the SDK.
+  }
+
+  /**
+   * Read many items from the collection.
+   */
+  async query<
+    const Query extends Directus.Query<Schema, Collections.SeoRedirection>,
+  >(
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.SeoRedirection,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(readSeoRedirectionItems(query));
+  }
+
+  /**
+   * Read the first item from the collection matching the query.
+   */
+  async find<
+    const Query extends Directus.Query<Schema, Collections.SeoRedirection>,
+  >(
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.SeoRedirection,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    const items = await this.client.request(
+      readSeoRedirectionItems({
+        ...query,
+        limit: 1,
+      }),
+    );
+    return items?.[0] as any; // TODO: fix
+  }
+
+  /**
+   * Update many items in the collection.
+   */
+  async update<
+    const Query extends Directus.Query<Schema, Collections.SeoRedirection[]>,
+  >(
+    keys: string[] | number[],
+    patch: Partial<Collections.SeoRedirection>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.SeoRedirection,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(
+      updateSeoRedirectionItems(keys, patch, query),
+    );
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.SeoRedirection>,
+  >(keys: string[] | number[]): Promise<void> {}
+}
+
+export class SeoRedirectionItem
+  implements TypedCollectionItemWrapper<Collections.SeoRedirection>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Create a single item in the collection.
+   */
+  async create<
+    const Query extends Directus.Query<Schema, Collections.SeoRedirection>,
+  >(
+    item: Partial<Collections.SeoRedirection>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.SeoRedirection,
+      Query["fields"]
+    >
+  > {
+    return (await this.client.request(
+      createSeoRedirectionItem(item, query as any),
+    )) as any;
+  }
+
+  /**
+   * Read a single item from the collection.
+   */
+  async get<
+    const Query extends Directus.Query<Schema, Collections.SeoRedirection>,
+  >(
+    key: string | number,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.SeoRedirection,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return await this.client.request(readSeoRedirectionItem(key, query));
+  }
+
+  /**
+   * Update a single item from the collection.
+   */
+  async update<
+    const Query extends Directus.Query<Schema, Collections.SeoRedirection>,
+  >(
+    key: string | number,
+    patch: Partial<Collections.SeoRedirection>,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.SeoRedirection,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return (await this.client.request(
+      updateSeoRedirectionItem(key, patch, query as any),
+    )) as any;
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.SeoRedirection>,
+  >(key: string | number): Promise<void> {
+    return await this.client.request(deleteSeoRedirectionItem(key));
+  }
+}
+
+/**
+ * Create many seo setting items.
+ */
+export function createSeoSettingItems<
+  const Query extends Directus.Query<Schema, Collections.SeoSetting[]>,
+>(items: Partial<Collections.SeoSetting>[], query?: Query) {
+  return DirectusSDK.createItems<Schema, "seo_setting", Query>(
+    "seo_setting",
+    items,
+    query,
+  );
+}
+
+/**
+ * Create a single seo setting item.
+ */
+export function createSeoSettingItem<
+  const Query extends DirectusSDK.Query<Schema, Collections.SeoSetting[]>, // Is this a mistake? Why []?
+>(item: Partial<Collections.SeoSetting>, query?: Query) {
+  return DirectusSDK.createItem<Schema, "seo_setting", Query>(
+    "seo_setting",
+    item,
+    query,
+  );
+}
+
+/**
+ * Read many seo setting items.
+ */
+export function readSeoSettingItems<
+  const Query extends Directus.Query<Schema, Collections.SeoSetting>,
+>(query?: Query) {
+  return DirectusSDK.readItems<Schema, "seo_setting", Query>(
+    "seo_setting",
+    query,
+  );
+}
+
+/**
+ * Read many seo setting items.
+ */
+export const listSeoSetting = readSeoSettingItems;
+
+/**
+ * Gets a single known seo setting item by id.
+ */
+export function readSeoSettingItem<
+  const Query extends Directus.Query<Schema, Collections.SeoSetting>,
+>(key: string | number, query?: Query) {
+  return DirectusSDK.readItem<Schema, "seo_setting", Query>(
+    "seo_setting",
+    key,
+    query,
+  );
+}
+
+/**
+ * Gets a single known seo setting item by id.
+ */
+export const readSeoSetting = readSeoSettingItem;
+
+/**
+ * Read many seo setting items.
+ */
+export function updateSeoSettingItems<
+  const Query extends Directus.Query<Schema, Collections.SeoSetting[]>,
+>(
+  keys: string[] | number[],
+  patch: Partial<Collections.SeoSetting>,
+  query?: Query,
+) {
+  return DirectusSDK.updateItems<Schema, "seo_setting", Query>(
+    "seo_setting",
+    keys,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Gets a single known seo setting item by id.
+ */
+export function updateSeoSettingItem<
+  const Query extends Directus.Query<Schema, Collections.SeoSetting[]>,
+>(key: string | number, patch: Partial<Collections.SeoSetting>, query?: Query) {
+  return DirectusSDK.updateItem<Schema, "seo_setting", Query>(
+    "seo_setting",
+    key,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Deletes many seo setting items.
+ */
+export function deleteSeoSettingItems<
+  const Query extends Directus.Query<Schema, Collections.SeoSetting[]>,
+>(keys: string[] | number[]) {
+  return DirectusSDK.deleteItems<Schema, "seo_setting", Query>(
+    "seo_setting",
+    keys,
+  );
+}
+
+/**
+ * Deletes a single known seo setting item by id.
+ */
+export function deleteSeoSettingItem(key: string | number) {
+  return DirectusSDK.deleteItem<Schema, "seo_setting">("seo_setting", key);
+}
+
+export class SeoSettingItems
+  implements TypedCollectionItemsWrapper<Collections.SeoSetting>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Creates many items in the collection.
+   */
+  async create<
+    const Query extends DirectusSDK.Query<Schema, Collections.SeoSetting>,
+  >(
+    items: Partial<Collections.SeoSetting>[],
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.SeoSetting,
+      Query["fields"]
+    >[]
+  > {
+    return (await this.client.request(
+      createSeoSettingItems(items, query as any),
+    )) as any; // Seems like a bug in the SDK.
+  }
+
+  /**
+   * Read many items from the collection.
+   */
+  async query<
+    const Query extends Directus.Query<Schema, Collections.SeoSetting>,
+  >(
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.SeoSetting,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(readSeoSettingItems(query));
+  }
+
+  /**
+   * Read the first item from the collection matching the query.
+   */
+  async find<
+    const Query extends Directus.Query<Schema, Collections.SeoSetting>,
+  >(
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.SeoSetting,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    const items = await this.client.request(
+      readSeoSettingItems({
+        ...query,
+        limit: 1,
+      }),
+    );
+    return items?.[0] as any; // TODO: fix
+  }
+
+  /**
+   * Update many items in the collection.
+   */
+  async update<
+    const Query extends Directus.Query<Schema, Collections.SeoSetting[]>,
+  >(
+    keys: string[] | number[],
+    patch: Partial<Collections.SeoSetting>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.SeoSetting,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(updateSeoSettingItems(keys, patch, query));
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.SeoSetting>,
+  >(keys: string[] | number[]): Promise<void> {}
+}
+
+export class SeoSettingItem
+  implements TypedCollectionItemWrapper<Collections.SeoSetting>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Create a single item in the collection.
+   */
+  async create<
+    const Query extends Directus.Query<Schema, Collections.SeoSetting>,
+  >(
+    item: Partial<Collections.SeoSetting>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.SeoSetting,
+      Query["fields"]
+    >
+  > {
+    return (await this.client.request(
+      createSeoSettingItem(item, query as any),
+    )) as any;
+  }
+
+  /**
+   * Read a single item from the collection.
+   */
+  async get<const Query extends Directus.Query<Schema, Collections.SeoSetting>>(
+    key: string | number,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.SeoSetting,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return await this.client.request(readSeoSettingItem(key, query));
+  }
+
+  /**
+   * Update a single item from the collection.
+   */
+  async update<
+    const Query extends Directus.Query<Schema, Collections.SeoSetting>,
+  >(
+    key: string | number,
+    patch: Partial<Collections.SeoSetting>,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.SeoSetting,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return (await this.client.request(
+      updateSeoSettingItem(key, patch, query as any),
+    )) as any;
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.SeoSetting>,
+  >(key: string | number): Promise<void> {
+    return await this.client.request(deleteSeoSettingItem(key));
+  }
+}
+
+/**
  * Create many directus sync id map items.
  */
 export function createDirectusSyncIdMapItems<
@@ -3087,6 +4961,26 @@ export type TypedClient = {
   image: TypedCollectionItemWrapper<Collections.Image>;
 
   /**
+   * Manages multiple items from the MenuItems collection.
+   */
+  menu_items: TypedCollectionItemsWrapper<Collections.MenuItems>;
+
+  /**
+   * Manages individual items from the MenuItems collection.
+   */
+  menu_item: TypedCollectionItemWrapper<Collections.MenuItems>;
+
+  /**
+   * Manages multiple items from the Menus collection.
+   */
+  menus: TypedCollectionItemsWrapper<Collections.Menus>;
+
+  /**
+   * Manages individual items from the Menus collection.
+   */
+  menu: TypedCollectionItemWrapper<Collections.Menus>;
+
+  /**
    * Manages multiple items from the Pages collection.
    */
   pages: TypedCollectionItemsWrapper<Collections.Pages>;
@@ -3135,6 +5029,46 @@ export type TypedClient = {
    * Manages individual items from the SectionEditorNodes collection.
    */
   section_editor_node: TypedCollectionItemWrapper<Collections.SectionEditorNodes>;
+
+  /**
+   * Manages multiple items from the SeoAdvancedSetting collection.
+   */
+  seo_advanced_settings: TypedCollectionItemsWrapper<Collections.SeoAdvancedSetting>;
+
+  /**
+   * Manages individual items from the SeoAdvancedSetting collection.
+   */
+  seo_advanced_setting: TypedCollectionItemWrapper<Collections.SeoAdvancedSetting>;
+
+  /**
+   * Manages multiple items from the SeoDetail collection.
+   */
+  seo_details: TypedCollectionItemsWrapper<Collections.SeoDetail>;
+
+  /**
+   * Manages individual items from the SeoDetail collection.
+   */
+  seo_detail: TypedCollectionItemWrapper<Collections.SeoDetail>;
+
+  /**
+   * Manages multiple items from the SeoRedirection collection.
+   */
+  seo_redirections: TypedCollectionItemsWrapper<Collections.SeoRedirection>;
+
+  /**
+   * Manages individual items from the SeoRedirection collection.
+   */
+  seo_redirection: TypedCollectionItemWrapper<Collections.SeoRedirection>;
+
+  /**
+   * Manages multiple items from the SeoSetting collection.
+   */
+  seo_settings: TypedCollectionItemsWrapper<Collections.SeoSetting>;
+
+  /**
+   * Manages individual items from the SeoSetting collection.
+   */
+  seo_setting: TypedCollectionItemWrapper<Collections.SeoSetting>;
 
   /**
    * Manages multiple items from the DirectusSyncIdMap collection.
@@ -3306,6 +5240,12 @@ export const schema = () => {
       ["images", new ImageItems(client as any)],
       ["image", new ImageItem(client as any)],
 
+      ["menu_items", new MenuItemsItems(client as any)],
+      ["menu_item", new MenuItemsItem(client as any)],
+
+      ["menus", new MenusItems(client as any)],
+      ["menu", new MenusItem(client as any)],
+
       ["pages", new PagesItems(client as any)],
       ["page", new PagesItem(client as any)],
 
@@ -3320,6 +5260,18 @@ export const schema = () => {
 
       ["section_editor_nodes", new SectionEditorNodesItems(client as any)],
       ["section_editor_node", new SectionEditorNodesItem(client as any)],
+
+      ["seo_advanced_settings", new SeoAdvancedSettingItems(client as any)],
+      ["seo_advanced_setting", new SeoAdvancedSettingItem(client as any)],
+
+      ["seo_details", new SeoDetailItems(client as any)],
+      ["seo_detail", new SeoDetailItem(client as any)],
+
+      ["seo_redirections", new SeoRedirectionItems(client as any)],
+      ["seo_redirection", new SeoRedirectionItem(client as any)],
+
+      ["seo_settings", new SeoSettingItems(client as any)],
+      ["seo_setting", new SeoSettingItem(client as any)],
 
       ["directus_sync_id_maps", new DirectusSyncIdMapItems(client as any)],
       ["directus_sync_id_map", new DirectusSyncIdMapItem(client as any)],

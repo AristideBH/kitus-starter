@@ -6,13 +6,17 @@
     "collection": "gallery",
     "conditions": null,
     "display": "related-values",
-    "display_options": null,
+    "display_options": {
+      "template": "{{directus_files_id.title}}"
+    },
     "field": "images",
     "group": null,
     "hidden": false,
     "interface": "files",
     "note": "Please only select image files (jpg, png, etc.)",
-    "options": null,
+    "options": {
+      "template": "{{directus_files_id.$thumbnail}} {{directus_files_id.title}}"
+    },
     "readonly": false,
     "required": false,
     "sort": 4,

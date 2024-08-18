@@ -12,6 +12,6 @@
 
 <ModeWatcher />
 
-<div class="container grid gap-12" role="main">
+<div class="container grid gap-12 py-20" role="main">
 	{@render children()}
 </div>

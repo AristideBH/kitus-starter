@@ -3,6 +3,7 @@
 	import Image from '$lib/components/image/Image.svelte';
 
 	let { content }: { content: Collections.Image } = $props();
+	let { image, show_caption } = content;
 </script>
 
-<Image item={content.image} />
+<Image item={image} showCaption={show_caption!} />
