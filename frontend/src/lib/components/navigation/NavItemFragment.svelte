@@ -2,22 +2,20 @@
 	import type { Collections } from '$types/client';
 	import { page } from '$app/stores';
 	let { item, class: className }: { item: Collections.MenuItems; class?: string } = $props();
-
-	const { open_in_new_tab } = item;
 </script>
 
 {#if item.type === 'url'}
 	<a
-		class={className ?? ''}
+		class={className ?? 'url'}
 		href={item.url}
-		target={open_in_new_tab ? '_blank' : ''}
+		target={item.open_in_new_tab ? '_blank' : ''}
 		class:active={$page.data.pathName === item.url}
 	>
 		{item.label}
 	</a>
 {:else if item.type === 'page' && typeof item.page != 'string'}
 	<a
-		class={className ?? ''}
+		class={className ?? 'page'}
 		href="/{item.page?.permalink}"
 		class:active={$page.data.pathName.replace('/', '') === item.page?.permalink}
 	>

@@ -23,7 +23,7 @@
 							<NavItemSub item={child} />
 						{:else}
 							<DropdownMenu.Item>
-								<NavItemFragment item={child} class="no-underline" />
+								<NavItemFragment item={child} />
 							</DropdownMenu.Item>
 						{/if}
 					{/each}
