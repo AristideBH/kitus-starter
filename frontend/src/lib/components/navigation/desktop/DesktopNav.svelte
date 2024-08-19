@@ -11,7 +11,7 @@
 
 <div class="flex gap-6 xl:gap-8">
 	{#each menu.items as item}
-		<!-- {#if item.type === 'list'}
+		{#if item.type === 'list'}
 			<DropdownMenu.Root>
 				<DropdownMenu.Trigger class="flex items-center gap-1">
 					{item.label}
@@ -29,8 +29,8 @@
 					{/each}
 				</DropdownMenu.Content>
 			</DropdownMenu.Root>
-		{:else} -->
+		{:else}
 		<NavItemFragment {item} class="top no-underline" />
-		<!-- {/if} -->
+		{/if}
 	{/each}
 </div>

@@ -2,7 +2,8 @@
 	import type { Collections } from '$lib/types/client';
 	import { Button } from '$lib/components/ui/button';
 	import * as Sheet from '$lib/components/ui/sheet';
-	import { Menu, X } from 'lucide-svelte';
+	import Menu from 'lucide-svelte/icons/menu';
+	import X from 'lucide-svelte/icons/x';
 
 	import NavItemFragment from '../NavItemFragment.svelte';
 	import NavItemSub from '../mobile/NavItemSub.svelte';

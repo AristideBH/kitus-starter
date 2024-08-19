@@ -4,7 +4,10 @@
 	import { setContext } from 'svelte';
 
 	import { ModeWatcher } from 'mode-watcher';
-	import Navigation from '$lib/components/navigation/Navigation.svelte';
+
+	import Main from '$lib/components/layout/Main.svelte';
+	import Header from '$lib/components/layout/Header.svelte';
+	import Footer from '$lib/components/layout/Footer.svelte';
 
 	const directus = client(fetch);
 	setContext<DirectusClient>('directus', directus);
@@ -12,10 +15,14 @@
 	let { children } = $props();
 </script>
 
+<!-- UTILITIES -->
 <ModeWatcher />
 
-<div class="container grid gap-12 py-20" role="main">
-	{@render children()}
-</div>
+<!-- MARKUP -->
+<Header />
 
-<Navigation />
+<Main>
+	{@render children()}
+</Main>
+
+<Footer />
