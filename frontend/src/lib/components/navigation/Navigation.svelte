@@ -10,9 +10,11 @@
 </script>
 
 <nav class="pointer-events-auto flex flex-row items-center gap-6 xl:gap-10">
-	{#if screen?.matches}
-		<DesktopNav {menu} />
-	{:else}
-		<MobileNav {menu} />
+	{#if screen}
+		{#if screen.matches}
+			<DesktopNav {menu} />
+		{:else}
+			<MobileNav {menu} />
+		{/if}
 	{/if}
 </nav>

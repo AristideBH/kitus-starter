@@ -13,6 +13,20 @@
   },
   {
     "role": null,
+    "collection": "directus_settings",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "project_name",
+      "project_descriptor",
+      "project_url"
+    ],
+    "_syncId": "a8c66bc6-61e4-490a-bcff-795170afa4c8"
+  },
+  {
+    "role": null,
     "collection": "gallery_files",
     "action": "read",
     "permissions": {},

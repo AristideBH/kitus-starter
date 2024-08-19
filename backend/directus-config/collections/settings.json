@@ -1,9 +1,9 @@
 [
   {
     "project_name": "Starter demo",
-    "project_color": "#FFA439",
+    "project_color": "#e35123",
     "public_note": null,
-    "auth_login_attempts": 25,
+    "auth_login_attempts": 50,
     "auth_password_policy": null,
     "storage_asset_transform": "all",
     "storage_asset_presets": [
@@ -13,12 +13,7 @@
         "width": 50,
         "format": "auto",
         "quality": 80,
-        "transforms": [
-          [
-            "blur",
-            15
-          ]
-        ],
+        "transforms": [["blur", 15]],
         "withoutEnlargement": false
       },
       {

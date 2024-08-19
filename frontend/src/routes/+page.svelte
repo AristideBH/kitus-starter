@@ -2,7 +2,7 @@
 </script>
 
 <section class="grid gap-6 py-8">
-	<h1>Welcome to Starterkit</h1>
+	<h1>Sveltus starterkit</h1>
 
 	<p class="lead">A custom boilerplate for Sveltekit and Directus</p>
 	<summary class="bg-muted list-none rounded-sm p-4">

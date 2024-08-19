@@ -30,7 +30,7 @@
 				</DropdownMenu.Content>
 			</DropdownMenu.Root>
 		{:else}
-		<NavItemFragment {item} class="top no-underline" />
+			<NavItemFragment {item} class="top no-underline" />
 		{/if}
 	{/each}
 </div>
