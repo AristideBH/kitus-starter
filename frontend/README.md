@@ -1,9 +1,6 @@
 # Setting up Sveltekit frontend
 
-## Summary
-
-This README provides instructions for setting up and configuring the frontend of our project, which uses Svelte 5 as web framework.
-
+> _This README provides instructions for setting up and configuring the frontend of our project, which uses Svelte 5 as web framework._
 ## Requirements
 
 - `Node.js` and `pnpm` installed on your local machine

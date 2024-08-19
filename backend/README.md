@@ -1,8 +1,6 @@
 # Setting up Directus backend
 
-## Summary
-
-This README provides instructions for setting up and configuring the backend of our project, which uses Directus as the content management system.
+> _This README provides instructions for setting up and configuring the backend of our project, which uses Directus as the content management system._
 
 ## Requirements
 
