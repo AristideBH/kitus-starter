@@ -1,47 +1,20 @@
-# Project Name
+# Sveltus starterkit
 
-Brief description of the project.
+![](https://i.imgur.com/6iLbGIO.png)
 
-## Table of Contents
+> _A starter template to build a Sveltekit project connected to a Directus CMS, auto-deploying to a Caprover instance via GitHub Webhook._
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Features](#features)
-- [Contributing](#contributing)
-- [License](#license)
+## Features :
 
-## Installation
-
-Instructions on how to install and set up the project.
-
-npm install project-name
-
-## Usage
-
-Examples of how to use the project.
-
-const projectName = require('project-name');
-
-// Example usage
-projectName.someFunction();
-
-## Features
-
-List of key features of the project.
-
-- Feature 1
-- Feature 2
-- Feature 3
-
-## Contributing
-
-Guidelines for contributing to the project.
-
-1. Fork the repository
-2. Create a new branch
-3. Make your changes
-4. Submit a pull request
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+- [Svelte 5](https://svelte.dev/) and [Sveltekit](https://kit.svelte.dev/)
+- Type safety with [Typescript](https://www.typescriptlang.org/)
+- [Tailwind](https://tailwindcss.com/), [shadcn-svelte](https://www.shadcn-svelte.com/docs) and [Fluid plugin](https://fluid.tw/)
+- [Directus authentification](https://docs.directus.io/blog/directus-auth-sveltekit.html) and account page
+- Basic layout
+- Page transitions
+- Auto dark-mode
+- Custom components :
+  - Responsive image
+  - Flexible builder
+- Custom fonts configuration
+- And many small improvements to help you speed up your dev cycle.

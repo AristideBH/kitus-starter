@@ -10,7 +10,7 @@
 		class={className ?? ''}
 		href={item.url}
 		target={item.open_in_new_tab ? '_blank' : ''}
-		class:active={$page.data.pathName === item.url}
+		class:active={$page.url.pathname === item.url}
 	>
 		{item.label}
 	</a>
@@ -18,7 +18,7 @@
 	<a
 		class={className ?? ''}
 		href="/{item.page?.permalink}"
-		class:active={$page.data.pathName.replace('/', '') === item.page?.permalink}
+		class:active={$page.url.pathname.replace('/', '') === item.page?.permalink}
 	>
 		{item.label}
 	</a>

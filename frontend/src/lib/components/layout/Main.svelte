@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { page, navigating } from '$app/stores';
+	import { page } from '$app/stores';
 	import { afterNavigate, disableScrollHandling } from '$app/navigation';
 	import { fade, fly } from 'svelte/transition';
 
@@ -14,7 +14,7 @@
 	});
 </script>
 
-{#key $page.data.pathName}
+{#key $page.url.pathname}
 	<main
 		class="container grid gap-12 py-20"
 		in:fly={{ y: 50, delay: 450 }}

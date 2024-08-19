@@ -3,7 +3,7 @@ import { client } from '$logic/directus';
 import { readMenus } from '$lib/types/client';
 import { readSettings } from '@directus/sdk';
 
-export const load = (async ({ url, fetch, locals }) => {
+export const load = (async ({ fetch, locals }) => {
     // const user = locals.user;
     const token = locals.token ? locals.token : null;
     const directus = client(fetch, token);
@@ -16,8 +16,6 @@ export const load = (async ({ url, fetch, locals }) => {
 
 
     return {
-        // Trigger for pages transition
-        pathName: url.pathname,
         // Data
         headerNav,
         footerNav,
