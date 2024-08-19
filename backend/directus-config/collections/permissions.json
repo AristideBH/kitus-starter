@@ -1,0 +1,170 @@
+[
+  {
+    "role": null,
+    "collection": "directus_files",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "c8037e0b-d94b-4842-83ab-67794cb8a6d3"
+  },
+  {
+    "role": null,
+    "collection": "gallery_files",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "f779524b-e9ae-49c5-b415-a1954713cf86"
+  },
+  {
+    "role": null,
+    "collection": "gallery",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "52232495-5b9c-4070-a0f8-91d3c16de9a8"
+  },
+  {
+    "role": null,
+    "collection": "homepage",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "2960b757-d0f3-4573-b265-2a532f19cf57"
+  },
+  {
+    "role": null,
+    "collection": "image",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "3a3cd5d1-9f87-4fff-a551-53b5c05e226a"
+  },
+  {
+    "role": null,
+    "collection": "menu_items",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "43701fce-1190-412c-8e03-22cfa587cd5d"
+  },
+  {
+    "role": null,
+    "collection": "menus",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "b2174fd3-f97c-4561-b70f-00481973ba8b"
+  },
+  {
+    "role": null,
+    "collection": "pages_editor_nodes",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "6ec5cb32-aea0-49c8-b418-063580b65f62"
+  },
+  {
+    "role": null,
+    "collection": "pages",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "2d1de207-3eda-40db-8b10-9677483a94a9"
+  },
+  {
+    "role": null,
+    "collection": "quote",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "403d0210-b79a-456a-b912-6123b5b67602"
+  },
+  {
+    "role": null,
+    "collection": "section_editor_nodes",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "f96e79df-ea10-4f5b-82ba-b46719af79b6"
+  },
+  {
+    "role": null,
+    "collection": "section",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "600912ba-79b1-4487-b487-ce2435bac745"
+  },
+  {
+    "role": null,
+    "collection": "seo_detail",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "02b26deb-8aa5-430e-abbf-0cdafcce1d49"
+  },
+  {
+    "role": null,
+    "collection": "seo_setting",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "ddb2021a-f460-4373-8564-9602cdc73d37"
+  }
+]

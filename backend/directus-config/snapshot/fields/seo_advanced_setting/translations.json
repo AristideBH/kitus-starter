@@ -1,0 +1,27 @@
+{
+  "collection": "seo_advanced_setting",
+  "field": "translations",
+  "type": "alias",
+  "meta": {
+    "collection": "seo_advanced_setting",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "translations",
+    "group": null,
+    "hidden": false,
+    "interface": "translations",
+    "note": null,
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "sort": 4,
+    "special": [
+      "translations"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

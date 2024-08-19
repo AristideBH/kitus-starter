@@ -1,0 +1,61 @@
+[
+  {
+    "name": "Run Script",
+    "key": "exec_v529h",
+    "type": "exec",
+    "position_x": 20,
+    "position_y": 17,
+    "options": {
+      "code": "const slugify = (text) => {\n  if (typeof text !== 'string') return '';\n\n  const from = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìıİłḿñńǹňôöòóœøōõőṕŕřśşšșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'\n  const to   = 'aaaaaaaaaacccddeeeeeeeegghiiiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'\n\n  return text\n    .toLowerCase()\n    .trim()\n    .replace(/\\s+/g, '-')\n    .replace(new RegExp(`[${from}]`, 'g'), (char) => to[from.indexOf(char)] || '-')\n    .replace(/&/g, '-and-')\n    .replace(/[^\\w\\-]+/g, '')\n    .replace(/\\-\\-+/g, '-')\n    .replace(/^-+/, '')\n    .replace(/-+$/, '')\n    .substring(0, 100);\n};\n\nmodule.exports = async function(data) {\n  const obj = data.$last;\n  \n  async function createSlugPath(node) {\n    const parts = [];\n    \n    async function traverse(currentNode) {\n      if (currentNode.parent) {\n        await traverse(currentNode.parent);\n      }\n      parts.push(slugify(currentNode.title));\n    }\n    \n    await traverse(node);\n    return parts.join('/') ;\n  }\n\n  return await createSlugPath(obj);\n};"
+    },
+    "resolve": "8325e95b-10f6-4155-b0ee-7dc14d86b84a",
+    "reject": null,
+    "flow": "628d9225-e75b-458c-ac50-a16843b14171",
+    "_syncId": "416e1b3b-1039-4f71-9fca-f6db162bb6b4"
+  },
+  {
+    "name": "Read Data",
+    "key": "item_read_iqmhi",
+    "type": "item-read",
+    "position_x": 3,
+    "position_y": 17,
+    "options": {
+      "collection": "pages",
+      "key": [
+        "{{$trigger.keys[0]}}"
+      ],
+      "query": {
+        "fields": [
+          "title",
+          "parent.title",
+          "parent.parent.title",
+          "parent.parent.parent.title"
+        ]
+      }
+    },
+    "resolve": "416e1b3b-1039-4f71-9fca-f6db162bb6b4",
+    "reject": null,
+    "flow": "628d9225-e75b-458c-ac50-a16843b14171",
+    "_syncId": "2894d282-6d16-469b-8c75-69ae40b95c44"
+  },
+  {
+    "name": "Update Data",
+    "key": "item_update_az9ho",
+    "type": "item-update",
+    "position_x": 18,
+    "position_y": 33,
+    "options": {
+      "collection": "{{$trigger.collection}}",
+      "key": [
+        "{{$trigger.keys[0]}}"
+      ],
+      "payload": {
+        "permalink": "{{$last}}"
+      }
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "628d9225-e75b-458c-ac50-a16843b14171",
+    "_syncId": "8325e95b-10f6-4155-b0ee-7dc14d86b84a"
+  }
+]

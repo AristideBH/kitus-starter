@@ -1,0 +1,25 @@
+{
+  "collection": "menu_items",
+  "field": "menu",
+  "related_collection": "menus",
+  "meta": {
+    "junction_field": null,
+    "many_collection": "menu_items",
+    "many_field": "menu",
+    "one_allowed_collections": null,
+    "one_collection": "menus",
+    "one_collection_field": null,
+    "one_deselect_action": "delete",
+    "one_field": "items",
+    "sort_field": "sort"
+  },
+  "schema": {
+    "table": "menu_items",
+    "column": "menu",
+    "foreign_key_table": "menus",
+    "foreign_key_column": "title",
+    "constraint_name": "menu_items_menu_foreign",
+    "on_update": "RESTRICT",
+    "on_delete": "CASCADE"
+  }
+}

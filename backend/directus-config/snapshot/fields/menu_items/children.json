@@ -1,0 +1,45 @@
+{
+  "collection": "menu_items",
+  "field": "children",
+  "type": "alias",
+  "meta": {
+    "collection": "menu_items",
+    "conditions": [
+      {
+        "name": "if type = list",
+        "rule": {
+          "_and": [
+            {
+              "type": {
+                "_eq": "list"
+              }
+            }
+          ]
+        },
+        "options": {
+          "enableCreate": true,
+          "enableSelect": true
+        },
+        "hidden": false
+      }
+    ],
+    "display": null,
+    "display_options": null,
+    "field": "children",
+    "group": null,
+    "hidden": true,
+    "interface": "list-o2m-tree-view",
+    "note": null,
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "sort": 7,
+    "special": [
+      "o2m"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

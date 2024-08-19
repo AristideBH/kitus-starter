@@ -1,0 +1,35 @@
+{
+  "collection": "menus",
+  "field": "items",
+  "type": "alias",
+  "meta": {
+    "collection": "menus",
+    "conditions": null,
+    "display": "related-values",
+    "display_options": {
+      "template": "{{type}} {{label}}"
+    },
+    "field": "items",
+    "group": null,
+    "hidden": false,
+    "interface": "list-o2m",
+    "note": null,
+    "options": {
+      "displayTemplate": "{{type}} ({{type}})",
+      "enableLink": true,
+      "enableSelect": false,
+      "limit": 10,
+      "template": null
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 3,
+    "special": [
+      "o2m"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}
