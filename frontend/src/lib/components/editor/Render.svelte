@@ -16,6 +16,7 @@
 		Image,
 		elementQuery
 	} from './';
+	import Button from '../ui/button/button.svelte';
 
 	let { editor }: { editor: TipTapEditor } = $props();
 	let state: 'loading' | 'ready' = $state('loading');
@@ -44,8 +45,13 @@
 		{#await elementQuery(directus, attrs) then content}
 			{#if content}
 				{#if 'editor' in content}
-					{@const { editor } = content}
-					<section>
+					{@const { editor, width, color } = content}
+					<section
+						class:full-width={width === 'full-bleed'}
+						class="bg-{color}"
+						class:p-6={color != 'none'}
+						class:rounded={color != 'none' && width != 'full-bleed'}
+					>
 						<svelte:self {editor}></svelte:self>
 					</section>
 				{:else if 'image' in content}
@@ -54,19 +60,14 @@
 					<Quote {content} />
 				{:else if 'images' in content}
 					<Gallery {content} />
-					<!-- todo MENULINKS  -->
-					<!-- {:else if 'label' in content}
-					{@const { type, url, label, page } = content}
-					<section>
-						{#if type === 'url'}
-							<Button variant="outline" href={url} class="w-fit">{label}</Button>
-						{:else if type === 'page' && typeof page != 'string'}
-							<Button variant="outline" href={page?.permalink} class="w-fit no-underline">
-								{label}
-							</Button>
-						{/if}
-					</section>
-					-->
+				{:else if 'label' in content}
+					{@const { label, variant, size, type, url, page, new_tab } = content}
+					<Button
+						{variant}
+						{size}
+						href={type === 'page' && typeof page != 'string' ? `/${page?.permalink}` : url}
+						target={new_tab && type === 'url' ? '_blank' : ''}>{label}</Button
+					>
 				{/if}
 			{/if}
 		{/await}

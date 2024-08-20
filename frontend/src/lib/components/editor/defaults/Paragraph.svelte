@@ -6,28 +6,26 @@
 </script>
 
 {#if content}
-	<section>
-		<p class=" text-pretty">
-			{#each content as item}
-				{#if item.type === 'text'}
-					{#if item.marks}
-						{@const link = findLink(item.marks)}
-						{@const code = findCode(item.marks)}
-						{#if link}
-							{@const { rel, href, target } = link.attrs}
-							<a class={setMarks(item.marks)} {rel} {href} {target}>{item.text}</a>
-						{:else if code}
-							<code>{item.text}</code>
-						{:else}
-							<span class={setMarks(item.marks)}>{item.text}</span>
-						{/if}
+	<p class=" text-pretty">
+		{#each content as item}
+			{#if item.type === 'text'}
+				{#if item.marks}
+					{@const link = findLink(item.marks)}
+					{@const code = findCode(item.marks)}
+					{#if link}
+						{@const { rel, href, target } = link.attrs}
+						<a class={setMarks(item.marks)} {rel} {href} {target}>{item.text}</a>
+					{:else if code}
+						<code>{item.text}</code>
 					{:else}
-						{item.text}
+						<span class={setMarks(item.marks)}>{item.text}</span>
 					{/if}
-				{:else if item.type === 'hardBreak'}
-					<br />
+				{:else}
+					{item.text}
 				{/if}
-			{/each}
-		</p>
-	</section>
+			{:else if item.type === 'hardBreak'}
+				<br />
+			{/if}
+		{/each}
+	</p>
 {/if}

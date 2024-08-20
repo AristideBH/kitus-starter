@@ -26,26 +26,26 @@
 	/* TYPOGRAPHY */
 	/*- Headings */
 	h1 {
-		@apply ~text-4xl/6xl font-bold tracking-tight;
+		@apply font-bold tracking-tight ~text-4xl/6xl;
 	}
 
 	h2 {
-		@apply ~text-2xl/4xl font-semibold tracking-normal;
+		@apply font-semibold tracking-normal ~text-2xl/4xl;
 	}
 
 	h3 {
-		@apply ~text-xl/3xl font-semibold;
+		@apply font-semibold ~text-xl/3xl;
 	}
 
 	h4 {
-		@apply ~text-base/lg font-semibold uppercase tracking-wide;
+		@apply font-semibold uppercase tracking-wide ~text-base/lg;
 	}
 
 	h5 {
 		@apply font-semibold uppercase text-muted-foreground;
 	}
 	h6 {
-		@apply ~text-sm/base uppercase text-muted-foreground;
+		@apply uppercase text-muted-foreground ~text-sm/base;
 	}
 
 	/*- Paragraph */
@@ -54,10 +54,13 @@
 	h3,
 	h4,
 	h5,
-	h6 {
+	h6,
+	p,
+	ul,
+	blockquote {
 		@apply my-2 scroll-m-20 text-balance font-heading;
 		&:first-of-type {
-			@apply mt-0;
+			@apply mt-2;
 		}
 	}
 
@@ -75,6 +78,12 @@
 
 		& + p {
 			@apply mt-2;
+		}
+		& + ul {
+			@apply mt-4;
+		}
+		& + a[data-button-root] {
+			@apply mt-6;
 		}
 
 		& + h1,
@@ -147,7 +156,7 @@
 	}
 
 	pre {
-		@apply rounded border bg-muted px-[0.3rem] py-[0.2rem] text-sm font-semibold text-muted-foreground;
+		@apply overflow-scroll rounded border bg-muted px-[0.3rem] py-[0.2rem] text-sm font-semibold text-muted-foreground;
 	}
 
 	/*- Utilities */
@@ -197,5 +206,9 @@
 	table tfoot {
 	}
 	table tfoot td {
+	}
+
+	a[data-button-root] {
+		@apply no-underline;
 	}
 }

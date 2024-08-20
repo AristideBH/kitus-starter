@@ -41,10 +41,10 @@ export const elementQuery = async (client: DirectusClient, attrs: CustomAttrs | 
             return (await client.request(
                 readItem('gallery', rel.item, { fields: ['*', { images: ['*'] }] })
             )) as Collections.Gallery;
-            // } else if (collection === 'menu_items') {
-            // 	return (await client.request(
-            // 		readItem('menu_items', rel.item, { fields: ['*.*'] })
-            // 	)) as Collections.MenuItems;
+        } else if (collection === 'button') {
+            return (await client.request(
+                readItem('button', rel.item, { fields: ['*', { page: ['permalink'] }] })
+            )) as Collections.Button;
         } else if (collection === 'section') {
             return (await client.request(
                 readItem('section', rel.item, { fields: ['*'] })

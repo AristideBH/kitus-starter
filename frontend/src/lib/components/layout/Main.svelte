@@ -15,11 +15,7 @@
 </script>
 
 {#key $page.url.pathname}
-	<main
-		class="container grid gap-12 py-20"
-		in:fly={{ y: 50, delay: 450 }}
-		out:fade={{ duration: 300 }}
-	>
+	<main in:fly={{ y: 50, delay: 450 }} out:fade={{ duration: 300 }}>
 		{@render children()}
 	</main>
 {/key}

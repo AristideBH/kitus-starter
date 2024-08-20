@@ -6,9 +6,29 @@
 		@apply scroll-smooth;
 	}
 	body {
-		@apply flex min-h-dvh w-dvw flex-col bg-background text-foreground;
+		@apply flex min-h-dvh w-dvw flex-col gap-y-12 bg-background text-foreground;
 		& > div:first-of-type {
 			@apply contents;
+		}
+	}
+
+	body > div {
+		& > header,
+		& > main,
+		& > footer {
+			--x-gap: 1rem;
+			--y-gap: 3rem;
+			display: grid;
+			grid-template-columns: 1fr min(120ch, calc(100% - calc(2 * var(--x-gap)))) 1fr;
+			grid-column-gap: var(--x-gap);
+			grid-row-gap: var(--y-gap);
+			& > * {
+				grid-column: 2;
+			}
+			.full-width {
+				width: 100%;
+				grid-column: 1 / -1;
+			}
 		}
 	}
 }
