@@ -31,7 +31,7 @@
 	const { form: formData, enhance, delayed } = form;
 </script>
 
-<Card.Root class="mx-auto w-full max-w-xl">
+<Card.Root class="mx-auto w-full max-w-xl bg-muted">
 	{#if formStatus === 'submitted'}
 		<Card.Header>
 			<Card.Title class="mt-0">Thanks for your message</Card.Title>
