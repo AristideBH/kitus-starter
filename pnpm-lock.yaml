@@ -7,16 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      formsnap:
-        specifier: ^1.0.1
-        version: 1.0.1(svelte@5.0.0-next.225)(sveltekit-superforms@2.17.0(@sveltejs/kit@2.5.24(@sveltejs/vite-plugin-svelte@3.1.1(svelte@5.0.0-next.225)(vite@5.4.1(@types/node@22.4.1)))(svelte@5.0.0-next.225)(vite@5.4.1(@types/node@22.4.1)))(svelte@5.0.0-next.225))
-      sveltekit-superforms:
-        specifier: ^2.17.0
-        version: 2.17.0(@sveltejs/kit@2.5.24(@sveltejs/vite-plugin-svelte@3.1.1(svelte@5.0.0-next.225)(vite@5.4.1(@types/node@22.4.1)))(svelte@5.0.0-next.225)(vite@5.4.1(@types/node@22.4.1)))(svelte@5.0.0-next.225)
-      zod:
-        specifier: ^3.23.8
-        version: 3.23.8
     devDependencies:
       '@directus/sdk':
         specifier: ^17.0.0
@@ -69,6 +59,9 @@ importers:
       fluid-tailwind:
         specifier: ^1.0.3
         version: 1.0.3(tailwindcss@3.4.10)
+      formsnap:
+        specifier: ^1.0.1
+        version: 1.0.1(svelte@5.0.0-next.225)(sveltekit-superforms@2.17.0(@sveltejs/kit@2.5.24(@sveltejs/vite-plugin-svelte@3.1.1(svelte@5.0.0-next.225)(vite@5.4.1(@types/node@22.4.1)))(svelte@5.0.0-next.225)(vite@5.4.1(@types/node@22.4.1)))(svelte@5.0.0-next.225))
       globals:
         specifier: ^15.9.0
         version: 15.9.0
@@ -102,6 +95,9 @@ importers:
       svelte-sonner:
         specifier: ^0.3.27
         version: 0.3.27(svelte@5.0.0-next.225)
+      sveltekit-superforms:
+        specifier: ^2.17.0
+        version: 2.17.0(@sveltejs/kit@2.5.24(@sveltejs/vite-plugin-svelte@3.1.1(svelte@5.0.0-next.225)(vite@5.4.1(@types/node@22.4.1)))(svelte@5.0.0-next.225)(vite@5.4.1(@types/node@22.4.1)))(svelte@5.0.0-next.225)
       tailwind-merge:
         specifier: ^2.5.2
         version: 2.5.2
@@ -123,6 +119,9 @@ importers:
       vite:
         specifier: ^5.4.1
         version: 5.4.1(@types/node@22.4.1)
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
 
 packages:
 

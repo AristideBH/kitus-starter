@@ -227,6 +227,18 @@ export namespace Collections {
   }
 
   /**
+   * The contact forms collection.
+   */
+  export interface ContactForms {
+    id: Types.PrimaryKey<Types.BigInteger>;
+    date_created: Types.Optional<Types.DateTime>;
+    sort: Types.Optional<Types.Integer>;
+    name: Types.Optional<Types.String>;
+    email: Types.Optional<Types.String>;
+    message: Types.Optional<Types.String>;
+  }
+
+  /**
    * The gallery collection.
    */
   export interface Gallery {
@@ -637,6 +649,11 @@ export interface Schema extends System {
    * The button collection.
    */
   button: Collections.Button[];
+
+  /**
+   * The contact forms collection.
+   */
+  contact_forms: Collections.ContactForms[];
 
   /**
    * The gallery collection.
@@ -1050,6 +1067,305 @@ export class ButtonItem
     key: string | number,
   ): Promise<void> {
     return await this.client.request(deleteButtonItem(key));
+  }
+}
+
+/**
+ * Create many contact forms items.
+ */
+export function createContactFormsItems<
+  const Query extends Directus.Query<Schema, Collections.ContactForms[]>,
+>(items: Partial<Collections.ContactForms>[], query?: Query) {
+  return DirectusSDK.createItems<Schema, "contact_forms", Query>(
+    "contact_forms",
+    items,
+    query,
+  );
+}
+
+/**
+ * Create a single contact forms item.
+ */
+export function createContactFormsItem<
+  const Query extends DirectusSDK.Query<Schema, Collections.ContactForms[]>, // Is this a mistake? Why []?
+>(item: Partial<Collections.ContactForms>, query?: Query) {
+  return DirectusSDK.createItem<Schema, "contact_forms", Query>(
+    "contact_forms",
+    item,
+    query,
+  );
+}
+
+/**
+ * Read many contact forms items.
+ */
+export function readContactFormsItems<
+  const Query extends Directus.Query<Schema, Collections.ContactForms>,
+>(query?: Query) {
+  return DirectusSDK.readItems<Schema, "contact_forms", Query>(
+    "contact_forms",
+    query,
+  );
+}
+
+/**
+ * Read many contact forms items.
+ */
+export const listContactForms = readContactFormsItems;
+
+/**
+ * Gets a single known contact forms item by id.
+ */
+export function readContactFormsItem<
+  const Query extends Directus.Query<Schema, Collections.ContactForms>,
+>(key: string | number, query?: Query) {
+  return DirectusSDK.readItem<Schema, "contact_forms", Query>(
+    "contact_forms",
+    key,
+    query,
+  );
+}
+
+/**
+ * Gets a single known contact forms item by id.
+ */
+export const readContactForms = readContactFormsItem;
+
+/**
+ * Read many contact forms items.
+ */
+export function updateContactFormsItems<
+  const Query extends Directus.Query<Schema, Collections.ContactForms[]>,
+>(
+  keys: string[] | number[],
+  patch: Partial<Collections.ContactForms>,
+  query?: Query,
+) {
+  return DirectusSDK.updateItems<Schema, "contact_forms", Query>(
+    "contact_forms",
+    keys,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Gets a single known contact forms item by id.
+ */
+export function updateContactFormsItem<
+  const Query extends Directus.Query<Schema, Collections.ContactForms[]>,
+>(
+  key: string | number,
+  patch: Partial<Collections.ContactForms>,
+  query?: Query,
+) {
+  return DirectusSDK.updateItem<Schema, "contact_forms", Query>(
+    "contact_forms",
+    key,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Deletes many contact forms items.
+ */
+export function deleteContactFormsItems<
+  const Query extends Directus.Query<Schema, Collections.ContactForms[]>,
+>(keys: string[] | number[]) {
+  return DirectusSDK.deleteItems<Schema, "contact_forms", Query>(
+    "contact_forms",
+    keys,
+  );
+}
+
+/**
+ * Deletes a single known contact forms item by id.
+ */
+export function deleteContactFormsItem(key: string | number) {
+  return DirectusSDK.deleteItem<Schema, "contact_forms">("contact_forms", key);
+}
+
+export class ContactFormsItems
+  implements TypedCollectionItemsWrapper<Collections.ContactForms>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Creates many items in the collection.
+   */
+  async create<
+    const Query extends DirectusSDK.Query<Schema, Collections.ContactForms>,
+  >(
+    items: Partial<Collections.ContactForms>[],
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.ContactForms,
+      Query["fields"]
+    >[]
+  > {
+    return (await this.client.request(
+      createContactFormsItems(items, query as any),
+    )) as any; // Seems like a bug in the SDK.
+  }
+
+  /**
+   * Read many items from the collection.
+   */
+  async query<
+    const Query extends Directus.Query<Schema, Collections.ContactForms>,
+  >(
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.ContactForms,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(readContactFormsItems(query));
+  }
+
+  /**
+   * Read the first item from the collection matching the query.
+   */
+  async find<
+    const Query extends Directus.Query<Schema, Collections.ContactForms>,
+  >(
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.ContactForms,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    const items = await this.client.request(
+      readContactFormsItems({
+        ...query,
+        limit: 1,
+      }),
+    );
+    return items?.[0] as any; // TODO: fix
+  }
+
+  /**
+   * Update many items in the collection.
+   */
+  async update<
+    const Query extends Directus.Query<Schema, Collections.ContactForms[]>,
+  >(
+    keys: string[] | number[],
+    patch: Partial<Collections.ContactForms>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.ContactForms,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(
+      updateContactFormsItems(keys, patch, query),
+    );
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.ContactForms>,
+  >(keys: string[] | number[]): Promise<void> {}
+}
+
+export class ContactFormsItem
+  implements TypedCollectionItemWrapper<Collections.ContactForms>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Create a single item in the collection.
+   */
+  async create<
+    const Query extends Directus.Query<Schema, Collections.ContactForms>,
+  >(
+    item: Partial<Collections.ContactForms>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.ContactForms,
+      Query["fields"]
+    >
+  > {
+    return (await this.client.request(
+      createContactFormsItem(item, query as any),
+    )) as any;
+  }
+
+  /**
+   * Read a single item from the collection.
+   */
+  async get<
+    const Query extends Directus.Query<Schema, Collections.ContactForms>,
+  >(
+    key: string | number,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.ContactForms,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return await this.client.request(readContactFormsItem(key, query));
+  }
+
+  /**
+   * Update a single item from the collection.
+   */
+  async update<
+    const Query extends Directus.Query<Schema, Collections.ContactForms>,
+  >(
+    key: string | number,
+    patch: Partial<Collections.ContactForms>,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.ContactForms,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return (await this.client.request(
+      updateContactFormsItem(key, patch, query as any),
+    )) as any;
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.ContactForms>,
+  >(key: string | number): Promise<void> {
+    return await this.client.request(deleteContactFormsItem(key));
   }
 }
 
@@ -5202,6 +5518,16 @@ export type TypedClient = {
   button: TypedCollectionItemWrapper<Collections.Button>;
 
   /**
+   * Manages multiple items from the ContactForms collection.
+   */
+  contact_forms: TypedCollectionItemsWrapper<Collections.ContactForms>;
+
+  /**
+   * Manages individual items from the ContactForms collection.
+   */
+  contact_form: TypedCollectionItemWrapper<Collections.ContactForms>;
+
+  /**
    * Manages multiple items from the Gallery collection.
    */
   galleries: TypedCollectionItemsWrapper<Collections.Gallery>;
@@ -5508,6 +5834,9 @@ export const schema = () => {
 
       ["buttons", new ButtonItems(client as any)],
       ["button", new ButtonItem(client as any)],
+
+      ["contact_forms", new ContactFormsItems(client as any)],
+      ["contact_form", new ContactFormsItem(client as any)],
 
       ["galleries", new GalleryItems(client as any)],
       ["gallery", new GalleryItem(client as any)],
