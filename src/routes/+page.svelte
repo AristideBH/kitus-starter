@@ -4,13 +4,21 @@
 	let weight = $state(200);
 </script>
 
-<section class="grid gap-6 py-8">
-	<h1 style="--wght:{weight}">Sveltus starterkit</h1>
-	<div class="flex flex-col">
+<section>
+	<h1 style="--wght:{weight}">Kitus Starter</h1>
+	<div class="mb-10 flex gap-4">
 		<Label for="weight">Weight : <code>{weight}</code></Label>
-		<input type="range" name="weight" id="weight" min="100" max="900" bind:value={weight} />
+		<input
+			type="range"
+			name="weight"
+			id="weight"
+			min="100"
+			max="900"
+			class="grow"
+			bind:value={weight}
+		/>
 	</div>
-	<p class="lead">A custom boilerplate for Sveltekit and Directus</p>
+	<p class="lead mb-1">A custom template for Sveltekit & Directus</p>
 	<details open={true} class="list-none rounded-sm bg-muted p-4">
 		<summary>Détails</summary>
 		<ul class="!mt-4">

@@ -4,4 +4,6 @@
 	export let data;
 </script>
 
-<ContactForm data={data.form} />
+<section>
+	<ContactForm data={data.form} />
+</section>

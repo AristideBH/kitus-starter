@@ -5,22 +5,20 @@
 	const { footerNav: menu } = $page.data;
 </script>
 
-<footer class=" mt-auto pb-4 pt-24">
+<footer class=" grid-layout mt-auto pb-4 pt-24">
 	<div class="small flex items-center justify-between border-t pt-4">
 		<nav class="flex gap-3">
+			{#if $page.data.token}
+				<a href="/profile">Profile</a>
+				<a href="/logout" data-sveltekit-preload-data="off">Logout</a>
+			{:else}
+				<a href="/signin">Sign in</a>
+				<a href="/login">Log in</a>
+			{/if}
 			{#each menu.items as item}
 				<NavItemFragment {item} class="w-fit grow-0" />
 			{/each}
 		</nav>
-		<div class="flex gap-3 capitalize">
-			<span>© All rights reserved </span>
-			{#if $page.data.token}
-				<a href="/profile">profile</a>
-				<a href="/logout" data-sveltekit-preload-data="off">logout</a>
-			{:else}
-				<a href="/signin">signin</a>
-				<a href="/login">login</a>
-			{/if}
-		</div>
+		<span>© All rights reserved </span>
 	</div>
 </footer>

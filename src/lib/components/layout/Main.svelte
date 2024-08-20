@@ -15,7 +15,7 @@
 </script>
 
 {#key $page.url.pathname}
-	<main in:fly={{ y: 50, delay: 450 }} out:fade={{ duration: 300 }}>
+	<main class="grid-layout" in:fly={{ y: 50, delay: 450 }} out:fade={{ duration: 300 }}>
 		{@render children()}
 	</main>
 {/key}

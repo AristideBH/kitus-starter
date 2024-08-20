@@ -47,10 +47,10 @@
 				{#if 'editor' in content}
 					{@const { editor, width, color } = content}
 					<section
-						class:full-width={width === 'full-bleed'}
+						class:layout-full={width === 'full-width'}
 						class="bg-{color}"
-						class:p-6={color != 'none'}
-						class:rounded={color != 'none' && width != 'full-bleed'}
+						class:rounded={color != 'none' && width != 'full-width'}
+						data-tinted={color != 'none' ? 'true' : 'false'}
 					>
 						<svelte:self {editor}></svelte:self>
 					</section>
@@ -66,8 +66,11 @@
 						{variant}
 						{size}
 						href={type === 'page' && typeof page != 'string' ? `/${page?.permalink}` : url}
-						target={new_tab && type === 'url' ? '_blank' : ''}>{label}</Button
+						target={new_tab && type === 'url' ? '_blank' : ''}
+						class="w-fit"
 					>
+						{label}
+					</Button>
 				{/if}
 			{/if}
 		{/await}

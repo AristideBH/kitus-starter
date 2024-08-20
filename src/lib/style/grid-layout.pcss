@@ -1,0 +1,67 @@
+:root {
+	--content-max-width: 140ch;
+	--content-width: min(
+		calc(100% - var(--sidebar-width) - calc(2 * var(--side-padding)) - var(--x-gap)),
+		calc(var(--content-max-width) - var(--sidebar-width))
+	);
+	--sidebar-width: min(350px, 60ch);
+	--side-padding: 1rem;
+	--x-gap: 1rem;
+	--y-gap: 5rem;
+}
+
+.grid-layout {
+	display: grid;
+	gap: var(--y-gap) 0;
+	grid-template-columns:
+		[full-start]
+		minmax(var(--side-padding), 1fr)
+		[main-start side-start]
+		var(--sidebar-width)
+		[side-end]
+		var(--x-gap)
+		[content-start]
+		var(--content-width)
+		[content-end main-end]
+		minmax(var(--side-padding), 1fr)
+		[full-end];
+
+	& > * {
+		grid-column: main;
+
+		display: grid;
+		grid-template-columns: subgrid;
+		@apply gap-y-2;
+
+		&[data-tinted='true'] {
+			@apply p-14;
+		}
+
+		& > * {
+			grid-column: inherit;
+		}
+
+		&.layout-full {
+			grid-column: full;
+			display: grid;
+			grid-template-columns: subgrid;
+			align-items: start;
+
+			&[data-tinted='true'] {
+				@apply px-0;
+			}
+
+			& > *:not(img, figure) {
+				grid-column: main;
+			}
+		}
+	}
+}
+
+main > section:first-of-type {
+	@apply mt-20;
+	&.layout-full[data-tinted='true'],
+	&:has(> figure) {
+		@apply mt-0;
+	}
+}
