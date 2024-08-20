@@ -12,6 +12,15 @@
 				<NavItemFragment {item} class="w-fit grow-0" />
 			{/each}
 		</nav>
-		<span>© All rights reserved </span>
+		<div class="flex gap-3 capitalize">
+			<span>© All rights reserved </span>
+			{#if $page.data.token}
+				<a href="/profile">profile</a>
+				<a href="/logout" data-sveltekit-preload-data="off">logout</a>
+			{:else}
+				<a href="/signin">signin</a>
+				<a href="/login">login</a>
+			{/if}
+		</div>
 	</div>
 </footer>

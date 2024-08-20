@@ -4,7 +4,7 @@ import { readMenus } from '$lib/types/client';
 import { readSettings } from '@directus/sdk';
 
 export const load = (async ({ fetch, locals }) => {
-    // const user = locals.user;
+    const user = locals.user;
     const token = locals.token ? locals.token : null;
     const directus = client(fetch, token);
 
@@ -16,6 +16,9 @@ export const load = (async ({ fetch, locals }) => {
 
 
     return {
+        // Auth
+        user,
+        token,
         // Data
         headerNav,
         footerNav,

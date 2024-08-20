@@ -10,10 +10,9 @@
 	import Header from '$lib/components/layout/Header.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
 
-	const directus = client(fetch);
+	let { children, data } = $props();
+	const directus = client(fetch, data.token);
 	setContext<DirectusClient>('directus', directus);
-
-	let { children } = $props();
 </script>
 
 <!-- UTILITIES -->
