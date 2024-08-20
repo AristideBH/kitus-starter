@@ -1,7 +1,14 @@
+# Dockerfile for building and running a Node.js application.
+
+# This Dockerfile sets up a multi-stage build process:
+
+# 1. The first stage (`sk-build`) installs dependencies, copies the application code, and builds the application.
+# 2. The second stage (`node:21-alpine`) copies the built application from the first stage and runs it.
+
+ARG TZ=Europe/Paris
 FROM node:21-alpine AS sk-build
 WORKDIR /app
 
-ARG TZ=Europe/Paris
 ARG PUBLIC_DIRECTUS_URL
 ARG PUBLIC_COOKIE_DOMAIN
 
@@ -14,7 +21,6 @@ RUN npm run build
 FROM node:21-alpine
 WORKDIR /app
 
-ARG TZ=Europe/Paris
 RUN apk --no-cache add curl tzdata
 RUN cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
