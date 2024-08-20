@@ -15,13 +15,13 @@
 
 <Sheet.Root bind:open>
 	<Sheet.Trigger>
-		<Button variant="outline" size="icon">
+		<Button variant="outline" size="icon" aria-label="Open menu">
 			<Menu class="s-4" />
 		</Button>
 	</Sheet.Trigger>
 	<Sheet.Content class="px-inline flex flex-col justify-between gap-4">
 		<Sheet.Header class="flex-row justify-between">
-			<img class="mt-1 size-14" src="/icons/favicon.svg" />
+			<img class="mt-1 size-14" src="/icons/favicon.svg" alt="Logo" />
 
 			<Sheet.Close class="ms-auto">
 				<Button variant="outline" size="icon">

@@ -15,9 +15,3 @@
 		<span>© All rights reserved </span>
 	</div>
 </footer>
-
-<style lang="postcss">
-	:global(footer *) {
-		@apply text-foreground/50;
-	}
-</style>
