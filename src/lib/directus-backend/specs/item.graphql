@@ -65,6 +65,10 @@ type Query {
   button_by_id(id: ID!, version: String): button
   button_aggregated(groupBy: [String], filter: button_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [button_aggregated!]!
   button_by_version(version: String!, id: ID!): version_button
+  contact_forms(filter: contact_forms_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [contact_forms!]!
+  contact_forms_by_id(id: ID!, version: String): contact_forms
+  contact_forms_aggregated(groupBy: [String], filter: contact_forms_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [contact_forms_aggregated!]!
+  contact_forms_by_version(version: String!, id: ID!): version_contact_forms
 }
 
 type Mutation {
@@ -100,6 +104,8 @@ type Mutation {
   create_menu_items_item(data: create_menu_items_input!): menu_items
   create_button_items(filter: button_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_button_input!]): [button!]!
   create_button_item(data: create_button_input!): button
+  create_contact_forms_items(filter: contact_forms_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_contact_forms_input!]): [contact_forms!]!
+  create_contact_forms_item(data: create_contact_forms_input!): contact_forms
   update_directus_sync_id_map_items(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_sync_id_map_input!): [directus_sync_id_map!]!
   update_directus_sync_id_map_batch(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_sync_id_map_input!]): [directus_sync_id_map!]!
   update_directus_sync_id_map_item(id: ID!, data: update_directus_sync_id_map_input!): directus_sync_id_map
@@ -149,6 +155,9 @@ type Mutation {
   update_button_items(filter: button_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_button_input!): [button!]!
   update_button_batch(filter: button_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_button_input!]): [button!]!
   update_button_item(id: ID!, data: update_button_input!): button
+  update_contact_forms_items(filter: contact_forms_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_contact_forms_input!): [contact_forms!]!
+  update_contact_forms_batch(filter: contact_forms_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_contact_forms_input!]): [contact_forms!]!
+  update_contact_forms_item(id: ID!, data: update_contact_forms_input!): contact_forms
   delete_directus_sync_id_map_items(ids: [ID]!): delete_many
   delete_directus_sync_id_map_item(id: ID!): delete_one
   delete_pages_items(ids: [ID]!): delete_many
@@ -181,6 +190,8 @@ type Mutation {
   delete_menu_items_item(id: ID!): delete_one
   delete_button_items(ids: [ID]!): delete_many
   delete_button_item(id: ID!): delete_one
+  delete_contact_forms_items(ids: [ID]!): delete_many
+  delete_contact_forms_item(id: ID!): delete_one
 }
 
 type Subscription {
@@ -219,6 +230,7 @@ type Subscription {
   menus_mutated(event: EventEnum): menus_mutated
   menu_items_mutated(event: EventEnum): menu_items_mutated
   button_mutated(event: EventEnum): button_mutated
+  contact_forms_mutated(event: EventEnum): contact_forms_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -304,6 +316,49 @@ type button_mutated {
   key: ID!
   event: EventEnum
   data: button
+}
+
+type contact_forms {
+  id: ID!
+  sort: Int
+  date_created: Date
+  date_created_func: datetime_functions
+  name: String
+  email: String
+  message: String
+}
+
+type contact_forms_aggregated {
+  group: JSON
+  countAll: Int
+  count: contact_forms_aggregated_count
+  countDistinct: contact_forms_aggregated_count
+  avg: contact_forms_aggregated_fields
+  sum: contact_forms_aggregated_fields
+  avgDistinct: contact_forms_aggregated_fields
+  sumDistinct: contact_forms_aggregated_fields
+  min: contact_forms_aggregated_fields
+  max: contact_forms_aggregated_fields
+}
+
+type contact_forms_aggregated_count {
+  id: Int
+  sort: Int
+  date_created: Int
+  name: Int
+  email: Int
+  message: Int
+}
+
+type contact_forms_aggregated_fields {
+  id: Float
+  sort: Float
+}
+
+type contact_forms_mutated {
+  key: ID!
+  event: EventEnum
+  data: contact_forms
 }
 
 type count_functions {
@@ -1360,6 +1415,16 @@ type version_button {
 }
 
 """"""
+type version_contact_forms {
+  id: ID
+  sort: Int
+  date_created: Date
+  name: String
+  email: String
+  message: String
+}
+
+""""""
 type version_directus_sync_id_map {
   id: ID
   table: String
@@ -1543,6 +1608,18 @@ input button_filter {
   _or: [button_filter]
 }
 
+input contact_forms_filter {
+  id: big_int_filter_operators
+  sort: number_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  name: string_filter_operators
+  email: string_filter_operators
+  message: string_filter_operators
+  _and: [contact_forms_filter]
+  _or: [contact_forms_filter]
+}
+
 input count_function_filter_operators {
   count: number_filter_operators
 }
@@ -1556,6 +1633,15 @@ input create_button_input {
   url: String
   page: create_pages_input
   new_tab: Boolean
+}
+
+input create_contact_forms_input {
+  id: ID
+  sort: Int
+  date_created: Date
+  name: String
+  email: String
+  message: String
 }
 
 input create_directus_files_input {
@@ -2236,6 +2322,15 @@ input update_button_input {
   url: String
   page: update_pages_input
   new_tab: Boolean
+}
+
+input update_contact_forms_input {
+  id: ID
+  sort: Int
+  date_created: Date
+  name: String
+  email: String
+  message: String
 }
 
 input update_directus_files_input {

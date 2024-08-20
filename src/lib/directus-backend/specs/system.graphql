@@ -246,6 +246,7 @@ type Subscription {
   menus_mutated(event: EventEnum): menus_mutated
   menu_items_mutated(event: EventEnum): menu_items_mutated
   button_mutated(event: EventEnum): button_mutated
+  contact_forms_mutated(event: EventEnum): contact_forms_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -333,6 +334,22 @@ type button_mutated {
   key: ID!
   event: EventEnum
   data: button
+}
+
+type contact_forms {
+  id: ID!
+  sort: Int
+  date_created: Date
+  date_created_func: datetime_functions
+  name: String
+  email: String
+  message: String
+}
+
+type contact_forms_mutated {
+  key: ID!
+  event: EventEnum
+  data: contact_forms
 }
 
 type count_functions {

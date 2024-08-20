@@ -1,5 +1,29 @@
 [
   {
+    "name": "New contact alert",
+    "icon": "mark_email_unread",
+    "color": null,
+    "description": "Send email notification upon new contact form",
+    "status": "active",
+    "trigger": "event",
+    "accountability": "all",
+    "options": {
+      "type": "action",
+      "scope": [
+        "items.create"
+      ],
+      "collections": [
+        "contact_forms"
+      ]
+    },
+    "operation": "faa52d09-2c27-47f7-9bf2-18f9d4a20ff0",
+    "flow_manager_category": null,
+    "flow_manager_order": 0,
+    "flow_manager_last_run_at": null,
+    "flow_manager_run_counter": 0,
+    "_syncId": "2feabe16-370f-4d52-86eb-e632e6731975"
+  },
+  {
     "name": "Permalink Generator",
     "icon": "link",
     "color": null,

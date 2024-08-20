@@ -57,5 +57,26 @@
     "reject": null,
     "flow": "628d9225-e75b-458c-ac50-a16843b14171",
     "_syncId": "8325e95b-10f6-4155-b0ee-7dc14d86b84a"
+  },
+  {
+    "name": "Send Email",
+    "key": "mail_i357a",
+    "type": "mail",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "subject": "A new contact form has been submitted",
+      "type": "template",
+      "data": {
+        "form": "{{$trigger.payload}}"
+      },
+      "to": [
+        "aristide.bruneau@gmail.com"
+      ]
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "2feabe16-370f-4d52-86eb-e632e6731975",
+    "_syncId": "faa52d09-2c27-47f7-9bf2-18f9d4a20ff0"
   }
 ]

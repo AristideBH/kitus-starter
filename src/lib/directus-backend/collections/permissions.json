@@ -13,6 +13,18 @@
   },
   {
     "role": null,
+    "collection": "contact_forms",
+    "action": "create",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "44fd627b-24d7-4497-a2d2-62e82e89d7dc"
+  },
+  {
+    "role": null,
     "collection": "directus_files",
     "action": "read",
     "permissions": {},
