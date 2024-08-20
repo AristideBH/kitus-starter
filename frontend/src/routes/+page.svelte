@@ -1,9 +1,13 @@
 <script lang="ts">
+	import Label from '$lib/components/ui/label/label.svelte';
+
+	let weight = $state(200);
 </script>
 
 <section class="grid gap-6 py-8">
-	<h1>Sveltus starterkit</h1>
-
+	<h1 style="--wght:{weight}">Sveltus starterkit</h1>
+	<Label for="weight">Weight : <code>{weight}</code></Label>
+	<input type="range" name="weight" id="weight" min="100" max="900" bind:value={weight} />
 	<p class="lead">A custom boilerplate for Sveltekit and Directus</p>
 	<summary class="bg-muted list-none rounded-sm p-4">
 		<details open={true}>
@@ -26,3 +30,9 @@
 		</details>
 	</summary>
 </section>
+
+<style>
+	h1 {
+		font-variation-settings: 'wght' var(--wght, 200);
+	}
+</style>

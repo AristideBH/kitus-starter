@@ -60,7 +60,7 @@ const config: Config = {
 			},
 			fontFamily: {
 				sans: [...fontFamily.sans],
-				heading: ['Changa', ...fontFamily.sans],
+				heading: ['WorkSans-Variable', ...fontFamily.sans],
 			}
 		},
 		screens,
