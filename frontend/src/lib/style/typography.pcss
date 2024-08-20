@@ -2,7 +2,7 @@
 	/*- Headings */
 	h1 {
 		@apply ~text-5xl/7xl;
-		font-variation-settings: 'wght' 200;
+		font-variation-settings: 'wght' var(--wght, 200);
 	}
 
 	h2 {
@@ -44,7 +44,7 @@
 	blockquote {
 		@apply my-2 scroll-m-20 text-balance;
 		&:first-of-type {
-			@apply mt-2;
+			@apply mt-0;
 		}
 	}
 
@@ -99,7 +99,7 @@
 
 	/*- Links */
 	a {
-		@apply font-medium underline decoration-primary underline-offset-4;
+		@apply underline underline-offset-4;
 
 		&[rel='footnote'] {
 			@apply no-underline;
@@ -160,7 +160,7 @@
 	}
 
 	.small {
-		@apply text-sm font-medium leading-none;
+		@apply text-sm font-normal leading-none;
 	}
 
 	/*- Text selection */

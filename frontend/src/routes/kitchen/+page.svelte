@@ -1,9 +1,10 @@
 <script>
+	import IntersectionObserver from '$lib/components/layout/IntersectionObserver.svelte';
 	import { fly } from 'svelte/transition';
 	let longContent = true;
 </script>
 
-<section>
+<IntersectionObserver>
 	<label for="longContent">
 		<input
 			class="mb-12"
@@ -26,51 +27,48 @@
 	<p>This is a test paragraph.</p>
 	<h6>This is 6th level heading</h6>
 	<p>This is a test paragraph.</p>
-	<p>This is a test paragraph.</p>
-</section>
+</IntersectionObserver>
 
 {#if longContent}
-	<section>
-		<div in:fly={{ y: 100, delay: 140 }} class="layout-bleed-left bg-muted/50 grid p-6">
-			<h2 class="">Basic block level elements</h2>
+	<IntersectionObserver>
+		<h2 class="">Basic block level elements</h2>
+		<div>
+			<p>
+				This is a normal paragraph (<code>p</code> element). To add some length to it, let us
+				mention that this page was primarily written for testing the effect of
+				<strong>user style sheets</strong>. You can use it for various other purposes as well, like
+				just checking how your browser displays various HTML elements by default. It can also be
+				useful when testing conversions from HTML format to other formats, since some elements can
+				go wrong then.
+			</p>
+			<p>
+				This is another paragraph. I think it needs to be added that the set of elements tested is
+				not exhaustive in any sense. I have selected those elements for which it can make sense to
+				write user style sheet rules, in my opionion.
+			</p>
 			<div>
-				<p>
-					This is a normal paragraph (<code>p</code> element). To add some length to it, let us
-					mention that this page was primarily written for testing the effect of
-					<strong>user style sheets</strong>. You can use it for various other purposes as well,
-					like just checking how your browser displays various HTML elements by default. It can also
-					be useful when testing conversions from HTML format to other formats, since some elements
-					can go wrong then.
-				</p>
-				<p>
-					This is another paragraph. I think it needs to be added that the set of elements tested is
-					not exhaustive in any sense. I have selected those elements for which it can make sense to
-					write user style sheet rules, in my opionion.
-				</p>
-				<div>
-					This is a <code>div</code> element. Authors may use such elements instead of paragraph
-					markup for various reasons. (End of <code>div</code>.)
-				</div>
-				<blockquote>
-					<p>
-						This is a block quotation containing a single paragraph. Well, not quite, since this is
-						not <em>really</em> quoted text, but I hope you understand the point. After all, this page
-						does not use HTML markup very normally anyway.
-					</p>
-				</blockquote>
-				<p>
-					The following contains address information about the author, in an <code>address</code> element.
-				</p>
-				<address>
-					<a href="../somelink.html" lang="fr" hreflang="en">Mon nom en francais</a>,
-					<a href="mailto:example@example.com">example@example.com</a><br />
-					3 Rue Jules Ferry, Neuilly Sur Seine, France 94000
-				</address>
+				This is a <code>div</code> element. Authors may use such elements instead of paragraph
+				markup for various reasons. (End of <code>div</code>.)
 			</div>
+			<blockquote>
+				<p>
+					This is a block quotation containing a single paragraph. Well, not quite, since this is
+					not <em>really</em> quoted text, but I hope you understand the point. After all, this page
+					does not use HTML markup very normally anyway.
+				</p>
+			</blockquote>
+			<p>
+				The following contains address information about the author, in an <code>address</code> element.
+			</p>
+			<address>
+				<a href="../somelink.html" lang="fr" hreflang="en">Mon nom en francais</a>,
+				<a href="mailto:example@example.com">example@example.com</a><br />
+				3 Rue Jules Ferry, Neuilly Sur Seine, France 94000
+			</address>
 		</div>
-	</section>
+	</IntersectionObserver>
 
-	<section>
+	<IntersectionObserver>
 		<div>
 			<h2>Lists</h2>
 			<p>
@@ -152,9 +150,9 @@
 				</dd>
 			</dl>
 		</div>
-	</section>
+	</IntersectionObserver>
 
-	<section>
+	<IntersectionObserver>
 		<div class="layout-content-left">
 			<h2>Text-level markup, in alphabetical order</h2>
 			<ul>
@@ -252,9 +250,9 @@
 				<cite><a href="links.html">Links Want To Be Links</a></cite>.
 			</p>
 		</div>
-	</section>
+	</IntersectionObserver>
 
-	<section>
+	<IntersectionObserver>
 		<h2>Forms</h2>
 		<form action="somewhere.cgi">
 			<p>
@@ -419,9 +417,9 @@
 				>
 			</div>
 		</form>
-	</section>
+	</IntersectionObserver>
 
-	<section>
+	<IntersectionObserver>
 		<h2>Tables</h2>
 		<p>
 			The following table has a caption. The first row is in a thead, the second row is the tfoot,
@@ -454,9 +452,9 @@
 				<tr><th scope="row">Sweden</th> <td>449,964 </td><td>410,928</td></tr>
 			</tbody>
 		</table>
-	</section>
+	</IntersectionObserver>
 
-	<section>
+	<IntersectionObserver>
 		<h2>HTML5 Elements</h2>
 		<h3>Details and Summary</h3>
 		<details>
@@ -491,9 +489,9 @@
 			<li><progress value="17" max="100">17% complete</progress></li>
 			<li><progress value="75" max="100">75% complete</progress></li>
 		</ul>
-	</section>
+	</IntersectionObserver>
 
-	<section>
+	<IntersectionObserver>
 		<p>
 			The following table has some sample characters with annotations. If the browser&#8217;s
 			default font does not contain all of them, they may get displayed using backup fonts. This may
@@ -524,5 +522,5 @@
 				<tr><td>&#x2300;</td> <td>diameter sign </td><td>relatively rare in fonts</td></tr>
 			</tbody>
 		</table>
-	</section>
+	</IntersectionObserver>
 {/if}

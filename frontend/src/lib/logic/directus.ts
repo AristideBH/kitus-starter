@@ -5,7 +5,7 @@ import { createDirectus, rest, authentication, readFile } from '@directus/sdk';
 import { PUBLIC_DIRECTUS_URL, PUBLIC_COOKIE_DOMAIN } from '$env/static/public';
 import { error } from '@sveltejs/kit';
 import { toast } from 'svelte-sonner';
-
+import directusSettings from '../../../../backend/directus-config/collections/settings.json'
 
 // * ////////////////////////////////////////////////////////////////////////////////
 // * Types & definitions
@@ -19,7 +19,8 @@ export type DirectusClient = ReturnType<typeof client>;
 
 export type CustomDirectusFile = Partial<Types.Optional<Collections.DirectusFile>>
 export const assetBaseUrl = `${PUBLIC_DIRECTUS_URL}/assets/`;
-export const PixelSizes = ['50', '320', '480', '768', '1024', '1440', '1920'] as const;
+//@ts-expect-error this is a hack to get the type from a json object
+export const PixelSizes = directusSettings[0].storage_asset_presets.map((preset) => preset.key) as const;
 export type DirectusImagePreset = typeof PixelSizes[number];
 
 export type DirectusTokens = {

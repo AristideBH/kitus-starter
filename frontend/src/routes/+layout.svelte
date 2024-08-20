@@ -4,6 +4,7 @@
 	import { setContext } from 'svelte';
 
 	import { ModeWatcher } from 'mode-watcher';
+	import { Toaster } from '$lib/components/ui/sonner';
 
 	import Main from '$lib/components/layout/Main.svelte';
 	import Header from '$lib/components/layout/Header.svelte';
@@ -17,6 +18,7 @@
 
 <!-- UTILITIES -->
 <ModeWatcher />
+<Toaster />
 
 <!-- MARKUP -->
 <Header />

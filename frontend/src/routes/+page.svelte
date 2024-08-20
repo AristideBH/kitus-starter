@@ -6,8 +6,10 @@
 
 <section class="grid gap-6 py-8">
 	<h1 style="--wght:{weight}">Sveltus starterkit</h1>
-	<Label for="weight">Weight : <code>{weight}</code></Label>
-	<input type="range" name="weight" id="weight" min="100" max="900" bind:value={weight} />
+	<div class="flex flex-col">
+		<Label for="weight">Weight : <code>{weight}</code></Label>
+		<input type="range" name="weight" id="weight" min="100" max="900" bind:value={weight} />
+	</div>
 	<p class="lead">A custom boilerplate for Sveltekit and Directus</p>
 	<summary class="bg-muted list-none rounded-sm p-4">
 		<details open={true}>
@@ -30,9 +32,3 @@
 		</details>
 	</summary>
 </section>
-
-<style>
-	h1 {
-		font-variation-settings: 'wght' var(--wght, 200);
-	}
-</style>
