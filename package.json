@@ -40,6 +40,7 @@
 		"prettier": "^3.3.3",
 		"prettier-plugin-svelte": "^3.2.6",
 		"prettier-plugin-tailwindcss": "^0.6.6",
+		"runed": "^0.15.1",
 		"svelte": "5.0.0-next.225",
 		"svelte-check": "^3.8.5",
 		"svelte-sonner": "^0.3.27",
@@ -49,9 +50,12 @@
 		"thumbhash": "^0.1.1",
 		"typescript": "^5.5.4",
 		"typescript-eslint": "^8.2.0",
-		"vite": "^5.4.1",
-		"runed": "^0.15.1"
+		"vite": "^5.4.1"
 	},
 	"type": "module",
-	"dependencies": {}
+	"dependencies": {
+		"formsnap": "^1.0.1",
+		"sveltekit-superforms": "^2.17.0",
+		"zod": "^3.23.8"
+	}
 }

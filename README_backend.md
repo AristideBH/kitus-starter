@@ -93,7 +93,7 @@ In the **Apps** section, select your `admin` application.
    - [SEO](https://github.com/codihaus/directus-extension-seo.git)
    - [Thumbhash](https://github.com/WoLfulus/directus-extension-thumbhash)
 2. Head over the Admin User account page and generate a new token
-3. Update the `frontend/.env` file in the root of your project with the token you generated, and the `PUBLIC_DIRECTUS_URL` variable
+3. Update the `.env` file in the root of your project with the token you generated, and the `PUBLIC_DIRECTUS_URL` variable
 
 ## Template push
 
