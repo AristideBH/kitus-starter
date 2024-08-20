@@ -5,7 +5,7 @@
 	import { Input } from '$lib/components/ui/input';
 	import { Checkbox } from '../ui/checkbox';
 	import { Textarea } from '../ui/textarea';
-	import { formSchema, type FormSchema } from '$lib/types/contactFormSchema';
+	import { formSchema, type FormSchema } from '$lib/types/forms/contact';
 	import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { toast } from 'svelte-sonner';

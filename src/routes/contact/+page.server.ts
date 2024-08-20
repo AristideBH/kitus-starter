@@ -1,7 +1,7 @@
 import type { PageServerLoad, Actions } from './$types';
 import { fail } from "@sveltejs/kit";
 import { superValidate } from "sveltekit-superforms";
-import { formSchema } from "$lib/types/ContactFormSchema";
+import { formSchema } from "$lib/types/forms/contact";
 import { zod } from "sveltekit-superforms/adapters";
 import { client, directusError } from '$lib/logic/directus';
 import { createContactFormsItem } from '$lib/types/client';
