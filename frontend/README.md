@@ -1,6 +1,7 @@
 # Setting up Sveltekit frontend
 
 > _This README provides instructions for setting up and configuring the frontend of our project, which uses Svelte 5 as web framework._
+
 ## Requirements
 
 - `Node.js` and `pnpm` installed on your local machine
@@ -27,7 +28,6 @@ Head over to your CapRover dashboard, and navigate to the **Apps** section
       PUBLIC_DIRECTUS_URL=***directus_admin_url***
       PUBLIC_COOKIE_DOMAIN=***sveltekit_frontend_url***
       ```
-    - Scroll down and edit the **captain-definition Relative Path** to `./captain-definition-frontend`
     - **Save & Restart** your app
 
 4.  Head over to the **Deployment** tab
