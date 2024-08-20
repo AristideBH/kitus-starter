@@ -1,0 +1,51 @@
+{
+  "collection": "pages",
+  "field": "permalink",
+  "type": "string",
+  "meta": {
+    "collection": "pages",
+    "conditions": null,
+    "display": "extension-display-link",
+    "display_options": {
+      "font": "monospace",
+      "prefix": "https://test-frontend.aristide-bh.com/",
+      "showClipboard": false
+    },
+    "field": "permalink",
+    "group": null,
+    "hidden": true,
+    "interface": "input",
+    "note": null,
+    "options": {
+      "font": "monospace",
+      "iconLeft": "link",
+      "slug": true,
+      "trim": true
+    },
+    "readonly": true,
+    "required": false,
+    "sort": 13,
+    "special": null,
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "half"
+  },
+  "schema": {
+    "name": "permalink",
+    "table": "pages",
+    "data_type": "character varying",
+    "default_value": null,
+    "max_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": null,
+    "foreign_key_column": null
+  }
+}

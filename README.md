@@ -21,5 +21,5 @@
 
 ## Installation
 
-- [Backend setup](https://github.com/AristideBH/starter_caprover-sveltekit-directus/tree/main/backend)
-- [Frontend setup](https://github.com/AristideBH/starter_caprover-sveltekit-directus/tree/main/frontend)
+- [Backend setup](https://github.com/AristideBH/starter_caprover-sveltekit-directus/tree/main/README_backend.md)
+- [Frontend setup](https://github.com/AristideBH/starter_caprover-sveltekit-directus/tree/main/README_frontend.md)

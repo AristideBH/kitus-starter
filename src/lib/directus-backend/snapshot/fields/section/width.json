@@ -1,0 +1,55 @@
+{
+  "collection": "section",
+  "field": "width",
+  "type": "string",
+  "meta": {
+    "collection": "section",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "width",
+    "group": null,
+    "hidden": false,
+    "interface": "select-dropdown",
+    "note": null,
+    "options": {
+      "choices": [
+        {
+          "text": "Default",
+          "value": "default",
+          "icon": "fit_width"
+        },
+        {
+          "text": "Full-width",
+          "value": "full-bleed",
+          "icon": "width"
+        }
+      ]
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 2,
+    "special": null,
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "half"
+  },
+  "schema": {
+    "name": "width",
+    "table": "section",
+    "data_type": "character varying",
+    "default_value": "default",
+    "max_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": null,
+    "foreign_key_column": null
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "collection": "section_editor_nodes",
+  "field": "item",
+  "related_collection": null,
+  "meta": {
+    "junction_field": "section_id",
+    "many_collection": "section_editor_nodes",
+    "many_field": "item",
+    "one_allowed_collections": [
+      "button",
+      "gallery",
+      "image",
+      "quote"
+    ],
+    "one_collection": null,
+    "one_collection_field": "collection",
+    "one_deselect_action": "nullify",
+    "one_field": null,
+    "sort_field": null
+  }
+}
