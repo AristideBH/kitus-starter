@@ -16,10 +16,11 @@ import TaskList from './defaults/TaskList.svelte';
 import Quote from './custom/Quote.svelte';
 import Gallery from './custom/Gallery.svelte';
 import Image from './custom/Image.svelte';
+import AnimatedHeading from './custom/AnimatedHeading.svelte';
 
 export {
     BulletList, Heading, Paragraph, OrderedList, Blockquote, TaskList,
-    Quote, Gallery, Image
+    Quote, Gallery, Image, AnimatedHeading
 }
 
 // - FUNCTIONS

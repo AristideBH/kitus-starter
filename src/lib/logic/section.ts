@@ -39,7 +39,6 @@ const translate = (distance: UnitValue) => {
 
 export const inView = (node: HTMLElement, params: Partial<InViewParams> = inViewDefaults) => {
     if (!('ViewTimeline' in window)) {
-        console.log('ViewTimeline API not supported in this browser');
         return;
     }
     const timeline = new ViewTimeline({

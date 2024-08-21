@@ -14,6 +14,7 @@
 		Quote,
 		Gallery,
 		Image,
+		AnimatedHeading,
 		elementQuery
 	} from './';
 	import Button from '../ui/button/button.svelte';
@@ -28,7 +29,11 @@
 	{@const { type, content, attrs } = item}
 	<!-- DEFAULTS COMPONENTS -->
 	{#if type === 'heading' && attrs}
-		<Heading level={attrs.level} {content} />
+		{#if (attrs.level = '1')}
+			<AnimatedHeading {content} />
+		{:else}
+			<Heading level={attrs.level} {content} />
+		{/if}
 	{:else if type === 'paragraph'}
 		<Paragraph {content} />
 	{:else if type === 'horizontalRule'}
