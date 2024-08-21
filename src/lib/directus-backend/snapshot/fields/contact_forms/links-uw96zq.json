@@ -1,0 +1,36 @@
+{
+  "collection": "contact_forms",
+  "field": "links-uw96zq",
+  "type": "alias",
+  "meta": {
+    "collection": "contact_forms",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "links-uw96zq",
+    "group": null,
+    "hidden": false,
+    "interface": "presentation-links",
+    "note": null,
+    "options": {
+      "links": [
+        {
+          "label": "Répondre",
+          "type": "primary",
+          "url": "mailto:{{email}}"
+        }
+      ]
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 7,
+    "special": [
+      "alias",
+      "no-data"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

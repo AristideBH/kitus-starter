@@ -37,7 +37,7 @@
       "collection": "contact_forms",
       "meta": {
         "collection": "contact_forms",
-        "icon": null,
+        "icon": "markunread_mailbox",
         "note": null,
         "display_template": null,
         "hidden": false,
@@ -1655,7 +1655,7 @@
         "readonly": true,
         "hidden": false,
         "sort": 2,
-        "width": "half",
+        "width": "full",
         "translations": null,
         "note": null,
         "conditions": null,
@@ -1698,7 +1698,7 @@
         "options": null,
         "display": null,
         "display_options": null,
-        "readonly": false,
+        "readonly": true,
         "hidden": false,
         "sort": 4,
         "width": "half",
@@ -1742,9 +1742,12 @@
         "special": null,
         "interface": "input",
         "options": null,
-        "display": null,
-        "display_options": null,
-        "readonly": false,
+        "display": "extension-display-link",
+        "display_options": {
+          "kind": "email",
+          "openInNew": false
+        },
+        "readonly": true,
         "hidden": false,
         "sort": 5,
         "width": "half",
@@ -1790,7 +1793,7 @@
         "options": null,
         "display": null,
         "display_options": null,
-        "readonly": false,
+        "readonly": true,
         "hidden": false,
         "sort": 6,
         "width": "full",
@@ -18703,7 +18706,7 @@
             },
             {
               "text": "Full-width",
-              "value": "full-bleed",
+              "value": "full-width",
               "icon": "width"
             }
           ]
@@ -20238,6 +20241,44 @@
         "readonly": false,
         "hidden": true,
         "sort": 11,
+        "width": "full",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": false,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
+      "collection": "contact_forms",
+      "field": "links-uw96zq",
+      "type": "alias",
+      "schema": null,
+      "meta": {
+        "id": 170,
+        "collection": "contact_forms",
+        "field": "links-uw96zq",
+        "special": [
+          "alias",
+          "no-data"
+        ],
+        "interface": "presentation-links",
+        "options": {
+          "links": [
+            {
+              "label": "Répondre",
+              "type": "primary",
+              "url": "mailto:{{email}}"
+            }
+          ]
+        },
+        "display": null,
+        "display_options": null,
+        "readonly": false,
+        "hidden": false,
+        "sort": 7,
         "width": "full",
         "translations": null,
         "note": null,

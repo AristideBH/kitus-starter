@@ -1,10 +1,9 @@
 <script>
-	import IntersectionObserver from '$lib/components/layout/IntersectionObserver.svelte';
-	import { fly } from 'svelte/transition';
+	import Section from '$lib/components/layout/Section.svelte';
 	let longContent = true;
 </script>
 
-<IntersectionObserver>
+<Section>
 	<label for="longContent">
 		<input
 			class="mb-12"
@@ -27,10 +26,10 @@
 	<p>This is a test paragraph.</p>
 	<h6>This is 6th level heading</h6>
 	<p>This is a test paragraph.</p>
-</IntersectionObserver>
+</Section>
 
 {#if longContent}
-	<IntersectionObserver>
+	<Section>
 		<h2 class="">Basic block level elements</h2>
 		<div>
 			<p>
@@ -66,9 +65,9 @@
 				3 Rue Jules Ferry, Neuilly Sur Seine, France 94000
 			</address>
 		</div>
-	</IntersectionObserver>
+	</Section>
 
-	<IntersectionObserver>
+	<Section>
 		<div>
 			<h2>Lists</h2>
 			<p>
@@ -150,9 +149,9 @@
 				</dd>
 			</dl>
 		</div>
-	</IntersectionObserver>
+	</Section>
 
-	<IntersectionObserver>
+	<Section>
 		<div class="layout-content-left">
 			<h2>Text-level markup, in alphabetical order</h2>
 			<ul>
@@ -250,9 +249,9 @@
 				<cite><a href="links.html">Links Want To Be Links</a></cite>.
 			</p>
 		</div>
-	</IntersectionObserver>
+	</Section>
 
-	<IntersectionObserver>
+	<Section>
 		<h2>Forms</h2>
 		<form action="somewhere.cgi">
 			<p>
@@ -417,9 +416,9 @@
 				>
 			</div>
 		</form>
-	</IntersectionObserver>
+	</Section>
 
-	<IntersectionObserver>
+	<Section>
 		<h2>Tables</h2>
 		<p>
 			The following table has a caption. The first row is in a thead, the second row is the tfoot,
@@ -452,9 +451,9 @@
 				<tr><th scope="row">Sweden</th> <td>449,964 </td><td>410,928</td></tr>
 			</tbody>
 		</table>
-	</IntersectionObserver>
+	</Section>
 
-	<IntersectionObserver>
+	<Section>
 		<h2>HTML5 Elements</h2>
 		<h3>Details and Summary</h3>
 		<details>
@@ -489,9 +488,9 @@
 			<li><progress value="17" max="100">17% complete</progress></li>
 			<li><progress value="75" max="100">75% complete</progress></li>
 		</ul>
-	</IntersectionObserver>
+	</Section>
 
-	<IntersectionObserver>
+	<Section>
 		<p>
 			The following table has some sample characters with annotations. If the browser&#8217;s
 			default font does not contain all of them, they may get displayed using backup fonts. This may
@@ -522,5 +521,5 @@
 				<tr><td>&#x2300;</td> <td>diameter sign </td><td>relatively rare in fonts</td></tr>
 			</tbody>
 		</table>
-	</IntersectionObserver>
+	</Section>
 {/if}

@@ -1,10 +1,11 @@
 <script lang="ts">
+	import Section from '$lib/components/layout/Section.svelte';
 	import Label from '$lib/components/ui/label/label.svelte';
 
 	let weight = $state(200);
 </script>
 
-<section>
+<Section>
 	<h1 style="--wght:{weight}">Kitus Starter</h1>
 	<div class="mb-10 flex gap-4">
 		<Label for="weight">Weight : <code>{weight}</code></Label>
@@ -38,4 +39,4 @@
 			</li>
 		</ul>
 	</details>
-</section>
+</Section>

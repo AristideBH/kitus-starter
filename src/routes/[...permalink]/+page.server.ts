@@ -25,7 +25,7 @@ export const load = (async ({ params, fetch }) => {
                 ]
             },
             fields:
-                ["title", "editor"]
+                ["title", "editor",]
         }
     ))
 

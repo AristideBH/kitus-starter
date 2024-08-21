@@ -346,7 +346,7 @@ export namespace Collections {
    */
   export interface Section {
     id: Types.PrimaryKey<Types.UUID>;
-    width: Types.Optional<"full-bleed" | "default" | Types.String>;
+    width: Types.Optional<"full-width" | "default" | Types.String>;
     color: "muted" | "secondary" | "primary" | "none" | Types.String;
     editor: Types.Optional<Types.JSON | Types.JSON>;
     editor_nodes: Collections.SectionEditorNodes[];

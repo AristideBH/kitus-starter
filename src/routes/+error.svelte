@@ -12,10 +12,10 @@
 	<Card.Root class="bg-muted">
 		<Card.Header>
 			<h1>Oups !</h1>
-			<!-- <Card.Description>Erreur {status} : {error?.message}</Card.Description> -->
+			<Card.Description>Erreur {status} : {error?.message}</Card.Description>
 		</Card.Header>
 		<Card.Content>
-			<p>On dirait que la page que vous recherchez n'éxiste pas !</p>
+			<p>On dirait que la page que vous recherchez n'existe pas !</p>
 		</Card.Content>
 		<Card.Footer class="flex gap-2">
 			<Button

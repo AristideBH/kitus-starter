@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { TipTapEditor } from './index.d';
 	import type { DirectusClient } from '$lib/logic/directus';
-
+	import Section from '$lib/components/layout/Section.svelte';
 	import { getContext, onMount } from 'svelte';
 	const directus = getContext<DirectusClient>('directus');
 
@@ -45,15 +45,10 @@
 		{#await elementQuery(directus, attrs) then content}
 			{#if content}
 				{#if 'editor' in content}
-					{@const { editor, width, color } = content}
-					<section
-						class:layout-full={width === 'full-width'}
-						class="bg-{color}"
-						class:rounded={color != 'none' && width != 'full-width'}
-						data-tinted={color != 'none' ? 'true' : 'false'}
-					>
+					{@const { editor } = content}
+					<Section {content}>
 						<svelte:self {editor}></svelte:self>
-					</section>
+					</Section>
 				{:else if 'image' in content}
 					<Image {content} />
 				{:else if 'text' in content}
