@@ -8,7 +8,6 @@ type InViewParams = {
     distance?: UnitValue;
 };
 
-
 export type SectionProps = {
     tag?: 'section' | 'header' | 'footer';
     viewTimeline?: InViewParams;
@@ -28,17 +27,21 @@ export const inViewDefaults: InViewParams = {
 const translate = (distance: UnitValue) => {
     return {
         in: {
-            opacity: [0.5, 1],
+            opacity: [0, 1],
             transform: [`translateY(${distance})`, `translateY(0)`]
         },
         out: {
-            opacity: [1, 0.5],
+            opacity: [1, 0],
             transform: [`translateY(0px)`, `translateY(-${distance})`]
         }
     };
 };
 
 export const inView = (node: HTMLElement, params: Partial<InViewParams> = inViewDefaults) => {
+    if (!('ViewTimeline' in window)) {
+        console.log('ViewTimeline API not supported in this browser');
+        return;
+    }
     const timeline = new ViewTimeline({
         subject: node,
         axis: 'block'

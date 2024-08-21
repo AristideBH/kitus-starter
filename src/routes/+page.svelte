@@ -28,7 +28,7 @@
 			<li>Client Types & Schema sync</li>
 			<li>Authentification & account page</li>
 			<li>Tailwind, shadcn-svelte and fluid plugin</li>
-			<li>Pages transitions</li>
+			<li>Pages transitions & ViewTimeline section animations</li>
 			<li>
 				Components :
 				<ul>

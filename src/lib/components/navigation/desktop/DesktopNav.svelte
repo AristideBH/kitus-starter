@@ -22,8 +22,8 @@
 						{#if child.type === 'list'}
 							<NavItemSub item={child} />
 						{:else}
-							<DropdownMenu.Item>
-								<NavItemFragment item={child} class="no-underline" />
+							<DropdownMenu.Item class="p-0">
+								<NavItemFragment item={child} class="px-2 py-1.5 no-underline" />
 							</DropdownMenu.Item>
 						{/if}
 					{/each}

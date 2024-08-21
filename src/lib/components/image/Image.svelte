@@ -48,6 +48,9 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 	let src = $state('');
 	let srcset = $state('');
 	let thumbhashUrl = $state('');
+	let aspectRatio = $derived(fetchedFile?.width! / fetchedFile?.height!);
+	let elWidth = $state<number>(0);
+	let elHeight = $derived(elWidth / aspectRatio);
 
 	// * COMPONENTS INITIALIZATION
 	onMount(() => {
@@ -92,6 +95,7 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 <figure
 	class={`${className ?? ''}`}
 	bind:this={imgContainer}
+	bind:offsetWidth={elWidth}
 	style="max-width:{fetchedFile?.width}px;"
 >
 	<img
@@ -100,8 +104,8 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 		{loading}
 		alt={alt || fetchedFile?.description || ''}
 		title={title || fetchedFile?.title || ''}
-		width={fetchedFile?.width}
-		height={fetchedFile?.height}
+		width={elWidth}
+		height={elHeight}
 		class:not-loaded={!inView}
 	/>
 	<!-- style="background-image:url({thumbhashUrl})" -->
