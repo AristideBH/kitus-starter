@@ -33,7 +33,7 @@
 	}: { content?: TipTapNode[]; class?: string; children?: Snippet } = $props();
 </script>
 
-<IntersectionObserver {element} bind:intersecting rootMargin={'-50px'}>
+<IntersectionObserver {element} bind:intersecting rootMargin={'-400px'}>
 	<h1 style="--wght:{weight}" class={className ?? ''} bind:this={element}>
 		{#if content}
 			{#each content as item}

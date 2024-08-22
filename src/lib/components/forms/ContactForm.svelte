@@ -43,8 +43,11 @@
 			>
 		</Card.Header>
 	{:else if formStatus === 'new'}
+		<Card.Header>
+			<Card.Title class="mt-0">Interrested in working together ?</Card.Title>
+		</Card.Header>
 		<form method="POST" use:enhance>
-			<Card.Content class="flex flex-col gap-4 pt-6 ">
+			<Card.Content class="flex flex-col gap-4 ">
 				<Form.Field {form} name="name">
 					<Form.Control let:attrs>
 						<Form.Label>Name</Form.Label>
