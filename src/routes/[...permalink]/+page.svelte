@@ -10,9 +10,6 @@
 	<title>{title}</title>
 </svelte:head>
 
-<Section>
-	<h1>{title}</h1>
-</Section>
 {#if editor}
 	<Render {editor} />
 {/if}

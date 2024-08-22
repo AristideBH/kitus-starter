@@ -13,7 +13,6 @@
 	let { children, data } = $props();
 	const directus = client(fetch, data.token);
 	setContext<DirectusClient>('directus', directus);
-	$inspect(data.pathName);
 </script>
 
 <!-- UTILITIES -->

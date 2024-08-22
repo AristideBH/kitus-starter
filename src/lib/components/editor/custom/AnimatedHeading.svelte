@@ -30,7 +30,7 @@
 	let { content, class: className, children }: Props = $props();
 </script>
 
-<IntersectionObserver {element} bind:intersecting rootMargin={'0% 0% -35% 0%'}>
+<IntersectionObserver {element} bind:intersecting rootMargin={'0% 0% -17.5% 0%'}>
 	<h1 style="--wght:{weight}" class={className ?? ''} bind:this={element}>
 		{#if content}
 			{#each content as item}

@@ -41,6 +41,7 @@ export const inView = (node: HTMLElement, params: Partial<InViewParams> = inView
     if (!('ViewTimeline' in window)) {
         return;
     }
+    //@ts-expect-error ViewTimeline is still very supported
     const timeline = new ViewTimeline({
         subject: node,
         axis: 'block'
@@ -54,6 +55,7 @@ export const inView = (node: HTMLElement, params: Partial<InViewParams> = inView
     node.animate(translate(distance!).in, {
         fill: 'forwards',
         timeline,
+        // @ts-expect-error Rangestart not yet typed in
         rangeStart: 'entry 0%',
         rangeEnd: `cover ${trigger?.start}`,
     });
@@ -61,6 +63,7 @@ export const inView = (node: HTMLElement, params: Partial<InViewParams> = inView
     node.animate(translate(distance!).out, {
         fill: 'forwards',
         timeline,
+        // @ts-expect-error Rangestart not yet typed in
         rangeStart: `cover calc(100% - ${trigger?.end})`,
         rangeEnd: 'exit 100%'
     });
