@@ -32,7 +32,7 @@
 		@apply flex flex-nowrap items-center gap-2;
 		&::before {
 			content: '';
-			@apply bg-primary size-1 rounded;
+			@apply size-1 rounded bg-primary;
 		}
 	}
 
@@ -44,7 +44,7 @@
 		@apply relative;
 		&::before {
 			content: '';
-			@apply absolute -bottom-1 right-1/2 mx-auto h-1 w-full max-w-[30px] translate-x-1/2 translate-y-1/2 scale-100;
+			@apply absolute -bottom-1 right-1/2 mx-auto h-1 w-full max-w-[4px] origin-center translate-x-1/2 translate-y-1/2 scale-100;
 		}
 	}
 </style>
