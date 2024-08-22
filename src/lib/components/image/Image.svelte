@@ -1,6 +1,6 @@
 <!-- 
 @component
-The `<Image/>` component is a Svelte component that renders an image with various custDirectusCliention options, specially developed with Directus API in mind.
+The `<Image/>` component is a Svelte component that renders an image with various custom options, specially developed with Directus API in mind.
 
 Props:
 - `item`: A `CustomDirectusFile` object or a string representing the ID of the image file.
@@ -93,7 +93,7 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 </script>
 
 <figure
-	class={`${className ?? ''}`}
+	class={`${className ?? ''} aspect-video`}
 	bind:this={imgContainer}
 	bind:offsetWidth={elWidth}
 	style="max-width:{fetchedFile?.width}px;"

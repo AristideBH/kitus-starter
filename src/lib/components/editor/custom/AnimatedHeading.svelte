@@ -3,6 +3,7 @@
 	import IntersectionObserver from 'svelte-intersection-observer';
 	import { setMarks } from '..';
 	import { spring } from 'svelte/motion';
+	import type { Snippet } from 'svelte';
 
 	let start = 200;
 	let end = 900;
@@ -25,17 +26,25 @@
 		}
 	});
 
-	let { content, class: className }: { content: TipTapNode[]; class?: string } = $props();
+	let {
+		content,
+		class: className,
+		children
+	}: { content?: TipTapNode[]; class?: string; children?: Snippet } = $props();
 </script>
 
-<IntersectionObserver {element} bind:intersecting rootMargin={'-50px'} once>
+<IntersectionObserver {element} bind:intersecting rootMargin={'-50px'}>
 	<h1 style="--wght:{weight}" class={className ?? ''} bind:this={element}>
-		{#each content as item}
-			{#if item.marks}
-				<span class={setMarks(item.marks)}>{item.text}</span>
-			{:else}
-				<span>{item.text}</span>
-			{/if}
-		{/each}
+		{#if content}
+			{#each content as item}
+				{#if item.marks}
+					<span class={setMarks(item.marks)}>{item.text}</span>
+				{:else}
+					<span>{item.text}</span>
+				{/if}
+			{/each}
+		{:else}
+			{@render children?.()}
+		{/if}
 	</h1>
 </IntersectionObserver>

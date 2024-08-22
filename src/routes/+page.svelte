@@ -1,26 +1,19 @@
 <script lang="ts">
+	import AnimatedHeading from '$lib/components/editor/custom/AnimatedHeading.svelte';
+	import Image from '$lib/components/image/Image.svelte';
 	import Section from '$lib/components/layout/Section.svelte';
-	import Label from '$lib/components/ui/label/label.svelte';
 
-	let weight = $state(200);
+	let { data } = $props();
+	let { home } = data;
 </script>
 
+<Section content={{ width: 'full-width', color: 'none' }}>
+	<Image item={home?.img!} class="max-h-96" loading="eager" />
+</Section>
 <Section>
-	<h1 style="--wght:{weight}">Kitus Starter</h1>
-	<div class="mb-10 flex gap-4">
-		<Label for="weight">Weight : <code>{weight}</code></Label>
-		<input
-			type="range"
-			name="weight"
-			id="weight"
-			min="100"
-			max="900"
-			class="grow"
-			bind:value={weight}
-		/>
-	</div>
-	<p class="lead mb-1">A custom template for Sveltekit & Directus</p>
-	<details open={true} class="list-none rounded-sm bg-muted p-4">
+	<AnimatedHeading class="mb-0 ~text-6xl/9xl">Kitus Starter</AnimatedHeading>
+	<p class="lead mb-10 italic text-primary">A custom starter template for Sveltekit & Directus</p>
+	<details open class="list-none rounded-sm bg-muted p-4">
 		<summary>Détails</summary>
 		<ul class="!mt-4">
 			<li>Svelte 5 & Sveltekit</li>

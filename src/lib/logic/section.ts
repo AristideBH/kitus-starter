@@ -15,7 +15,7 @@ export type SectionProps = {
     rootMargin?: UnitValue;
     class?: string;
     children: Snippet;
-    content?: Collections.Section
+    content?: Partial<Collections.Section>
 };
 
 // ViewTimeline
