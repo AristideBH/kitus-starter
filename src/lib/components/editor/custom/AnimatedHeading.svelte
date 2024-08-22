@@ -5,6 +5,7 @@
 	import { spring } from 'svelte/motion';
 	import type { Snippet } from 'svelte';
 
+	type Props = { content?: TipTapNode[]; class?: string; children?: Snippet };
 	let start = 200;
 	let end = 900;
 	let weight = $state(start);
@@ -26,14 +27,10 @@
 		}
 	});
 
-	let {
-		content,
-		class: className,
-		children
-	}: { content?: TipTapNode[]; class?: string; children?: Snippet } = $props();
+	let { content, class: className, children }: Props = $props();
 </script>
 
-<IntersectionObserver {element} bind:intersecting rootMargin={'-400px'}>
+<IntersectionObserver {element} bind:intersecting rootMargin={'0% 0% -35% 0%'}>
 	<h1 style="--wght:{weight}" class={className ?? ''} bind:this={element}>
 		{#if content}
 			{#each content as item}

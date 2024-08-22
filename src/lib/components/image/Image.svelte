@@ -92,12 +92,7 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 	});
 </script>
 
-<figure
-	class={`${className ?? ''} aspect-video`}
-	bind:this={imgContainer}
-	bind:offsetWidth={elWidth}
-	style="max-width:{fetchedFile?.width}px;"
->
+<figure class={`${className ?? ''}`} bind:this={imgContainer} bind:offsetWidth={elWidth}>
 	<img
 		{src}
 		{srcset}
@@ -107,7 +102,9 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 		width={elWidth}
 		height={elHeight}
 		class:not-loaded={!inView}
+		class=" aspect-video"
 	/>
+	<!-- Problem when using transparent images -->
 	<!-- style="background-image:url({thumbhashUrl})" -->
 	{#if showCaption && inView}
 		<figcaption>

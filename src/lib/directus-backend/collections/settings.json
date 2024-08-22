@@ -46,7 +46,7 @@
 				"width": 1024,
 				"format": "auto",
 				"quality": 100,
-				"withoutEnlargement": true
+				"withoutEnlargement": false
 			},
 			{
 				"fit": "contain",
@@ -54,7 +54,7 @@
 				"width": 1440,
 				"format": "auto",
 				"quality": 100,
-				"withoutEnlargement": true
+				"withoutEnlargement": false
 			},
 			{
 				"fit": "contain",
@@ -62,7 +62,7 @@
 				"width": 1920,
 				"format": "auto",
 				"quality": 100,
-				"withoutEnlargement": true
+				"withoutEnlargement": false
 			},
 			{
 				"fit": "contain",
@@ -70,7 +70,8 @@
 				"width": 2560,
 				"format": "auto",
 				"quality": 100,
-				"withoutEnlargement": true
+				"withoutEnlargement": false,
+				"transforms": []
 			}
 		],
 		"custom_css": null,

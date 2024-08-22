@@ -1731,7 +1731,7 @@ type seo_setting_mutated {
 
 type server_info {
   project: server_info_project
-  rateLimit: server_info_rate_limit
+  rateLimit: Boolean
   rateLimitGlobal: Boolean
   websocket: Boolean
   queryLimit: server_info_query_limit
@@ -1754,11 +1754,6 @@ type server_info_project {
 type server_info_query_limit {
   default: Int
   max: Int
-}
-
-type server_info_rate_limit {
-  points: Int
-  duration: Int
 }
 
 type users_me_tfa_generate_data {

@@ -13,6 +13,7 @@
 	let { children, data } = $props();
 	const directus = client(fetch, data.token);
 	setContext<DirectusClient>('directus', directus);
+	$inspect(data.pathName);
 </script>
 
 <!-- UTILITIES -->
@@ -23,7 +24,7 @@
 <Header />
 
 <Main transitionKey={data.pathName} options={{ duration: 100, y: 20, delta: 0 }}>
-	{@render children()}
+	{@render children?.()}
 </Main>
 
 <Footer />
