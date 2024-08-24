@@ -1,29 +1,32 @@
 :root {
-	--content-max-width: 140ch;
+	--content-max-width: 120ch;
 	--content-width: min(
 		calc(100% - var(--sidebar-width) - calc(2 * var(--side-padding)) - var(--x-gap)),
 		calc(var(--content-max-width) - var(--sidebar-width))
 	);
 	--sidebar-width: min(350px, 60ch);
 	--side-padding: 1.5rem;
-	--x-gap: 1rem;
-	--y-gap: 5rem;
+	--x-gap: 2rem;
+	--y-gap: 6rem;
 	--section-padding: 1.5rem;
 }
 
+header,
+main,
+footer,
 .grid-layout {
 	display: grid;
 	gap: var(--y-gap) 0;
 	grid-template-columns:
 		[full-start]
 		minmax(var(--side-padding), 1fr)
-		[main-start side-start]
-		var(--sidebar-width)
-		[side-end]
-		var(--x-gap)
-		[content-start]
+		[main-start content-start]
 		var(--content-width)
-		[content-end main-end]
+		[content-end]
+		var(--x-gap)
+		[side-start]
+		var(--sidebar-width)
+		[side-end main-end]
 		minmax(var(--side-padding), 1fr)
 		[full-end];
 
@@ -38,8 +41,8 @@
 			@apply p-10;
 		}
 
-		& > * {
-			grid-column: inherit;
+		& > *:not(.block-wrapper) {
+			grid-column: 1 / -1;
 		}
 
 		&.layout-full {
@@ -48,20 +51,26 @@
 			grid-template-columns: subgrid;
 			align-items: start;
 
-			&[data-tinted='true'] {
-				@apply px-0;
-			}
-
 			& > *:not(img, figure) {
 				grid-column: main;
+			}
+
+			& > .block-wrapper:first-of-type {
+				grid-column: content;
+			}
+			& > .block-wrapper:last-of-type {
+				grid-column: side;
 			}
 		}
 	}
 }
 
+main > section:has(figure, blockquote) {
+	@apply !p-0;
+}
+
 main > section:first-of-type {
 	@apply mt-20;
-	&.layout-full[data-tinted='true'],
 	&:has(> figure),
 	&:has([aria-roledescription='carousel']),
 	&:has(.__grid--masonry),

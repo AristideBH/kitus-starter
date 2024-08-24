@@ -15,15 +15,32 @@
 		Gallery,
 		Image,
 		AnimatedHeading,
-		elementQuery
+		elementQuery,
+		Wrapper
 	} from './';
 	import Button from '../ui/button/button.svelte';
+	import { type Collections } from '$lib/types/client';
 
 	let { editor }: { editor: TipTapEditor } = $props();
-	let state: 'loading' | 'ready' = $state('loading');
+	let status: 'loading' | 'ready' = $state('loading');
 
-	onMount(() => (state = 'ready'));
+	onMount(() => (status = 'ready'));
 </script>
+
+{#snippet btn(content: Collections.Button | null)}
+	{#if content}
+		{@const { label, variant, size, type, url, page, new_tab } = content}
+		<Button
+			{variant}
+			{size}
+			href={type === 'page' && typeof page != 'string' ? `/${page?.permalink}` : url}
+			target={new_tab && type === 'url' ? '_blank' : ''}
+			class="w-fit"
+		>
+			{label}
+		</Button>
+	{/if}
+{/snippet}
 
 {#each editor.content as item}
 	{@const { type, content, attrs } = item}
@@ -46,32 +63,35 @@
 		<Blockquote {content} />
 
 		<!-- CUSTOM COMPONENTS -->
-	{:else if type === 'relation-block' && state === 'ready'}
+	{:else if type === 'relation-block' && status === 'ready'}
 		{#await elementQuery(directus, attrs) then content}
 			{#if content}
 				{#if 'editor' in content}
 					{@const { editor } = content}
-					<Section {content}>
-						<svelte:self {editor}></svelte:self>
-					</Section>
+					{#if 'fit_height' in content}
+						<Wrapper {content}>
+							<svelte:self {editor} />
+						</Wrapper>
+					{:else}
+						<Section {content}>
+							<svelte:self {editor} />
+						</Section>
+					{/if}
 				{:else if 'image' in content}
 					<Image {content} />
 				{:else if 'text' in content}
 					<Quote {content} />
 				{:else if 'images' in content}
 					<Gallery {content} />
+				{:else if 'buttons' in content}
+					<div class="buttons-wrapper flex flex-wrap" class:gap-3={content.gap}>
+						{#each content.buttons as button}
+							{@render btn(button.item)}
+						{/each}
+					</div>
 				{:else if 'label' in content}
-					{@const { label, variant, size, type, url, page, new_tab } = content}
-					<Button
-						{variant}
-						{size}
-						href={type === 'page' && typeof page != 'string' ? `/${page?.permalink}` : url}
-						target={new_tab && type === 'url' ? '_blank' : ''}
-						class="w-fit"
-					>
-						{label}
-					</Button>
-				{/if}
+					{@render btn(content)}
+				{:else}{/if}
 			{/if}
 		{/await}
 	{/if}

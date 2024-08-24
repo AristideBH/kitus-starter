@@ -6,7 +6,7 @@
 </script>
 
 {#if content}
-	<p class=" text-pretty">
+	<p class="text-pretty">
 		{#each content as item}
 			{#if item.type === 'text'}
 				{#if item.marks}

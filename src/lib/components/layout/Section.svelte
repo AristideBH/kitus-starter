@@ -18,6 +18,8 @@
 
 	let color = $state(content?.color);
 	let width = $state(content?.width);
+	let template = $state(content?.template);
+	let align = $state(content?.align);
 </script>
 
 <IntersectionObserver {once} {element} {rootMargin}>
@@ -26,12 +28,26 @@
 		bind:this={element}
 		use:inView={viewTimeline}
 		data-inview
-		class="relative {className ?? ''} bg-{color}"
 		class:layout-full={width === 'full-width'}
-		class:rounded={content && color != 'none' && width != 'full-width'}
-		data-tinted={content && color != 'none' ? 'true' : 'false'}
+		class:rounded={content && color && width != 'full-width'}
+		class:p-8={content && color && width != 'full-width'}
+		class:py-8={width === 'full-width'}
+		class="relative bg-{color} items-{align} {className ?? ''}"
+		data-template={template}
 		transition:flyAndScale={{ y: -20, start: 0.975 }}
 	>
 		{@render children()}
 	</svelte:element>
 </IntersectionObserver>
+
+<style lang="postcss">
+	[data-template] {
+		@apply gap-[var(--x-gap)];
+	}
+	[data-template='cols-2'] {
+		@apply grid-cols-2;
+	}
+	[data-template='cols-3'] {
+		@apply grid-cols-3;
+	}
+</style>

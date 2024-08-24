@@ -40,11 +40,7 @@ Props:
 </script>
 
 {#key transitionKey}
-	<main
-		class="grid-layout"
-		in:fly={{ y, x, delay: delta + duration }}
-		out:fly={{ duration, y: -y, x: -x }}
-	>
+	<main in:fly={{ y, x, delay: delta + duration }} out:fly={{ duration, y: -y, x: -x }}>
 		{@render children()}
 	</main>
 {/key}

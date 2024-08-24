@@ -26,7 +26,7 @@
 
 <style lang="postcss">
 	a {
-		@apply flex w-fit grow;
+		@apply flex w-fit grow text-foreground;
 	}
 	a.active {
 		@apply flex flex-nowrap items-center gap-2;

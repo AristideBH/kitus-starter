@@ -17,10 +17,11 @@ import Quote from './custom/Quote.svelte';
 import Gallery from './custom/Gallery.svelte';
 import Image from './custom/Image.svelte';
 import AnimatedHeading from './custom/AnimatedHeading.svelte';
+import Wrapper from './custom/Wrapper.svelte';
 
 export {
     BulletList, Heading, Paragraph, OrderedList, Blockquote, TaskList,
-    Quote, Gallery, Image, AnimatedHeading
+    Quote, Gallery, Image, AnimatedHeading, Wrapper
 }
 
 // - FUNCTIONS
@@ -34,22 +35,37 @@ export const elementQuery = async (client: DirectusClient, attrs: CustomAttrs | 
 
         if (collection === 'quote') {
             return (await client.request(readItem('quote', rel.item))) as Collections.Quote;
+
         } else if (collection === 'image') {
             return (await client.request(
                 readItem('image', rel.item, { fields: ['*', { image: ['*'] }] })
             )) as Collections.Image;
+
         } else if (collection === 'gallery') {
             return (await client.request(
                 readItem('gallery', rel.item, { fields: ['*', { images: ['*'] }] })
             )) as Collections.Gallery;
+
         } else if (collection === 'button') {
             return (await client.request(
                 readItem('button', rel.item, { fields: ['*', { page: ['permalink'] }] })
             )) as Collections.Button;
+
+        } else if (collection === 'wrapper') {
+            return (await client.request(
+                readItem('wrapper', rel.item, { fields: ['*'] })
+            )) as Collections.Wrapper;
+
         } else if (collection === 'section') {
             return (await client.request(
                 readItem('section', rel.item, { fields: ['*'] })
             )) as Collections.Section;
+
+        } else if (collection === 'button_group') {
+            return (await client.request(
+                readItem('button_group', rel.item, { fields: ['*', { buttons: ['*', { item: ["*", { page: ['permalink'] }] }] }] })
+            )) as Collections.ButtonGroup;
+
         } else {
             throw new Error('Invalid collection type');
         }

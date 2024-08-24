@@ -5,7 +5,7 @@
 	const { footerNav: menu } = $page.data;
 </script>
 
-<footer class=" grid-layout mt-auto pb-4 pt-24">
+<footer class="mt-auto pb-4 pt-24">
 	<div class="small flex items-center justify-between border-t pt-4">
 		<nav class="flex gap-3">
 			{#if $page.data.token}

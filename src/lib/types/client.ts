@@ -227,6 +227,25 @@ export namespace Collections {
   }
 
   /**
+   * The button group collection.
+   */
+  export interface ButtonGroup {
+    id: Types.PrimaryKey<Types.UUID>;
+    gap: Types.Optional<Types.Boolean>;
+    buttons: Collections.ButtonGroupButtons[];
+  }
+
+  /**
+   * The button group buttons collection.
+   */
+  export interface ButtonGroupButtons {
+    id: Types.PrimaryKey<Types.Integer>;
+    button_group_id: Types.Optional<Types.UUID | Collections.ButtonGroup>;
+    item: Types.Optional<Types.String | Collections.Button>;
+    collection: Types.Optional<Types.String>;
+  }
+
+  /**
    * The contact forms collection.
    */
   export interface ContactForms {
@@ -347,7 +366,11 @@ export namespace Collections {
   export interface Section {
     id: Types.PrimaryKey<Types.UUID>;
     width: Types.Optional<"full-width" | "default" | Types.String>;
-    color: "muted" | "secondary" | "primary" | "none" | Types.String;
+    color: Types.Optional<"muted" | "secondary" | "primary" | Types.String>;
+    template: Types.Optional<
+      "cols-3" | "cols-2" | "sidebar-content" | Types.String
+    >;
+    align: Types.Optional<"end" | "center" | "start" | Types.String>;
     editor: Types.Optional<Types.JSON | Types.JSON>;
     editor_nodes: Collections.SectionEditorNodes[];
   }
@@ -364,6 +387,7 @@ export namespace Collections {
       | Collections.Gallery
       | Collections.Quote
       | Collections.Button
+      | Collections.Wrapper
     >;
     collection: Types.Optional<Types.String>;
   }
@@ -480,6 +504,34 @@ export namespace Collections {
   export interface SeoSetting {
     key: Types.PrimaryKey<Types.String>;
     value: Types.Optional<Types.JSON | Types.JSON>;
+  }
+
+  /**
+   * The wrapper collection.
+   */
+  export interface Wrapper {
+    id: Types.PrimaryKey<Types.UUID>;
+    color: Types.Optional<"muted" | "secondary" | "primary" | Types.String>;
+    fit_height: Types.Optional<Types.Boolean>;
+    editor: Types.Optional<Types.JSON | Types.JSON>;
+    editor_nodes: Collections.WrapperEditorNodes[];
+  }
+
+  /**
+   * The wrapper editor nodes collection.
+   */
+  export interface WrapperEditorNodes {
+    id: Types.PrimaryKey<Types.UUID>;
+    wrapper_id: Types.Optional<Types.UUID | Collections.Wrapper>;
+    item: Types.Optional<
+      | Types.String
+      | Collections.Button
+      | Collections.Image
+      | Collections.Gallery
+      | Collections.Quote
+      | Collections.ButtonGroup
+    >;
+    collection: Types.Optional<Types.String>;
   }
 
   /**
@@ -651,6 +703,16 @@ export interface Schema extends System {
   button: Collections.Button[];
 
   /**
+   * The button group collection.
+   */
+  button_group: Collections.ButtonGroup[];
+
+  /**
+   * The button group buttons collection.
+   */
+  button_group_buttons: Collections.ButtonGroupButtons[];
+
+  /**
    * The contact forms collection.
    */
   contact_forms: Collections.ContactForms[];
@@ -729,6 +791,16 @@ export interface Schema extends System {
    * The seo setting collection.
    */
   seo_setting: Collections.SeoSetting[];
+
+  /**
+   * The wrapper collection.
+   */
+  wrapper: Collections.Wrapper[];
+
+  /**
+   * The wrapper editor nodes collection.
+   */
+  wrapper_editor_nodes: Collections.WrapperEditorNodes[];
 
   /**
    * The directus sync id map collection.
@@ -1067,6 +1139,616 @@ export class ButtonItem
     key: string | number,
   ): Promise<void> {
     return await this.client.request(deleteButtonItem(key));
+  }
+}
+
+/**
+ * Create many button group items.
+ */
+export function createButtonGroupItems<
+  const Query extends Directus.Query<Schema, Collections.ButtonGroup[]>,
+>(items: Partial<Collections.ButtonGroup>[], query?: Query) {
+  return DirectusSDK.createItems<Schema, "button_group", Query>(
+    "button_group",
+    items,
+    query,
+  );
+}
+
+/**
+ * Create a single button group item.
+ */
+export function createButtonGroupItem<
+  const Query extends DirectusSDK.Query<Schema, Collections.ButtonGroup[]>, // Is this a mistake? Why []?
+>(item: Partial<Collections.ButtonGroup>, query?: Query) {
+  return DirectusSDK.createItem<Schema, "button_group", Query>(
+    "button_group",
+    item,
+    query,
+  );
+}
+
+/**
+ * Read many button group items.
+ */
+export function readButtonGroupItems<
+  const Query extends Directus.Query<Schema, Collections.ButtonGroup>,
+>(query?: Query) {
+  return DirectusSDK.readItems<Schema, "button_group", Query>(
+    "button_group",
+    query,
+  );
+}
+
+/**
+ * Read many button group items.
+ */
+export const listButtonGroup = readButtonGroupItems;
+
+/**
+ * Gets a single known button group item by id.
+ */
+export function readButtonGroupItem<
+  const Query extends Directus.Query<Schema, Collections.ButtonGroup>,
+>(key: string | number, query?: Query) {
+  return DirectusSDK.readItem<Schema, "button_group", Query>(
+    "button_group",
+    key,
+    query,
+  );
+}
+
+/**
+ * Gets a single known button group item by id.
+ */
+export const readButtonGroup = readButtonGroupItem;
+
+/**
+ * Read many button group items.
+ */
+export function updateButtonGroupItems<
+  const Query extends Directus.Query<Schema, Collections.ButtonGroup[]>,
+>(
+  keys: string[] | number[],
+  patch: Partial<Collections.ButtonGroup>,
+  query?: Query,
+) {
+  return DirectusSDK.updateItems<Schema, "button_group", Query>(
+    "button_group",
+    keys,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Gets a single known button group item by id.
+ */
+export function updateButtonGroupItem<
+  const Query extends Directus.Query<Schema, Collections.ButtonGroup[]>,
+>(
+  key: string | number,
+  patch: Partial<Collections.ButtonGroup>,
+  query?: Query,
+) {
+  return DirectusSDK.updateItem<Schema, "button_group", Query>(
+    "button_group",
+    key,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Deletes many button group items.
+ */
+export function deleteButtonGroupItems<
+  const Query extends Directus.Query<Schema, Collections.ButtonGroup[]>,
+>(keys: string[] | number[]) {
+  return DirectusSDK.deleteItems<Schema, "button_group", Query>(
+    "button_group",
+    keys,
+  );
+}
+
+/**
+ * Deletes a single known button group item by id.
+ */
+export function deleteButtonGroupItem(key: string | number) {
+  return DirectusSDK.deleteItem<Schema, "button_group">("button_group", key);
+}
+
+export class ButtonGroupItems
+  implements TypedCollectionItemsWrapper<Collections.ButtonGroup>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Creates many items in the collection.
+   */
+  async create<
+    const Query extends DirectusSDK.Query<Schema, Collections.ButtonGroup>,
+  >(
+    items: Partial<Collections.ButtonGroup>[],
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.ButtonGroup,
+      Query["fields"]
+    >[]
+  > {
+    return (await this.client.request(
+      createButtonGroupItems(items, query as any),
+    )) as any; // Seems like a bug in the SDK.
+  }
+
+  /**
+   * Read many items from the collection.
+   */
+  async query<
+    const Query extends Directus.Query<Schema, Collections.ButtonGroup>,
+  >(
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.ButtonGroup,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(readButtonGroupItems(query));
+  }
+
+  /**
+   * Read the first item from the collection matching the query.
+   */
+  async find<
+    const Query extends Directus.Query<Schema, Collections.ButtonGroup>,
+  >(
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.ButtonGroup,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    const items = await this.client.request(
+      readButtonGroupItems({
+        ...query,
+        limit: 1,
+      }),
+    );
+    return items?.[0] as any; // TODO: fix
+  }
+
+  /**
+   * Update many items in the collection.
+   */
+  async update<
+    const Query extends Directus.Query<Schema, Collections.ButtonGroup[]>,
+  >(
+    keys: string[] | number[],
+    patch: Partial<Collections.ButtonGroup>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.ButtonGroup,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(
+      updateButtonGroupItems(keys, patch, query),
+    );
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.ButtonGroup>,
+  >(keys: string[] | number[]): Promise<void> {}
+}
+
+export class ButtonGroupItem
+  implements TypedCollectionItemWrapper<Collections.ButtonGroup>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Create a single item in the collection.
+   */
+  async create<
+    const Query extends Directus.Query<Schema, Collections.ButtonGroup>,
+  >(
+    item: Partial<Collections.ButtonGroup>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.ButtonGroup,
+      Query["fields"]
+    >
+  > {
+    return (await this.client.request(
+      createButtonGroupItem(item, query as any),
+    )) as any;
+  }
+
+  /**
+   * Read a single item from the collection.
+   */
+  async get<
+    const Query extends Directus.Query<Schema, Collections.ButtonGroup>,
+  >(
+    key: string | number,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.ButtonGroup,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return await this.client.request(readButtonGroupItem(key, query));
+  }
+
+  /**
+   * Update a single item from the collection.
+   */
+  async update<
+    const Query extends Directus.Query<Schema, Collections.ButtonGroup>,
+  >(
+    key: string | number,
+    patch: Partial<Collections.ButtonGroup>,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.ButtonGroup,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return (await this.client.request(
+      updateButtonGroupItem(key, patch, query as any),
+    )) as any;
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.ButtonGroup>,
+  >(key: string | number): Promise<void> {
+    return await this.client.request(deleteButtonGroupItem(key));
+  }
+}
+
+/**
+ * Create many button group buttons items.
+ */
+export function createButtonGroupButtonsItems<
+  const Query extends Directus.Query<Schema, Collections.ButtonGroupButtons[]>,
+>(items: Partial<Collections.ButtonGroupButtons>[], query?: Query) {
+  return DirectusSDK.createItems<Schema, "button_group_buttons", Query>(
+    "button_group_buttons",
+    items,
+    query,
+  );
+}
+
+/**
+ * Create a single button group buttons item.
+ */
+export function createButtonGroupButtonsItem<
+  const Query extends DirectusSDK.Query<
+    Schema,
+    Collections.ButtonGroupButtons[]
+  >, // Is this a mistake? Why []?
+>(item: Partial<Collections.ButtonGroupButtons>, query?: Query) {
+  return DirectusSDK.createItem<Schema, "button_group_buttons", Query>(
+    "button_group_buttons",
+    item,
+    query,
+  );
+}
+
+/**
+ * Read many button group buttons items.
+ */
+export function readButtonGroupButtonsItems<
+  const Query extends Directus.Query<Schema, Collections.ButtonGroupButtons>,
+>(query?: Query) {
+  return DirectusSDK.readItems<Schema, "button_group_buttons", Query>(
+    "button_group_buttons",
+    query,
+  );
+}
+
+/**
+ * Read many button group buttons items.
+ */
+export const listButtonGroupButtons = readButtonGroupButtonsItems;
+
+/**
+ * Gets a single known button group buttons item by id.
+ */
+export function readButtonGroupButtonsItem<
+  const Query extends Directus.Query<Schema, Collections.ButtonGroupButtons>,
+>(key: string | number, query?: Query) {
+  return DirectusSDK.readItem<Schema, "button_group_buttons", Query>(
+    "button_group_buttons",
+    key,
+    query,
+  );
+}
+
+/**
+ * Gets a single known button group buttons item by id.
+ */
+export const readButtonGroupButtons = readButtonGroupButtonsItem;
+
+/**
+ * Read many button group buttons items.
+ */
+export function updateButtonGroupButtonsItems<
+  const Query extends Directus.Query<Schema, Collections.ButtonGroupButtons[]>,
+>(
+  keys: string[] | number[],
+  patch: Partial<Collections.ButtonGroupButtons>,
+  query?: Query,
+) {
+  return DirectusSDK.updateItems<Schema, "button_group_buttons", Query>(
+    "button_group_buttons",
+    keys,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Gets a single known button group buttons item by id.
+ */
+export function updateButtonGroupButtonsItem<
+  const Query extends Directus.Query<Schema, Collections.ButtonGroupButtons[]>,
+>(
+  key: string | number,
+  patch: Partial<Collections.ButtonGroupButtons>,
+  query?: Query,
+) {
+  return DirectusSDK.updateItem<Schema, "button_group_buttons", Query>(
+    "button_group_buttons",
+    key,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Deletes many button group buttons items.
+ */
+export function deleteButtonGroupButtonsItems<
+  const Query extends Directus.Query<Schema, Collections.ButtonGroupButtons[]>,
+>(keys: string[] | number[]) {
+  return DirectusSDK.deleteItems<Schema, "button_group_buttons", Query>(
+    "button_group_buttons",
+    keys,
+  );
+}
+
+/**
+ * Deletes a single known button group buttons item by id.
+ */
+export function deleteButtonGroupButtonsItem(key: string | number) {
+  return DirectusSDK.deleteItem<Schema, "button_group_buttons">(
+    "button_group_buttons",
+    key,
+  );
+}
+
+export class ButtonGroupButtonsItems
+  implements TypedCollectionItemsWrapper<Collections.ButtonGroupButtons>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Creates many items in the collection.
+   */
+  async create<
+    const Query extends DirectusSDK.Query<
+      Schema,
+      Collections.ButtonGroupButtons
+    >,
+  >(
+    items: Partial<Collections.ButtonGroupButtons>[],
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.ButtonGroupButtons,
+      Query["fields"]
+    >[]
+  > {
+    return (await this.client.request(
+      createButtonGroupButtonsItems(items, query as any),
+    )) as any; // Seems like a bug in the SDK.
+  }
+
+  /**
+   * Read many items from the collection.
+   */
+  async query<
+    const Query extends Directus.Query<Schema, Collections.ButtonGroupButtons>,
+  >(
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.ButtonGroupButtons,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(readButtonGroupButtonsItems(query));
+  }
+
+  /**
+   * Read the first item from the collection matching the query.
+   */
+  async find<
+    const Query extends Directus.Query<Schema, Collections.ButtonGroupButtons>,
+  >(
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.ButtonGroupButtons,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    const items = await this.client.request(
+      readButtonGroupButtonsItems({
+        ...query,
+        limit: 1,
+      }),
+    );
+    return items?.[0] as any; // TODO: fix
+  }
+
+  /**
+   * Update many items in the collection.
+   */
+  async update<
+    const Query extends Directus.Query<
+      Schema,
+      Collections.ButtonGroupButtons[]
+    >,
+  >(
+    keys: string[] | number[],
+    patch: Partial<Collections.ButtonGroupButtons>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.ButtonGroupButtons,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(
+      updateButtonGroupButtonsItems(keys, patch, query),
+    );
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.ButtonGroupButtons>,
+  >(keys: string[] | number[]): Promise<void> {}
+}
+
+export class ButtonGroupButtonsItem
+  implements TypedCollectionItemWrapper<Collections.ButtonGroupButtons>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Create a single item in the collection.
+   */
+  async create<
+    const Query extends Directus.Query<Schema, Collections.ButtonGroupButtons>,
+  >(
+    item: Partial<Collections.ButtonGroupButtons>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.ButtonGroupButtons,
+      Query["fields"]
+    >
+  > {
+    return (await this.client.request(
+      createButtonGroupButtonsItem(item, query as any),
+    )) as any;
+  }
+
+  /**
+   * Read a single item from the collection.
+   */
+  async get<
+    const Query extends Directus.Query<Schema, Collections.ButtonGroupButtons>,
+  >(
+    key: string | number,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.ButtonGroupButtons,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return await this.client.request(readButtonGroupButtonsItem(key, query));
+  }
+
+  /**
+   * Update a single item from the collection.
+   */
+  async update<
+    const Query extends Directus.Query<Schema, Collections.ButtonGroupButtons>,
+  >(
+    key: string | number,
+    patch: Partial<Collections.ButtonGroupButtons>,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.ButtonGroupButtons,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return (await this.client.request(
+      updateButtonGroupButtonsItem(key, patch, query as any),
+    )) as any;
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.ButtonGroupButtons>,
+  >(key: string | number): Promise<void> {
+    return await this.client.request(deleteButtonGroupButtonsItem(key));
   }
 }
 
@@ -5187,6 +5869,562 @@ export class SeoSettingItem
 }
 
 /**
+ * Create many wrapper items.
+ */
+export function createWrapperItems<
+  const Query extends Directus.Query<Schema, Collections.Wrapper[]>,
+>(items: Partial<Collections.Wrapper>[], query?: Query) {
+  return DirectusSDK.createItems<Schema, "wrapper", Query>(
+    "wrapper",
+    items,
+    query,
+  );
+}
+
+/**
+ * Create a single wrapper item.
+ */
+export function createWrapperItem<
+  const Query extends DirectusSDK.Query<Schema, Collections.Wrapper[]>, // Is this a mistake? Why []?
+>(item: Partial<Collections.Wrapper>, query?: Query) {
+  return DirectusSDK.createItem<Schema, "wrapper", Query>(
+    "wrapper",
+    item,
+    query,
+  );
+}
+
+/**
+ * Read many wrapper items.
+ */
+export function readWrapperItems<
+  const Query extends Directus.Query<Schema, Collections.Wrapper>,
+>(query?: Query) {
+  return DirectusSDK.readItems<Schema, "wrapper", Query>("wrapper", query);
+}
+
+/**
+ * Read many wrapper items.
+ */
+export const listWrapper = readWrapperItems;
+
+/**
+ * Gets a single known wrapper item by id.
+ */
+export function readWrapperItem<
+  const Query extends Directus.Query<Schema, Collections.Wrapper>,
+>(key: string | number, query?: Query) {
+  return DirectusSDK.readItem<Schema, "wrapper", Query>("wrapper", key, query);
+}
+
+/**
+ * Gets a single known wrapper item by id.
+ */
+export const readWrapper = readWrapperItem;
+
+/**
+ * Read many wrapper items.
+ */
+export function updateWrapperItems<
+  const Query extends Directus.Query<Schema, Collections.Wrapper[]>,
+>(
+  keys: string[] | number[],
+  patch: Partial<Collections.Wrapper>,
+  query?: Query,
+) {
+  return DirectusSDK.updateItems<Schema, "wrapper", Query>(
+    "wrapper",
+    keys,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Gets a single known wrapper item by id.
+ */
+export function updateWrapperItem<
+  const Query extends Directus.Query<Schema, Collections.Wrapper[]>,
+>(key: string | number, patch: Partial<Collections.Wrapper>, query?: Query) {
+  return DirectusSDK.updateItem<Schema, "wrapper", Query>(
+    "wrapper",
+    key,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Deletes many wrapper items.
+ */
+export function deleteWrapperItems<
+  const Query extends Directus.Query<Schema, Collections.Wrapper[]>,
+>(keys: string[] | number[]) {
+  return DirectusSDK.deleteItems<Schema, "wrapper", Query>("wrapper", keys);
+}
+
+/**
+ * Deletes a single known wrapper item by id.
+ */
+export function deleteWrapperItem(key: string | number) {
+  return DirectusSDK.deleteItem<Schema, "wrapper">("wrapper", key);
+}
+
+export class WrapperItems
+  implements TypedCollectionItemsWrapper<Collections.Wrapper>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Creates many items in the collection.
+   */
+  async create<
+    const Query extends DirectusSDK.Query<Schema, Collections.Wrapper>,
+  >(
+    items: Partial<Collections.Wrapper>[],
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<Schema, Collections.Wrapper, Query["fields"]>[]
+  > {
+    return (await this.client.request(
+      createWrapperItems(items, query as any),
+    )) as any; // Seems like a bug in the SDK.
+  }
+
+  /**
+   * Read many items from the collection.
+   */
+  async query<const Query extends Directus.Query<Schema, Collections.Wrapper>>(
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<Schema, Collections.Wrapper, Query["fields"]>[]
+  > {
+    return await this.client.request(readWrapperItems(query));
+  }
+
+  /**
+   * Read the first item from the collection matching the query.
+   */
+  async find<const Query extends Directus.Query<Schema, Collections.Wrapper>>(
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<Schema, Collections.Wrapper, Query["fields"]>
+    | undefined
+  > {
+    const items = await this.client.request(
+      readWrapperItems({
+        ...query,
+        limit: 1,
+      }),
+    );
+    return items?.[0] as any; // TODO: fix
+  }
+
+  /**
+   * Update many items in the collection.
+   */
+  async update<
+    const Query extends Directus.Query<Schema, Collections.Wrapper[]>,
+  >(
+    keys: string[] | number[],
+    patch: Partial<Collections.Wrapper>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<Schema, Collections.Wrapper, Query["fields"]>[]
+  > {
+    return await this.client.request(updateWrapperItems(keys, patch, query));
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<const Query extends Directus.Query<Schema, Collections.Wrapper>>(
+    keys: string[] | number[],
+  ): Promise<void> {}
+}
+
+export class WrapperItem
+  implements TypedCollectionItemWrapper<Collections.Wrapper>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Create a single item in the collection.
+   */
+  async create<const Query extends Directus.Query<Schema, Collections.Wrapper>>(
+    item: Partial<Collections.Wrapper>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<Schema, Collections.Wrapper, Query["fields"]>
+  > {
+    return (await this.client.request(
+      createWrapperItem(item, query as any),
+    )) as any;
+  }
+
+  /**
+   * Read a single item from the collection.
+   */
+  async get<const Query extends Directus.Query<Schema, Collections.Wrapper>>(
+    key: string | number,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<Schema, Collections.Wrapper, Query["fields"]>
+    | undefined
+  > {
+    return await this.client.request(readWrapperItem(key, query));
+  }
+
+  /**
+   * Update a single item from the collection.
+   */
+  async update<const Query extends Directus.Query<Schema, Collections.Wrapper>>(
+    key: string | number,
+    patch: Partial<Collections.Wrapper>,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<Schema, Collections.Wrapper, Query["fields"]>
+    | undefined
+  > {
+    return (await this.client.request(
+      updateWrapperItem(key, patch, query as any),
+    )) as any;
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<const Query extends Directus.Query<Schema, Collections.Wrapper>>(
+    key: string | number,
+  ): Promise<void> {
+    return await this.client.request(deleteWrapperItem(key));
+  }
+}
+
+/**
+ * Create many wrapper editor nodes items.
+ */
+export function createWrapperEditorNodesItems<
+  const Query extends Directus.Query<Schema, Collections.WrapperEditorNodes[]>,
+>(items: Partial<Collections.WrapperEditorNodes>[], query?: Query) {
+  return DirectusSDK.createItems<Schema, "wrapper_editor_nodes", Query>(
+    "wrapper_editor_nodes",
+    items,
+    query,
+  );
+}
+
+/**
+ * Create a single wrapper editor nodes item.
+ */
+export function createWrapperEditorNodesItem<
+  const Query extends DirectusSDK.Query<
+    Schema,
+    Collections.WrapperEditorNodes[]
+  >, // Is this a mistake? Why []?
+>(item: Partial<Collections.WrapperEditorNodes>, query?: Query) {
+  return DirectusSDK.createItem<Schema, "wrapper_editor_nodes", Query>(
+    "wrapper_editor_nodes",
+    item,
+    query,
+  );
+}
+
+/**
+ * Read many wrapper editor nodes items.
+ */
+export function readWrapperEditorNodesItems<
+  const Query extends Directus.Query<Schema, Collections.WrapperEditorNodes>,
+>(query?: Query) {
+  return DirectusSDK.readItems<Schema, "wrapper_editor_nodes", Query>(
+    "wrapper_editor_nodes",
+    query,
+  );
+}
+
+/**
+ * Read many wrapper editor nodes items.
+ */
+export const listWrapperEditorNodes = readWrapperEditorNodesItems;
+
+/**
+ * Gets a single known wrapper editor nodes item by id.
+ */
+export function readWrapperEditorNodesItem<
+  const Query extends Directus.Query<Schema, Collections.WrapperEditorNodes>,
+>(key: string | number, query?: Query) {
+  return DirectusSDK.readItem<Schema, "wrapper_editor_nodes", Query>(
+    "wrapper_editor_nodes",
+    key,
+    query,
+  );
+}
+
+/**
+ * Gets a single known wrapper editor nodes item by id.
+ */
+export const readWrapperEditorNodes = readWrapperEditorNodesItem;
+
+/**
+ * Read many wrapper editor nodes items.
+ */
+export function updateWrapperEditorNodesItems<
+  const Query extends Directus.Query<Schema, Collections.WrapperEditorNodes[]>,
+>(
+  keys: string[] | number[],
+  patch: Partial<Collections.WrapperEditorNodes>,
+  query?: Query,
+) {
+  return DirectusSDK.updateItems<Schema, "wrapper_editor_nodes", Query>(
+    "wrapper_editor_nodes",
+    keys,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Gets a single known wrapper editor nodes item by id.
+ */
+export function updateWrapperEditorNodesItem<
+  const Query extends Directus.Query<Schema, Collections.WrapperEditorNodes[]>,
+>(
+  key: string | number,
+  patch: Partial<Collections.WrapperEditorNodes>,
+  query?: Query,
+) {
+  return DirectusSDK.updateItem<Schema, "wrapper_editor_nodes", Query>(
+    "wrapper_editor_nodes",
+    key,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Deletes many wrapper editor nodes items.
+ */
+export function deleteWrapperEditorNodesItems<
+  const Query extends Directus.Query<Schema, Collections.WrapperEditorNodes[]>,
+>(keys: string[] | number[]) {
+  return DirectusSDK.deleteItems<Schema, "wrapper_editor_nodes", Query>(
+    "wrapper_editor_nodes",
+    keys,
+  );
+}
+
+/**
+ * Deletes a single known wrapper editor nodes item by id.
+ */
+export function deleteWrapperEditorNodesItem(key: string | number) {
+  return DirectusSDK.deleteItem<Schema, "wrapper_editor_nodes">(
+    "wrapper_editor_nodes",
+    key,
+  );
+}
+
+export class WrapperEditorNodesItems
+  implements TypedCollectionItemsWrapper<Collections.WrapperEditorNodes>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Creates many items in the collection.
+   */
+  async create<
+    const Query extends DirectusSDK.Query<
+      Schema,
+      Collections.WrapperEditorNodes
+    >,
+  >(
+    items: Partial<Collections.WrapperEditorNodes>[],
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.WrapperEditorNodes,
+      Query["fields"]
+    >[]
+  > {
+    return (await this.client.request(
+      createWrapperEditorNodesItems(items, query as any),
+    )) as any; // Seems like a bug in the SDK.
+  }
+
+  /**
+   * Read many items from the collection.
+   */
+  async query<
+    const Query extends Directus.Query<Schema, Collections.WrapperEditorNodes>,
+  >(
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.WrapperEditorNodes,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(readWrapperEditorNodesItems(query));
+  }
+
+  /**
+   * Read the first item from the collection matching the query.
+   */
+  async find<
+    const Query extends Directus.Query<Schema, Collections.WrapperEditorNodes>,
+  >(
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.WrapperEditorNodes,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    const items = await this.client.request(
+      readWrapperEditorNodesItems({
+        ...query,
+        limit: 1,
+      }),
+    );
+    return items?.[0] as any; // TODO: fix
+  }
+
+  /**
+   * Update many items in the collection.
+   */
+  async update<
+    const Query extends Directus.Query<
+      Schema,
+      Collections.WrapperEditorNodes[]
+    >,
+  >(
+    keys: string[] | number[],
+    patch: Partial<Collections.WrapperEditorNodes>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.WrapperEditorNodes,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(
+      updateWrapperEditorNodesItems(keys, patch, query),
+    );
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.WrapperEditorNodes>,
+  >(keys: string[] | number[]): Promise<void> {}
+}
+
+export class WrapperEditorNodesItem
+  implements TypedCollectionItemWrapper<Collections.WrapperEditorNodes>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Create a single item in the collection.
+   */
+  async create<
+    const Query extends Directus.Query<Schema, Collections.WrapperEditorNodes>,
+  >(
+    item: Partial<Collections.WrapperEditorNodes>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.WrapperEditorNodes,
+      Query["fields"]
+    >
+  > {
+    return (await this.client.request(
+      createWrapperEditorNodesItem(item, query as any),
+    )) as any;
+  }
+
+  /**
+   * Read a single item from the collection.
+   */
+  async get<
+    const Query extends Directus.Query<Schema, Collections.WrapperEditorNodes>,
+  >(
+    key: string | number,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.WrapperEditorNodes,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return await this.client.request(readWrapperEditorNodesItem(key, query));
+  }
+
+  /**
+   * Update a single item from the collection.
+   */
+  async update<
+    const Query extends Directus.Query<Schema, Collections.WrapperEditorNodes>,
+  >(
+    key: string | number,
+    patch: Partial<Collections.WrapperEditorNodes>,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.WrapperEditorNodes,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return (await this.client.request(
+      updateWrapperEditorNodesItem(key, patch, query as any),
+    )) as any;
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.WrapperEditorNodes>,
+  >(key: string | number): Promise<void> {
+    return await this.client.request(deleteWrapperEditorNodesItem(key));
+  }
+}
+
+/**
  * Create many directus sync id map items.
  */
 export function createDirectusSyncIdMapItems<
@@ -5518,6 +6756,26 @@ export type TypedClient = {
   button: TypedCollectionItemWrapper<Collections.Button>;
 
   /**
+   * Manages multiple items from the ButtonGroup collection.
+   */
+  button_groups: TypedCollectionItemsWrapper<Collections.ButtonGroup>;
+
+  /**
+   * Manages individual items from the ButtonGroup collection.
+   */
+  button_group: TypedCollectionItemWrapper<Collections.ButtonGroup>;
+
+  /**
+   * Manages multiple items from the ButtonGroupButtons collection.
+   */
+  button_group_buttons: TypedCollectionItemsWrapper<Collections.ButtonGroupButtons>;
+
+  /**
+   * Manages individual items from the ButtonGroupButtons collection.
+   */
+  button_group_button: TypedCollectionItemWrapper<Collections.ButtonGroupButtons>;
+
+  /**
    * Manages multiple items from the ContactForms collection.
    */
   contact_forms: TypedCollectionItemsWrapper<Collections.ContactForms>;
@@ -5679,6 +6937,26 @@ export type TypedClient = {
   seo_setting: TypedCollectionItemWrapper<Collections.SeoSetting>;
 
   /**
+   * Manages multiple items from the Wrapper collection.
+   */
+  wrappers: TypedCollectionItemsWrapper<Collections.Wrapper>;
+
+  /**
+   * Manages individual items from the Wrapper collection.
+   */
+  wrapper: TypedCollectionItemWrapper<Collections.Wrapper>;
+
+  /**
+   * Manages multiple items from the WrapperEditorNodes collection.
+   */
+  wrapper_editor_nodes: TypedCollectionItemsWrapper<Collections.WrapperEditorNodes>;
+
+  /**
+   * Manages individual items from the WrapperEditorNodes collection.
+   */
+  wrapper_editor_node: TypedCollectionItemWrapper<Collections.WrapperEditorNodes>;
+
+  /**
    * Manages multiple items from the DirectusSyncIdMap collection.
    */
   directus_sync_id_maps: TypedCollectionItemsWrapper<Collections.DirectusSyncIdMap>;
@@ -5835,6 +7113,12 @@ export const schema = () => {
       ["buttons", new ButtonItems(client as any)],
       ["button", new ButtonItem(client as any)],
 
+      ["button_groups", new ButtonGroupItems(client as any)],
+      ["button_group", new ButtonGroupItem(client as any)],
+
+      ["button_group_buttons", new ButtonGroupButtonsItems(client as any)],
+      ["button_group_button", new ButtonGroupButtonsItem(client as any)],
+
       ["contact_forms", new ContactFormsItems(client as any)],
       ["contact_form", new ContactFormsItem(client as any)],
 
@@ -5886,6 +7170,12 @@ export const schema = () => {
 
       ["seo_settings", new SeoSettingItems(client as any)],
       ["seo_setting", new SeoSettingItem(client as any)],
+
+      ["wrappers", new WrapperItems(client as any)],
+      ["wrapper", new WrapperItem(client as any)],
+
+      ["wrapper_editor_nodes", new WrapperEditorNodesItems(client as any)],
+      ["wrapper_editor_node", new WrapperEditorNodesItem(client as any)],
 
       ["directus_sync_id_maps", new DirectusSyncIdMapItems(client as any)],
       ["directus_sync_id_map", new DirectusSyncIdMapItem(client as any)],
