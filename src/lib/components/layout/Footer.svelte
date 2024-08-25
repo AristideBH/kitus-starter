@@ -5,20 +5,28 @@
 	const { footerNav: menu } = $page.data;
 </script>
 
-<footer class="mt-auto pb-4 pt-24">
-	<div class="small flex flex-wrap items-center justify-between border-t pt-4">
-		<nav class="flex flex-wrap gap-3">
-			{#if $page.data.token}
+<footer class="mt-auto bg-muted pt-4">
+	<div class="small flex flex-wrap items-center justify-between border-b border-secondary pb-4">
+		<nav class="flex flex-wrap gap-2">
+			{#each menu.items as item}
+				<NavItemFragment {item} class="w-fit grow-0 !text-muted-foreground" />
+			{/each}
+		</nav>
+		<span class="flex flex-wrap gap-2"
+			>{#if $page.data.token}
 				<a href="/profile">Profile</a>
 				<a href="/logout" data-sveltekit-preload-data="off">Logout</a>
 			{:else}
 				<a href="/signin">Sign in</a>
 				<a href="/login">Log in</a>
-			{/if}
-			{#each menu.items as item}
-				<NavItemFragment {item} class="w-fit grow-0" />
-			{/each}
-		</nav>
-		<span>© All rights reserved </span>
+			{/if}</span
+		>
 	</div>
 </footer>
+
+<style lang="postcss">
+	a,
+	span {
+		@apply text-muted-foreground;
+	}
+</style>
