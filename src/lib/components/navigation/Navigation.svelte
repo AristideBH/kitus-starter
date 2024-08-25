@@ -5,7 +5,7 @@
 	import MobileNav from './mobile/MobileNav.svelte';
 	import { browser } from '$app/environment';
 
-	let screen = $state(browser ? new MediaQuery('(min-width: 859px)') : null);
+	let screen = $state(browser ? new MediaQuery('(min-width: 620px)') : null);
 	const { headerNav: menu } = $page.data;
 </script>
 

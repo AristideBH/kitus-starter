@@ -1,5 +1,5 @@
 :root {
-	--content-max-width: 115ch;
+	--content-max-width: 116ch;
 	--content-width: min(
 		calc(100% - var(--sidebar-width) - calc(2 * var(--side-padding)) - var(--x-gap)),
 		calc(var(--content-max-width) - var(--sidebar-width))
@@ -9,19 +9,31 @@
 	--x-gap: 2rem;
 	--y-gap: 6rem;
 
-	--main-template: var(--content-width) [content-end] var(--x-gap) [side-start] var(--sidebar-width);
+	--main-template: calc(var(--content-width) + var(--x-gap) + var(--sidebar-width));
 	--main-width: min(
 		calc(100% - calc(2 * var(--side-padding)) - var(--x-gap)),
 		calc(var(--content-max-width))
 	);
 
+	--cols-2: repeat(1, minmax(0, 1fr));
 	--col-2-width: calc((var(--main-width) / 2) + (var(--x-gap) / 2));
-	--cols-2: repeat(2, minmax(0, 1fr));
 	--cols-2-template: var(--col-2-width) [content-end side-start] var(--col-2-width);
 
+	--cols-3: repeat(1, minmax(0, 1fr));
 	--col-3-width: calc((var(--main-width) / 3) + (var(--x-gap) / 3));
 	--cols-3-template: var(--col-3-width) var(--col-3-width) var(--col-3-width);
-	--cols-3: repeat(3, minmax(0, 1fr));
+}
+@media (min-width: 620px) {
+	:root {
+		--cols-2: repeat(2, minmax(0, 1fr));
+	}
+}
+@media (min-width: 780px) {
+	:root {
+		--main-template: var(--content-width) [content-end] var(--x-gap) [side-start]
+			var(--sidebar-width);
+		--cols-3: repeat(3, minmax(0, 1fr));
+	}
 }
 
 header,
