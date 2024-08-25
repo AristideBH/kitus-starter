@@ -4,7 +4,7 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import NavItemFragment from '../NavItemFragment.svelte';
 	import NavItemSub from './NavItemSub.svelte';
-	import ChevronDown from 'lucide-svelte/icons/chevron-down';
+	import ChevronUp from 'lucide-svelte/icons/chevron-up';
 
 	let { menu }: { menu: Collections.Menus } = $props();
 </script>
@@ -15,7 +15,7 @@
 			<DropdownMenu.Root>
 				<DropdownMenu.Trigger class="flex items-center gap-1">
 					{item.label}
-					<ChevronDown class="size-5" />
+					<ChevronUp class="size-5" />
 				</DropdownMenu.Trigger>
 				<DropdownMenu.Content>
 					{#each item.children as child}

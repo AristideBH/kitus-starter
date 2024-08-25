@@ -15,19 +15,16 @@
 		content
 	}: SectionProps = $props();
 
-	let template = $state(content?.template);
-	const setStyles = (node: HTMLElement) => {
-		let color = $state(content?.color);
-		let width = $state(content?.width);
-		let align = $state(content?.align);
-		let isFullWidth = width === 'full-width';
-		let isColorSet = color !== null;
+	let template = $state(content?.template),
+		color = $state(content?.color),
+		width = $state(content?.width),
+		align = $state(content?.align);
 
-		if (template) {
-			node.setAttribute('data-template', template);
-		} else {
-			node.setAttribute('data-template', 'none');
-		}
+	const setStyles = (node: HTMLElement) => {
+		let isFullWidth = width === 'full-width';
+		let isColorSet = !!color;
+
+		node.setAttribute('data-template', template || 'none');
 		if (isColorSet) node.classList.add(`bg-${color}`);
 		if (align) node.classList.add(`items-${align}`);
 		if (isFullWidth) node.classList.add('layout-full', 'py-12');

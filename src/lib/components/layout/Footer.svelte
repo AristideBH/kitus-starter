@@ -6,8 +6,8 @@
 </script>
 
 <footer class="mt-auto pb-4 pt-24">
-	<div class="small flex items-center justify-between border-t pt-4">
-		<nav class="flex gap-3">
+	<div class="small flex flex-wrap items-center justify-between border-t pt-4">
+		<nav class="flex flex-wrap gap-3">
 			{#if $page.data.token}
 				<a href="/profile">Profile</a>
 				<a href="/logout" data-sveltekit-preload-data="off">Logout</a>

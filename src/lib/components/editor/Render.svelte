@@ -45,7 +45,7 @@
 {#if status === 'ready'}
 	{#each editor.content as item}
 		{@const { type, content, attrs } = item}
-		<!-- DEFAULTS COMPONENTS -->
+		<!-- * DEFAULTS COMPONENTS -->
 		{#if type === 'heading' && attrs}
 			{#if attrs.level.toString() === '1'}
 				<AnimatedHeading {content} />
@@ -63,7 +63,7 @@
 		{:else if type === 'blockquote'}
 			<Blockquote {content} />
 
-			<!-- CUSTOM COMPONENTS -->
+			<!-- * CUSTOM COMPONENTS -->
 		{:else if type === 'relation-block'}
 			{#await elementQuery(directus, attrs) then content}
 				{#if content}

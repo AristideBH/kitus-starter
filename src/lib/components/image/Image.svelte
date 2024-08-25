@@ -118,6 +118,7 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 		overflow: hidden;
 		position: relative;
 		width: 100%;
+
 		&:hover figcaption,
 		&:focus figcaption {
 			opacity: 0.65;
@@ -130,6 +131,8 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 		height: auto;
 		background-size: 100%;
 		transition: all ease-in-out 0.3s;
+		object-fit: cover;
+		max-height: 70dvh;
 	}
 	.not-loaded {
 		filter: blur(100px);
@@ -140,11 +143,12 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 		left: 0;
 		padding: 0.5em 0.75em;
 		position: absolute;
-		background-color: hsl(var(--background));
-		/* color: hsl(var(--muted-foreground)); */
 		transition: opacity 0.175s ease-in-out;
+		backdrop-filter: blur(100px) brightness(0.35);
+		/* background-color: hsl(var(--background)); */
 		opacity: 0;
 		width: 100%;
+		z-index: 5;
 		text-align: center;
 		&:empty {
 			display: none;

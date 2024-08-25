@@ -1,5 +1,5 @@
 :root {
-	--content-max-width: 120ch;
+	--content-max-width: 115ch;
 	--content-width: min(
 		calc(100% - var(--sidebar-width) - calc(2 * var(--side-padding)) - var(--x-gap)),
 		calc(var(--content-max-width) - var(--sidebar-width))
@@ -74,6 +74,9 @@ footer,
 	& > * {
 		grid-column: main;
 		@apply grid grid-cols-subgrid gap-y-2;
+		& > span {
+			grid-column: 1 / -1;
+		}
 
 		&.layout-full {
 			grid-column: full;

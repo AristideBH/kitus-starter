@@ -20,11 +20,11 @@
 	});
 
 	$effect(() => {
-		// if (intersecting === true) {
-		// 	weightSpring.set(end);
-		// } else {
-		// 	weightSpring.set(start);
-		// }
+		if (intersecting === true) {
+			weightSpring.set(end);
+		} else {
+			weightSpring.set(start);
+		}
 	});
 
 	let { content, class: className, children }: Props = $props();

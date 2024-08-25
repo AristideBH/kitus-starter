@@ -20,10 +20,9 @@
 <Toaster />
 
 <!-- MARKUP -->
-<Header />
 
 <Main transitionKey={data.pathName} options={{ duration: 100, y: 20, delta: 0 }}>
 	{@render children?.()}
 </Main>
-
 <Footer />
+<Header />
