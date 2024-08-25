@@ -5,7 +5,6 @@
 
 	// Variables
 	let element = $state<HTMLElement>();
-
 	let {
 		tag = 'section',
 		viewTimeline,
@@ -16,10 +15,24 @@
 		content
 	}: SectionProps = $props();
 
-	let color = $state(content?.color);
-	let width = $state(content?.width);
 	let template = $state(content?.template);
-	let align = $state(content?.align);
+	const setStyles = (node: HTMLElement) => {
+		let color = $state(content?.color);
+		let width = $state(content?.width);
+		let align = $state(content?.align);
+		let isFullWidth = width === 'full-width';
+		let isColorSet = color !== null;
+
+		if (template) {
+			node.setAttribute('data-template', template);
+		} else {
+			node.setAttribute('data-template', 'none');
+		}
+		if (isColorSet) node.classList.add(`bg-${color}`);
+		if (align) node.classList.add(`items-${align}`);
+		if (isFullWidth) node.classList.add('layout-full', 'py-12');
+		if (!isFullWidth && isColorSet) node.classList.add('p-8', 'rounded');
+	};
 </script>
 
 <IntersectionObserver {once} {element} {rootMargin}>
@@ -27,27 +40,13 @@
 		this={tag}
 		bind:this={element}
 		use:inView={viewTimeline}
-		data-inview
-		class:layout-full={width === 'full-width'}
-		class:rounded={content && color && width != 'full-width'}
-		class:p-8={content && color && width != 'full-width'}
-		class:py-8={width === 'full-width'}
-		class="relative bg-{color} items-{align} {className ?? ''}"
-		data-template={template}
 		transition:flyAndScale={{ y: -20, start: 0.975 }}
+		use:setStyles
+		class={className ?? ''}
 	>
 		{@render children()}
 	</svelte:element>
 </IntersectionObserver>
 
 <style lang="postcss">
-	[data-template] {
-		@apply gap-[var(--x-gap)];
-	}
-	[data-template='cols-2'] {
-		@apply grid-cols-2;
-	}
-	[data-template='cols-3'] {
-		@apply grid-cols-3;
-	}
 </style>

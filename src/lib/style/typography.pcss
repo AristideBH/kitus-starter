@@ -34,20 +34,32 @@
 	h6 {
 		font-variation-settings: 'wght' var(--wght, 500);
 		@apply text-balance font-heading;
+		&:has(+ p),
+		&:has(+ .block-wrapper),
+		&:has(+ figure) {
+			@apply mb-2;
+		}
+	}
+
+	figure {
+		&:has(+ .block-wrapper) {
+			@apply mb-4 rounded;
+		}
 	}
 
 	/*- Paragraph */
 	ul,
 	ol,
 	blockquote,
-	menu {
+	menu,
+	figure {
 		+ p {
-			@apply mt-6;
+			@apply mt-4;
 		}
 	}
 
 	p {
-		@apply mb-0 text-balance text-lg leading-6;
+		@apply mb-0 text-pretty text-lg leading-6;
 		& + p {
 			@apply mt-[0.65em];
 		}
