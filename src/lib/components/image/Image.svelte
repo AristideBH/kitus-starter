@@ -106,8 +106,8 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 	/>
 	<!-- Problem when using transparent images -->
 	<!-- style="background-image:url({thumbhashUrl})" -->
-	{#if showCaption && inView}
-		<figcaption>
+	{#if showCaption && inView && fetchedFile?.description}
+		<figcaption class="small">
 			{alt || fetchedFile?.description || ''}
 		</figcaption>
 	{/if}
@@ -118,6 +118,10 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 		overflow: hidden;
 		position: relative;
 		width: 100%;
+		&:hover figcaption,
+		&:focus figcaption {
+			opacity: 0.65;
+		}
 	}
 
 	img {
@@ -134,9 +138,14 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 	figcaption {
 		bottom: 0;
 		left: 0;
-		padding: 0.3em 0.75em;
+		padding: 0.5em 0.75em;
 		position: absolute;
-		background-color: hsl(var(--background) / 0.5);
+		background-color: hsl(var(--background));
+		/* color: hsl(var(--muted-foreground)); */
+		transition: opacity 0.175s ease-in-out;
+		opacity: 0;
+		width: 100%;
+		text-align: center;
 		&:empty {
 			display: none;
 		}

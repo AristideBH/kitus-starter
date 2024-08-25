@@ -42,57 +42,59 @@
 	{/if}
 {/snippet}
 
-{#each editor.content as item}
-	{@const { type, content, attrs } = item}
-	<!-- DEFAULTS COMPONENTS -->
-	{#if type === 'heading' && attrs}
-		{#if attrs.level.toString() === '1'}
-			<AnimatedHeading {content} />
-		{:else}
-			<Heading level={attrs.level} {content} />
-		{/if}
-	{:else if type === 'paragraph'}
-		<Paragraph {content} />
-	{:else if type === 'horizontalRule'}
-		<hr />
-	{:else if type === 'bulletList'}
-		<BulletList {content} />
-	{:else if type === 'orderedList'}
-		<OrderedList {content} />
-	{:else if type === 'blockquote'}
-		<Blockquote {content} />
-
-		<!-- CUSTOM COMPONENTS -->
-	{:else if type === 'relation-block' && status === 'ready'}
-		{#await elementQuery(directus, attrs) then content}
-			{#if content}
-				{#if 'editor' in content}
-					{@const { editor } = content}
-					{#if 'fit_height' in content}
-						<Wrapper {content}>
-							<svelte:self {editor} />
-						</Wrapper>
-					{:else}
-						<Section {content}>
-							<svelte:self {editor} />
-						</Section>
-					{/if}
-				{:else if 'image' in content}
-					<Image {content} />
-				{:else if 'text' in content}
-					<Quote {content} />
-				{:else if 'images' in content}
-					<Gallery {content} />
-				{:else if 'buttons' in content}
-					<div class="buttons-wrapper flex flex-wrap" class:gap-3={content.gap}>
-						{#each content.buttons as button}
-							{@render btn(button.item)}
-						{/each}
-					</div>
-				{:else if 'label' in content}
-					{@render btn(content)}
-				{:else}{/if}
+{#if status === 'ready'}
+	{#each editor.content as item}
+		{@const { type, content, attrs } = item}
+		<!-- DEFAULTS COMPONENTS -->
+		{#if type === 'heading' && attrs}
+			{#if attrs.level.toString() === '1'}
+				<AnimatedHeading {content} />
+			{:else}
+				<Heading level={attrs.level} {content} />
 			{/if}
-		{/await}
-	{/if}
-{/each}
+		{:else if type === 'paragraph'}
+			<Paragraph {content} />
+		{:else if type === 'horizontalRule'}
+			<hr />
+		{:else if type === 'bulletList'}
+			<BulletList {content} />
+		{:else if type === 'orderedList'}
+			<OrderedList {content} />
+		{:else if type === 'blockquote'}
+			<Blockquote {content} />
+
+			<!-- CUSTOM COMPONENTS -->
+		{:else if type === 'relation-block'}
+			{#await elementQuery(directus, attrs) then content}
+				{#if content}
+					{#if 'editor' in content}
+						{@const { editor } = content}
+						{#if 'fit_height' in content}
+							<Wrapper {content}>
+								<svelte:self {editor} />
+							</Wrapper>
+						{:else}
+							<Section {content}>
+								<svelte:self {editor} />
+							</Section>
+						{/if}
+					{:else if 'image' in content}
+						<Image {content} />
+					{:else if 'text' in content}
+						<Quote {content} />
+					{:else if 'images' in content}
+						<Gallery {content} />
+					{:else if 'buttons' in content}
+						<div class="buttons-wrapper flex flex-wrap" class:gap-3={content.gap}>
+							{#each content.buttons as button}
+								{@render btn(button.item)}
+							{/each}
+						</div>
+					{:else if 'label' in content}
+						{@render btn(content)}
+					{:else}{/if}
+				{/if}
+			{/await}
+		{/if}
+	{/each}
+{/if}

@@ -1,11 +1,10 @@
 :root {
 	--content-max-width: 120ch;
-	/* --content-max-width: 810px; */
 	--content-width: min(
 		calc(100% - var(--sidebar-width) - calc(2 * var(--side-padding)) - var(--x-gap)),
 		calc(var(--content-max-width) - var(--sidebar-width))
 	);
-	--sidebar-width: min(250px, 40ch);
+	--sidebar-width: min(350px, 35ch);
 	--side-padding: 1.5rem;
 	--x-gap: 2rem;
 	--y-gap: 6rem;
@@ -48,7 +47,7 @@ footer,
 
 	[data-template='cols-2'],
 	[data-template='cols-3'] {
-		@apply gap-x-[var(--x-gap)] gap-y-3;
+		@apply gap-x-[var(--x-gap)] gap-y-[var(--x-gap)];
 		& > *:not(.block-wrapper) {
 			grid-column: 1 / -1;
 		}
@@ -67,8 +66,8 @@ footer,
 		& > *:not(.block-wrapper) {
 			grid-column: 1 / -1;
 		}
-		& > :last-child {
-			@apply -col-end-1;
+		& > :nth-of-type(even) {
+			grid-column: side;
 		}
 	}
 
@@ -145,10 +144,10 @@ footer,
 				& > *:not(.block-wrapper) {
 					grid-column: main;
 				}
-				& > .block-wrapper:first-of-type {
+				& > .block-wrapper:nth-of-type(odd) {
 					grid-column: content;
 				}
-				& > .block-wrapper:last-of-type {
+				& > .block-wrapper:nth-of-type(even) {
 					grid-column: side;
 				}
 			}
@@ -164,15 +163,17 @@ main > section {
 		@apply !pb-0;
 	}
 }
-
-main > section {
-	&:first-of-type {
-		@apply mt-20;
-		&:has(> figure),
-		&:has(> [aria-roledescription='carousel']),
-		&:has(> .__grid--masonry),
-		&:has(> [data-hs='section']) {
-			@apply mt-0;
+main {
+	& > h1,
+	& > section {
+		&:first-child {
+			@apply mt-32;
+			&:has(> figure),
+			&:has(> [aria-roledescription='carousel']),
+			&:has(> .__grid--masonry),
+			&:has(> [data-hs='section']) {
+				@apply mt-0;
+			}
 		}
 	}
 }
