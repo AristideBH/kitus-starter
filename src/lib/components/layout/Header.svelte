@@ -9,9 +9,9 @@
 		<div class="flex items-center gap-3">
 			<a href="/">
 				<img
-					class="size-12"
-					height="48"
-					width="48"
+					class="size-11"
+					height="44"
+					width="44"
 					src="/icons/favicon.svg"
 					alt="Logo {project_name}"
 				/>

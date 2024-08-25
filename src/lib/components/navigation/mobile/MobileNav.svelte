@@ -4,16 +4,59 @@
 	import * as Sheet from '$lib/components/ui/sheet';
 	import Menu from 'lucide-svelte/icons/menu';
 	import X from 'lucide-svelte/icons/x';
+	import * as Drawer from '$lib/components/ui/drawer';
 
 	import NavItemFragment from '../NavItemFragment.svelte';
 	import NavItemSub from '../mobile/NavItemSub.svelte';
+	import Header from '$lib/components/layout/Header.svelte';
+	import { page } from '$app/stores';
+	let { project_name, project_descriptor, project_url } = $page.data.global;
 
 	let { menu }: { menu: Collections.Menus } = $props();
 
 	let open = $state(false);
 </script>
 
-<Sheet.Root bind:open>
+<Drawer.Root bind:open>
+	<Drawer.Trigger>
+		<Button variant="outline" size="icon" aria-label="Open menu">
+			<Menu class="s-4" />
+		</Button>
+	</Drawer.Trigger>
+	<Drawer.Content class="h-[80vh]">
+		<Drawer.Header class="flex items-start gap-3 px-8 pt-8 text-left">
+			<a href="/">
+				<img
+					class="size-11"
+					height="44"
+					width="44"
+					src="/icons/favicon.svg"
+					alt="Logo {project_name}"
+				/>
+			</a>
+			<p class="leading-5">
+				<span class="font-extrabold">{project_name}</span>
+				<br />
+				<span class="small">{project_descriptor}</span>
+			</p>
+		</Drawer.Header>
+		<menu class="flex flex-col px-8 text-xl">
+			{#each menu.items as item}
+				{#if item.type === 'list'}
+					<NavItemSub {item} />
+				{:else}
+					<Drawer.Close>
+						<NavItemFragment {item} />
+					</Drawer.Close>
+				{/if}
+			{/each}
+		</menu>
+		<Drawer.Footer>
+			<Drawer.Close><Button variant="outline" class="w-full">Close</Button></Drawer.Close>
+		</Drawer.Footer>
+	</Drawer.Content>
+</Drawer.Root>
+<!-- <Sheet.Root bind:open>
 	<Sheet.Trigger>
 		<Button variant="outline" size="icon" aria-label="Open menu">
 			<Menu class="s-4" />
@@ -45,4 +88,4 @@
 		</menu>
 		<Sheet.Footer class="flex flex-row justify-end gap-1">footer</Sheet.Footer>
 	</Sheet.Content>
-</Sheet.Root>
+</Sheet.Root> -->
