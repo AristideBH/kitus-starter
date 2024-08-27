@@ -32,7 +32,7 @@
 		@apply flex flex-nowrap items-center gap-2;
 		&::before {
 			content: '';
-			@apply size-1 rounded bg-primary;
+			@apply size-1.5 rounded bg-primary;
 		}
 	}
 

@@ -44,6 +44,3 @@
 		{@render children()}
 	</svelte:element>
 </IntersectionObserver>
-
-<style lang="postcss">
-</style>

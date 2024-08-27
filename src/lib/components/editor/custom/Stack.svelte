@@ -1,0 +1,34 @@
+<script lang="ts">
+	import type { Collections } from '$lib/types/client';
+	import type { Snippet } from 'svelte';
+
+	type BlockProps = {
+		class?: string;
+		content: Partial<Collections.Stack>;
+		children: Snippet;
+	};
+
+	let { class: className, content, children }: BlockProps = $props();
+	let { color, fit_height, direction, gap } = content;
+
+	const setStyles = (node: HTMLElement) => {
+		let isColorSet = !!color;
+		let isGapSet = !!gap;
+
+		if (isGapSet) node.classList.add(`gap-${gap}`);
+		if (isColorSet) node.classList.add(`bg-${color}`, 'p-5', 'rounded');
+		if (color === 'primary') node.classList.add('text-primary-foreground');
+		if (direction) node.classList.add(`flex-${direction}`);
+		if (fit_height) node.classList.add('h-fit');
+	};
+</script>
+
+<div class="block-wrapper {className ?? ''} flex" class:h-fit={fit_height} use:setStyles>
+	{@render children()}
+</div>
+
+<style>
+	:global(.block-wrapper p + p) {
+		margin-top: 0;
+	}
+</style>

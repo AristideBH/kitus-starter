@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { TipTapNode } from '../index.d';
 	import IntersectionObserver from 'svelte-intersection-observer';
-	import { setMarks } from '..';
+	import { setMarks } from '../index.svelte';
 	import { spring } from 'svelte/motion';
 	import type { Snippet } from 'svelte';
 

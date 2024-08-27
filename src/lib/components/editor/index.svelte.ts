@@ -1,8 +1,8 @@
 // - Types
 import type { Mark, LinkMark, GenericMark, CustomAttrs, EditorNodesCollections } from './index.d';
-import { readItem } from '@directus/sdk';
 import type { DirectusClient } from '$lib/logic/directus';
 import type { Collections } from '$lib/types/client';
+import { readItem } from '@directus/sdk';
 
 // - COMPONENTS
 // Defaults
@@ -17,11 +17,11 @@ import Quote from './custom/Quote.svelte';
 import Gallery from './custom/Gallery.svelte';
 import Image from './custom/Image.svelte';
 import AnimatedHeading from './custom/AnimatedHeading.svelte';
-import Wrapper from './custom/Wrapper.svelte';
+import Stack from './custom/Stack.svelte';
 
 export {
     BulletList, Heading, Paragraph, OrderedList, Blockquote, TaskList,
-    Quote, Gallery, Image, AnimatedHeading, Wrapper
+    Quote, Gallery, Image, AnimatedHeading, Stack
 }
 
 // - FUNCTIONS
@@ -30,6 +30,7 @@ export const elementQuery = async (client: DirectusClient, attrs: CustomAttrs | 
     try {
         const { id, collection, junction } = attrs;
         const rel = await client.request(readItem(junction as EditorNodesCollections, id));
+
 
         if (!rel.item || typeof rel.item != 'string') return;
 
@@ -51,20 +52,17 @@ export const elementQuery = async (client: DirectusClient, attrs: CustomAttrs | 
                 readItem('button', rel.item, { fields: ['*', { page: ['permalink'] }] })
             )) as Collections.Button;
 
-        } else if (collection === 'wrapper') {
+
+        } else if (collection === 'stack') {
             return (await client.request(
-                readItem('wrapper', rel.item, { fields: ['*'] })
-            )) as Collections.Wrapper;
+                readItem('stack', rel.item, { fields: ['*'] })
+            )) as Collections.Stack;
 
         } else if (collection === 'section') {
             return (await client.request(
                 readItem('section', rel.item, { fields: ['*'] })
             )) as Collections.Section;
 
-        } else if (collection === 'button_group') {
-            return (await client.request(
-                readItem('button_group', rel.item, { fields: ['*', { buttons: ['*', { item: ["*", { page: ['permalink'] }] }] }] })
-            )) as Collections.ButtonGroup;
 
         } else {
             throw new Error('Invalid collection type');

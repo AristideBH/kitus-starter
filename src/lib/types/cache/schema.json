@@ -230,7 +230,7 @@
         "accountability": "all",
         "color": null,
         "item_duplication_fields": null,
-        "sort": 2,
+        "sort": 1,
         "group": null,
         "collapse": "open",
         "preview_url": null,
@@ -320,7 +320,7 @@
         "accountability": "all",
         "color": null,
         "item_duplication_fields": null,
-        "sort": 1,
+        "sort": 2,
         "group": null,
         "collapse": "closed",
         "preview_url": null,
@@ -493,7 +493,16 @@
           "item:button.size",
           "item:grid_block.editor",
           "item:wrapper.color",
-          "item:wrapper.fit_height"
+          "item:wrapper.fit_height",
+          "item:wrapper.editor",
+          "item:button.variant",
+          "item:button.type",
+          "item:button.url",
+          "item:button.new_tab",
+          "item:button.page",
+          "item:gallery.type",
+          "item:image.show_caption",
+          "item:stack"
         ],
         "sort": 1,
         "group": "section",
@@ -624,6 +633,69 @@
       "schema": {
         "schema": "public",
         "name": "seo_setting",
+        "comment": null
+      }
+    },
+    {
+      "collection": "stack",
+      "meta": {
+        "collection": "stack",
+        "icon": "flex_direction",
+        "note": null,
+        "display_template": null,
+        "hidden": false,
+        "singleton": false,
+        "translations": null,
+        "archive_field": null,
+        "archive_app_filter": true,
+        "archive_value": null,
+        "unarchive_value": null,
+        "sort_field": null,
+        "accountability": "all",
+        "color": null,
+        "item_duplication_fields": null,
+        "sort": 8,
+        "group": "editor",
+        "collapse": "open",
+        "preview_url": null,
+        "versioning": false
+      },
+      "schema": {
+        "schema": "public",
+        "name": "stack",
+        "comment": null
+      }
+    },
+    {
+      "collection": "stack_editor_nodes",
+      "meta": {
+        "collection": "stack_editor_nodes",
+        "icon": null,
+        "note": null,
+        "display_template": null,
+        "hidden": true,
+        "singleton": false,
+        "translations": null,
+        "archive_field": null,
+        "archive_app_filter": true,
+        "archive_value": null,
+        "unarchive_value": null,
+        "sort_field": null,
+        "accountability": "all",
+        "color": null,
+        "item_duplication_fields": [
+          "item:button",
+          "collection"
+        ],
+        "sort": 1,
+        "group": "stack",
+        "collapse": "open",
+        "preview_url": null,
+        "versioning": false
+      },
+      "schema": {
+        "schema": "public",
+        "name": "stack_editor_nodes",
         "comment": null
       }
     },
@@ -17350,6 +17422,52 @@
       }
     },
     {
+      "collection": "image",
+      "field": "type",
+      "type": "string",
+      "schema": {
+        "name": "type",
+        "table": "image",
+        "schema": "public",
+        "data_type": "character varying",
+        "is_nullable": true,
+        "generation_expression": null,
+        "default_value": "image",
+        "is_generated": false,
+        "max_length": 255,
+        "comment": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "foreign_key_schema": null,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      },
+      "meta": {
+        "id": 199,
+        "collection": "image",
+        "field": "type",
+        "special": null,
+        "interface": "input",
+        "options": null,
+        "display": null,
+        "display_options": null,
+        "readonly": true,
+        "hidden": false,
+        "sort": 5,
+        "width": "full",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": true,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
       "collection": "menu_items",
       "field": "id",
       "type": "uuid",
@@ -18552,8 +18670,12 @@
           "toolbarMode": "sticky",
           "displayFormat": true,
           "tools": [
+            "h1",
+            "h2",
+            "h3",
             "fullscreen"
-          ]
+          ],
+          "editorHeight": "height-grow"
         },
         "display": "formatted-json-value",
         "display_options": {
@@ -18959,6 +19081,52 @@
       }
     },
     {
+      "collection": "quote",
+      "field": "type",
+      "type": "string",
+      "schema": {
+        "name": "type",
+        "table": "quote",
+        "schema": "public",
+        "data_type": "character varying",
+        "is_nullable": false,
+        "generation_expression": null,
+        "default_value": "quote",
+        "is_generated": false,
+        "max_length": 255,
+        "comment": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "foreign_key_schema": null,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      },
+      "meta": {
+        "id": 200,
+        "collection": "quote",
+        "field": "type",
+        "special": null,
+        "interface": "input",
+        "options": null,
+        "display": null,
+        "display_options": null,
+        "readonly": true,
+        "hidden": false,
+        "sort": 5,
+        "width": "full",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": true,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
       "collection": "section",
       "field": "id",
       "type": "uuid",
@@ -19064,7 +19232,8 @@
             "fullscreen"
           ],
           "displayFormat": true,
-          "editorHeight": "height-grow"
+          "editorHeight": "height-grow",
+          "toolbarMode": "sticky"
         },
         "display": "flexible-editor-display",
         "display_options": null,
@@ -19110,7 +19279,7 @@
         "collection": "section",
         "field": "width",
         "special": null,
-        "interface": "select-dropdown",
+        "interface": "select-radio",
         "options": {
           "choices": [
             {
@@ -19236,8 +19405,8 @@
           "allowNone": true,
           "choices": [
             {
-              "text": "Sidebar | Content",
-              "value": "sidebar-content"
+              "text": "Content | Sidebar",
+              "value": "inherit-main"
             },
             {
               "text": "2 columns",
@@ -19275,7 +19444,7 @@
         "data_type": "character varying",
         "is_nullable": true,
         "generation_expression": null,
-        "default_value": "flex-start",
+        "default_value": "start",
         "is_generated": false,
         "max_length": 255,
         "comment": null,
@@ -19338,6 +19507,52 @@
           }
         ],
         "required": false,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
+      "collection": "section",
+      "field": "type",
+      "type": "string",
+      "schema": {
+        "name": "type",
+        "table": "section",
+        "schema": "public",
+        "data_type": "character varying",
+        "is_nullable": false,
+        "generation_expression": null,
+        "default_value": "section",
+        "is_generated": false,
+        "max_length": 255,
+        "comment": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "foreign_key_schema": null,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      },
+      "meta": {
+        "id": 201,
+        "collection": "section",
+        "field": "type",
+        "special": null,
+        "interface": "input",
+        "options": null,
+        "display": null,
+        "display_options": null,
+        "readonly": true,
+        "hidden": false,
+        "sort": 8,
+        "width": "full",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": true,
         "group": null,
         "validation": null,
         "validation_message": null
@@ -20600,6 +20815,572 @@
       }
     },
     {
+      "collection": "stack",
+      "field": "id",
+      "type": "uuid",
+      "schema": {
+        "name": "id",
+        "table": "stack",
+        "schema": "public",
+        "data_type": "uuid",
+        "is_nullable": false,
+        "generation_expression": null,
+        "default_value": null,
+        "is_generated": false,
+        "max_length": null,
+        "comment": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_unique": true,
+        "is_primary_key": true,
+        "has_auto_increment": false,
+        "foreign_key_schema": null,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      },
+      "meta": {
+        "id": 202,
+        "collection": "stack",
+        "field": "id",
+        "special": [
+          "uuid"
+        ],
+        "interface": "input",
+        "options": null,
+        "display": null,
+        "display_options": null,
+        "readonly": true,
+        "hidden": true,
+        "sort": 1,
+        "width": "full",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": false,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
+      "collection": "stack",
+      "field": "type",
+      "type": "string",
+      "schema": {
+        "name": "type",
+        "table": "stack",
+        "schema": "public",
+        "data_type": "character varying",
+        "is_nullable": false,
+        "generation_expression": null,
+        "default_value": "stack",
+        "is_generated": false,
+        "max_length": 255,
+        "comment": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "foreign_key_schema": null,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      },
+      "meta": {
+        "id": 203,
+        "collection": "stack",
+        "field": "type",
+        "special": null,
+        "interface": "input",
+        "options": null,
+        "display": null,
+        "display_options": null,
+        "readonly": true,
+        "hidden": false,
+        "sort": 2,
+        "width": "full",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": true,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
+      "collection": "stack",
+      "field": "direction",
+      "type": "string",
+      "schema": {
+        "name": "direction",
+        "table": "stack",
+        "schema": "public",
+        "data_type": "character varying",
+        "is_nullable": true,
+        "generation_expression": null,
+        "default_value": "row",
+        "is_generated": false,
+        "max_length": 255,
+        "comment": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "foreign_key_schema": null,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      },
+      "meta": {
+        "id": 204,
+        "collection": "stack",
+        "field": "direction",
+        "special": null,
+        "interface": "select-dropdown",
+        "options": {
+          "iconOn": "arrow_range",
+          "choices": [
+            {
+              "text": "Horizontal",
+              "value": "row"
+            },
+            {
+              "text": "Vertical",
+              "value": "column"
+            }
+          ]
+        },
+        "display": null,
+        "display_options": null,
+        "readonly": false,
+        "hidden": false,
+        "sort": 3,
+        "width": "half",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": true,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
+      "collection": "stack",
+      "field": "gap",
+      "type": "string",
+      "schema": {
+        "name": "gap",
+        "table": "stack",
+        "schema": "public",
+        "data_type": "character varying",
+        "is_nullable": true,
+        "generation_expression": null,
+        "default_value": "4",
+        "is_generated": false,
+        "max_length": 255,
+        "comment": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "foreign_key_schema": null,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      },
+      "meta": {
+        "id": 205,
+        "collection": "stack",
+        "field": "gap",
+        "special": null,
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            {
+              "text": "None",
+              "value": "0"
+            },
+            {
+              "text": "Small",
+              "value": "2"
+            },
+            {
+              "text": "Medium",
+              "value": "4"
+            },
+            {
+              "text": "Large",
+              "value": "8"
+            }
+          ]
+        },
+        "display": null,
+        "display_options": null,
+        "readonly": false,
+        "hidden": false,
+        "sort": 4,
+        "width": "half",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": true,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
+      "collection": "stack",
+      "field": "color",
+      "type": "string",
+      "schema": {
+        "name": "color",
+        "table": "stack",
+        "schema": "public",
+        "data_type": "character varying",
+        "is_nullable": true,
+        "generation_expression": null,
+        "default_value": null,
+        "is_generated": false,
+        "max_length": 255,
+        "comment": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "foreign_key_schema": null,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      },
+      "meta": {
+        "id": 206,
+        "collection": "stack",
+        "field": "color",
+        "special": null,
+        "interface": "select-dropdown",
+        "options": {
+          "allowNone": true,
+          "choices": [
+            {
+              "text": "Primary",
+              "value": "primary"
+            },
+            {
+              "text": "Secondary",
+              "value": "secondary"
+            },
+            {
+              "text": "Muted",
+              "value": "muted"
+            }
+          ]
+        },
+        "display": null,
+        "display_options": null,
+        "readonly": false,
+        "hidden": false,
+        "sort": 5,
+        "width": "half",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": false,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
+      "collection": "stack",
+      "field": "fit_height",
+      "type": "boolean",
+      "schema": {
+        "name": "fit_height",
+        "table": "stack",
+        "schema": "public",
+        "data_type": "boolean",
+        "is_nullable": true,
+        "generation_expression": null,
+        "default_value": false,
+        "is_generated": false,
+        "max_length": null,
+        "comment": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "foreign_key_schema": null,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      },
+      "meta": {
+        "id": 207,
+        "collection": "stack",
+        "field": "fit_height",
+        "special": [
+          "cast-boolean"
+        ],
+        "interface": "boolean",
+        "options": null,
+        "display": null,
+        "display_options": null,
+        "readonly": false,
+        "hidden": false,
+        "sort": 6,
+        "width": "half",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": false,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
+      "collection": "stack",
+      "field": "editor",
+      "type": "json",
+      "schema": {
+        "name": "editor",
+        "table": "stack",
+        "schema": "public",
+        "data_type": "json",
+        "is_nullable": true,
+        "generation_expression": null,
+        "default_value": null,
+        "is_generated": false,
+        "max_length": null,
+        "comment": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "foreign_key_schema": null,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      },
+      "meta": {
+        "id": 209,
+        "collection": "stack",
+        "field": "editor",
+        "special": [
+          "cast-json"
+        ],
+        "interface": "flexible-editor-interface",
+        "options": {
+          "editorHeight": "height-grow",
+          "toolbarMode": "sticky",
+          "displayFormat": true,
+          "m2aField": "editor_nodes"
+        },
+        "display": null,
+        "display_options": null,
+        "readonly": false,
+        "hidden": false,
+        "sort": 7,
+        "width": "full",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": false,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
+      "collection": "stack_editor_nodes",
+      "field": "id",
+      "type": "uuid",
+      "schema": {
+        "name": "id",
+        "table": "stack_editor_nodes",
+        "schema": "public",
+        "data_type": "uuid",
+        "is_nullable": false,
+        "generation_expression": null,
+        "default_value": null,
+        "is_generated": false,
+        "max_length": null,
+        "comment": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_unique": true,
+        "is_primary_key": true,
+        "has_auto_increment": false,
+        "foreign_key_schema": null,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      },
+      "meta": {
+        "id": 208,
+        "collection": "stack_editor_nodes",
+        "field": "id",
+        "special": [
+          "uuid"
+        ],
+        "interface": "input",
+        "options": null,
+        "display": null,
+        "display_options": null,
+        "readonly": true,
+        "hidden": true,
+        "sort": 1,
+        "width": "full",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": false,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
+      "collection": "stack_editor_nodes",
+      "field": "stack_id",
+      "type": "uuid",
+      "schema": {
+        "name": "stack_id",
+        "table": "stack_editor_nodes",
+        "schema": "public",
+        "data_type": "uuid",
+        "is_nullable": true,
+        "generation_expression": null,
+        "default_value": null,
+        "is_generated": false,
+        "max_length": null,
+        "comment": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "foreign_key_schema": "public",
+        "foreign_key_table": "stack",
+        "foreign_key_column": "id"
+      },
+      "meta": {
+        "id": 211,
+        "collection": "stack_editor_nodes",
+        "field": "stack_id",
+        "special": null,
+        "interface": null,
+        "options": null,
+        "display": null,
+        "display_options": null,
+        "readonly": false,
+        "hidden": true,
+        "sort": 2,
+        "width": "full",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": false,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
+      "collection": "stack_editor_nodes",
+      "field": "item",
+      "type": "string",
+      "schema": {
+        "name": "item",
+        "table": "stack_editor_nodes",
+        "schema": "public",
+        "data_type": "character varying",
+        "is_nullable": true,
+        "generation_expression": null,
+        "default_value": null,
+        "is_generated": false,
+        "max_length": 255,
+        "comment": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "foreign_key_schema": null,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      },
+      "meta": {
+        "id": 212,
+        "collection": "stack_editor_nodes",
+        "field": "item",
+        "special": null,
+        "interface": null,
+        "options": null,
+        "display": null,
+        "display_options": null,
+        "readonly": false,
+        "hidden": true,
+        "sort": 3,
+        "width": "full",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": false,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
+      "collection": "stack_editor_nodes",
+      "field": "collection",
+      "type": "string",
+      "schema": {
+        "name": "collection",
+        "table": "stack_editor_nodes",
+        "schema": "public",
+        "data_type": "character varying",
+        "is_nullable": true,
+        "generation_expression": null,
+        "default_value": null,
+        "is_generated": false,
+        "max_length": 255,
+        "comment": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "foreign_key_schema": null,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      },
+      "meta": {
+        "id": 213,
+        "collection": "stack_editor_nodes",
+        "field": "collection",
+        "special": null,
+        "interface": null,
+        "options": null,
+        "display": null,
+        "display_options": null,
+        "readonly": false,
+        "hidden": true,
+        "sort": 4,
+        "width": "full",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": false,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
       "collection": "wrapper",
       "field": "id",
       "type": "uuid",
@@ -21311,6 +22092,35 @@
         "readonly": false,
         "hidden": true,
         "sort": 5,
+        "width": "full",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": false,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
+      "collection": "stack",
+      "field": "editor_nodes",
+      "type": "alias",
+      "schema": null,
+      "meta": {
+        "id": 210,
+        "collection": "stack",
+        "field": "editor_nodes",
+        "special": [
+          "m2a"
+        ],
+        "interface": null,
+        "options": null,
+        "display": null,
+        "display_options": null,
+        "readonly": false,
+        "hidden": true,
+        "sort": 8,
         "width": "full",
         "translations": null,
         "note": null,
@@ -22316,33 +23126,6 @@
       }
     },
     {
-      "collection": "gallery_files",
-      "field": "directus_files_id",
-      "related_collection": "directus_files",
-      "schema": {
-        "constraint_name": "gallery_files_directus_files_id_foreign",
-        "table": "gallery_files",
-        "column": "directus_files_id",
-        "foreign_key_schema": "public",
-        "foreign_key_table": "directus_files",
-        "foreign_key_column": "id",
-        "on_update": "NO ACTION",
-        "on_delete": "CASCADE"
-      },
-      "meta": {
-        "id": 15,
-        "many_collection": "gallery_files",
-        "many_field": "directus_files_id",
-        "one_collection": "directus_files",
-        "one_field": null,
-        "one_collection_field": null,
-        "one_allowed_collections": null,
-        "junction_field": "gallery_id",
-        "sort_field": null,
-        "one_deselect_action": "nullify"
-      }
-    },
-    {
       "collection": "image",
       "field": "image",
       "related_collection": "directus_files",
@@ -22365,6 +23148,33 @@
         "one_collection_field": null,
         "one_allowed_collections": null,
         "junction_field": null,
+        "sort_field": null,
+        "one_deselect_action": "nullify"
+      }
+    },
+    {
+      "collection": "gallery_files",
+      "field": "directus_files_id",
+      "related_collection": "directus_files",
+      "schema": {
+        "constraint_name": "gallery_files_directus_files_id_foreign",
+        "table": "gallery_files",
+        "column": "directus_files_id",
+        "foreign_key_schema": "public",
+        "foreign_key_table": "directus_files",
+        "foreign_key_column": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE"
+      },
+      "meta": {
+        "id": 15,
+        "many_collection": "gallery_files",
+        "many_field": "directus_files_id",
+        "one_collection": "directus_files",
+        "one_field": null,
+        "one_collection_field": null,
+        "one_allowed_collections": null,
+        "junction_field": "gallery_id",
         "sort_field": null,
         "one_deselect_action": "nullify"
       }
@@ -23639,6 +24449,33 @@
       }
     },
     {
+      "collection": "stack_editor_nodes",
+      "field": "stack_id",
+      "related_collection": "stack",
+      "schema": {
+        "constraint_name": "stack_editor_nodes_stack_id_foreign",
+        "table": "stack_editor_nodes",
+        "column": "stack_id",
+        "foreign_key_schema": "public",
+        "foreign_key_table": "stack",
+        "foreign_key_column": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "CASCADE"
+      },
+      "meta": {
+        "id": 33,
+        "many_collection": "stack_editor_nodes",
+        "many_field": "stack_id",
+        "one_collection": "stack",
+        "one_field": "editor_nodes",
+        "one_collection_field": null,
+        "one_allowed_collections": null,
+        "junction_field": "item",
+        "sort_field": null,
+        "one_deselect_action": "delete"
+      }
+    },
+    {
       "collection": "pages_editor_nodes",
       "field": "item",
       "related_collection": null,
@@ -23675,7 +24512,8 @@
           "gallery",
           "quote",
           "button",
-          "wrapper"
+          "wrapper",
+          "stack"
         ],
         "junction_field": "section_id",
         "sort_field": null,
@@ -23722,6 +24560,26 @@
           "button"
         ],
         "junction_field": "button_group_id",
+        "sort_field": null,
+        "one_deselect_action": "nullify"
+      }
+    },
+    {
+      "collection": "stack_editor_nodes",
+      "field": "item",
+      "related_collection": null,
+      "schema": null,
+      "meta": {
+        "id": 32,
+        "many_collection": "stack_editor_nodes",
+        "many_field": "item",
+        "one_collection": null,
+        "one_field": null,
+        "one_collection_field": "collection",
+        "one_allowed_collections": [
+          "button"
+        ],
+        "junction_field": "stack_id",
         "sort_field": null,
         "one_deselect_action": "nullify"
       }

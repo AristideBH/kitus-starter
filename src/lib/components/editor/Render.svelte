@@ -2,8 +2,7 @@
 	import type { TipTapEditor } from './index.d';
 	import type { DirectusClient } from '$lib/logic/directus';
 	import Section from '$lib/components/layout/Section.svelte';
-	import { getContext, onMount } from 'svelte';
-	const directus = getContext<DirectusClient>('directus');
+	import { getContext, onMount, setContext } from 'svelte';
 
 	import {
 		Heading,
@@ -15,16 +14,13 @@
 		Gallery,
 		Image,
 		AnimatedHeading,
-		elementQuery,
-		Wrapper
-	} from './';
+		elementQuery
+	} from './index.svelte';
 	import Button from '../ui/button/button.svelte';
 	import { type Collections } from '$lib/types/client';
 
 	let { editor }: { editor: TipTapEditor } = $props();
-	let status: 'loading' | 'ready' = $state('loading');
-
-	onMount(() => (status = 'ready'));
+	const directus = getContext<DirectusClient>('directus');
 </script>
 
 {#snippet btn(content: Collections.Button | null)}
@@ -42,34 +38,35 @@
 	{/if}
 {/snippet}
 
-{#if status === 'ready'}
-	{#each editor.content as item}
-		{@const { type, content, attrs } = item}
-		<!-- * DEFAULTS COMPONENTS -->
-		{#if type === 'heading' && attrs}
-			{#if attrs.level.toString() === '1'}
-				<AnimatedHeading {content} />
-			{:else}
-				<Heading level={attrs.level} {content} />
-			{/if}
-		{:else if type === 'paragraph'}
-			<Paragraph {content} />
-		{:else if type === 'horizontalRule'}
-			<hr />
-		{:else if type === 'bulletList'}
-			<BulletList {content} />
-		{:else if type === 'orderedList'}
-			<OrderedList {content} />
-		{:else if type === 'blockquote'}
-			<Blockquote {content} />
+{#each editor.content as item}
+	{@const { type, content, attrs } = item}
+	<!-- * DEFAULTS COMPONENTS -->
+	{#if type === 'heading' && attrs}
+		{#if attrs.level.toString() === '1'}
+			<AnimatedHeading {content} />
+		{:else}
+			<Heading level={attrs.level} {content} />
+		{/if}
+	{:else if type === 'paragraph'}
+		<Paragraph {content} />
+	{:else if type === 'horizontalRule'}
+		<hr />
+	{:else if type === 'bulletList'}
+		<BulletList {content} />
+	{:else if type === 'orderedList'}
+		<OrderedList {content} />
+	{:else if type === 'blockquote'}
+		<Blockquote {content} />
 
-			<!-- * CUSTOM COMPONENTS -->
-		{:else if type === 'relation-block'}
-			{#await elementQuery(directus, attrs) then content}
-				{#if content}
-					{#if 'editor' in content}
-						{@const { editor } = content}
-						{#if 'fit_height' in content}
+		<!-- * CUSTOM COMPONENTS -->
+	{:else if type === 'relation-block'}
+		{#await elementQuery(directus, attrs)}
+			laoding
+		{:then content}
+			{#if content}
+				{#if 'editor' in content}
+					{@const { editor } = content}
+					<!-- {#if 'fit_height' in content}
 							<Wrapper {content}>
 								<svelte:self {editor} />
 							</Wrapper>
@@ -77,24 +74,23 @@
 							<Section {content}>
 								<svelte:self {editor} />
 							</Section>
-						{/if}
-					{:else if 'image' in content}
-						<Image {content} />
-					{:else if 'text' in content}
-						<Quote {content} />
-					{:else if 'images' in content}
-						<Gallery {content} />
-					{:else if 'buttons' in content}
-						<div class="buttons-wrapper flex flex-wrap" class:gap-3={content.gap}>
-							{#each content.buttons as button}
-								{@render btn(button.item)}
-							{/each}
-						</div>
-					{:else if 'label' in content}
-						{@render btn(content)}
-					{:else}{/if}
-				{/if}
-			{/await}
-		{/if}
-	{/each}
-{/if}
+						{/if} -->
+				{:else if 'image' in content}
+					<Image {content} />
+				{:else if 'text' in content}
+					<Quote {content} />
+				{:else if 'images' in content}
+					<Gallery {content} />
+				{:else if 'buttons' in content}
+					<div class="buttons-wrapper flex flex-wrap" class:gap-3={content.gap}>
+						{#each content.buttons as button}
+							{@render btn(button.item)}
+						{/each}
+					</div>
+				{:else if 'label' in content}
+					{@render btn(content)}
+				{:else}{/if}
+			{/if}
+		{/await}
+	{/if}
+{/each}

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { TipTapNode } from '../index.d';
-	import { setMarks } from '../';
+	import { setMarks } from '../index.svelte';
 
 	let {
 		content,

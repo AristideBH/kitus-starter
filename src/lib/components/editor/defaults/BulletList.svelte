@@ -9,7 +9,8 @@
 	{#each content as item}
 		<li>
 			{#if item.type === 'listItem'}
-				<Render editor={item} />
+				<!-- <Render editor={item} /> -->
+				todo : list item
 			{/if}
 		</li>
 	{/each}

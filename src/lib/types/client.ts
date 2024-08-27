@@ -295,6 +295,7 @@ export namespace Collections {
     sort: Types.Optional<Types.Integer>;
     image: Types.Optional<Types.UUID | Collections.DirectusFile>;
     show_caption: Types.Optional<Types.Boolean>;
+    type: Types.Optional<Types.String>;
   }
 
   /**
@@ -358,6 +359,7 @@ export namespace Collections {
     id: Types.PrimaryKey<Types.UUID>;
     text: Types.Optional<Types.String>;
     author: Types.Optional<Types.String>;
+    type: Types.String;
   }
 
   /**
@@ -365,14 +367,15 @@ export namespace Collections {
    */
   export interface Section {
     id: Types.PrimaryKey<Types.UUID>;
-    width: Types.Optional<"full-width" | "default" | Types.String>;
+    width: Types.Optional<Types.String>;
     color: Types.Optional<"muted" | "secondary" | "primary" | Types.String>;
     template: Types.Optional<
-      "cols-3" | "cols-2" | "sidebar-content" | Types.String
+      "cols-3" | "cols-2" | "inherit-main" | Types.String
     >;
     align: Types.Optional<"end" | "center" | "start" | Types.String>;
     editor: Types.Optional<Types.JSON | Types.JSON>;
     editor_nodes: Collections.SectionEditorNodes[];
+    type: Types.String;
   }
 
   /**
@@ -388,6 +391,7 @@ export namespace Collections {
       | Collections.Quote
       | Collections.Button
       | Collections.Wrapper
+      | Collections.Stack
     >;
     collection: Types.Optional<Types.String>;
   }
@@ -504,6 +508,30 @@ export namespace Collections {
   export interface SeoSetting {
     key: Types.PrimaryKey<Types.String>;
     value: Types.Optional<Types.JSON | Types.JSON>;
+  }
+
+  /**
+   * The stack collection.
+   */
+  export interface Stack {
+    id: Types.PrimaryKey<Types.UUID>;
+    type: Types.String;
+    direction: Types.Optional<"column" | "row" | Types.String>;
+    gap: Types.Optional<"8" | "4" | "2" | "0" | Types.String>;
+    color: Types.Optional<"muted" | "secondary" | "primary" | Types.String>;
+    fit_height: Types.Optional<Types.Boolean>;
+    editor: Types.Optional<Types.JSON | Types.JSON>;
+    editor_nodes: Collections.StackEditorNodes[];
+  }
+
+  /**
+   * The stack editor nodes collection.
+   */
+  export interface StackEditorNodes {
+    id: Types.PrimaryKey<Types.UUID>;
+    stack_id: Types.Optional<Types.UUID | Collections.Stack>;
+    item: Types.Optional<Types.String | Collections.Button>;
+    collection: Types.Optional<Types.String>;
   }
 
   /**
@@ -791,6 +819,16 @@ export interface Schema extends System {
    * The seo setting collection.
    */
   seo_setting: Collections.SeoSetting[];
+
+  /**
+   * The stack collection.
+   */
+  stack: Collections.Stack[];
+
+  /**
+   * The stack editor nodes collection.
+   */
+  stack_editor_nodes: Collections.StackEditorNodes[];
 
   /**
    * The wrapper collection.
@@ -5869,6 +5907,539 @@ export class SeoSettingItem
 }
 
 /**
+ * Create many stack items.
+ */
+export function createStackItems<
+  const Query extends Directus.Query<Schema, Collections.Stack[]>,
+>(items: Partial<Collections.Stack>[], query?: Query) {
+  return DirectusSDK.createItems<Schema, "stack", Query>("stack", items, query);
+}
+
+/**
+ * Create a single stack item.
+ */
+export function createStackItem<
+  const Query extends DirectusSDK.Query<Schema, Collections.Stack[]>, // Is this a mistake? Why []?
+>(item: Partial<Collections.Stack>, query?: Query) {
+  return DirectusSDK.createItem<Schema, "stack", Query>("stack", item, query);
+}
+
+/**
+ * Read many stack items.
+ */
+export function readStackItems<
+  const Query extends Directus.Query<Schema, Collections.Stack>,
+>(query?: Query) {
+  return DirectusSDK.readItems<Schema, "stack", Query>("stack", query);
+}
+
+/**
+ * Read many stack items.
+ */
+export const listStack = readStackItems;
+
+/**
+ * Gets a single known stack item by id.
+ */
+export function readStackItem<
+  const Query extends Directus.Query<Schema, Collections.Stack>,
+>(key: string | number, query?: Query) {
+  return DirectusSDK.readItem<Schema, "stack", Query>("stack", key, query);
+}
+
+/**
+ * Gets a single known stack item by id.
+ */
+export const readStack = readStackItem;
+
+/**
+ * Read many stack items.
+ */
+export function updateStackItems<
+  const Query extends Directus.Query<Schema, Collections.Stack[]>,
+>(keys: string[] | number[], patch: Partial<Collections.Stack>, query?: Query) {
+  return DirectusSDK.updateItems<Schema, "stack", Query>(
+    "stack",
+    keys,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Gets a single known stack item by id.
+ */
+export function updateStackItem<
+  const Query extends Directus.Query<Schema, Collections.Stack[]>,
+>(key: string | number, patch: Partial<Collections.Stack>, query?: Query) {
+  return DirectusSDK.updateItem<Schema, "stack", Query>(
+    "stack",
+    key,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Deletes many stack items.
+ */
+export function deleteStackItems<
+  const Query extends Directus.Query<Schema, Collections.Stack[]>,
+>(keys: string[] | number[]) {
+  return DirectusSDK.deleteItems<Schema, "stack", Query>("stack", keys);
+}
+
+/**
+ * Deletes a single known stack item by id.
+ */
+export function deleteStackItem(key: string | number) {
+  return DirectusSDK.deleteItem<Schema, "stack">("stack", key);
+}
+
+export class StackItems
+  implements TypedCollectionItemsWrapper<Collections.Stack>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Creates many items in the collection.
+   */
+  async create<
+    const Query extends DirectusSDK.Query<Schema, Collections.Stack>,
+  >(
+    items: Partial<Collections.Stack>[],
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<Schema, Collections.Stack, Query["fields"]>[]
+  > {
+    return (await this.client.request(
+      createStackItems(items, query as any),
+    )) as any; // Seems like a bug in the SDK.
+  }
+
+  /**
+   * Read many items from the collection.
+   */
+  async query<const Query extends Directus.Query<Schema, Collections.Stack>>(
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<Schema, Collections.Stack, Query["fields"]>[]
+  > {
+    return await this.client.request(readStackItems(query));
+  }
+
+  /**
+   * Read the first item from the collection matching the query.
+   */
+  async find<const Query extends Directus.Query<Schema, Collections.Stack>>(
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<Schema, Collections.Stack, Query["fields"]>
+    | undefined
+  > {
+    const items = await this.client.request(
+      readStackItems({
+        ...query,
+        limit: 1,
+      }),
+    );
+    return items?.[0] as any; // TODO: fix
+  }
+
+  /**
+   * Update many items in the collection.
+   */
+  async update<const Query extends Directus.Query<Schema, Collections.Stack[]>>(
+    keys: string[] | number[],
+    patch: Partial<Collections.Stack>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<Schema, Collections.Stack, Query["fields"]>[]
+  > {
+    return await this.client.request(updateStackItems(keys, patch, query));
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<const Query extends Directus.Query<Schema, Collections.Stack>>(
+    keys: string[] | number[],
+  ): Promise<void> {}
+}
+
+export class StackItem
+  implements TypedCollectionItemWrapper<Collections.Stack>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Create a single item in the collection.
+   */
+  async create<const Query extends Directus.Query<Schema, Collections.Stack>>(
+    item: Partial<Collections.Stack>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<Schema, Collections.Stack, Query["fields"]>
+  > {
+    return (await this.client.request(
+      createStackItem(item, query as any),
+    )) as any;
+  }
+
+  /**
+   * Read a single item from the collection.
+   */
+  async get<const Query extends Directus.Query<Schema, Collections.Stack>>(
+    key: string | number,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<Schema, Collections.Stack, Query["fields"]>
+    | undefined
+  > {
+    return await this.client.request(readStackItem(key, query));
+  }
+
+  /**
+   * Update a single item from the collection.
+   */
+  async update<const Query extends Directus.Query<Schema, Collections.Stack>>(
+    key: string | number,
+    patch: Partial<Collections.Stack>,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<Schema, Collections.Stack, Query["fields"]>
+    | undefined
+  > {
+    return (await this.client.request(
+      updateStackItem(key, patch, query as any),
+    )) as any;
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<const Query extends Directus.Query<Schema, Collections.Stack>>(
+    key: string | number,
+  ): Promise<void> {
+    return await this.client.request(deleteStackItem(key));
+  }
+}
+
+/**
+ * Create many stack editor nodes items.
+ */
+export function createStackEditorNodesItems<
+  const Query extends Directus.Query<Schema, Collections.StackEditorNodes[]>,
+>(items: Partial<Collections.StackEditorNodes>[], query?: Query) {
+  return DirectusSDK.createItems<Schema, "stack_editor_nodes", Query>(
+    "stack_editor_nodes",
+    items,
+    query,
+  );
+}
+
+/**
+ * Create a single stack editor nodes item.
+ */
+export function createStackEditorNodesItem<
+  const Query extends DirectusSDK.Query<Schema, Collections.StackEditorNodes[]>, // Is this a mistake? Why []?
+>(item: Partial<Collections.StackEditorNodes>, query?: Query) {
+  return DirectusSDK.createItem<Schema, "stack_editor_nodes", Query>(
+    "stack_editor_nodes",
+    item,
+    query,
+  );
+}
+
+/**
+ * Read many stack editor nodes items.
+ */
+export function readStackEditorNodesItems<
+  const Query extends Directus.Query<Schema, Collections.StackEditorNodes>,
+>(query?: Query) {
+  return DirectusSDK.readItems<Schema, "stack_editor_nodes", Query>(
+    "stack_editor_nodes",
+    query,
+  );
+}
+
+/**
+ * Read many stack editor nodes items.
+ */
+export const listStackEditorNodes = readStackEditorNodesItems;
+
+/**
+ * Gets a single known stack editor nodes item by id.
+ */
+export function readStackEditorNodesItem<
+  const Query extends Directus.Query<Schema, Collections.StackEditorNodes>,
+>(key: string | number, query?: Query) {
+  return DirectusSDK.readItem<Schema, "stack_editor_nodes", Query>(
+    "stack_editor_nodes",
+    key,
+    query,
+  );
+}
+
+/**
+ * Gets a single known stack editor nodes item by id.
+ */
+export const readStackEditorNodes = readStackEditorNodesItem;
+
+/**
+ * Read many stack editor nodes items.
+ */
+export function updateStackEditorNodesItems<
+  const Query extends Directus.Query<Schema, Collections.StackEditorNodes[]>,
+>(
+  keys: string[] | number[],
+  patch: Partial<Collections.StackEditorNodes>,
+  query?: Query,
+) {
+  return DirectusSDK.updateItems<Schema, "stack_editor_nodes", Query>(
+    "stack_editor_nodes",
+    keys,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Gets a single known stack editor nodes item by id.
+ */
+export function updateStackEditorNodesItem<
+  const Query extends Directus.Query<Schema, Collections.StackEditorNodes[]>,
+>(
+  key: string | number,
+  patch: Partial<Collections.StackEditorNodes>,
+  query?: Query,
+) {
+  return DirectusSDK.updateItem<Schema, "stack_editor_nodes", Query>(
+    "stack_editor_nodes",
+    key,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Deletes many stack editor nodes items.
+ */
+export function deleteStackEditorNodesItems<
+  const Query extends Directus.Query<Schema, Collections.StackEditorNodes[]>,
+>(keys: string[] | number[]) {
+  return DirectusSDK.deleteItems<Schema, "stack_editor_nodes", Query>(
+    "stack_editor_nodes",
+    keys,
+  );
+}
+
+/**
+ * Deletes a single known stack editor nodes item by id.
+ */
+export function deleteStackEditorNodesItem(key: string | number) {
+  return DirectusSDK.deleteItem<Schema, "stack_editor_nodes">(
+    "stack_editor_nodes",
+    key,
+  );
+}
+
+export class StackEditorNodesItems
+  implements TypedCollectionItemsWrapper<Collections.StackEditorNodes>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Creates many items in the collection.
+   */
+  async create<
+    const Query extends DirectusSDK.Query<Schema, Collections.StackEditorNodes>,
+  >(
+    items: Partial<Collections.StackEditorNodes>[],
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.StackEditorNodes,
+      Query["fields"]
+    >[]
+  > {
+    return (await this.client.request(
+      createStackEditorNodesItems(items, query as any),
+    )) as any; // Seems like a bug in the SDK.
+  }
+
+  /**
+   * Read many items from the collection.
+   */
+  async query<
+    const Query extends Directus.Query<Schema, Collections.StackEditorNodes>,
+  >(
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.StackEditorNodes,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(readStackEditorNodesItems(query));
+  }
+
+  /**
+   * Read the first item from the collection matching the query.
+   */
+  async find<
+    const Query extends Directus.Query<Schema, Collections.StackEditorNodes>,
+  >(
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.StackEditorNodes,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    const items = await this.client.request(
+      readStackEditorNodesItems({
+        ...query,
+        limit: 1,
+      }),
+    );
+    return items?.[0] as any; // TODO: fix
+  }
+
+  /**
+   * Update many items in the collection.
+   */
+  async update<
+    const Query extends Directus.Query<Schema, Collections.StackEditorNodes[]>,
+  >(
+    keys: string[] | number[],
+    patch: Partial<Collections.StackEditorNodes>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.StackEditorNodes,
+      Query["fields"]
+    >[]
+  > {
+    return await this.client.request(
+      updateStackEditorNodesItems(keys, patch, query),
+    );
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.StackEditorNodes>,
+  >(keys: string[] | number[]): Promise<void> {}
+}
+
+export class StackEditorNodesItem
+  implements TypedCollectionItemWrapper<Collections.StackEditorNodes>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Create a single item in the collection.
+   */
+  async create<
+    const Query extends Directus.Query<Schema, Collections.StackEditorNodes>,
+  >(
+    item: Partial<Collections.StackEditorNodes>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<
+      Schema,
+      Collections.StackEditorNodes,
+      Query["fields"]
+    >
+  > {
+    return (await this.client.request(
+      createStackEditorNodesItem(item, query as any),
+    )) as any;
+  }
+
+  /**
+   * Read a single item from the collection.
+   */
+  async get<
+    const Query extends Directus.Query<Schema, Collections.StackEditorNodes>,
+  >(
+    key: string | number,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.StackEditorNodes,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return await this.client.request(readStackEditorNodesItem(key, query));
+  }
+
+  /**
+   * Update a single item from the collection.
+   */
+  async update<
+    const Query extends Directus.Query<Schema, Collections.StackEditorNodes>,
+  >(
+    key: string | number,
+    patch: Partial<Collections.StackEditorNodes>,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<
+        Schema,
+        Collections.StackEditorNodes,
+        Query["fields"]
+      >
+    | undefined
+  > {
+    return (await this.client.request(
+      updateStackEditorNodesItem(key, patch, query as any),
+    )) as any;
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<
+    const Query extends Directus.Query<Schema, Collections.StackEditorNodes>,
+  >(key: string | number): Promise<void> {
+    return await this.client.request(deleteStackEditorNodesItem(key));
+  }
+}
+
+/**
  * Create many wrapper items.
  */
 export function createWrapperItems<
@@ -6937,6 +7508,26 @@ export type TypedClient = {
   seo_setting: TypedCollectionItemWrapper<Collections.SeoSetting>;
 
   /**
+   * Manages multiple items from the Stack collection.
+   */
+  stacks: TypedCollectionItemsWrapper<Collections.Stack>;
+
+  /**
+   * Manages individual items from the Stack collection.
+   */
+  stack: TypedCollectionItemWrapper<Collections.Stack>;
+
+  /**
+   * Manages multiple items from the StackEditorNodes collection.
+   */
+  stack_editor_nodes: TypedCollectionItemsWrapper<Collections.StackEditorNodes>;
+
+  /**
+   * Manages individual items from the StackEditorNodes collection.
+   */
+  stack_editor_node: TypedCollectionItemWrapper<Collections.StackEditorNodes>;
+
+  /**
    * Manages multiple items from the Wrapper collection.
    */
   wrappers: TypedCollectionItemsWrapper<Collections.Wrapper>;
@@ -7170,6 +7761,12 @@ export const schema = () => {
 
       ["seo_settings", new SeoSettingItems(client as any)],
       ["seo_setting", new SeoSettingItem(client as any)],
+
+      ["stacks", new StackItems(client as any)],
+      ["stack", new StackItem(client as any)],
+
+      ["stack_editor_nodes", new StackEditorNodesItems(client as any)],
+      ["stack_editor_node", new StackEditorNodesItem(client as any)],
 
       ["wrappers", new WrapperItems(client as any)],
       ["wrapper", new WrapperItem(client as any)],

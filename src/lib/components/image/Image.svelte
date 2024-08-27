@@ -92,6 +92,8 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 	});
 </script>
 
+<!-- <pre>{JSON.stringify(fetchedFile.focal_point_x, null, 2)}</pre>
+<pre>{JSON.stringify(fetchedFile.focal_point_y, null, 2)}</pre> -->
 <figure class={`${className ?? ''}`} bind:this={imgContainer} bind:offsetWidth={elWidth}>
 	<img
 		{src}

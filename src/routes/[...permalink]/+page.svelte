@@ -1,14 +1,16 @@
 <script lang="ts">
 	import Render from '$lib/components/editor/Render.svelte';
-
+	import Builder from '$lib/components/editor/Builder.svelte';
 	let { data } = $props();
-	let { title, editor } = data.page;
+	let { page, editor } = data;
 </script>
 
 <svelte:head>
-	<title>{title}</title>
+	<title>{page.title}</title>
 </svelte:head>
 
-{#if editor}
+<Builder nodes={editor} />
+
+<!-- {#if editor}
 	<Render {editor} />
-{/if}
+{/if} -->

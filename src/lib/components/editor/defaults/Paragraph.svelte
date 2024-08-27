@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { TipTapNode } from '../index.d';
-	import { findLink, findCode, setMarks } from '../';
+	import { findLink, findCode, setMarks } from '../index.svelte';
 
 	let { content }: { content: TipTapNode[] } = $props();
 </script>
