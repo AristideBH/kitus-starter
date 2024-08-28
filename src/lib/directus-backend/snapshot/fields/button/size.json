@@ -25,6 +25,10 @@
         {
           "text": "Large",
           "value": "lg"
+        },
+        {
+          "text": "Badge",
+          "value": "badge"
         }
       ]
     },

@@ -233,20 +233,22 @@ type Subscription {
   pages_mutated(event: EventEnum): pages_mutated
   homepage_mutated(event: EventEnum): homepage_mutated
   section_editor_nodes_mutated(event: EventEnum): section_editor_nodes_mutated
-  quote_mutated(event: EventEnum): quote_mutated
+  section_mutated(event: EventEnum): section_mutated
   pages_editor_nodes_mutated(event: EventEnum): pages_editor_nodes_mutated
-  image_mutated(event: EventEnum): image_mutated
+  quote_mutated(event: EventEnum): quote_mutated
   gallery_files_mutated(event: EventEnum): gallery_files_mutated
   gallery_mutated(event: EventEnum): gallery_mutated
   seo_setting_mutated(event: EventEnum): seo_setting_mutated
   seo_redirection_mutated(event: EventEnum): seo_redirection_mutated
   seo_advanced_setting_mutated(event: EventEnum): seo_advanced_setting_mutated
   seo_detail_mutated(event: EventEnum): seo_detail_mutated
-  section_mutated(event: EventEnum): section_mutated
+  image_mutated(event: EventEnum): image_mutated
   menus_mutated(event: EventEnum): menus_mutated
   menu_items_mutated(event: EventEnum): menu_items_mutated
-  button_mutated(event: EventEnum): button_mutated
   contact_forms_mutated(event: EventEnum): contact_forms_mutated
+  button_mutated(event: EventEnum): button_mutated
+  stack_mutated(event: EventEnum): stack_mutated
+  stack_editor_nodes_mutated(event: EventEnum): stack_editor_nodes_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -311,7 +313,9 @@ enum graphql_sdl_scope {
 
 union pages_editor_nodes_item_union = section
 
-union section_editor_nodes_item_union = image | gallery | quote | button
+union section_editor_nodes_item_union = image | gallery | quote | button | stack
+
+union stack_editor_nodes_item_union = button | image | gallery | quote | stack
 
 type auth_tokens {
   access_token: String
@@ -324,10 +328,11 @@ type button {
   label: String!
   size: String
   variant: String
-  type: String
   url: String
   page(filter: pages_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): pages
   new_tab: Boolean
+  link: String
+  type: String
 }
 
 type button_mutated {
@@ -1545,6 +1550,7 @@ type image {
   sort: Int
   image(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
   show_caption: Boolean
+  type: String
 }
 
 type image_mutated {
@@ -1629,6 +1635,7 @@ type quote {
   id: ID!
   text: String
   author: String
+  type: String
 }
 
 type quote_mutated {
@@ -1643,6 +1650,9 @@ type section {
   editor_func: count_functions
   width: String
   color: String
+  template: String
+  align: String
+  type: String
   editor_nodes(filter: section_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [section_editor_nodes]
   editor_nodes_func: count_functions
 }
@@ -1756,6 +1766,38 @@ type server_info_query_limit {
   max: Int
 }
 
+type stack {
+  id: ID!
+  type: String
+  direction: String
+  gap: String
+  color: String
+  fit_height: Boolean
+  editor: JSON
+  editor_func: count_functions
+  editor_nodes(filter: stack_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [stack_editor_nodes]
+  editor_nodes_func: count_functions
+}
+
+type stack_editor_nodes {
+  id: ID!
+  stack_id(filter: stack_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): stack
+  item: stack_editor_nodes_item_union
+  collection: String
+}
+
+type stack_editor_nodes_mutated {
+  key: ID!
+  event: EventEnum
+  data: stack_editor_nodes
+}
+
+type stack_mutated {
+  key: ID!
+  event: EventEnum
+  data: stack
+}
+
 type users_me_tfa_generate_data {
   secret: String
   otpauth_url: String
@@ -1788,10 +1830,11 @@ input button_filter {
   label: string_filter_operators
   size: string_filter_operators
   variant: string_filter_operators
-  type: string_filter_operators
   url: string_filter_operators
   page: pages_filter
   new_tab: boolean_filter_operators
+  link: string_filter_operators
+  type: string_filter_operators
   _and: [button_filter]
   _or: [button_filter]
 }
@@ -2537,6 +2580,7 @@ input image_filter {
   sort: number_filter_operators
   image: directus_files_filter
   show_caption: boolean_filter_operators
+  type: string_filter_operators
   _and: [image_filter]
   _or: [image_filter]
 }
@@ -2616,6 +2660,7 @@ input quote_filter {
   id: string_filter_operators
   text: string_filter_operators
   author: string_filter_operators
+  type: string_filter_operators
   _and: [quote_filter]
   _or: [quote_filter]
 }
@@ -2630,6 +2675,7 @@ input section_editor_nodes_filter {
   item__gallery: gallery_filter
   item__quote: quote_filter
   item__button: button_filter
+  item__stack: stack_filter
 }
 
 input section_filter {
@@ -2638,6 +2684,9 @@ input section_filter {
   editor_func: count_function_filter_operators
   width: string_filter_operators
   color: string_filter_operators
+  template: string_filter_operators
+  align: string_filter_operators
+  type: string_filter_operators
   editor_nodes: section_editor_nodes_filter
   editor_nodes_func: count_function_filter_operators
   _and: [section_filter]
@@ -2658,6 +2707,34 @@ input seo_detail_filter {
   twitter_image: string_filter_operators
   _and: [seo_detail_filter]
   _or: [seo_detail_filter]
+}
+
+input stack_editor_nodes_filter {
+  id: string_filter_operators
+  stack_id: stack_filter
+  collection: string_filter_operators
+  _and: [stack_editor_nodes_filter]
+  _or: [stack_editor_nodes_filter]
+  item__button: button_filter
+  item__image: image_filter
+  item__gallery: gallery_filter
+  item__quote: quote_filter
+  item__stack: stack_filter
+}
+
+input stack_filter {
+  id: string_filter_operators
+  type: string_filter_operators
+  direction: string_filter_operators
+  gap: string_filter_operators
+  color: string_filter_operators
+  fit_height: boolean_filter_operators
+  editor: string_filter_operators
+  editor_func: count_function_filter_operators
+  editor_nodes: stack_editor_nodes_filter
+  editor_nodes_func: count_function_filter_operators
+  _and: [stack_filter]
+  _or: [stack_filter]
 }
 
 input string_filter_operators {

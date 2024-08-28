@@ -16,13 +16,14 @@
       "displayFormat": true,
       "editorHeight": "height-grow",
       "m2aField": "editor_nodes",
+      "toolbarMode": "sticky",
       "tools": [
         "autolink",
         "blockquote",
         "bold",
         "bulletList",
         "code",
-        "fullscreen",
+        "codeBlock",
         "h1",
         "h2",
         "h3",
@@ -34,15 +35,15 @@
         "link",
         "orderedList",
         "paragraph",
-        "redo",
         "removeLink",
         "strike",
-        "undo"
+        "subscript",
+        "superscript"
       ]
     },
     "readonly": false,
     "required": false,
-    "sort": 4,
+    "sort": 6,
     "special": [
       "cast-json"
     ],

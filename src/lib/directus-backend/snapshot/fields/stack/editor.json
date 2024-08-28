@@ -1,14 +1,12 @@
 {
-  "collection": "pages",
+  "collection": "stack",
   "field": "editor",
   "type": "json",
   "meta": {
-    "collection": "pages",
+    "collection": "stack",
     "conditions": null,
-    "display": "formatted-json-value",
-    "display_options": {
-      "format": "{{content.count()}}"
-    },
+    "display": "flexible-editor-display",
+    "display_options": null,
     "field": "editor",
     "group": null,
     "hidden": false,
@@ -18,18 +16,34 @@
       "displayFormat": true,
       "editorHeight": "height-grow",
       "m2aField": "editor_nodes",
-      "spellcheck": true,
       "toolbarMode": "sticky",
       "tools": [
-        "fullscreen",
+        "autolink",
+        "blockquote",
+        "bold",
+        "bulletList",
+        "code",
+        "codeBlock",
         "h1",
         "h2",
-        "h3"
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "horizontalRule",
+        "italic",
+        "link",
+        "orderedList",
+        "paragraph",
+        "removeLink",
+        "strike",
+        "subscript",
+        "superscript"
       ]
     },
     "readonly": false,
     "required": false,
-    "sort": 10,
+    "sort": 7,
     "special": [
       "cast-json"
     ],
@@ -40,7 +54,7 @@
   },
   "schema": {
     "name": "editor",
-    "table": "pages",
+    "table": "stack",
     "data_type": "json",
     "default_value": null,
     "max_length": null,

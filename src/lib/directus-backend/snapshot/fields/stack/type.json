@@ -1,9 +1,9 @@
 {
-  "collection": "button",
+  "collection": "stack",
   "field": "type",
   "type": "string",
   "meta": {
-    "collection": "button",
+    "collection": "stack",
     "conditions": null,
     "display": null,
     "display_options": null,
@@ -13,20 +13,20 @@
     "interface": "input",
     "note": null,
     "options": null,
-    "readonly": false,
+    "readonly": true,
     "required": true,
-    "sort": 10,
+    "sort": 2,
     "special": null,
     "translations": null,
     "validation": null,
     "validation_message": null,
-    "width": "full"
+    "width": "fill"
   },
   "schema": {
     "name": "type",
-    "table": "button",
+    "table": "stack",
     "data_type": "character varying",
-    "default_value": "button",
+    "default_value": "stack",
     "max_length": 255,
     "numeric_precision": null,
     "numeric_scale": null,

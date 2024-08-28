@@ -1,15 +1,13 @@
 {
-  "collection": "section",
-  "field": "width",
+  "collection": "stack",
+  "field": "direction",
   "type": "string",
   "meta": {
-    "collection": "section",
+    "collection": "stack",
     "conditions": null,
-    "display": "labels",
-    "display_options": {
-      "font": "monospace"
-    },
-    "field": "width",
+    "display": null,
+    "display_options": null,
+    "field": "direction",
     "group": null,
     "hidden": false,
     "interface": "select-radio",
@@ -17,20 +15,18 @@
     "options": {
       "choices": [
         {
-          "text": "Default",
-          "value": "default",
-          "icon": "fit_width"
+          "text": "Horizontal",
+          "value": "row"
         },
         {
-          "text": "Full-width",
-          "value": "full-width",
-          "icon": "width"
+          "text": "Vertical",
+          "value": "col"
         }
       ]
     },
     "readonly": false,
-    "required": false,
-    "sort": 2,
+    "required": true,
+    "sort": 3,
     "special": null,
     "translations": null,
     "validation": null,
@@ -38,10 +34,10 @@
     "width": "half"
   },
   "schema": {
-    "name": "width",
-    "table": "section",
+    "name": "direction",
+    "table": "stack",
     "data_type": "character varying",
-    "default_value": "default",
+    "default_value": "col",
     "max_length": 255,
     "numeric_precision": null,
     "numeric_scale": null,

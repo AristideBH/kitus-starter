@@ -1,36 +1,37 @@
 {
   "collection": "section",
-  "field": "width",
+  "field": "template",
   "type": "string",
   "meta": {
     "collection": "section",
     "conditions": null,
     "display": "labels",
-    "display_options": {
-      "font": "monospace"
-    },
-    "field": "width",
+    "display_options": null,
+    "field": "template",
     "group": null,
     "hidden": false,
-    "interface": "select-radio",
+    "interface": "select-dropdown",
     "note": null,
     "options": {
+      "allowNone": true,
       "choices": [
         {
-          "text": "Default",
-          "value": "default",
-          "icon": "fit_width"
+          "text": "Content | Sidebar",
+          "value": "inherit-main"
         },
         {
-          "text": "Full-width",
-          "value": "full-width",
-          "icon": "width"
+          "text": "2 columns",
+          "value": "cols-2"
+        },
+        {
+          "text": "3 columns",
+          "value": "cols-3"
         }
       ]
     },
     "readonly": false,
     "required": false,
-    "sort": 2,
+    "sort": 4,
     "special": null,
     "translations": null,
     "validation": null,
@@ -38,10 +39,10 @@
     "width": "half"
   },
   "schema": {
-    "name": "width",
+    "name": "template",
     "table": "section",
     "data_type": "character varying",
-    "default_value": "default",
+    "default_value": null,
     "max_length": 255,
     "numeric_precision": null,
     "numeric_scale": null,

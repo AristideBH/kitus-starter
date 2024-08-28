@@ -1,51 +1,36 @@
 {
   "collection": "section",
-  "field": "width",
+  "field": "type",
   "type": "string",
   "meta": {
     "collection": "section",
     "conditions": null,
-    "display": "labels",
-    "display_options": {
-      "font": "monospace"
-    },
-    "field": "width",
+    "display": null,
+    "display_options": null,
+    "field": "type",
     "group": null,
-    "hidden": false,
-    "interface": "select-radio",
+    "hidden": true,
+    "interface": "input",
     "note": null,
-    "options": {
-      "choices": [
-        {
-          "text": "Default",
-          "value": "default",
-          "icon": "fit_width"
-        },
-        {
-          "text": "Full-width",
-          "value": "full-width",
-          "icon": "width"
-        }
-      ]
-    },
-    "readonly": false,
-    "required": false,
-    "sort": 2,
+    "options": null,
+    "readonly": true,
+    "required": true,
+    "sort": 8,
     "special": null,
     "translations": null,
     "validation": null,
     "validation_message": null,
-    "width": "half"
+    "width": "full"
   },
   "schema": {
-    "name": "width",
+    "name": "type",
     "table": "section",
     "data_type": "character varying",
-    "default_value": "default",
+    "default_value": "section",
     "max_length": 255,
     "numeric_precision": null,
     "numeric_scale": null,
-    "is_nullable": true,
+    "is_nullable": false,
     "is_unique": false,
     "is_primary_key": false,
     "is_generated": false,

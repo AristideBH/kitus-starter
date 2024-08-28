@@ -1,0 +1,25 @@
+{
+  "collection": "stack_editor_nodes",
+  "field": "stack_id",
+  "related_collection": "stack",
+  "meta": {
+    "junction_field": "item",
+    "many_collection": "stack_editor_nodes",
+    "many_field": "stack_id",
+    "one_allowed_collections": null,
+    "one_collection": "stack",
+    "one_collection_field": null,
+    "one_deselect_action": "delete",
+    "one_field": "editor_nodes",
+    "sort_field": null
+  },
+  "schema": {
+    "table": "stack_editor_nodes",
+    "column": "stack_id",
+    "foreign_key_table": "stack",
+    "foreign_key_column": "id",
+    "constraint_name": "stack_editor_nodes_stack_id_foreign",
+    "on_update": "NO ACTION",
+    "on_delete": "CASCADE"
+  }
+}

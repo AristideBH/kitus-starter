@@ -5,7 +5,7 @@
   "meta": {
     "collection": "section",
     "conditions": null,
-    "display": null,
+    "display": "labels",
     "display_options": null,
     "field": "color",
     "group": null,
@@ -13,11 +13,8 @@
     "interface": "select-dropdown",
     "note": null,
     "options": {
+      "allowNone": true,
       "choices": [
-        {
-          "text": "None",
-          "value": "none"
-        },
         {
           "text": "Primary",
           "value": "primary"
@@ -45,11 +42,11 @@
     "name": "color",
     "table": "section",
     "data_type": "character varying",
-    "default_value": "none",
+    "default_value": null,
     "max_length": 255,
     "numeric_precision": null,
     "numeric_scale": null,
-    "is_nullable": false,
+    "is_nullable": true,
     "is_unique": false,
     "is_primary_key": false,
     "is_generated": false,

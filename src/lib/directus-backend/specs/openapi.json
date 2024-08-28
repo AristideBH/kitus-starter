@@ -8832,15 +8832,15 @@
         ]
       }
     },
-    "/items/quote": {
+    "/items/section": {
       "post": {
         "summary": "Create an Item",
-        "description": "Create a new quote item.",
+        "description": "Create a new section item.",
         "tags": [
           "Items",
-          "ItemsQuote"
+          "ItemsSection"
         ],
-        "operationId": "createItemsQuote",
+        "operationId": "createItemsSection",
         "parameters": [
           {
             "$ref": "#/components/parameters/Meta"
@@ -8854,11 +8854,11 @@
                   {
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/ItemsQuote"
+                      "$ref": "#/components/schemas/ItemsSection"
                     }
                   },
                   {
-                    "$ref": "#/components/schemas/ItemsQuote"
+                    "$ref": "#/components/schemas/ItemsSection"
                   }
                 ]
               }
@@ -8875,7 +8875,7 @@
                   "properties": {
                     "data": {
                       "items": {
-                        "$ref": "#/components/schemas/ItemsQuote"
+                        "$ref": "#/components/schemas/ItemsSection"
                       }
                     }
                   }
@@ -8890,12 +8890,12 @@
       },
       "get": {
         "summary": "List Items",
-        "description": "List the quote items.",
+        "description": "List the section items.",
         "tags": [
           "Items",
-          "ItemsQuote"
+          "ItemsSection"
         ],
-        "operationId": "readItemsQuote",
+        "operationId": "readItemsSection",
         "security": [
           {
             "Auth": []
@@ -8936,7 +8936,7 @@
                       "type": "array",
                       "items": {
                         "type": "object",
-                        "$ref": "#/components/schemas/ItemsQuote"
+                        "$ref": "#/components/schemas/ItemsSection"
                       }
                     },
                     "meta": {
@@ -8954,12 +8954,12 @@
       },
       "patch": {
         "summary": "Update Multiple Items",
-        "description": "Update multiple quote items at the same time.",
+        "description": "Update multiple section items at the same time.",
         "tags": [
           "Items",
-          "ItemsQuote"
+          "ItemsSection"
         ],
-        "operationId": "updateItemsQuote",
+        "operationId": "updateItemsSection",
         "parameters": [
           {
             "$ref": "#/components/parameters/Fields"
@@ -8991,11 +8991,11 @@
                   {
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/ItemsQuote"
+                      "$ref": "#/components/schemas/ItemsSection"
                     }
                   },
                   {
-                    "$ref": "#/components/schemas/ItemsQuote"
+                    "$ref": "#/components/schemas/ItemsSection"
                   }
                 ]
               }
@@ -9011,7 +9011,7 @@
                   "properties": {
                     "data": {
                       "items": {
-                        "$ref": "#/components/schemas/ItemsQuote"
+                        "$ref": "#/components/schemas/ItemsSection"
                       }
                     }
                   }
@@ -9023,12 +9023,12 @@
       },
       "delete": {
         "summary": "Delete Multiple Items",
-        "description": "Delete multiple existing quote items.",
+        "description": "Delete multiple existing section items.",
         "tags": [
           "Items",
-          "ItemsQuote"
+          "ItemsSection"
         ],
-        "operationId": "deleteItemsQuote",
+        "operationId": "deleteItemsSection",
         "responses": {
           "200": {
             "description": "Successful request"
@@ -9040,15 +9040,15 @@
         "parameters": []
       }
     },
-    "/items/quote/{id}": {
+    "/items/section/{id}": {
       "get": {
         "summary": "Retrieve an Item",
-        "description": "Retrieve a single quote item by unique identifier.",
+        "description": "Retrieve a single section item by unique identifier.",
         "tags": [
           "Items",
-          "ItemsQuote"
+          "ItemsSection"
         ],
-        "operationId": "readSingleItemsQuote",
+        "operationId": "readSingleItemsSection",
         "parameters": [
           {
             "$ref": "#/components/parameters/Fields"
@@ -9090,7 +9090,7 @@
                   "properties": {
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/ItemsQuote"
+                      "$ref": "#/components/schemas/ItemsSection"
                     }
                   }
                 }
@@ -9107,12 +9107,12 @@
       },
       "patch": {
         "summary": "Update an Item",
-        "description": "Update an existing quote item.",
+        "description": "Update an existing section item.",
         "tags": [
           "Items",
-          "ItemsQuote"
+          "ItemsSection"
         ],
-        "operationId": "updateSingleItemsQuote",
+        "operationId": "updateSingleItemsSection",
         "parameters": [
           {
             "$ref": "#/components/parameters/Fields"
@@ -9146,7 +9146,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "$ref": "#/components/schemas/ItemsQuote"
+                "$ref": "#/components/schemas/ItemsSection"
               }
             }
           }
@@ -9161,7 +9161,7 @@
                   "properties": {
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/ItemsQuote"
+                      "$ref": "#/components/schemas/ItemsSection"
                     }
                   }
                 }
@@ -9178,12 +9178,12 @@
       },
       "delete": {
         "summary": "Delete an Item",
-        "description": "Delete an existing quote item.",
+        "description": "Delete an existing section item.",
         "tags": [
           "Items",
-          "ItemsQuote"
+          "ItemsSection"
         ],
-        "operationId": "deleteSingleItemsQuote",
+        "operationId": "deleteSingleItemsSection",
         "responses": {
           "200": {
             "description": "Successful request"
@@ -9606,15 +9606,15 @@
         ]
       }
     },
-    "/items/image": {
+    "/items/quote": {
       "post": {
         "summary": "Create an Item",
-        "description": "Create a new image item.",
+        "description": "Create a new quote item.",
         "tags": [
           "Items",
-          "ItemsImage"
+          "ItemsQuote"
         ],
-        "operationId": "createItemsImage",
+        "operationId": "createItemsQuote",
         "parameters": [
           {
             "$ref": "#/components/parameters/Meta"
@@ -9628,11 +9628,11 @@
                   {
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/ItemsImage"
+                      "$ref": "#/components/schemas/ItemsQuote"
                     }
                   },
                   {
-                    "$ref": "#/components/schemas/ItemsImage"
+                    "$ref": "#/components/schemas/ItemsQuote"
                   }
                 ]
               }
@@ -9649,7 +9649,7 @@
                   "properties": {
                     "data": {
                       "items": {
-                        "$ref": "#/components/schemas/ItemsImage"
+                        "$ref": "#/components/schemas/ItemsQuote"
                       }
                     }
                   }
@@ -9664,12 +9664,12 @@
       },
       "get": {
         "summary": "List Items",
-        "description": "List the image items.",
+        "description": "List the quote items.",
         "tags": [
           "Items",
-          "ItemsImage"
+          "ItemsQuote"
         ],
-        "operationId": "readItemsImage",
+        "operationId": "readItemsQuote",
         "security": [
           {
             "Auth": []
@@ -9710,7 +9710,7 @@
                       "type": "array",
                       "items": {
                         "type": "object",
-                        "$ref": "#/components/schemas/ItemsImage"
+                        "$ref": "#/components/schemas/ItemsQuote"
                       }
                     },
                     "meta": {
@@ -9728,12 +9728,12 @@
       },
       "patch": {
         "summary": "Update Multiple Items",
-        "description": "Update multiple image items at the same time.",
+        "description": "Update multiple quote items at the same time.",
         "tags": [
           "Items",
-          "ItemsImage"
+          "ItemsQuote"
         ],
-        "operationId": "updateItemsImage",
+        "operationId": "updateItemsQuote",
         "parameters": [
           {
             "$ref": "#/components/parameters/Fields"
@@ -9765,11 +9765,11 @@
                   {
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/ItemsImage"
+                      "$ref": "#/components/schemas/ItemsQuote"
                     }
                   },
                   {
-                    "$ref": "#/components/schemas/ItemsImage"
+                    "$ref": "#/components/schemas/ItemsQuote"
                   }
                 ]
               }
@@ -9785,7 +9785,7 @@
                   "properties": {
                     "data": {
                       "items": {
-                        "$ref": "#/components/schemas/ItemsImage"
+                        "$ref": "#/components/schemas/ItemsQuote"
                       }
                     }
                   }
@@ -9797,12 +9797,12 @@
       },
       "delete": {
         "summary": "Delete Multiple Items",
-        "description": "Delete multiple existing image items.",
+        "description": "Delete multiple existing quote items.",
         "tags": [
           "Items",
-          "ItemsImage"
+          "ItemsQuote"
         ],
-        "operationId": "deleteItemsImage",
+        "operationId": "deleteItemsQuote",
         "responses": {
           "200": {
             "description": "Successful request"
@@ -9814,15 +9814,15 @@
         "parameters": []
       }
     },
-    "/items/image/{id}": {
+    "/items/quote/{id}": {
       "get": {
         "summary": "Retrieve an Item",
-        "description": "Retrieve a single image item by unique identifier.",
+        "description": "Retrieve a single quote item by unique identifier.",
         "tags": [
           "Items",
-          "ItemsImage"
+          "ItemsQuote"
         ],
-        "operationId": "readSingleItemsImage",
+        "operationId": "readSingleItemsQuote",
         "parameters": [
           {
             "$ref": "#/components/parameters/Fields"
@@ -9864,7 +9864,7 @@
                   "properties": {
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/ItemsImage"
+                      "$ref": "#/components/schemas/ItemsQuote"
                     }
                   }
                 }
@@ -9881,12 +9881,12 @@
       },
       "patch": {
         "summary": "Update an Item",
-        "description": "Update an existing image item.",
+        "description": "Update an existing quote item.",
         "tags": [
           "Items",
-          "ItemsImage"
+          "ItemsQuote"
         ],
-        "operationId": "updateSingleItemsImage",
+        "operationId": "updateSingleItemsQuote",
         "parameters": [
           {
             "$ref": "#/components/parameters/Fields"
@@ -9920,7 +9920,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "$ref": "#/components/schemas/ItemsImage"
+                "$ref": "#/components/schemas/ItemsQuote"
               }
             }
           }
@@ -9935,7 +9935,7 @@
                   "properties": {
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/ItemsImage"
+                      "$ref": "#/components/schemas/ItemsQuote"
                     }
                   }
                 }
@@ -9952,12 +9952,12 @@
       },
       "delete": {
         "summary": "Delete an Item",
-        "description": "Delete an existing image item.",
+        "description": "Delete an existing quote item.",
         "tags": [
           "Items",
-          "ItemsImage"
+          "ItemsQuote"
         ],
-        "operationId": "deleteSingleItemsImage",
+        "operationId": "deleteSingleItemsQuote",
         "responses": {
           "200": {
             "description": "Successful request"
@@ -12315,15 +12315,15 @@
         ]
       }
     },
-    "/items/section": {
+    "/items/image": {
       "post": {
         "summary": "Create an Item",
-        "description": "Create a new section item.",
+        "description": "Create a new image item.",
         "tags": [
           "Items",
-          "ItemsSection"
+          "ItemsImage"
         ],
-        "operationId": "createItemsSection",
+        "operationId": "createItemsImage",
         "parameters": [
           {
             "$ref": "#/components/parameters/Meta"
@@ -12337,11 +12337,11 @@
                   {
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/ItemsSection"
+                      "$ref": "#/components/schemas/ItemsImage"
                     }
                   },
                   {
-                    "$ref": "#/components/schemas/ItemsSection"
+                    "$ref": "#/components/schemas/ItemsImage"
                   }
                 ]
               }
@@ -12358,7 +12358,7 @@
                   "properties": {
                     "data": {
                       "items": {
-                        "$ref": "#/components/schemas/ItemsSection"
+                        "$ref": "#/components/schemas/ItemsImage"
                       }
                     }
                   }
@@ -12373,12 +12373,12 @@
       },
       "get": {
         "summary": "List Items",
-        "description": "List the section items.",
+        "description": "List the image items.",
         "tags": [
           "Items",
-          "ItemsSection"
+          "ItemsImage"
         ],
-        "operationId": "readItemsSection",
+        "operationId": "readItemsImage",
         "security": [
           {
             "Auth": []
@@ -12419,7 +12419,7 @@
                       "type": "array",
                       "items": {
                         "type": "object",
-                        "$ref": "#/components/schemas/ItemsSection"
+                        "$ref": "#/components/schemas/ItemsImage"
                       }
                     },
                     "meta": {
@@ -12437,12 +12437,12 @@
       },
       "patch": {
         "summary": "Update Multiple Items",
-        "description": "Update multiple section items at the same time.",
+        "description": "Update multiple image items at the same time.",
         "tags": [
           "Items",
-          "ItemsSection"
+          "ItemsImage"
         ],
-        "operationId": "updateItemsSection",
+        "operationId": "updateItemsImage",
         "parameters": [
           {
             "$ref": "#/components/parameters/Fields"
@@ -12474,11 +12474,11 @@
                   {
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/ItemsSection"
+                      "$ref": "#/components/schemas/ItemsImage"
                     }
                   },
                   {
-                    "$ref": "#/components/schemas/ItemsSection"
+                    "$ref": "#/components/schemas/ItemsImage"
                   }
                 ]
               }
@@ -12494,7 +12494,7 @@
                   "properties": {
                     "data": {
                       "items": {
-                        "$ref": "#/components/schemas/ItemsSection"
+                        "$ref": "#/components/schemas/ItemsImage"
                       }
                     }
                   }
@@ -12506,12 +12506,12 @@
       },
       "delete": {
         "summary": "Delete Multiple Items",
-        "description": "Delete multiple existing section items.",
+        "description": "Delete multiple existing image items.",
         "tags": [
           "Items",
-          "ItemsSection"
+          "ItemsImage"
         ],
-        "operationId": "deleteItemsSection",
+        "operationId": "deleteItemsImage",
         "responses": {
           "200": {
             "description": "Successful request"
@@ -12523,15 +12523,15 @@
         "parameters": []
       }
     },
-    "/items/section/{id}": {
+    "/items/image/{id}": {
       "get": {
         "summary": "Retrieve an Item",
-        "description": "Retrieve a single section item by unique identifier.",
+        "description": "Retrieve a single image item by unique identifier.",
         "tags": [
           "Items",
-          "ItemsSection"
+          "ItemsImage"
         ],
-        "operationId": "readSingleItemsSection",
+        "operationId": "readSingleItemsImage",
         "parameters": [
           {
             "$ref": "#/components/parameters/Fields"
@@ -12573,7 +12573,7 @@
                   "properties": {
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/ItemsSection"
+                      "$ref": "#/components/schemas/ItemsImage"
                     }
                   }
                 }
@@ -12590,12 +12590,12 @@
       },
       "patch": {
         "summary": "Update an Item",
-        "description": "Update an existing section item.",
+        "description": "Update an existing image item.",
         "tags": [
           "Items",
-          "ItemsSection"
+          "ItemsImage"
         ],
-        "operationId": "updateSingleItemsSection",
+        "operationId": "updateSingleItemsImage",
         "parameters": [
           {
             "$ref": "#/components/parameters/Fields"
@@ -12629,7 +12629,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "$ref": "#/components/schemas/ItemsSection"
+                "$ref": "#/components/schemas/ItemsImage"
               }
             }
           }
@@ -12644,7 +12644,7 @@
                   "properties": {
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/ItemsSection"
+                      "$ref": "#/components/schemas/ItemsImage"
                     }
                   }
                 }
@@ -12661,12 +12661,12 @@
       },
       "delete": {
         "summary": "Delete an Item",
-        "description": "Delete an existing section item.",
+        "description": "Delete an existing image item.",
         "tags": [
           "Items",
-          "ItemsSection"
+          "ItemsImage"
         ],
-        "operationId": "deleteSingleItemsSection",
+        "operationId": "deleteSingleItemsImage",
         "responses": {
           "200": {
             "description": "Successful request"
@@ -13476,6 +13476,393 @@
         ]
       }
     },
+    "/items/contact_forms": {
+      "post": {
+        "summary": "Create an Item",
+        "description": "Create a new contact_forms item.",
+        "tags": [
+          "Items",
+          "ItemsContactForms"
+        ],
+        "operationId": "createItemsContactForms",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Meta"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ItemsContactForms"
+                    }
+                  },
+                  {
+                    "$ref": "#/components/schemas/ItemsContactForms"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "$ref": "#/components/schemas/ItemsContactForms"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        }
+      },
+      "get": {
+        "summary": "List Items",
+        "description": "List the contact_forms items.",
+        "tags": [
+          "Items",
+          "ItemsContactForms"
+        ],
+        "operationId": "readItemsContactForms",
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Meta"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/Sort"
+          },
+          {
+            "$ref": "#/components/parameters/Filter"
+          },
+          {
+            "$ref": "#/components/parameters/Search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/ItemsContactForms"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/x-metadata"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update Multiple Items",
+        "description": "Update multiple contact_forms items at the same time.",
+        "tags": [
+          "Items",
+          "ItemsContactForms"
+        ],
+        "operationId": "updateItemsContactForms",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Meta"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/Sort"
+          },
+          {
+            "$ref": "#/components/parameters/Filter"
+          },
+          {
+            "$ref": "#/components/parameters/Search"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ItemsContactForms"
+                    }
+                  },
+                  {
+                    "$ref": "#/components/schemas/ItemsContactForms"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "$ref": "#/components/schemas/ItemsContactForms"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Multiple Items",
+        "description": "Delete multiple existing contact_forms items.",
+        "tags": [
+          "Items",
+          "ItemsContactForms"
+        ],
+        "operationId": "deleteItemsContactForms",
+        "responses": {
+          "200": {
+            "description": "Successful request"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/items/contact_forms/{id}": {
+      "get": {
+        "summary": "Retrieve an Item",
+        "description": "Retrieve a single contact_forms item by unique identifier.",
+        "tags": [
+          "Items",
+          "ItemsContactForms"
+        ],
+        "operationId": "readSingleItemsContactForms",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          },
+          {
+            "$ref": "#/components/parameters/Meta"
+          },
+          {
+            "$ref": "#/components/parameters/Version"
+          },
+          {
+            "name": "id",
+            "description": "Index of the item.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "integer",
+                  "description": "Incremental index of the item.",
+                  "example": 1
+                },
+                {
+                  "type": "string",
+                  "description": "Unique identifier of the item.",
+                  "example": "8cbb43fe-4cdf-4991-8352-c461779cec02"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/ItemsContactForms"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update an Item",
+        "description": "Update an existing contact_forms item.",
+        "tags": [
+          "Items",
+          "ItemsContactForms"
+        ],
+        "operationId": "updateSingleItemsContactForms",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          },
+          {
+            "$ref": "#/components/parameters/Meta"
+          },
+          {
+            "name": "id",
+            "description": "Index of the item.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "integer",
+                  "description": "Incremental index of the item.",
+                  "example": 1
+                },
+                {
+                  "type": "string",
+                  "description": "Unique identifier of the item.",
+                  "example": "8cbb43fe-4cdf-4991-8352-c461779cec02"
+                }
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/ItemsContactForms"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/ItemsContactForms"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an Item",
+        "description": "Delete an existing contact_forms item.",
+        "tags": [
+          "Items",
+          "ItemsContactForms"
+        ],
+        "operationId": "deleteSingleItemsContactForms",
+        "responses": {
+          "200": {
+            "description": "Successful request"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Index of the item.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "integer",
+                  "description": "Incremental index of the item.",
+                  "example": 1
+                },
+                {
+                  "type": "string",
+                  "description": "Unique identifier of the item.",
+                  "example": "8cbb43fe-4cdf-4991-8352-c461779cec02"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
     "/items/button": {
       "post": {
         "summary": "Create an Item",
@@ -13863,15 +14250,15 @@
         ]
       }
     },
-    "/items/contact_forms": {
+    "/items/stack": {
       "post": {
         "summary": "Create an Item",
-        "description": "Create a new contact_forms item.",
+        "description": "Create a new stack item.",
         "tags": [
           "Items",
-          "ItemsContactForms"
+          "ItemsStack"
         ],
-        "operationId": "createItemsContactForms",
+        "operationId": "createItemsStack",
         "parameters": [
           {
             "$ref": "#/components/parameters/Meta"
@@ -13885,11 +14272,11 @@
                   {
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/ItemsContactForms"
+                      "$ref": "#/components/schemas/ItemsStack"
                     }
                   },
                   {
-                    "$ref": "#/components/schemas/ItemsContactForms"
+                    "$ref": "#/components/schemas/ItemsStack"
                   }
                 ]
               }
@@ -13906,7 +14293,7 @@
                   "properties": {
                     "data": {
                       "items": {
-                        "$ref": "#/components/schemas/ItemsContactForms"
+                        "$ref": "#/components/schemas/ItemsStack"
                       }
                     }
                   }
@@ -13921,12 +14308,12 @@
       },
       "get": {
         "summary": "List Items",
-        "description": "List the contact_forms items.",
+        "description": "List the stack items.",
         "tags": [
           "Items",
-          "ItemsContactForms"
+          "ItemsStack"
         ],
-        "operationId": "readItemsContactForms",
+        "operationId": "readItemsStack",
         "security": [
           {
             "Auth": []
@@ -13967,7 +14354,7 @@
                       "type": "array",
                       "items": {
                         "type": "object",
-                        "$ref": "#/components/schemas/ItemsContactForms"
+                        "$ref": "#/components/schemas/ItemsStack"
                       }
                     },
                     "meta": {
@@ -13985,12 +14372,12 @@
       },
       "patch": {
         "summary": "Update Multiple Items",
-        "description": "Update multiple contact_forms items at the same time.",
+        "description": "Update multiple stack items at the same time.",
         "tags": [
           "Items",
-          "ItemsContactForms"
+          "ItemsStack"
         ],
-        "operationId": "updateItemsContactForms",
+        "operationId": "updateItemsStack",
         "parameters": [
           {
             "$ref": "#/components/parameters/Fields"
@@ -14022,11 +14409,11 @@
                   {
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/ItemsContactForms"
+                      "$ref": "#/components/schemas/ItemsStack"
                     }
                   },
                   {
-                    "$ref": "#/components/schemas/ItemsContactForms"
+                    "$ref": "#/components/schemas/ItemsStack"
                   }
                 ]
               }
@@ -14042,7 +14429,7 @@
                   "properties": {
                     "data": {
                       "items": {
-                        "$ref": "#/components/schemas/ItemsContactForms"
+                        "$ref": "#/components/schemas/ItemsStack"
                       }
                     }
                   }
@@ -14054,12 +14441,12 @@
       },
       "delete": {
         "summary": "Delete Multiple Items",
-        "description": "Delete multiple existing contact_forms items.",
+        "description": "Delete multiple existing stack items.",
         "tags": [
           "Items",
-          "ItemsContactForms"
+          "ItemsStack"
         ],
-        "operationId": "deleteItemsContactForms",
+        "operationId": "deleteItemsStack",
         "responses": {
           "200": {
             "description": "Successful request"
@@ -14071,15 +14458,15 @@
         "parameters": []
       }
     },
-    "/items/contact_forms/{id}": {
+    "/items/stack/{id}": {
       "get": {
         "summary": "Retrieve an Item",
-        "description": "Retrieve a single contact_forms item by unique identifier.",
+        "description": "Retrieve a single stack item by unique identifier.",
         "tags": [
           "Items",
-          "ItemsContactForms"
+          "ItemsStack"
         ],
-        "operationId": "readSingleItemsContactForms",
+        "operationId": "readSingleItemsStack",
         "parameters": [
           {
             "$ref": "#/components/parameters/Fields"
@@ -14121,7 +14508,7 @@
                   "properties": {
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/ItemsContactForms"
+                      "$ref": "#/components/schemas/ItemsStack"
                     }
                   }
                 }
@@ -14138,12 +14525,12 @@
       },
       "patch": {
         "summary": "Update an Item",
-        "description": "Update an existing contact_forms item.",
+        "description": "Update an existing stack item.",
         "tags": [
           "Items",
-          "ItemsContactForms"
+          "ItemsStack"
         ],
-        "operationId": "updateSingleItemsContactForms",
+        "operationId": "updateSingleItemsStack",
         "parameters": [
           {
             "$ref": "#/components/parameters/Fields"
@@ -14177,7 +14564,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "$ref": "#/components/schemas/ItemsContactForms"
+                "$ref": "#/components/schemas/ItemsStack"
               }
             }
           }
@@ -14192,7 +14579,7 @@
                   "properties": {
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/ItemsContactForms"
+                      "$ref": "#/components/schemas/ItemsStack"
                     }
                   }
                 }
@@ -14209,12 +14596,399 @@
       },
       "delete": {
         "summary": "Delete an Item",
-        "description": "Delete an existing contact_forms item.",
+        "description": "Delete an existing stack item.",
         "tags": [
           "Items",
-          "ItemsContactForms"
+          "ItemsStack"
         ],
-        "operationId": "deleteSingleItemsContactForms",
+        "operationId": "deleteSingleItemsStack",
+        "responses": {
+          "200": {
+            "description": "Successful request"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Index of the item.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "integer",
+                  "description": "Incremental index of the item.",
+                  "example": 1
+                },
+                {
+                  "type": "string",
+                  "description": "Unique identifier of the item.",
+                  "example": "8cbb43fe-4cdf-4991-8352-c461779cec02"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "/items/stack_editor_nodes": {
+      "post": {
+        "summary": "Create an Item",
+        "description": "Create a new stack_editor_nodes item.",
+        "tags": [
+          "Items",
+          "ItemsStackEditorNodes"
+        ],
+        "operationId": "createItemsStackEditorNodes",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Meta"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ItemsStackEditorNodes"
+                    }
+                  },
+                  {
+                    "$ref": "#/components/schemas/ItemsStackEditorNodes"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "$ref": "#/components/schemas/ItemsStackEditorNodes"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        }
+      },
+      "get": {
+        "summary": "List Items",
+        "description": "List the stack_editor_nodes items.",
+        "tags": [
+          "Items",
+          "ItemsStackEditorNodes"
+        ],
+        "operationId": "readItemsStackEditorNodes",
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Meta"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/Sort"
+          },
+          {
+            "$ref": "#/components/parameters/Filter"
+          },
+          {
+            "$ref": "#/components/parameters/Search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/ItemsStackEditorNodes"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/x-metadata"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update Multiple Items",
+        "description": "Update multiple stack_editor_nodes items at the same time.",
+        "tags": [
+          "Items",
+          "ItemsStackEditorNodes"
+        ],
+        "operationId": "updateItemsStackEditorNodes",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Meta"
+          },
+          {
+            "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/Sort"
+          },
+          {
+            "$ref": "#/components/parameters/Filter"
+          },
+          {
+            "$ref": "#/components/parameters/Search"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ItemsStackEditorNodes"
+                    }
+                  },
+                  {
+                    "$ref": "#/components/schemas/ItemsStackEditorNodes"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "$ref": "#/components/schemas/ItemsStackEditorNodes"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Multiple Items",
+        "description": "Delete multiple existing stack_editor_nodes items.",
+        "tags": [
+          "Items",
+          "ItemsStackEditorNodes"
+        ],
+        "operationId": "deleteItemsStackEditorNodes",
+        "responses": {
+          "200": {
+            "description": "Successful request"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        },
+        "parameters": []
+      }
+    },
+    "/items/stack_editor_nodes/{id}": {
+      "get": {
+        "summary": "Retrieve an Item",
+        "description": "Retrieve a single stack_editor_nodes item by unique identifier.",
+        "tags": [
+          "Items",
+          "ItemsStackEditorNodes"
+        ],
+        "operationId": "readSingleItemsStackEditorNodes",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          },
+          {
+            "$ref": "#/components/parameters/Meta"
+          },
+          {
+            "$ref": "#/components/parameters/Version"
+          },
+          {
+            "name": "id",
+            "description": "Index of the item.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "integer",
+                  "description": "Incremental index of the item.",
+                  "example": 1
+                },
+                {
+                  "type": "string",
+                  "description": "Unique identifier of the item.",
+                  "example": "8cbb43fe-4cdf-4991-8352-c461779cec02"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/ItemsStackEditorNodes"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update an Item",
+        "description": "Update an existing stack_editor_nodes item.",
+        "tags": [
+          "Items",
+          "ItemsStackEditorNodes"
+        ],
+        "operationId": "updateSingleItemsStackEditorNodes",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Fields"
+          },
+          {
+            "$ref": "#/components/parameters/Meta"
+          },
+          {
+            "name": "id",
+            "description": "Index of the item.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "integer",
+                  "description": "Incremental index of the item.",
+                  "example": 1
+                },
+                {
+                  "type": "string",
+                  "description": "Unique identifier of the item.",
+                  "example": "8cbb43fe-4cdf-4991-8352-c461779cec02"
+                }
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/ItemsStackEditorNodes"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/ItemsStackEditorNodes"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an Item",
+        "description": "Delete an existing stack_editor_nodes item.",
+        "tags": [
+          "Items",
+          "ItemsStackEditorNodes"
+        ],
+        "operationId": "deleteSingleItemsStackEditorNodes",
         "responses": {
           "200": {
             "description": "Successful request"
@@ -14386,16 +15160,16 @@
       "x-collection": "section_editor_nodes"
     },
     {
-      "name": "ItemsQuote",
-      "x-collection": "quote"
+      "name": "ItemsSection",
+      "x-collection": "section"
     },
     {
       "name": "ItemsPagesEditorNodes",
       "x-collection": "pages_editor_nodes"
     },
     {
-      "name": "ItemsImage",
-      "x-collection": "image"
+      "name": "ItemsQuote",
+      "x-collection": "quote"
     },
     {
       "name": "ItemsGalleryFiles",
@@ -14422,8 +15196,8 @@
       "x-collection": "seo_detail"
     },
     {
-      "name": "ItemsSection",
-      "x-collection": "section"
+      "name": "ItemsImage",
+      "x-collection": "image"
     },
     {
       "name": "ItemsMenus",
@@ -14434,12 +15208,20 @@
       "x-collection": "menu_items"
     },
     {
+      "name": "ItemsContactForms",
+      "x-collection": "contact_forms"
+    },
+    {
       "name": "ItemsButton",
       "x-collection": "button"
     },
     {
-      "name": "ItemsContactForms",
-      "x-collection": "contact_forms"
+      "name": "ItemsStack",
+      "x-collection": "stack"
+    },
+    {
+      "name": "ItemsStackEditorNodes",
+      "x-collection": "stack_editor_nodes"
     }
   ],
   "components": {
@@ -16482,13 +17264,16 @@
                   "$ref": "#/components/schemas/ItemsQuote"
                 },
                 {
-                  "$ref": "#/components/schemas/ItemsImage"
-                },
-                {
                   "$ref": "#/components/schemas/ItemsGallery"
                 },
                 {
+                  "$ref": "#/components/schemas/ItemsImage"
+                },
+                {
                   "$ref": "#/components/schemas/ItemsButton"
+                },
+                {
+                  "$ref": "#/components/schemas/ItemsStack"
                 }
               ]
             }
@@ -16500,7 +17285,7 @@
         },
         "x-collection": "section_editor_nodes"
       },
-      "ItemsQuote": {
+      "ItemsSection": {
         "type": "object",
         "properties": {
           "id": {
@@ -16508,16 +17293,46 @@
             "type": "string",
             "format": "uuid"
           },
-          "text": {
+          "editor": {
+            "nullable": true
+          },
+          "width": {
             "nullable": true,
             "type": "string"
           },
-          "author": {
+          "color": {
             "nullable": true,
             "type": "string"
+          },
+          "template": {
+            "nullable": true,
+            "type": "string"
+          },
+          "align": {
+            "nullable": true,
+            "type": "string"
+          },
+          "type": {
+            "nullable": false,
+            "type": "string"
+          },
+          "editor_nodes": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "$ref": "#/components/schemas/ItemsSectionEditorNodes"
+                }
+              ]
+            }
           }
         },
-        "x-collection": "quote"
+        "x-collection": "section"
       },
       "ItemsPagesEditorNodes": {
         "type": "object",
@@ -16560,7 +17375,7 @@
         },
         "x-collection": "pages_editor_nodes"
       },
-      "ItemsImage": {
+      "ItemsQuote": {
         "type": "object",
         "properties": {
           "id": {
@@ -16568,28 +17383,20 @@
             "type": "string",
             "format": "uuid"
           },
-          "sort": {
+          "text": {
             "nullable": true,
-            "type": "integer"
+            "type": "string"
           },
-          "image": {
+          "author": {
             "nullable": true,
-            "oneOf": [
-              {
-                "type": "string",
-                "format": "uuid"
-              },
-              {
-                "$ref": "#/components/schemas/Files"
-              }
-            ]
+            "type": "string"
           },
-          "show_caption": {
-            "nullable": true,
-            "type": "boolean"
+          "type": {
+            "nullable": false,
+            "type": "string"
           }
         },
-        "x-collection": "image"
+        "x-collection": "quote"
       },
       "ItemsGalleryFiles": {
         "type": "object",
@@ -16769,7 +17576,7 @@
         },
         "x-collection": "seo_detail"
       },
-      "ItemsSection": {
+      "ItemsImage": {
         "type": "object",
         "properties": {
           "id": {
@@ -16777,34 +17584,32 @@
             "type": "string",
             "format": "uuid"
           },
-          "editor": {
-            "nullable": true
+          "sort": {
+            "nullable": true,
+            "type": "integer"
           },
-          "width": {
+          "image": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "$ref": "#/components/schemas/Files"
+              }
+            ]
+          },
+          "show_caption": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "type": {
             "nullable": true,
             "type": "string"
-          },
-          "color": {
-            "nullable": false,
-            "type": "string"
-          },
-          "editor_nodes": {
-            "nullable": true,
-            "type": "array",
-            "items": {
-              "oneOf": [
-                {
-                  "type": "string",
-                  "format": "uuid"
-                },
-                {
-                  "$ref": "#/components/schemas/ItemsSectionEditorNodes"
-                }
-              ]
-            }
           }
         },
-        "x-collection": "section"
+        "x-collection": "image"
       },
       "ItemsMenus": {
         "type": "object",
@@ -16916,53 +17721,6 @@
         },
         "x-collection": "menu_items"
       },
-      "ItemsButton": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "nullable": false,
-            "type": "string",
-            "format": "uuid"
-          },
-          "label": {
-            "nullable": false,
-            "type": "string"
-          },
-          "size": {
-            "nullable": true,
-            "type": "string"
-          },
-          "variant": {
-            "nullable": false,
-            "type": "string"
-          },
-          "type": {
-            "nullable": false,
-            "type": "string"
-          },
-          "url": {
-            "nullable": true,
-            "type": "string"
-          },
-          "page": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "type": "string",
-                "format": "uuid"
-              },
-              {
-                "$ref": "#/components/schemas/ItemsPages"
-              }
-            ]
-          },
-          "new_tab": {
-            "nullable": true,
-            "type": "boolean"
-          }
-        },
-        "x-collection": "button"
-      },
       "ItemsContactForms": {
         "type": "object",
         "properties": {
@@ -16994,6 +17752,159 @@
           }
         },
         "x-collection": "contact_forms"
+      },
+      "ItemsButton": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "nullable": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          "label": {
+            "nullable": false,
+            "type": "string"
+          },
+          "size": {
+            "nullable": true,
+            "type": "string"
+          },
+          "variant": {
+            "nullable": false,
+            "type": "string"
+          },
+          "url": {
+            "nullable": true,
+            "type": "string"
+          },
+          "page": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "$ref": "#/components/schemas/ItemsPages"
+              }
+            ]
+          },
+          "new_tab": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "link": {
+            "nullable": true,
+            "type": "string"
+          },
+          "type": {
+            "nullable": false,
+            "type": "string"
+          }
+        },
+        "x-collection": "button"
+      },
+      "ItemsStack": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "nullable": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          "type": {
+            "nullable": false,
+            "type": "string"
+          },
+          "direction": {
+            "nullable": true,
+            "type": "string"
+          },
+          "gap": {
+            "nullable": true,
+            "type": "string"
+          },
+          "color": {
+            "nullable": true,
+            "type": "string"
+          },
+          "fit_height": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "editor": {
+            "nullable": true
+          },
+          "editor_nodes": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "$ref": "#/components/schemas/ItemsStackEditorNodes"
+                }
+              ]
+            }
+          }
+        },
+        "x-collection": "stack"
+      },
+      "ItemsStackEditorNodes": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "nullable": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          "stack_id": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "$ref": "#/components/schemas/ItemsStack"
+              }
+            ]
+          },
+          "item": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "$ref": "#/components/schemas/ItemsQuote"
+                },
+                {
+                  "$ref": "#/components/schemas/ItemsGallery"
+                },
+                {
+                  "$ref": "#/components/schemas/ItemsImage"
+                },
+                {
+                  "$ref": "#/components/schemas/ItemsButton"
+                },
+                {
+                  "$ref": "#/components/schemas/ItemsStack"
+                }
+              ]
+            }
+          },
+          "collection": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "x-collection": "stack_editor_nodes"
       }
     },
     "parameters": {

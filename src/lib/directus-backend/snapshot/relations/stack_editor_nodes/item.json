@@ -1,10 +1,10 @@
 {
-  "collection": "section_editor_nodes",
+  "collection": "stack_editor_nodes",
   "field": "item",
   "related_collection": null,
   "meta": {
-    "junction_field": "section_id",
-    "many_collection": "section_editor_nodes",
+    "junction_field": "stack_id",
+    "many_collection": "stack_editor_nodes",
     "many_field": "item",
     "one_allowed_collections": [
       "button",

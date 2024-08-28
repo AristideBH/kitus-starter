@@ -1,47 +1,32 @@
 {
-  "collection": "section",
-  "field": "width",
+  "collection": "stack_editor_nodes",
+  "field": "item",
   "type": "string",
   "meta": {
-    "collection": "section",
+    "collection": "stack_editor_nodes",
     "conditions": null,
-    "display": "labels",
-    "display_options": {
-      "font": "monospace"
-    },
-    "field": "width",
+    "display": null,
+    "display_options": null,
+    "field": "item",
     "group": null,
-    "hidden": false,
-    "interface": "select-radio",
+    "hidden": true,
+    "interface": null,
     "note": null,
-    "options": {
-      "choices": [
-        {
-          "text": "Default",
-          "value": "default",
-          "icon": "fit_width"
-        },
-        {
-          "text": "Full-width",
-          "value": "full-width",
-          "icon": "width"
-        }
-      ]
-    },
+    "options": null,
     "readonly": false,
     "required": false,
-    "sort": 2,
+    "sort": 3,
     "special": null,
     "translations": null,
     "validation": null,
     "validation_message": null,
-    "width": "half"
+    "width": "full"
   },
   "schema": {
-    "name": "width",
-    "table": "section",
+    "name": "item",
+    "table": "stack_editor_nodes",
     "data_type": "character varying",
-    "default_value": "default",
+    "default_value": null,
     "max_length": 255,
     "numeric_precision": null,
     "numeric_scale": null,

@@ -1,15 +1,13 @@
 {
-  "collection": "section",
-  "field": "width",
+  "collection": "button",
+  "field": "link",
   "type": "string",
   "meta": {
-    "collection": "section",
+    "collection": "button",
     "conditions": null,
-    "display": "labels",
-    "display_options": {
-      "font": "monospace"
-    },
-    "field": "width",
+    "display": null,
+    "display_options": null,
+    "field": "link",
     "group": null,
     "hidden": false,
     "interface": "select-radio",
@@ -17,31 +15,29 @@
     "options": {
       "choices": [
         {
-          "text": "Default",
-          "value": "default",
-          "icon": "fit_width"
+          "text": "Page",
+          "value": "page"
         },
         {
-          "text": "Full-width",
-          "value": "full-width",
-          "icon": "width"
+          "text": "URL",
+          "value": "url"
         }
       ]
     },
     "readonly": false,
     "required": false,
-    "sort": 2,
+    "sort": 6,
     "special": null,
     "translations": null,
     "validation": null,
     "validation_message": null,
-    "width": "half"
+    "width": "full"
   },
   "schema": {
-    "name": "width",
-    "table": "section",
+    "name": "link",
+    "table": "button",
     "data_type": "character varying",
-    "default_value": "default",
+    "default_value": "page",
     "max_length": 255,
     "numeric_precision": null,
     "numeric_scale": null,

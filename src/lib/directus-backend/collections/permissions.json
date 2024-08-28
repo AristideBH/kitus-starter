@@ -731,5 +731,29 @@
       "*"
     ],
     "_syncId": "ddb2021a-f460-4373-8564-9602cdc73d37"
+  },
+  {
+    "role": null,
+    "collection": "stack_editor_nodes",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "d7c4848e-0939-4921-8b09-20d0d6f9a4ad"
+  },
+  {
+    "role": null,
+    "collection": "stack",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "41570173-03ea-4a9a-9c37-63352c124052"
   }
 ]

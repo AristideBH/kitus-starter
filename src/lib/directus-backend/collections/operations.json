@@ -74,9 +74,30 @@
         "aristide.bruneau@gmail.com"
       ]
     },
-    "resolve": null,
+    "resolve": "df1aa55d-9eb0-4e38-a9a3-7fd6590ba8dd",
     "reject": null,
     "flow": "2feabe16-370f-4d52-86eb-e632e6731975",
     "_syncId": "faa52d09-2c27-47f7-9bf2-18f9d4a20ff0"
+  },
+  {
+    "name": "Send Notification",
+    "key": "notification_0fbf6",
+    "type": "notification",
+    "position_x": 37,
+    "position_y": 1,
+    "options": {
+      "subject": "Message de {{$trigger.payload.name}}",
+      "collection": "contact_forms",
+      "item": "{{$trigger.key}}",
+      "recipient": [
+        "bbf26f73-d51e-4a20-890a-24eb101fc9db"
+      ],
+      "message": "{{$trigger.payload.message}}",
+      "permissions": "$full"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "2feabe16-370f-4d52-86eb-e632e6731975",
+    "_syncId": "df1aa55d-9eb0-4e38-a9a3-7fd6590ba8dd"
   }
 ]

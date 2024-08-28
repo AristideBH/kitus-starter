@@ -16,7 +16,7 @@
         "rule": {
           "_and": [
             {
-              "type": {
+              "link": {
                 "_eq": "page"
               }
             }
@@ -37,7 +37,7 @@
     },
     "readonly": false,
     "required": false,
-    "sort": 8,
+    "sort": 9,
     "special": [
       "m2o"
     ],

@@ -1,36 +1,40 @@
 {
-  "collection": "section",
-  "field": "width",
+  "collection": "stack",
+  "field": "gap",
   "type": "string",
   "meta": {
-    "collection": "section",
+    "collection": "stack",
     "conditions": null,
-    "display": "labels",
-    "display_options": {
-      "font": "monospace"
-    },
-    "field": "width",
+    "display": null,
+    "display_options": null,
+    "field": "gap",
     "group": null,
     "hidden": false,
-    "interface": "select-radio",
+    "interface": "select-dropdown",
     "note": null,
     "options": {
       "choices": [
         {
-          "text": "Default",
-          "value": "default",
-          "icon": "fit_width"
+          "text": "None",
+          "value": "0"
         },
         {
-          "text": "Full-width",
-          "value": "full-width",
-          "icon": "width"
+          "text": "Small",
+          "value": "2"
+        },
+        {
+          "text": "Medium",
+          "value": "4"
+        },
+        {
+          "text": "Large",
+          "value": "8"
         }
       ]
     },
     "readonly": false,
-    "required": false,
-    "sort": 2,
+    "required": true,
+    "sort": 4,
     "special": null,
     "translations": null,
     "validation": null,
@@ -38,10 +42,10 @@
     "width": "half"
   },
   "schema": {
-    "name": "width",
-    "table": "section",
+    "name": "gap",
+    "table": "stack",
     "data_type": "character varying",
-    "default_value": "default",
+    "default_value": "4",
     "max_length": 255,
     "numeric_precision": null,
     "numeric_scale": null,
