@@ -16,7 +16,7 @@ Props:
 	import type { Snippet } from 'svelte';
 	import { afterNavigate, beforeNavigate, disableScrollHandling } from '$app/navigation';
 	import { fly } from 'svelte/transition';
-	import { loading } from '$lib/logic/pageLoading.svelte';
+	import { loading, loadingTimeout } from '$lib/logic/pageLoading.svelte';
 
 	type Props = {
 		children: Snippet;
@@ -32,9 +32,17 @@ Props:
 	let { children, transitionKey, options = {} }: Props = $props();
 	let { duration = 300, delta = 150, y = 50, x = 0 } = $derived(options);
 
-	beforeNavigate(() => ($loading = true));
+	beforeNavigate(() => {
+		$loadingTimeout = setTimeout(() => {
+			$loading = true;
+		}, 150);
+	});
 
 	afterNavigate(() => {
+		if ($loadingTimeout) {
+			clearTimeout($loadingTimeout);
+			$loadingTimeout = null;
+		}
 		$loading = false;
 		disableScrollHandling();
 		setTimeout(() => {
@@ -48,9 +56,7 @@ Props:
 </script>
 
 {#key transitionKey}
-	<!-- {#if $loading === false} -->
 	<main in:fly={{ y, x, delay: delta + duration }} out:fly={{ duration, y: -y, x: -x }}>
 		{@render children()}
 	</main>
-	<!-- {/if} -->
 {/key}

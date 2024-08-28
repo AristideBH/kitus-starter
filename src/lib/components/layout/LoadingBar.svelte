@@ -4,19 +4,15 @@
 
 <div
 	transition:slide={{ axis: 'y' }}
-	class="progress-bar absolute left-0 right-0 top-0 h-[3px] w-full overflow-hidden bg-accent"
+	class="progress-bar absolute left-0 right-0 top-0 col-span-full h-[3px] w-full overflow-hidden bg-accent opacity-35"
 >
-	<div class="progress-bar-value h-full w-full bg-primary"></div>
+	<span class="progress-bar-value h-full w-full origin-left bg-primary"></span>
 </div>
 
 <style>
-	.progress-bar {
-		grid-column: full;
-	}
-
-	.progress-bar-value {
-		animation: indeterminateAnimation 1s infinite linear;
-		transform-origin: 0% 50%;
+	span {
+		animation: indeterminateAnimation 0.75s infinite linear;
+		/* transform-origin: 0% 50%; */
 	}
 
 	@keyframes indeterminateAnimation {
