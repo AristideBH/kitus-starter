@@ -28,7 +28,6 @@
 {#if renderState.state === 'ready'}
 	{#each nodes as node}
 		{#if node?.editor}
-			<!-- - Wrappers nodes -->
 			{@const { type, editor } = node}
 			{#if type === 'section'}
 				<Section content={node}>
@@ -44,7 +43,6 @@
 		{:else}
 			{@const { type, content, attrs } = node}
 			{#if 'content' in node}
-				<!-- - Default TipTap Nodes -->
 				{#if type === 'heading' && attrs}
 					{#if attrs.level && attrs.level.toString() === '1'}
 						<AnimatedHeading {content} />
@@ -53,8 +51,6 @@
 					{/if}
 				{:else if type === 'paragraph'}
 					<Paragraph {content} />
-				{:else if type === 'horizontalRule'}
-					<hr />
 				{:else if type === 'bulletList'}
 					<BulletList {content} />
 				{:else if type === 'orderedList'}
@@ -67,9 +63,10 @@
 					</pre>
 				{/if}
 			{:else}
-				<!-- - Custom Elements -->
 				{@const { type } = node}
-				{#if type === 'quote'}
+				{#if type === 'horizontalRule'}
+					<hr class=" border-secondary" />
+				{:else if type === 'quote'}
 					<Quote content={node as Collections.Quote} />
 				{:else if type === 'image'}
 					<Image content={node as Collections.Image} />
