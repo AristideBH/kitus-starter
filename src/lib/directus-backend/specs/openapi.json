@@ -18313,6 +18313,14 @@
           },
           "video_link": {
             "nullable": true
+          },
+          "type": {
+            "nullable": false,
+            "type": "string"
+          },
+          "autoplay": {
+            "nullable": false,
+            "type": "boolean"
           }
         },
         "x-collection": "video"

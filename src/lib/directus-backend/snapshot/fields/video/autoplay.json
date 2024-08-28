@@ -1,40 +1,38 @@
 {
   "collection": "video",
-  "field": "video_link",
-  "type": "json",
+  "field": "autoplay",
+  "type": "boolean",
   "meta": {
     "collection": "video",
     "conditions": null,
-    "display": "formatted-json-value",
-    "display_options": {
-      "format": "{{service}} > {{id}}"
-    },
-    "field": "video_link",
+    "display": null,
+    "display_options": null,
+    "field": "autoplay",
     "group": null,
     "hidden": false,
-    "interface": "directus-labs-video-interface",
+    "interface": "boolean",
     "note": null,
     "options": null,
     "readonly": false,
-    "required": true,
-    "sort": 2,
+    "required": false,
+    "sort": 4,
     "special": [
-      "cast-json"
+      "cast-boolean"
     ],
     "translations": null,
     "validation": null,
     "validation_message": null,
-    "width": "full"
+    "width": "half"
   },
   "schema": {
-    "name": "video_link",
+    "name": "autoplay",
     "table": "video",
-    "data_type": "json",
-    "default_value": null,
+    "data_type": "boolean",
+    "default_value": false,
     "max_length": null,
     "numeric_precision": null,
     "numeric_scale": null,
-    "is_nullable": true,
+    "is_nullable": false,
     "is_unique": false,
     "is_primary_key": false,
     "is_generated": false,

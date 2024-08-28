@@ -755,5 +755,17 @@
       "*"
     ],
     "_syncId": "41570173-03ea-4a9a-9c37-63352c124052"
+  },
+  {
+    "role": null,
+    "collection": "video",
+    "action": "read",
+    "permissions": {},
+    "validation": {},
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "_syncId": "938c369c-f369-49f9-ad8d-15339aa1e850"
   }
 ]

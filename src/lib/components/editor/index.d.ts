@@ -4,9 +4,9 @@ type TipTapEditor = {
     type: string | 'doc';
     content: TipTapNode[];
 };
-type ContentArray = (TipTapNode | Collections.Button | Collections.Gallery | Collections.Image | Collections.Quote | Collections.Section | Collections.Stack)[];
+type ContentArray = (TipTapNode | Collections.Button | Collections.Gallery | Collections.Image | Collections.Quote | Collections.Section | Collections.Stack | Collections.Video)[];
 
-type TipTapNodeType = 'doc' | 'paragraph' | 'heading' | 'bulletList' | 'orderedList' | 'listItem' | 'taskList' | 'taskItem' | 'blockquote' | 'horizontalRule' | 'codeBlock' | 'quote' | 'image' | 'gallery' | 'section' | 'stack' | 'button' | 'relation-block' | 'text' | 'hardBreak';
+type TipTapNodeType = 'doc' | 'paragraph' | 'heading' | 'bulletList' | 'orderedList' | 'listItem' | 'taskList' | 'taskItem' | 'blockquote' | 'horizontalRule' | 'codeBlock' | 'quote' | 'image' | 'gallery' | 'section' | 'stack' | 'button' | 'relation-block' | 'text' | 'hardBreak' | 'video';
 
 interface BaseNode {
     type: TipTapNodeType;
@@ -23,10 +23,10 @@ interface BaseNode {
 type TipTapNode = BaseNode & CustomElementNode;
 
 type CustomElementNode = {
-    [K in keyof Collections]: K extends 'Quote' | 'Image' | 'Gallery' | 'Section' | 'Stack' | 'Button'
+    [K in keyof Collections]: K extends 'Quote' | 'Image' | 'Gallery' | 'Section' | 'Stack' | 'Button' | 'Video'
     ? Collections[K] & { type: Lowercase<K> }
     : never;
-}[keyof Collections] | { attrs: CustomAttrs; type: 'relation-block' } | { type: Exclude<TipTapNodeType, 'quote' | 'image' | 'gallery' | 'button' | 'relation-block'> };
+}[keyof Collections] | { attrs: CustomAttrs; type: 'relation-block' } | { type: Exclude<TipTapNodeType, 'quote' | 'image' | 'gallery' | 'button' | 'relation-block' | 'video'> };
 
 type CustomAttrs = {
     id: string,

@@ -1808,6 +1808,8 @@ type video {
   id: ID!
   video_link: JSON
   video_link_func: count_functions
+  type: String
+  autoplay: Boolean!
 }
 
 type video_mutated {
@@ -3087,6 +3089,8 @@ input video_filter {
   id: string_filter_operators
   video_link: string_filter_operators
   video_link_func: count_function_filter_operators
+  type: string_filter_operators
+  autoplay: boolean_filter_operators
   _and: [video_filter]
   _or: [video_filter]
 }

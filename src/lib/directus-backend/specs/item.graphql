@@ -1717,12 +1717,16 @@ type version_stack_editor_nodes {
 type version_video {
   id: ID
   video_link: JSON
+  type: String
+  autoplay: Boolean
 }
 
 type video {
   id: ID!
   video_link: JSON
   video_link_func: count_functions
+  type: String
+  autoplay: Boolean!
 }
 
 type video_aggregated {
@@ -1735,6 +1739,8 @@ type video_aggregated {
 type video_aggregated_count {
   id: Int
   video_link: Int
+  type: Int
+  autoplay: Int
 }
 
 type video_mutated {
@@ -2042,6 +2048,8 @@ input create_stack_input {
 input create_video_input {
   id: ID
   video_link: JSON
+  type: String
+  autoplay: Boolean!
 }
 
 input date_filter_operators {
@@ -2805,12 +2813,16 @@ input update_stack_input {
 input update_video_input {
   id: ID
   video_link: JSON
+  type: String
+  autoplay: Boolean
 }
 
 input video_filter {
   id: string_filter_operators
   video_link: string_filter_operators
   video_link_func: count_function_filter_operators
+  type: string_filter_operators
+  autoplay: boolean_filter_operators
   _and: [video_filter]
   _or: [video_filter]
 }

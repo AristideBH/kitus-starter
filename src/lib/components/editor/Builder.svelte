@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Section from '../layout/Section.svelte';
-	import { Button } from '../ui/button';
 	import { onMount } from 'svelte';
 	import {
 		Heading,
@@ -13,7 +12,9 @@
 		Image,
 		AnimatedHeading,
 		Stack,
-		LoadingState
+		LoadingState,
+		Video,
+		Button
 	} from './index.svelte';
 	import type { TipTapNode } from '.';
 	import { type Collections } from '$lib/types/client';
@@ -72,19 +73,12 @@
 					<Quote content={node as Collections.Quote} />
 				{:else if type === 'image'}
 					<Image content={node as Collections.Image} />
+				{:else if type === 'video'}
+					<Video content={node as Collections.Video} />
 				{:else if type === 'slider' || type === 'masonry' || type === 'scroll'}
 					<Gallery content={node as Collections.Gallery} />
 				{:else if type === 'button'}
-					{@const { label, variant, size, type, url, page, new_tab } = node as Collections.Button}
-					<Button
-						{variant}
-						{size}
-						href={type === 'page' && typeof page != 'string' ? `/${page?.permalink}` : url}
-						target={new_tab && type === 'url' ? '_blank' : ''}
-						class="w-fit"
-					>
-						{label}
-					</Button>
+					<Button content={node as Collections.Button} />
 				{/if}
 			{/if}
 		{/if}

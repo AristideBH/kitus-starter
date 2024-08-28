@@ -8,7 +8,7 @@
     "collapse": "open",
     "collection": "video",
     "color": null,
-    "display_template": null,
+    "display_template": "{{video_link}}",
     "group": "editor",
     "hidden": false,
     "icon": "slow_motion_video",

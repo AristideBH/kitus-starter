@@ -46,6 +46,7 @@
 		"svelte-check": "^3.8.6",
 		"svelte-intersection-observer": "^1.0.0",
 		"svelte-sonner": "^0.3.27",
+		"sveltekit-embed": "^0.0.12",
 		"sveltekit-superforms": "^2.17.0",
 		"tailwind-merge": "^2.5.2",
 		"tailwind-variants": "^0.2.1",
@@ -53,10 +54,9 @@
 		"thumbhash": "^0.1.1",
 		"typescript": "^5.5.4",
 		"typescript-eslint": "^8.3.0",
+		"vaul-svelte": "^0.3.2",
 		"vite": "^5.4.2",
-		"zod": "^3.23.8",
-		"vaul-svelte": "^0.3.2"
+		"zod": "^3.23.8"
 	},
-	"type": "module",
-	"dependencies": {}
+	"type": "module"
 }

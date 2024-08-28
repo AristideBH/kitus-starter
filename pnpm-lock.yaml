@@ -98,6 +98,9 @@ importers:
       svelte-sonner:
         specifier: ^0.3.27
         version: 0.3.27(svelte@5.0.0-next.240)
+      sveltekit-embed:
+        specifier: ^0.0.12
+        version: 0.0.12
       sveltekit-superforms:
         specifier: ^2.17.0
         version: 2.17.0(@sveltejs/kit@2.5.25(@sveltejs/vite-plugin-svelte@4.0.0-next.6(svelte@5.0.0-next.240)(vite@5.4.2(@types/node@22.4.1)))(svelte@5.0.0-next.240)(vite@5.4.2(@types/node@22.4.1)))(svelte@5.0.0-next.240)
@@ -1922,6 +1925,9 @@ packages:
   svelte@5.0.0-next.240:
     resolution: {integrity: sha512-5aiVyl2K7qJziN7ozovwr3PmlcmZLMwbCqVmF/U/g/UqC4SKfHrwyHO/5uvTFfu4h9Q34MiWPDxjoJB+fpU6jQ==}
     engines: {node: '>=18'}
+
+  sveltekit-embed@0.0.12:
+    resolution: {integrity: sha512-77GiPxkn4ZyF5tcq+YuosYjiFTrjYwA+sOMUiWoN+8sTCM0vJVi9sxHpIHWK6Cvmn0fAeaHagV//2i+tFmELkA==}
 
   sveltekit-superforms@2.17.0:
     resolution: {integrity: sha512-QrX8pkcmE0XoeVU42zMhsah4FoDrgtPc/4cZEr38rDlgU+DE0xNc5J0E7z1456sUJNbFjaB0+HZwwAkX0vYqaA==}
@@ -3778,6 +3784,8 @@ snapshots:
       locate-character: 3.0.0
       magic-string: 0.30.11
       zimmerframe: 1.1.2
+
+  sveltekit-embed@0.0.12: {}
 
   sveltekit-superforms@2.17.0(@sveltejs/kit@2.5.25(@sveltejs/vite-plugin-svelte@4.0.0-next.6(svelte@5.0.0-next.240)(vite@5.4.2(@types/node@22.4.1)))(svelte@5.0.0-next.240)(vite@5.4.2(@types/node@22.4.1)))(svelte@5.0.0-next.240):
     dependencies:

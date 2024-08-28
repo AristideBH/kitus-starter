@@ -530,6 +530,8 @@ export namespace Collections {
   export interface Video {
     id: Types.PrimaryKey<Types.UUID>;
     video_link: Types.Optional<Types.JSON | Types.JSON>;
+    type: Types.String;
+    autoplay: Types.Boolean;
   }
 
   /**

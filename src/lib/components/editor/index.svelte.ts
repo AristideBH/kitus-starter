@@ -16,6 +16,8 @@ import Gallery from './components/Gallery.svelte';
 import Image from './components/Image.svelte';
 import AnimatedHeading from './components/AnimatedHeading.svelte';
 import Stack from './components/Stack.svelte';
+import Video from './components/Video.svelte';
+import Button from './components/Button.svelte';
 
 // - FUNCTIONS
 /**
@@ -41,6 +43,10 @@ const elementQuery = async (client: DirectusClient, attrs: CustomAttrs | undefin
                 return (await client.request(
                     readItem('image', rel.item, { fields: ['*', { image: ['*'] }] })
                 )) as Collections.Image;
+            case 'video':
+                return (await client.request(
+                    readItem('video', rel.item, { fields: ['*'] })
+                )) as Collections.Video;
 
             case 'gallery':
                 return (await client.request(
@@ -170,7 +176,7 @@ const setMarks = (marks: Mark[]) => {
 
 
 export {
-    BulletList, Heading, Paragraph, OrderedList, Blockquote, TaskList,
-    Quote, Gallery, Image, AnimatedHeading, Stack,
-    LoadingState, setMarks, findCode, findLink, findSub, findSup, adaptToTipTapNodes, processContent
+    LoadingState, setMarks, findCode, findLink, findSub, findSup, adaptToTipTapNodes, processContent,
+    BulletList, Heading, Paragraph, OrderedList, Blockquote, TaskList, Button,
+    Quote, Gallery, Image, AnimatedHeading, Stack, Video,
 }
