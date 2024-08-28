@@ -12,29 +12,23 @@
 		Gallery,
 		Image,
 		AnimatedHeading,
-		Stack
+		Stack,
+		LoadingState
 	} from './index.svelte';
+	import type { TipTapNode } from '.';
+	import { type Collections } from '$lib/types/client';
 
-	class LoadingState {
-		state: 'loading' | 'ready' = $state('loading');
-		ready() {
-			this.state = 'ready';
-		}
-		loading() {
-			this.state = 'loading';
-		}
-	}
 	const renderState = new LoadingState();
 
-	let { nodes } = $props<{ nodes: any[] }>();
+	let { nodes }: { nodes: TipTapNode[] } = $props();
 	onMount(() => renderState.ready());
 </script>
 
 {#if renderState.state === 'ready'}
 	{#each nodes as node}
 		{#if node?.editor}
+			<!-- - Wrappers nodes -->
 			{@const { type, editor } = node}
-			<!-- Wrappers -->
 			{#if type === 'section'}
 				<Section content={node}>
 					<svelte:self nodes={editor.content} />
@@ -43,54 +37,55 @@
 				<Stack content={node}>
 					<svelte:self nodes={editor.content} />
 				</Stack>
-			{:else}
-				<pre>{JSON.stringify(node.type, null, 2)}</pre>
 			{/if}
 
 			<!-- Todo : fix gallery -->
 		{:else}
 			{@const { type, content, attrs } = node}
-			<!-- Elements -->
-			{#if type === 'heading' && attrs}
-				{#if attrs.level.toString() === '1'}
-					<AnimatedHeading {content} />
-				{:else}
-					<Heading level={attrs.level} {content} />
-				{/if}
-			{:else if type === 'paragraph'}
-				<Paragraph {content} />
-			{:else if type === 'horizontalRule'}
-				<hr />
-			{:else if type === 'bulletList'}
-				<BulletList {content} />
-			{:else if type === 'orderedList'}
-				<OrderedList {content} />
-			{:else if type === 'blockquote'}
-				<Blockquote {content} />
-			{:else if type === 'quote'}
-				<Quote content={node} />
-			{:else if type === 'codeBlock'}
-				<pre class="overflow-hidden whitespace-normal px-4 py-3 [&_p]:text-base">
+			{#if 'content' in node}
+				<!-- - Default TipTap Nodes -->
+				{#if type === 'heading' && attrs}
+					{#if attrs.level.toString() === '1'}
+						<AnimatedHeading {content} />
+					{:else}
+						<Heading level={attrs.level} {content} />
+					{/if}
+				{:else if type === 'paragraph'}
 					<Paragraph {content} />
-				</pre>
-			{:else if type === 'image'}
-				<Image content={node} />
-			{:else if type === 'slider' || type === 'masonry' || type === 'scroll'}
-				<Gallery content={node} />
-			{:else if type === 'url' || type === 'page'}
-				<!-- todo : fix button -->
-				<!-- {@const { label, variant, size, type, url, page, new_tab } = content} -->
-				<!-- <Button
-					{variant}
-					{size}
-					href={type === 'page' && typeof page != 'string' ? `/${page.permalink}` : url}
-					target={new_tab && type === 'url' ? '_blank' : ''}
-					class="w-fit"
-				>
-					{label}
-				</Button> -->
+				{:else if type === 'horizontalRule'}
+					<hr />
+				{:else if type === 'bulletList'}
+					<BulletList {content} />
+				{:else if type === 'orderedList'}
+					<OrderedList {content} />
+				{:else if type === 'blockquote'}
+					<Blockquote {content} />
+				{:else if type === 'codeBlock'}
+					<pre class="overflow-hidden whitespace-normal px-4 py-3 [&_p]:text-base">
+						<Paragraph {content} />
+					</pre>
+				{/if}
 			{:else}
-				<pre>{JSON.stringify(node, null, 2)}</pre>
+				<!-- - Custom Elements -->
+				{@const { type } = node}
+				{#if type === 'quote'}
+					<Quote content={node as Collections.Quote} />
+				{:else if type === 'image'}
+					<Image content={node as Collections.Image} />
+				{:else if type === 'slider' || type === 'masonry' || type === 'scroll'}
+					<Gallery content={node as Collections.Gallery} />
+				{:else if type === 'button'}
+					{@const { label, variant, size, type, url, page, new_tab } = node as Collections.Button}
+					<Button
+						{variant}
+						{size}
+						href={type === 'page' && typeof page != 'string' ? `/${page?.permalink}` : url}
+						target={new_tab && type === 'url' ? '_blank' : ''}
+						class="w-fit"
+					>
+						{label}
+					</Button>
+				{/if}
 			{/if}
 		{/if}
 	{/each}

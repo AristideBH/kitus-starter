@@ -1,5 +1,5 @@
 <script lang="ts">
-	import AnimatedHeading from '$lib/components/editor/custom/AnimatedHeading.svelte';
+	import AnimatedHeading from '$lib/components/editor/components/AnimatedHeading.svelte';
 	import Image from '$lib/components/image/Image.svelte';
 	import Section from '$lib/components/layout/Section.svelte';
 

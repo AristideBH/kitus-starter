@@ -60,7 +60,7 @@
 				The following contains address information about the author, in an <code>address</code> element.
 			</p>
 			<address>
-				<a href="../somelink.html" lang="fr" hreflang="en">Mon nom en francais</a>,
+				<a href="/" lang="fr" hreflang="en">Mon nom en francais</a>,
 				<a href="mailto:example@example.com">example@example.com</a><br />
 				3 Rue Jules Ferry, Neuilly Sur Seine, France 94000
 			</address>
@@ -156,13 +156,12 @@
 			<h2>Text-level markup, in alphabetical order</h2>
 			<ul>
 				<li>
-					<abbr title="Cascading Style Sheets">CSS</abbr> (an abbreviation;
-					<code>abbr</code> markup used)
+					<abbr title="Cascading Style Sheets">CSS</abbr>
+					(an abbreviation; <code>abbr</code> markup used)
 				</li>
 				<li>
-					<acronym title="radio detecting and ranging">radar</acronym> (an acronym;
-					<code>acronym</code>
-					markup used)
+					<acronym title="radio detecting and ranging">radar</acronym>
+					(an acronym; <code>acronym</code> markup used)
 				</li>
 				<li>
 					<b>bolded</b> (<code>b</code> markup used - just bolding with unspecified semantics)

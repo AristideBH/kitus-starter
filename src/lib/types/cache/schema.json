@@ -34,69 +34,6 @@
       }
     },
     {
-      "collection": "button_group",
-      "meta": {
-        "collection": "button_group",
-        "icon": "join_inner",
-        "note": null,
-        "display_template": null,
-        "hidden": false,
-        "singleton": false,
-        "translations": null,
-        "archive_field": null,
-        "archive_app_filter": true,
-        "archive_value": null,
-        "unarchive_value": null,
-        "sort_field": null,
-        "accountability": "all",
-        "color": null,
-        "item_duplication_fields": null,
-        "sort": 6,
-        "group": "editor",
-        "collapse": "open",
-        "preview_url": null,
-        "versioning": false
-      },
-      "schema": {
-        "schema": "public",
-        "name": "button_group",
-        "comment": null
-      }
-    },
-    {
-      "collection": "button_group_buttons",
-      "meta": {
-        "collection": "button_group_buttons",
-        "icon": "import_export",
-        "note": null,
-        "display_template": null,
-        "hidden": true,
-        "singleton": false,
-        "translations": null,
-        "archive_field": null,
-        "archive_app_filter": true,
-        "archive_value": null,
-        "unarchive_value": null,
-        "sort_field": null,
-        "accountability": "all",
-        "color": null,
-        "item_duplication_fields": [
-          "item:button",
-          "collection"
-        ],
-        "sort": 1,
-        "group": "button_group",
-        "collapse": "open",
-        "preview_url": null,
-        "versioning": false
-      },
-      "schema": {
-        "schema": "public",
-        "name": "button_group_buttons",
-        "comment": null
-      }
-    },
-    {
       "collection": "contact_forms",
       "meta": {
         "collection": "contact_forms",
@@ -441,7 +378,7 @@
         "collection": "section",
         "icon": "subtitles",
         "note": null,
-        "display_template": "{{editor}}",
+        "display_template": "{{width}}{{template}}{{color}}",
         "hidden": false,
         "singleton": false,
         "translations": null,
@@ -642,7 +579,7 @@
         "collection": "stack",
         "icon": "flex_direction",
         "note": null,
-        "display_template": null,
+        "display_template": "{{editor}}",
         "hidden": false,
         "singleton": false,
         "translations": null,
@@ -685,7 +622,11 @@
         "color": null,
         "item_duplication_fields": [
           "item:button",
-          "collection"
+          "collection",
+          "item:image",
+          "item:gallery",
+          "item:quote",
+          "item:stack"
         ],
         "sort": 1,
         "group": "stack",
@@ -696,72 +637,6 @@
       "schema": {
         "schema": "public",
         "name": "stack_editor_nodes",
-        "comment": null
-      }
-    },
-    {
-      "collection": "wrapper",
-      "meta": {
-        "collection": "wrapper",
-        "icon": "check_box_outline_blank",
-        "note": null,
-        "display_template": "{{editor}}",
-        "hidden": false,
-        "singleton": false,
-        "translations": null,
-        "archive_field": null,
-        "archive_app_filter": true,
-        "archive_value": null,
-        "unarchive_value": null,
-        "sort_field": null,
-        "accountability": "all",
-        "color": null,
-        "item_duplication_fields": null,
-        "sort": 2,
-        "group": "editor",
-        "collapse": "closed",
-        "preview_url": null,
-        "versioning": false
-      },
-      "schema": {
-        "schema": "public",
-        "name": "wrapper",
-        "comment": null
-      }
-    },
-    {
-      "collection": "wrapper_editor_nodes",
-      "meta": {
-        "collection": "wrapper_editor_nodes",
-        "icon": null,
-        "note": null,
-        "display_template": null,
-        "hidden": true,
-        "singleton": false,
-        "translations": null,
-        "archive_field": null,
-        "archive_app_filter": true,
-        "archive_value": null,
-        "unarchive_value": null,
-        "sort_field": null,
-        "accountability": "all",
-        "color": null,
-        "item_duplication_fields": [
-          "item:button",
-          "item:image",
-          "item:gallery",
-          "item:quote",
-          "collection"
-        ],
-        "sort": 1,
-        "group": "wrapper",
-        "collapse": "open",
-        "preview_url": null,
-        "versioning": false
-      },
-      "schema": {
-        "schema": "public",
-        "name": "wrapper_editor_nodes",
         "comment": null
       }
     },
@@ -1372,6 +1247,10 @@
             {
               "text": "Large",
               "value": "lg"
+            },
+            {
+              "text": "Badge",
+              "value": "badge"
             }
           ]
         },
@@ -1461,63 +1340,6 @@
     },
     {
       "collection": "button",
-      "field": "type",
-      "type": "string",
-      "schema": {
-        "name": "type",
-        "table": "button",
-        "schema": "public",
-        "data_type": "character varying",
-        "is_nullable": false,
-        "generation_expression": null,
-        "default_value": "page",
-        "is_generated": false,
-        "max_length": 255,
-        "comment": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_unique": false,
-        "is_primary_key": false,
-        "has_auto_increment": false,
-        "foreign_key_schema": null,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      },
-      "meta": {
-        "id": 157,
-        "collection": "button",
-        "field": "type",
-        "special": null,
-        "interface": "select-radio",
-        "options": {
-          "choices": [
-            {
-              "text": "Page",
-              "value": "page"
-            },
-            {
-              "text": "URL",
-              "value": "url"
-            }
-          ]
-        },
-        "display": null,
-        "display_options": null,
-        "readonly": false,
-        "hidden": false,
-        "sort": 5,
-        "width": "full",
-        "translations": null,
-        "note": null,
-        "conditions": null,
-        "required": false,
-        "group": null,
-        "validation": null,
-        "validation_message": null
-      }
-    },
-    {
-      "collection": "button",
       "field": "url",
       "type": "string",
       "schema": {
@@ -1557,7 +1379,7 @@
         },
         "readonly": false,
         "hidden": true,
-        "sort": 6,
+        "sort": 7,
         "width": "half",
         "translations": null,
         "note": null,
@@ -1567,7 +1389,7 @@
             "rule": {
               "_and": [
                 {
-                  "type": {
+                  "link": {
                     "_eq": "url"
                   }
                 }
@@ -1630,7 +1452,7 @@
         "display_options": null,
         "readonly": false,
         "hidden": true,
-        "sort": 8,
+        "sort": 9,
         "width": "full",
         "translations": null,
         "note": null,
@@ -1646,7 +1468,7 @@
             "rule": {
               "_and": [
                 {
-                  "type": {
+                  "link": {
                     "_eq": "page"
                   }
                 }
@@ -1697,7 +1519,7 @@
         "display_options": null,
         "readonly": false,
         "hidden": true,
-        "sort": 7,
+        "sort": 8,
         "width": "half",
         "translations": null,
         "note": null,
@@ -1707,7 +1529,7 @@
             "rule": {
               "_and": [
                 {
-                  "type": {
+                  "link": {
                     "_eq": "url"
                   }
                 }
@@ -1728,67 +1550,19 @@
       }
     },
     {
-      "collection": "button_group",
-      "field": "id",
-      "type": "uuid",
+      "collection": "button",
+      "field": "link",
+      "type": "string",
       "schema": {
-        "name": "id",
-        "table": "button_group",
+        "name": "link",
+        "table": "button",
         "schema": "public",
-        "data_type": "uuid",
-        "is_nullable": false,
-        "generation_expression": null,
-        "default_value": null,
-        "is_generated": false,
-        "max_length": null,
-        "comment": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_unique": true,
-        "is_primary_key": true,
-        "has_auto_increment": false,
-        "foreign_key_schema": null,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      },
-      "meta": {
-        "id": 186,
-        "collection": "button_group",
-        "field": "id",
-        "special": [
-          "uuid"
-        ],
-        "interface": "input",
-        "options": null,
-        "display": null,
-        "display_options": null,
-        "readonly": true,
-        "hidden": true,
-        "sort": 1,
-        "width": "full",
-        "translations": null,
-        "note": null,
-        "conditions": null,
-        "required": false,
-        "group": null,
-        "validation": null,
-        "validation_message": null
-      }
-    },
-    {
-      "collection": "button_group",
-      "field": "gap",
-      "type": "boolean",
-      "schema": {
-        "name": "gap",
-        "table": "button_group",
-        "schema": "public",
-        "data_type": "boolean",
+        "data_type": "character varying",
         "is_nullable": true,
         "generation_expression": null,
-        "default_value": true,
+        "default_value": "page",
         "is_generated": false,
-        "max_length": null,
+        "max_length": 255,
         "comment": null,
         "numeric_precision": null,
         "numeric_scale": null,
@@ -1800,19 +1574,28 @@
         "foreign_key_column": null
       },
       "meta": {
-        "id": 187,
-        "collection": "button_group",
-        "field": "gap",
-        "special": [
-          "cast-boolean"
-        ],
-        "interface": "boolean",
-        "options": null,
+        "id": 214,
+        "collection": "button",
+        "field": "link",
+        "special": null,
+        "interface": "select-radio",
+        "options": {
+          "choices": [
+            {
+              "text": "Page",
+              "value": "page"
+            },
+            {
+              "text": "URL",
+              "value": "url"
+            }
+          ]
+        },
         "display": null,
         "display_options": null,
         "readonly": false,
         "hidden": false,
-        "sort": 2,
+        "sort": 6,
         "width": "full",
         "translations": null,
         "note": null,
@@ -1824,109 +1607,17 @@
       }
     },
     {
-      "collection": "button_group_buttons",
-      "field": "id",
-      "type": "integer",
+      "collection": "button",
+      "field": "type",
+      "type": "string",
       "schema": {
-        "name": "id",
-        "table": "button_group_buttons",
+        "name": "type",
+        "table": "button",
         "schema": "public",
-        "data_type": "integer",
+        "data_type": "character varying",
         "is_nullable": false,
         "generation_expression": null,
-        "default_value": "nextval('button_group_buttons_id_seq'::regclass)",
-        "is_generated": false,
-        "max_length": null,
-        "comment": null,
-        "numeric_precision": 32,
-        "numeric_scale": 0,
-        "is_unique": true,
-        "is_primary_key": true,
-        "has_auto_increment": true,
-        "foreign_key_schema": null,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      },
-      "meta": {
-        "id": 195,
-        "collection": "button_group_buttons",
-        "field": "id",
-        "special": null,
-        "interface": null,
-        "options": null,
-        "display": null,
-        "display_options": null,
-        "readonly": false,
-        "hidden": true,
-        "sort": 1,
-        "width": "full",
-        "translations": null,
-        "note": null,
-        "conditions": null,
-        "required": false,
-        "group": null,
-        "validation": null,
-        "validation_message": null
-      }
-    },
-    {
-      "collection": "button_group_buttons",
-      "field": "button_group_id",
-      "type": "uuid",
-      "schema": {
-        "name": "button_group_id",
-        "table": "button_group_buttons",
-        "schema": "public",
-        "data_type": "uuid",
-        "is_nullable": true,
-        "generation_expression": null,
-        "default_value": null,
-        "is_generated": false,
-        "max_length": null,
-        "comment": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_unique": false,
-        "is_primary_key": false,
-        "has_auto_increment": false,
-        "foreign_key_schema": "public",
-        "foreign_key_table": "button_group",
-        "foreign_key_column": "id"
-      },
-      "meta": {
-        "id": 196,
-        "collection": "button_group_buttons",
-        "field": "button_group_id",
-        "special": null,
-        "interface": null,
-        "options": null,
-        "display": null,
-        "display_options": null,
-        "readonly": false,
-        "hidden": true,
-        "sort": 2,
-        "width": "full",
-        "translations": null,
-        "note": null,
-        "conditions": null,
-        "required": false,
-        "group": null,
-        "validation": null,
-        "validation_message": null
-      }
-    },
-    {
-      "collection": "button_group_buttons",
-      "field": "item",
-      "type": "string",
-      "schema": {
-        "name": "item",
-        "table": "button_group_buttons",
-        "schema": "public",
-        "data_type": "character varying",
-        "is_nullable": true,
-        "generation_expression": null,
-        "default_value": null,
+        "default_value": "button",
         "is_generated": false,
         "max_length": 255,
         "comment": null,
@@ -1940,68 +1631,22 @@
         "foreign_key_column": null
       },
       "meta": {
-        "id": 197,
-        "collection": "button_group_buttons",
-        "field": "item",
+        "id": 215,
+        "collection": "button",
+        "field": "type",
         "special": null,
-        "interface": null,
+        "interface": "input",
         "options": null,
         "display": null,
         "display_options": null,
         "readonly": false,
         "hidden": true,
-        "sort": 3,
+        "sort": 10,
         "width": "full",
         "translations": null,
         "note": null,
         "conditions": null,
-        "required": false,
-        "group": null,
-        "validation": null,
-        "validation_message": null
-      }
-    },
-    {
-      "collection": "button_group_buttons",
-      "field": "collection",
-      "type": "string",
-      "schema": {
-        "name": "collection",
-        "table": "button_group_buttons",
-        "schema": "public",
-        "data_type": "character varying",
-        "is_nullable": true,
-        "generation_expression": null,
-        "default_value": null,
-        "is_generated": false,
-        "max_length": 255,
-        "comment": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_unique": false,
-        "is_primary_key": false,
-        "has_auto_increment": false,
-        "foreign_key_schema": null,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      },
-      "meta": {
-        "id": 198,
-        "collection": "button_group_buttons",
-        "field": "collection",
-        "special": null,
-        "interface": null,
-        "options": null,
-        "display": null,
-        "display_options": null,
-        "readonly": false,
-        "hidden": true,
-        "sort": 4,
-        "width": "full",
-        "translations": null,
-        "note": null,
-        "conditions": null,
-        "required": false,
+        "required": true,
         "group": null,
         "validation": null,
         "validation_message": null
@@ -17455,7 +17100,7 @@
         "display": null,
         "display_options": null,
         "readonly": true,
-        "hidden": false,
+        "hidden": true,
         "sort": 5,
         "width": "full",
         "translations": null,
@@ -18620,7 +18265,7 @@
           "font": "monospace"
         },
         "readonly": true,
-        "hidden": false,
+        "hidden": true,
         "sort": 13,
         "width": "half",
         "translations": null,
@@ -19114,7 +18759,7 @@
         "display": null,
         "display_options": null,
         "readonly": true,
-        "hidden": false,
+        "hidden": true,
         "sort": 5,
         "width": "full",
         "translations": null,
@@ -19210,6 +18855,7 @@
           "m2aField": "editor_nodes",
           "tools": [
             "paragraph",
+            "codeBlock",
             "h1",
             "h2",
             "h3",
@@ -19220,16 +18866,15 @@
             "italic",
             "strike",
             "code",
+            "subscript",
+            "superscript",
             "link",
             "removeLink",
             "autolink",
             "horizontalRule",
             "bulletList",
             "orderedList",
-            "blockquote",
-            "undo",
-            "redo",
-            "fullscreen"
+            "blockquote"
           ],
           "displayFormat": true,
           "editorHeight": "height-grow",
@@ -19294,8 +18939,10 @@
             }
           ]
         },
-        "display": null,
-        "display_options": null,
+        "display": "labels",
+        "display_options": {
+          "font": "monospace"
+        },
         "readonly": false,
         "hidden": false,
         "sort": 2,
@@ -19356,7 +19003,7 @@
           ],
           "allowNone": true
         },
-        "display": null,
+        "display": "labels",
         "display_options": null,
         "readonly": false,
         "hidden": false,
@@ -19418,7 +19065,7 @@
             }
           ]
         },
-        "display": null,
+        "display": "labels",
         "display_options": null,
         "readonly": false,
         "hidden": false,
@@ -19546,7 +19193,7 @@
         "display": null,
         "display_options": null,
         "readonly": true,
-        "hidden": false,
+        "hidden": true,
         "sort": 8,
         "width": "full",
         "translations": null,
@@ -20896,9 +20543,9 @@
         "display": null,
         "display_options": null,
         "readonly": true,
-        "hidden": false,
+        "hidden": true,
         "sort": 2,
-        "width": "full",
+        "width": "fill",
         "translations": null,
         "note": null,
         "conditions": null,
@@ -20919,7 +20566,7 @@
         "data_type": "character varying",
         "is_nullable": true,
         "generation_expression": null,
-        "default_value": "row",
+        "default_value": "col",
         "is_generated": false,
         "max_length": 255,
         "comment": null,
@@ -20937,9 +20584,8 @@
         "collection": "stack",
         "field": "direction",
         "special": null,
-        "interface": "select-dropdown",
+        "interface": "select-radio",
         "options": {
-          "iconOn": "arrow_range",
           "choices": [
             {
               "text": "Horizontal",
@@ -20947,7 +20593,7 @@
             },
             {
               "text": "Vertical",
-              "value": "column"
+              "value": "col"
             }
           ]
         },
@@ -21104,7 +20750,7 @@
         "data_type": "boolean",
         "is_nullable": true,
         "generation_expression": null,
-        "default_value": false,
+        "default_value": true,
         "is_generated": false,
         "max_length": null,
         "comment": null,
@@ -21177,9 +20823,32 @@
           "editorHeight": "height-grow",
           "toolbarMode": "sticky",
           "displayFormat": true,
-          "m2aField": "editor_nodes"
+          "m2aField": "editor_nodes",
+          "tools": [
+            "paragraph",
+            "codeBlock",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6",
+            "bold",
+            "italic",
+            "strike",
+            "code",
+            "subscript",
+            "superscript",
+            "link",
+            "removeLink",
+            "autolink",
+            "horizontalRule",
+            "bulletList",
+            "orderedList",
+            "blockquote"
+          ]
         },
-        "display": null,
+        "display": "flexible-editor-display",
         "display_options": null,
         "readonly": false,
         "hidden": false,
@@ -21361,426 +21030,6 @@
       "meta": {
         "id": 213,
         "collection": "stack_editor_nodes",
-        "field": "collection",
-        "special": null,
-        "interface": null,
-        "options": null,
-        "display": null,
-        "display_options": null,
-        "readonly": false,
-        "hidden": true,
-        "sort": 4,
-        "width": "full",
-        "translations": null,
-        "note": null,
-        "conditions": null,
-        "required": false,
-        "group": null,
-        "validation": null,
-        "validation_message": null
-      }
-    },
-    {
-      "collection": "wrapper",
-      "field": "id",
-      "type": "uuid",
-      "schema": {
-        "name": "id",
-        "table": "wrapper",
-        "schema": "public",
-        "data_type": "uuid",
-        "is_nullable": false,
-        "generation_expression": null,
-        "default_value": null,
-        "is_generated": false,
-        "max_length": null,
-        "comment": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_unique": true,
-        "is_primary_key": true,
-        "has_auto_increment": false,
-        "foreign_key_schema": null,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      },
-      "meta": {
-        "id": 175,
-        "collection": "wrapper",
-        "field": "id",
-        "special": [
-          "uuid"
-        ],
-        "interface": "input",
-        "options": null,
-        "display": null,
-        "display_options": null,
-        "readonly": true,
-        "hidden": true,
-        "sort": 1,
-        "width": "full",
-        "translations": null,
-        "note": null,
-        "conditions": null,
-        "required": false,
-        "group": null,
-        "validation": null,
-        "validation_message": null
-      }
-    },
-    {
-      "collection": "wrapper",
-      "field": "editor",
-      "type": "json",
-      "schema": {
-        "name": "editor",
-        "table": "wrapper",
-        "schema": "public",
-        "data_type": "json",
-        "is_nullable": true,
-        "generation_expression": null,
-        "default_value": null,
-        "is_generated": false,
-        "max_length": null,
-        "comment": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_unique": false,
-        "is_primary_key": false,
-        "has_auto_increment": false,
-        "foreign_key_schema": null,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      },
-      "meta": {
-        "id": 176,
-        "collection": "wrapper",
-        "field": "editor",
-        "special": [
-          "cast-json"
-        ],
-        "interface": "flexible-editor-interface",
-        "options": {
-          "tools": [
-            "paragraph",
-            "h1",
-            "h2",
-            "h3",
-            "h4",
-            "h5",
-            "h6",
-            "bold",
-            "italic",
-            "strike",
-            "code",
-            "link",
-            "removeLink",
-            "autolink",
-            "horizontalRule",
-            "bulletList",
-            "orderedList",
-            "blockquote",
-            "undo",
-            "redo",
-            "fullscreen"
-          ],
-          "displayFormat": true,
-          "editorHeight": "height-grow",
-          "toolbarMode": "sticky",
-          "m2aField": "editor_nodes"
-        },
-        "display": "flexible-editor-display",
-        "display_options": null,
-        "readonly": false,
-        "hidden": false,
-        "sort": 4,
-        "width": "full",
-        "translations": null,
-        "note": null,
-        "conditions": null,
-        "required": false,
-        "group": null,
-        "validation": null,
-        "validation_message": null
-      }
-    },
-    {
-      "collection": "wrapper",
-      "field": "color",
-      "type": "string",
-      "schema": {
-        "name": "color",
-        "table": "wrapper",
-        "schema": "public",
-        "data_type": "character varying",
-        "is_nullable": true,
-        "generation_expression": null,
-        "default_value": null,
-        "is_generated": false,
-        "max_length": 255,
-        "comment": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_unique": false,
-        "is_primary_key": false,
-        "has_auto_increment": false,
-        "foreign_key_schema": null,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      },
-      "meta": {
-        "id": 177,
-        "collection": "wrapper",
-        "field": "color",
-        "special": null,
-        "interface": "select-dropdown",
-        "options": {
-          "choices": [
-            {
-              "text": "Primary",
-              "value": "primary"
-            },
-            {
-              "text": "Secondary",
-              "value": "secondary"
-            },
-            {
-              "text": "Muted",
-              "value": "muted"
-            }
-          ],
-          "allowNone": true
-        },
-        "display": null,
-        "display_options": null,
-        "readonly": false,
-        "hidden": false,
-        "sort": 2,
-        "width": "half",
-        "translations": null,
-        "note": null,
-        "conditions": null,
-        "required": false,
-        "group": null,
-        "validation": null,
-        "validation_message": null
-      }
-    },
-    {
-      "collection": "wrapper",
-      "field": "fit_height",
-      "type": "boolean",
-      "schema": {
-        "name": "fit_height",
-        "table": "wrapper",
-        "schema": "public",
-        "data_type": "boolean",
-        "is_nullable": true,
-        "generation_expression": null,
-        "default_value": false,
-        "is_generated": false,
-        "max_length": null,
-        "comment": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_unique": false,
-        "is_primary_key": false,
-        "has_auto_increment": false,
-        "foreign_key_schema": null,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      },
-      "meta": {
-        "id": 180,
-        "collection": "wrapper",
-        "field": "fit_height",
-        "special": [
-          "cast-boolean"
-        ],
-        "interface": "boolean",
-        "options": null,
-        "display": null,
-        "display_options": null,
-        "readonly": false,
-        "hidden": false,
-        "sort": 3,
-        "width": "half",
-        "translations": null,
-        "note": null,
-        "conditions": null,
-        "required": false,
-        "group": null,
-        "validation": null,
-        "validation_message": null
-      }
-    },
-    {
-      "collection": "wrapper_editor_nodes",
-      "field": "id",
-      "type": "uuid",
-      "schema": {
-        "name": "id",
-        "table": "wrapper_editor_nodes",
-        "schema": "public",
-        "data_type": "uuid",
-        "is_nullable": false,
-        "generation_expression": null,
-        "default_value": null,
-        "is_generated": false,
-        "max_length": null,
-        "comment": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_unique": true,
-        "is_primary_key": true,
-        "has_auto_increment": false,
-        "foreign_key_schema": null,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      },
-      "meta": {
-        "id": 181,
-        "collection": "wrapper_editor_nodes",
-        "field": "id",
-        "special": [
-          "uuid"
-        ],
-        "interface": "input",
-        "options": null,
-        "display": null,
-        "display_options": null,
-        "readonly": true,
-        "hidden": true,
-        "sort": 1,
-        "width": "full",
-        "translations": null,
-        "note": null,
-        "conditions": null,
-        "required": false,
-        "group": null,
-        "validation": null,
-        "validation_message": null
-      }
-    },
-    {
-      "collection": "wrapper_editor_nodes",
-      "field": "wrapper_id",
-      "type": "uuid",
-      "schema": {
-        "name": "wrapper_id",
-        "table": "wrapper_editor_nodes",
-        "schema": "public",
-        "data_type": "uuid",
-        "is_nullable": true,
-        "generation_expression": null,
-        "default_value": null,
-        "is_generated": false,
-        "max_length": null,
-        "comment": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_unique": false,
-        "is_primary_key": false,
-        "has_auto_increment": false,
-        "foreign_key_schema": "public",
-        "foreign_key_table": "wrapper",
-        "foreign_key_column": "id"
-      },
-      "meta": {
-        "id": 183,
-        "collection": "wrapper_editor_nodes",
-        "field": "wrapper_id",
-        "special": null,
-        "interface": null,
-        "options": null,
-        "display": null,
-        "display_options": null,
-        "readonly": false,
-        "hidden": true,
-        "sort": 2,
-        "width": "full",
-        "translations": null,
-        "note": null,
-        "conditions": null,
-        "required": false,
-        "group": null,
-        "validation": null,
-        "validation_message": null
-      }
-    },
-    {
-      "collection": "wrapper_editor_nodes",
-      "field": "item",
-      "type": "string",
-      "schema": {
-        "name": "item",
-        "table": "wrapper_editor_nodes",
-        "schema": "public",
-        "data_type": "character varying",
-        "is_nullable": true,
-        "generation_expression": null,
-        "default_value": null,
-        "is_generated": false,
-        "max_length": 255,
-        "comment": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_unique": false,
-        "is_primary_key": false,
-        "has_auto_increment": false,
-        "foreign_key_schema": null,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      },
-      "meta": {
-        "id": 184,
-        "collection": "wrapper_editor_nodes",
-        "field": "item",
-        "special": null,
-        "interface": null,
-        "options": null,
-        "display": null,
-        "display_options": null,
-        "readonly": false,
-        "hidden": true,
-        "sort": 3,
-        "width": "full",
-        "translations": null,
-        "note": null,
-        "conditions": null,
-        "required": false,
-        "group": null,
-        "validation": null,
-        "validation_message": null
-      }
-    },
-    {
-      "collection": "wrapper_editor_nodes",
-      "field": "collection",
-      "type": "string",
-      "schema": {
-        "name": "collection",
-        "table": "wrapper_editor_nodes",
-        "schema": "public",
-        "data_type": "character varying",
-        "is_nullable": true,
-        "generation_expression": null,
-        "default_value": null,
-        "is_generated": false,
-        "max_length": 255,
-        "comment": null,
-        "numeric_precision": null,
-        "numeric_scale": null,
-        "is_unique": false,
-        "is_primary_key": false,
-        "has_auto_increment": false,
-        "foreign_key_schema": null,
-        "foreign_key_table": null,
-        "foreign_key_column": null
-      },
-      "meta": {
-        "id": 185,
-        "collection": "wrapper_editor_nodes",
         "field": "collection",
         "special": null,
         "interface": null,
@@ -22032,66 +21281,6 @@
         "readonly": false,
         "hidden": false,
         "sort": 7,
-        "width": "full",
-        "translations": null,
-        "note": null,
-        "conditions": null,
-        "required": false,
-        "group": null,
-        "validation": null,
-        "validation_message": null
-      }
-    },
-    {
-      "collection": "button_group",
-      "field": "buttons",
-      "type": "alias",
-      "schema": null,
-      "meta": {
-        "id": 194,
-        "collection": "button_group",
-        "field": "buttons",
-        "special": [
-          "m2a"
-        ],
-        "interface": "list-m2a",
-        "options": {
-          "enableSelect": false
-        },
-        "display": null,
-        "display_options": null,
-        "readonly": false,
-        "hidden": false,
-        "sort": 3,
-        "width": "full",
-        "translations": null,
-        "note": null,
-        "conditions": null,
-        "required": false,
-        "group": null,
-        "validation": null,
-        "validation_message": null
-      }
-    },
-    {
-      "collection": "wrapper",
-      "field": "editor_nodes",
-      "type": "alias",
-      "schema": null,
-      "meta": {
-        "id": 182,
-        "collection": "wrapper",
-        "field": "editor_nodes",
-        "special": [
-          "m2a"
-        ],
-        "interface": null,
-        "options": null,
-        "display": null,
-        "display_options": null,
-        "readonly": false,
-        "hidden": true,
-        "sort": 5,
         "width": "full",
         "translations": null,
         "note": null,
@@ -24395,60 +23584,6 @@
       }
     },
     {
-      "collection": "wrapper_editor_nodes",
-      "field": "wrapper_id",
-      "related_collection": "wrapper",
-      "schema": {
-        "constraint_name": "wrapper_editor_nodes_wrapper_id_foreign",
-        "table": "wrapper_editor_nodes",
-        "column": "wrapper_id",
-        "foreign_key_schema": "public",
-        "foreign_key_table": "wrapper",
-        "foreign_key_column": "id",
-        "on_update": "NO ACTION",
-        "on_delete": "CASCADE"
-      },
-      "meta": {
-        "id": 27,
-        "many_collection": "wrapper_editor_nodes",
-        "many_field": "wrapper_id",
-        "one_collection": "wrapper",
-        "one_field": "editor_nodes",
-        "one_collection_field": null,
-        "one_allowed_collections": null,
-        "junction_field": "item",
-        "sort_field": null,
-        "one_deselect_action": "delete"
-      }
-    },
-    {
-      "collection": "button_group_buttons",
-      "field": "button_group_id",
-      "related_collection": "button_group",
-      "schema": {
-        "constraint_name": "button_group_buttons_button_group_id_foreign",
-        "table": "button_group_buttons",
-        "column": "button_group_id",
-        "foreign_key_schema": "public",
-        "foreign_key_table": "button_group",
-        "foreign_key_column": "id",
-        "on_update": "NO ACTION",
-        "on_delete": "SET NULL"
-      },
-      "meta": {
-        "id": 31,
-        "many_collection": "button_group_buttons",
-        "many_field": "button_group_id",
-        "one_collection": "button_group",
-        "one_field": "buttons",
-        "one_collection_field": null,
-        "one_allowed_collections": null,
-        "junction_field": "item",
-        "sort_field": null,
-        "one_deselect_action": "nullify"
-      }
-    },
-    {
       "collection": "stack_editor_nodes",
       "field": "stack_id",
       "related_collection": "stack",
@@ -24512,54 +23647,9 @@
           "gallery",
           "quote",
           "button",
-          "wrapper",
           "stack"
         ],
         "junction_field": "section_id",
-        "sort_field": null,
-        "one_deselect_action": "nullify"
-      }
-    },
-    {
-      "collection": "wrapper_editor_nodes",
-      "field": "item",
-      "related_collection": null,
-      "schema": null,
-      "meta": {
-        "id": 26,
-        "many_collection": "wrapper_editor_nodes",
-        "many_field": "item",
-        "one_collection": null,
-        "one_field": null,
-        "one_collection_field": "collection",
-        "one_allowed_collections": [
-          "button",
-          "image",
-          "gallery",
-          "quote",
-          "button_group"
-        ],
-        "junction_field": "wrapper_id",
-        "sort_field": null,
-        "one_deselect_action": "nullify"
-      }
-    },
-    {
-      "collection": "button_group_buttons",
-      "field": "item",
-      "related_collection": null,
-      "schema": null,
-      "meta": {
-        "id": 30,
-        "many_collection": "button_group_buttons",
-        "many_field": "item",
-        "one_collection": null,
-        "one_field": null,
-        "one_collection_field": "collection",
-        "one_allowed_collections": [
-          "button"
-        ],
-        "junction_field": "button_group_id",
         "sort_field": null,
         "one_deselect_action": "nullify"
       }
@@ -24577,7 +23667,11 @@
         "one_field": null,
         "one_collection_field": "collection",
         "one_allowed_collections": [
-          "button"
+          "button",
+          "image",
+          "gallery",
+          "quote",
+          "stack"
         ],
         "junction_field": "stack_id",
         "sort_field": null,
