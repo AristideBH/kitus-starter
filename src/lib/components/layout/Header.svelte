@@ -1,10 +1,15 @@
 <script lang="ts">
 	import Navigation from '$lib/components/navigation/Navigation.svelte';
 	import { page } from '$app/stores';
+	import { loading } from '$lib/logic/pageLoading.svelte';
 	let { project_name, project_descriptor, project_url } = $page.data.global;
+	import LoadingBar from './LoadingBar.svelte';
 </script>
 
 <header class="sticky bottom-0 z-50 bg-muted py-4">
+	{#if $loading}
+		<LoadingBar />
+	{/if}
 	<div class="flex items-center justify-between">
 		<div class="flex items-center gap-3">
 			<a href="/">
