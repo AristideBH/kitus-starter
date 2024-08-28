@@ -3,6 +3,8 @@
 	import Image from '$lib/components/image/Image.svelte';
 	import Section from '$lib/components/layout/Section.svelte';
 
+	import * as Accordion from '$lib/components/ui/accordion';
+
 	let { data } = $props();
 	let { home } = data;
 </script>
@@ -13,23 +15,28 @@
 <Section>
 	<AnimatedHeading class="mb-0 ~text-6xl/9xl">Kitus Starter</AnimatedHeading>
 	<p class="lead mb-10 italic text-primary">A custom starter template for Sveltekit & Directus</p>
-	<details open class="list-none rounded-sm bg-muted p-4">
-		<summary>Détails</summary>
-		<ul class="!mt-4">
-			<li>Svelte 5 & Sveltekit</li>
-			<li>Directus SDK and decicated functions</li>
-			<li>Client Types & Schema sync</li>
-			<li>Authentification & account page</li>
-			<li>Tailwind, shadcn-svelte and fluid plugin</li>
-			<li>Pages transitions & animated sections</li>
-			<li>
-				Components :
-				<ul>
-					<li>Image</li>
-					<li>Pagination</li>
-					<li>Flexible Builder</li>
+
+	<Accordion.Root class="rounded-sm bg-muted" value="item-1">
+		<Accordion.Item value="item-1" class="rounded-sm px-6">
+			<Accordion.Trigger class="!no-underline">Details</Accordion.Trigger>
+			<Accordion.Content>
+				<ul class="ms-0 border-t border-secondary pt-4 text-base">
+					<li>Svelte 5 & Sveltekit</li>
+					<li>Directus SDK and decicated functions</li>
+					<li>Client Types & Schema sync</li>
+					<li>Authentification & account page</li>
+					<li>Tailwind, shadcn-svelte and fluid plugin</li>
+					<li>Pages transitions & animated sections</li>
+					<li>
+						Components :
+						<ul>
+							<li>Image</li>
+							<li>Pagination</li>
+							<li>Flexible Builder</li>
+						</ul>
+					</li>
 				</ul>
-			</li>
-		</ul>
-	</details>
+			</Accordion.Content>
+		</Accordion.Item>
+	</Accordion.Root>
 </Section>

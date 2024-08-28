@@ -20,7 +20,7 @@
 			<Menu class="s-4" />
 		</Button>
 	</Drawer.Trigger>
-	<Drawer.Content class="h-[80vh] ">
+	<Drawer.Content class="max-h-full min-h-[33vh] ">
 		<Drawer.Header class="flex items-start gap-3 px-8 pt-8 text-left">
 			<a href="/">
 				<img
@@ -37,7 +37,7 @@
 				<span class="small">{project_descriptor}</span>
 			</p>
 		</Drawer.Header>
-		<nav class=" flex flex-col gap-8 overflow-auto p-8 text-3xl">
+		<nav class=" flex flex-col gap-8 overflow-auto p-8 pb-28 text-3xl">
 			{#each menu.items as item}
 				{#if item.type === 'list'}
 					<NavItemSub {item} />
