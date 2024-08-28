@@ -14,12 +14,13 @@
 	const setStyles = (node: HTMLElement) => {
 		let isColorSet = !!color;
 		let isGapSet = !!gap;
+		let isHeightFit = !!fit_height;
 
 		if (isGapSet) node.classList.add(`gap-${gap}`);
 		if (isColorSet) node.classList.add(`bg-${color}`, 'p-5', 'rounded');
 		if (color === 'primary') node.classList.add('text-primary-foreground');
 		if (direction) node.classList.add(`flex-${direction}`);
-		if (fit_height) node.classList.add('h-fit');
+		if (isHeightFit) node.classList.add('h-fit');
 	};
 </script>
 
@@ -30,5 +31,8 @@
 <style>
 	:global(.block-wrapper p + p) {
 		margin-top: 0;
+	}
+	.block-wrapper:empty {
+		display: none;
 	}
 </style>

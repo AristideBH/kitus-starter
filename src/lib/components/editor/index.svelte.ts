@@ -85,6 +85,13 @@ export const findCode = (marks: Mark[]): GenericMark | null => {
     return findMark<GenericMark>(marks, 'code');
 };
 
+export const findSub = (marks: Mark[]): GenericMark | null => {
+    return findMark<GenericMark>(marks, 'subscript');
+};
+export const findSup = (marks: Mark[]): GenericMark | null => {
+    return findMark<GenericMark>(marks, 'superscript');
+};
+
 
 // Layout
 export const setMarks = (marks: Mark[]) => {

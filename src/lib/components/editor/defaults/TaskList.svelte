@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { TipTapNode } from '../index.d';
-	import Render from '../Render.svelte';
+	import Builder from '../Builder.svelte';
 	import { Checkbox } from '$components/ui/checkbox';
 
 	let { content }: { content: TipTapNode[] } = $props();
@@ -11,7 +11,7 @@
 		{@const checked = item.attrs?.checked}
 		<li class="flex gap-3">
 			<Checkbox {checked} disabled class="!cursor-default" />
-			<Render editor={item} />
+			<Builder nodes={item.content} />
 		</li>
 	{/each}
 </ul>

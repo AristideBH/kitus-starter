@@ -27,8 +27,8 @@
 		node.setAttribute('data-template', template || 'none');
 		if (isColorSet) node.classList.add(`bg-${color}`);
 		if (align) node.classList.add(`items-${align}`);
-		if (isFullWidth) node.classList.add('layout-full', 'py-12');
-		if (!isFullWidth && isColorSet) node.classList.add('p-8', 'rounded');
+		if (isFullWidth) node.classList.add('layout-full', 'py-10');
+		if (!isFullWidth && isColorSet) node.classList.add('p-7', 'rounded');
 	};
 </script>
 

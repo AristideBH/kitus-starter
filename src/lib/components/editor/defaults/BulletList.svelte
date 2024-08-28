@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { TipTapNode } from '../index.d';
-	import Render from '../Render.svelte';
+	import Builder from '../Builder.svelte';
 
 	let { content, class: className }: { content: TipTapNode[]; class?: string } = $props();
 </script>
@@ -9,8 +9,7 @@
 	{#each content as item}
 		<li>
 			{#if item.type === 'listItem'}
-				<!-- <Render editor={item} /> -->
-				todo : list item
+				<Builder nodes={item.content} />
 			{/if}
 		</li>
 	{/each}

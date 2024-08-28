@@ -33,7 +33,7 @@ type LinkMark = {
 }
 
 type GenericMark = {
-    type: 'link' | 'italic' | 'bold' | 'strike' | "code"
+    type: 'link' | 'italic' | 'bold' | 'strike' | "code" | "subscript" | "superscript"
 }
 
 type Mark = LinkMark | GenericMark;

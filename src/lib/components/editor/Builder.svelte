@@ -34,8 +34,7 @@
 	{#each nodes as node}
 		{#if node?.editor}
 			{@const { type, editor } = node}
-			<!-- <pre>{JSON.stringify(node, null, 2)}</pre> -->
-
+			<!-- Wrappers -->
 			{#if type === 'section'}
 				<Section content={node}>
 					<svelte:self nodes={editor.content} />
@@ -44,13 +43,14 @@
 				<Stack content={node}>
 					<svelte:self nodes={editor.content} />
 				</Stack>
+			{:else}
+				<pre>{JSON.stringify(node.type, null, 2)}</pre>
 			{/if}
 
-			<!-- Todo : fix gallery, button -->
+			<!-- Todo : fix gallery -->
 		{:else}
 			{@const { type, content, attrs } = node}
-			<!-- <pre>{JSON.stringify(node, null, 2)}</pre> -->
-
+			<!-- Elements -->
 			{#if type === 'heading' && attrs}
 				{#if attrs.level.toString() === '1'}
 					<AnimatedHeading {content} />
@@ -69,6 +69,10 @@
 				<Blockquote {content} />
 			{:else if type === 'quote'}
 				<Quote content={node} />
+			{:else if type === 'codeBlock'}
+				<pre class="overflow-hidden whitespace-normal px-4 py-3 [&_p]:text-base">
+					<Paragraph {content} />
+				</pre>
 			{:else if type === 'image'}
 				<Image content={node} />
 			{:else if type === 'slider' || type === 'masonry' || type === 'scroll'}
@@ -86,7 +90,7 @@
 					{label}
 				</Button> -->
 			{:else}
-				<!-- <pre>{JSON.stringify(node.type, null, 2)}</pre> -->
+				<pre>{JSON.stringify(node, null, 2)}</pre>
 			{/if}
 		{/if}
 	{/each}

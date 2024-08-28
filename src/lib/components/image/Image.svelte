@@ -104,7 +104,8 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 		width={elWidth}
 		height={elHeight}
 		class:not-loaded={!inView}
-		class=" aspect-video"
+		class="aspect-video"
+		style={`object-position: ${fetchedFile?.focal_point_x}% ${fetchedFile?.focal_point_y}%;`}
 	/>
 	<!-- Problem when using transparent images -->
 	<!-- style="background-image:url({thumbhashUrl})" -->
