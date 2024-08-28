@@ -5,8 +5,12 @@
 	let {
 		content,
 		class: className,
-		level
-	}: { content: TipTapNode[]; class?: string; level: '1' | '2' | '3' | '4' | '5' | '6' } = $props();
+		level = '1'
+	}: {
+		content: TipTapNode[];
+		class?: string;
+		level: '1' | '2' | '3' | '4' | '5' | '6' | undefined;
+	} = $props();
 </script>
 
 <svelte:element this={'h' + level} class={className ?? ''}>

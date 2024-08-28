@@ -45,7 +45,7 @@
 			{#if 'content' in node}
 				<!-- - Default TipTap Nodes -->
 				{#if type === 'heading' && attrs}
-					{#if attrs.level.toString() === '1'}
+					{#if attrs.level && attrs.level.toString() === '1'}
 						<AnimatedHeading {content} />
 					{:else}
 						<Heading level={attrs.level} {content} />

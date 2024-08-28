@@ -80,7 +80,6 @@ const elementQuery = async (client: DirectusClient, attrs: CustomAttrs | undefin
  * @returns An array of `TipTapNode` objects representing the adapted content.
  */
 const adaptToTipTapNodes = (content: ProcessedContent[]): TipTapNode[] => {
-    //@ts-expect-error Overlap is not adequat but works 
     return content.map((item) => {
         if (item.type === 'quote') {
             return {
