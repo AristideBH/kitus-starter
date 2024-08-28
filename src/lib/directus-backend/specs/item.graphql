@@ -77,6 +77,10 @@ type Query {
   stack_editor_nodes_by_id(id: ID!, version: String): stack_editor_nodes
   stack_editor_nodes_aggregated(groupBy: [String], filter: stack_editor_nodes_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [stack_editor_nodes_aggregated!]!
   stack_editor_nodes_by_version(version: String!, id: ID!): version_stack_editor_nodes
+  video(filter: video_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [video!]!
+  video_by_id(id: ID!, version: String): video
+  video_aggregated(groupBy: [String], filter: video_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [video_aggregated!]!
+  video_by_version(version: String!, id: ID!): version_video
 }
 
 type Mutation {
@@ -118,6 +122,8 @@ type Mutation {
   create_stack_item(data: create_stack_input!): stack
   create_stack_editor_nodes_items(filter: stack_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_stack_editor_nodes_input!]): [stack_editor_nodes!]!
   create_stack_editor_nodes_item(data: create_stack_editor_nodes_input!): stack_editor_nodes
+  create_video_items(filter: video_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_video_input!]): [video!]!
+  create_video_item(data: create_video_input!): video
   update_directus_sync_id_map_items(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_sync_id_map_input!): [directus_sync_id_map!]!
   update_directus_sync_id_map_batch(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_sync_id_map_input!]): [directus_sync_id_map!]!
   update_directus_sync_id_map_item(id: ID!, data: update_directus_sync_id_map_input!): directus_sync_id_map
@@ -176,6 +182,9 @@ type Mutation {
   update_stack_editor_nodes_items(filter: stack_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_stack_editor_nodes_input!): [stack_editor_nodes!]!
   update_stack_editor_nodes_batch(filter: stack_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_stack_editor_nodes_input!]): [stack_editor_nodes!]!
   update_stack_editor_nodes_item(id: ID!, data: update_stack_editor_nodes_input!): stack_editor_nodes
+  update_video_items(filter: video_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_video_input!): [video!]!
+  update_video_batch(filter: video_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_video_input!]): [video!]!
+  update_video_item(id: ID!, data: update_video_input!): video
   delete_directus_sync_id_map_items(ids: [ID]!): delete_many
   delete_directus_sync_id_map_item(id: ID!): delete_one
   delete_pages_items(ids: [ID]!): delete_many
@@ -214,6 +223,8 @@ type Mutation {
   delete_stack_item(id: ID!): delete_one
   delete_stack_editor_nodes_items(ids: [ID]!): delete_many
   delete_stack_editor_nodes_item(id: ID!): delete_one
+  delete_video_items(ids: [ID]!): delete_many
+  delete_video_item(id: ID!): delete_one
 }
 
 type Subscription {
@@ -255,6 +266,7 @@ type Subscription {
   button_mutated(event: EventEnum): button_mutated
   stack_mutated(event: EventEnum): stack_mutated
   stack_editor_nodes_mutated(event: EventEnum): stack_editor_nodes_mutated
+  video_mutated(event: EventEnum): video_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -305,9 +317,9 @@ enum EventEnum {
 
 union pages_editor_nodes_item_union = section
 
-union section_editor_nodes_item_union = image | gallery | quote | button | stack
+union section_editor_nodes_item_union = image | gallery | quote | button | stack | video
 
-union stack_editor_nodes_item_union = button | image | gallery | quote | stack
+union stack_editor_nodes_item_union = button | image | gallery | quote | stack | video
 
 type button {
   id: ID!
@@ -1701,6 +1713,36 @@ type version_stack_editor_nodes {
   collection: String
 }
 
+""""""
+type version_video {
+  id: ID
+  video_link: JSON
+}
+
+type video {
+  id: ID!
+  video_link: JSON
+  video_link_func: count_functions
+}
+
+type video_aggregated {
+  group: JSON
+  countAll: Int
+  count: video_aggregated_count
+  countDistinct: video_aggregated_count
+}
+
+type video_aggregated_count {
+  id: Int
+  video_link: Int
+}
+
+type video_mutated {
+  key: ID!
+  event: EventEnum
+  data: video
+}
+
 input big_int_filter_operators {
   _eq: GraphQLBigInt
   _neq: GraphQLBigInt
@@ -1995,6 +2037,11 @@ input create_stack_input {
   fit_height: Boolean
   editor: JSON
   editor_nodes: [create_stack_editor_nodes_input]
+}
+
+input create_video_input {
+  id: ID
+  video_link: JSON
 }
 
 input date_filter_operators {
@@ -2386,6 +2433,7 @@ input section_editor_nodes_filter {
   item__quote: quote_filter
   item__button: button_filter
   item__stack: stack_filter
+  item__video: video_filter
 }
 
 input section_filter {
@@ -2461,6 +2509,7 @@ input stack_editor_nodes_filter {
   item__gallery: gallery_filter
   item__quote: quote_filter
   item__stack: stack_filter
+  item__video: video_filter
 }
 
 input stack_filter {
@@ -2751,4 +2800,17 @@ input update_stack_input {
   fit_height: Boolean
   editor: JSON
   editor_nodes: [update_stack_editor_nodes_input]
+}
+
+input update_video_input {
+  id: ID
+  video_link: JSON
+}
+
+input video_filter {
+  id: string_filter_operators
+  video_link: string_filter_operators
+  video_link_func: count_function_filter_operators
+  _and: [video_filter]
+  _or: [video_filter]
 }

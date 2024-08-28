@@ -373,6 +373,7 @@ export namespace Collections {
       | Collections.Quote
       | Collections.Button
       | Collections.Stack
+      | Collections.Video
     >;
     collection: Types.Optional<Types.String>;
   }
@@ -518,8 +519,17 @@ export namespace Collections {
       | Collections.Gallery
       | Collections.Quote
       | Collections.Stack
+      | Collections.Video
     >;
     collection: Types.Optional<Types.String>;
+  }
+
+  /**
+   * The video collection.
+   */
+  export interface Video {
+    id: Types.PrimaryKey<Types.UUID>;
+    video_link: Types.Optional<Types.JSON | Types.JSON>;
   }
 
   /**
@@ -779,6 +789,11 @@ export interface Schema extends System {
    * The stack editor nodes collection.
    */
   stack_editor_nodes: Collections.StackEditorNodes[];
+
+  /**
+   * The video collection.
+   */
+  video: Collections.Video[];
 
   /**
    * The directus sync id map collection.
@@ -5770,6 +5785,237 @@ export class StackEditorNodesItem
 }
 
 /**
+ * Create many video items.
+ */
+export function createVideoItems<
+  const Query extends Directus.Query<Schema, Collections.Video[]>,
+>(items: Partial<Collections.Video>[], query?: Query) {
+  return DirectusSDK.createItems<Schema, "video", Query>("video", items, query);
+}
+
+/**
+ * Create a single video item.
+ */
+export function createVideoItem<
+  const Query extends DirectusSDK.Query<Schema, Collections.Video[]>, // Is this a mistake? Why []?
+>(item: Partial<Collections.Video>, query?: Query) {
+  return DirectusSDK.createItem<Schema, "video", Query>("video", item, query);
+}
+
+/**
+ * Read many video items.
+ */
+export function readVideoItems<
+  const Query extends Directus.Query<Schema, Collections.Video>,
+>(query?: Query) {
+  return DirectusSDK.readItems<Schema, "video", Query>("video", query);
+}
+
+/**
+ * Read many video items.
+ */
+export const listVideo = readVideoItems;
+
+/**
+ * Gets a single known video item by id.
+ */
+export function readVideoItem<
+  const Query extends Directus.Query<Schema, Collections.Video>,
+>(key: string | number, query?: Query) {
+  return DirectusSDK.readItem<Schema, "video", Query>("video", key, query);
+}
+
+/**
+ * Gets a single known video item by id.
+ */
+export const readVideo = readVideoItem;
+
+/**
+ * Read many video items.
+ */
+export function updateVideoItems<
+  const Query extends Directus.Query<Schema, Collections.Video[]>,
+>(keys: string[] | number[], patch: Partial<Collections.Video>, query?: Query) {
+  return DirectusSDK.updateItems<Schema, "video", Query>(
+    "video",
+    keys,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Gets a single known video item by id.
+ */
+export function updateVideoItem<
+  const Query extends Directus.Query<Schema, Collections.Video[]>,
+>(key: string | number, patch: Partial<Collections.Video>, query?: Query) {
+  return DirectusSDK.updateItem<Schema, "video", Query>(
+    "video",
+    key,
+    patch,
+    query,
+  );
+}
+
+/**
+ * Deletes many video items.
+ */
+export function deleteVideoItems<
+  const Query extends Directus.Query<Schema, Collections.Video[]>,
+>(keys: string[] | number[]) {
+  return DirectusSDK.deleteItems<Schema, "video", Query>("video", keys);
+}
+
+/**
+ * Deletes a single known video item by id.
+ */
+export function deleteVideoItem(key: string | number) {
+  return DirectusSDK.deleteItem<Schema, "video">("video", key);
+}
+
+export class VideoItems
+  implements TypedCollectionItemsWrapper<Collections.Video>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Creates many items in the collection.
+   */
+  async create<
+    const Query extends DirectusSDK.Query<Schema, Collections.Video>,
+  >(
+    items: Partial<Collections.Video>[],
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<Schema, Collections.Video, Query["fields"]>[]
+  > {
+    return (await this.client.request(
+      createVideoItems(items, query as any),
+    )) as any; // Seems like a bug in the SDK.
+  }
+
+  /**
+   * Read many items from the collection.
+   */
+  async query<const Query extends Directus.Query<Schema, Collections.Video>>(
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<Schema, Collections.Video, Query["fields"]>[]
+  > {
+    return await this.client.request(readVideoItems(query));
+  }
+
+  /**
+   * Read the first item from the collection matching the query.
+   */
+  async find<const Query extends Directus.Query<Schema, Collections.Video>>(
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<Schema, Collections.Video, Query["fields"]>
+    | undefined
+  > {
+    const items = await this.client.request(
+      readVideoItems({
+        ...query,
+        limit: 1,
+      }),
+    );
+    return items?.[0] as any; // TODO: fix
+  }
+
+  /**
+   * Update many items in the collection.
+   */
+  async update<const Query extends Directus.Query<Schema, Collections.Video[]>>(
+    keys: string[] | number[],
+    patch: Partial<Collections.Video>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<Schema, Collections.Video, Query["fields"]>[]
+  > {
+    return await this.client.request(updateVideoItems(keys, patch, query));
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<const Query extends Directus.Query<Schema, Collections.Video>>(
+    keys: string[] | number[],
+  ): Promise<void> {}
+}
+
+export class VideoItem
+  implements TypedCollectionItemWrapper<Collections.Video>
+{
+  /**
+   *
+   */
+  constructor(
+    private client: Directus.DirectusClient<Schema> &
+      Directus.RestClient<Schema>,
+  ) {}
+
+  /**
+   * Create a single item in the collection.
+   */
+  async create<const Query extends Directus.Query<Schema, Collections.Video>>(
+    item: Partial<Collections.Video>,
+    query?: Query,
+  ): Promise<
+    DirectusSDK.ApplyQueryFields<Schema, Collections.Video, Query["fields"]>
+  > {
+    return (await this.client.request(
+      createVideoItem(item, query as any),
+    )) as any;
+  }
+
+  /**
+   * Read a single item from the collection.
+   */
+  async get<const Query extends Directus.Query<Schema, Collections.Video>>(
+    key: string | number,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<Schema, Collections.Video, Query["fields"]>
+    | undefined
+  > {
+    return await this.client.request(readVideoItem(key, query));
+  }
+
+  /**
+   * Update a single item from the collection.
+   */
+  async update<const Query extends Directus.Query<Schema, Collections.Video>>(
+    key: string | number,
+    patch: Partial<Collections.Video>,
+    query?: Query,
+  ): Promise<
+    | DirectusSDK.ApplyQueryFields<Schema, Collections.Video, Query["fields"]>
+    | undefined
+  > {
+    return (await this.client.request(
+      updateVideoItem(key, patch, query as any),
+    )) as any;
+  }
+
+  /**
+   * Remove many items in the collection.
+   */
+  async remove<const Query extends Directus.Query<Schema, Collections.Video>>(
+    key: string | number,
+  ): Promise<void> {
+    return await this.client.request(deleteVideoItem(key));
+  }
+}
+
+/**
  * Create many directus sync id map items.
  */
 export function createDirectusSyncIdMapItems<
@@ -6282,6 +6528,16 @@ export type TypedClient = {
   stack_editor_node: TypedCollectionItemWrapper<Collections.StackEditorNodes>;
 
   /**
+   * Manages multiple items from the Video collection.
+   */
+  videos: TypedCollectionItemsWrapper<Collections.Video>;
+
+  /**
+   * Manages individual items from the Video collection.
+   */
+  video: TypedCollectionItemWrapper<Collections.Video>;
+
+  /**
    * Manages multiple items from the DirectusSyncIdMap collection.
    */
   directus_sync_id_maps: TypedCollectionItemsWrapper<Collections.DirectusSyncIdMap>;
@@ -6495,6 +6751,9 @@ export const schema = () => {
 
       ["stack_editor_nodes", new StackEditorNodesItems(client as any)],
       ["stack_editor_node", new StackEditorNodesItem(client as any)],
+
+      ["videos", new VideoItems(client as any)],
+      ["video", new VideoItem(client as any)],
 
       ["directus_sync_id_maps", new DirectusSyncIdMapItems(client as any)],
       ["directus_sync_id_map", new DirectusSyncIdMapItem(client as any)],

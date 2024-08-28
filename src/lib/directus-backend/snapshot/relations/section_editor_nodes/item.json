@@ -11,7 +11,8 @@
       "gallery",
       "image",
       "quote",
-      "stack"
+      "stack",
+      "video"
     ],
     "one_collection": null,
     "one_collection_field": "collection",

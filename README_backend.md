@@ -55,6 +55,11 @@ In the **Apps** section, select your `admin` application.
    EMAIL_SMTP_PORT=****
    EMAIL_SMTP_USER=******************
    EMAIL_SMTP_PASSWORD=******************
+
+   CONTENT_SECURITY_POLICY_DIRECTIVES__FRAME_SRC=https://www.youtube-nocookie.com,https://player.vimeo.com
+   CONTENT_SECURITY_POLICY_DIRECTIVES__SCRIPT_SRC=array:'self', player.vimeo.com 'unsafe-eval', www.youtube.com 'unsafe-eval', www.youtube.com/iframe_api 'unsafe-eval'
+   CONTENT_SECURITY_POLICY_DIRECTIVES__IMG_SRC=array:'self' data:, i.ytimg.com 'unsafe-eval'
+   CONTENT_SECURITY_POLICY_DIRECTIVES__MEDIA_SRC=array:'self', cdn.plyr.io
    ```
 
    For more configuration options, see [Directus documentation](https://docs.directus.io/self-hosted/config-options.html)

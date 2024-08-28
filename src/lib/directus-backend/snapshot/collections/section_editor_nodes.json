@@ -30,6 +30,7 @@
       "item:quote.author",
       "item:quote.text",
       "item:stack",
+      "item:video",
       "item:wrapper.color",
       "item:wrapper.editor",
       "item:wrapper.fit_height"

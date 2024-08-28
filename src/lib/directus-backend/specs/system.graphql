@@ -249,6 +249,7 @@ type Subscription {
   button_mutated(event: EventEnum): button_mutated
   stack_mutated(event: EventEnum): stack_mutated
   stack_editor_nodes_mutated(event: EventEnum): stack_editor_nodes_mutated
+  video_mutated(event: EventEnum): video_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -313,9 +314,9 @@ enum graphql_sdl_scope {
 
 union pages_editor_nodes_item_union = section
 
-union section_editor_nodes_item_union = image | gallery | quote | button | stack
+union section_editor_nodes_item_union = image | gallery | quote | button | stack | video
 
-union stack_editor_nodes_item_union = button | image | gallery | quote | stack
+union stack_editor_nodes_item_union = button | image | gallery | quote | stack | video
 
 type auth_tokens {
   access_token: String
@@ -1803,6 +1804,18 @@ type users_me_tfa_generate_data {
   otpauth_url: String
 }
 
+type video {
+  id: ID!
+  video_link: JSON
+  video_link_func: count_functions
+}
+
+type video_mutated {
+  key: ID!
+  event: EventEnum
+  data: video
+}
+
 input big_int_filter_operators {
   _eq: GraphQLBigInt
   _neq: GraphQLBigInt
@@ -2676,6 +2689,7 @@ input section_editor_nodes_filter {
   item__quote: quote_filter
   item__button: button_filter
   item__stack: stack_filter
+  item__video: video_filter
 }
 
 input section_filter {
@@ -2720,6 +2734,7 @@ input stack_editor_nodes_filter {
   item__gallery: gallery_filter
   item__quote: quote_filter
   item__stack: stack_filter
+  item__video: video_filter
 }
 
 input stack_filter {
@@ -3066,4 +3081,12 @@ input update_directus_webhooks_input {
   headers: JSON
   was_active_before_deprecation: Boolean
   migrated_flow: update_directus_flows_input
+}
+
+input video_filter {
+  id: string_filter_operators
+  video_link: string_filter_operators
+  video_link_func: count_function_filter_operators
+  _and: [video_filter]
+  _or: [video_filter]
 }

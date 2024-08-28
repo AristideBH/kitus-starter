@@ -21,7 +21,7 @@
         "accountability": "all",
         "color": null,
         "item_duplication_fields": null,
-        "sort": 5,
+        "sort": 4,
         "group": "editor",
         "collapse": "open",
         "preview_url": null,
@@ -107,7 +107,7 @@
         "accountability": "all",
         "color": null,
         "item_duplication_fields": null,
-        "sort": 4,
+        "sort": 3,
         "group": "editor",
         "collapse": "closed",
         "preview_url": null,
@@ -197,7 +197,7 @@
         "accountability": "all",
         "color": null,
         "item_duplication_fields": null,
-        "sort": 3,
+        "sort": 2,
         "group": "editor",
         "collapse": "open",
         "preview_url": null,
@@ -360,7 +360,7 @@
         "accountability": "all",
         "color": null,
         "item_duplication_fields": null,
-        "sort": 7,
+        "sort": 5,
         "group": "editor",
         "collapse": "open",
         "preview_url": null,
@@ -378,7 +378,7 @@
         "collection": "section",
         "icon": "subtitles",
         "note": null,
-        "display_template": "{{width}}{{template}}{{color}}",
+        "display_template": "{{width}}{{template}}{{color}}{{editor}}",
         "hidden": false,
         "singleton": false,
         "translations": null,
@@ -439,7 +439,8 @@
           "item:button.page",
           "item:gallery.type",
           "item:image.show_caption",
-          "item:stack"
+          "item:stack",
+          "item:video"
         ],
         "sort": 1,
         "group": "section",
@@ -591,7 +592,7 @@
         "accountability": "all",
         "color": null,
         "item_duplication_fields": null,
-        "sort": 8,
+        "sort": 6,
         "group": "editor",
         "collapse": "open",
         "preview_url": null,
@@ -626,7 +627,8 @@
           "item:image",
           "item:gallery",
           "item:quote",
-          "item:stack"
+          "item:stack",
+          "item:video"
         ],
         "sort": 1,
         "group": "stack",
@@ -637,6 +639,36 @@
       "schema": {
         "schema": "public",
         "name": "stack_editor_nodes",
+        "comment": null
+      }
+    },
+    {
+      "collection": "video",
+      "meta": {
+        "collection": "video",
+        "icon": "slow_motion_video",
+        "note": null,
+        "display_template": null,
+        "hidden": false,
+        "singleton": false,
+        "translations": null,
+        "archive_field": null,
+        "archive_app_filter": true,
+        "archive_value": null,
+        "unarchive_value": null,
+        "sort_field": null,
+        "accountability": "all",
+        "color": null,
+        "item_duplication_fields": null,
+        "sort": 7,
+        "group": "editor",
+        "collapse": "open",
+        "preview_url": null,
+        "versioning": false
+      },
+      "schema": {
+        "schema": "public",
+        "name": "video",
         "comment": null
       }
     },
@@ -21050,6 +21082,102 @@
       }
     },
     {
+      "collection": "video",
+      "field": "id",
+      "type": "uuid",
+      "schema": {
+        "name": "id",
+        "table": "video",
+        "schema": "public",
+        "data_type": "uuid",
+        "is_nullable": false,
+        "generation_expression": null,
+        "default_value": null,
+        "is_generated": false,
+        "max_length": null,
+        "comment": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_unique": true,
+        "is_primary_key": true,
+        "has_auto_increment": false,
+        "foreign_key_schema": null,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      },
+      "meta": {
+        "id": 216,
+        "collection": "video",
+        "field": "id",
+        "special": [
+          "uuid"
+        ],
+        "interface": "input",
+        "options": null,
+        "display": null,
+        "display_options": null,
+        "readonly": true,
+        "hidden": true,
+        "sort": 1,
+        "width": "full",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": false,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
+      "collection": "video",
+      "field": "video_link",
+      "type": "json",
+      "schema": {
+        "name": "video_link",
+        "table": "video",
+        "schema": "public",
+        "data_type": "json",
+        "is_nullable": true,
+        "generation_expression": null,
+        "default_value": null,
+        "is_generated": false,
+        "max_length": null,
+        "comment": null,
+        "numeric_precision": null,
+        "numeric_scale": null,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "foreign_key_schema": null,
+        "foreign_key_table": null,
+        "foreign_key_column": null
+      },
+      "meta": {
+        "id": 217,
+        "collection": "video",
+        "field": "video_link",
+        "special": [
+          "cast-json"
+        ],
+        "interface": "directus-labs-video-interface",
+        "options": null,
+        "display": null,
+        "display_options": null,
+        "readonly": false,
+        "hidden": false,
+        "sort": 2,
+        "width": "full",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": true,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
       "collection": "seo_advanced_setting",
       "field": "translations",
       "type": "alias",
@@ -23647,7 +23775,8 @@
           "gallery",
           "quote",
           "button",
-          "stack"
+          "stack",
+          "video"
         ],
         "junction_field": "section_id",
         "sort_field": null,
@@ -23671,7 +23800,8 @@
           "image",
           "gallery",
           "quote",
-          "stack"
+          "stack",
+          "video"
         ],
         "junction_field": "stack_id",
         "sort_field": null,
