@@ -17,8 +17,9 @@
 </script>
 
 <!-- UTILITIES -->
-<ModeWatcher />
+<ModeWatcher darkClassNames={['dark', 'cc--darkmode']} />
 <Toaster />
+<CookieConsent />
 
 <!-- MARKUP -->
 <Main transitionKey={data.pathName} options={{ duration: 100, y: 20, delta: 0 }}>
@@ -27,5 +28,3 @@
 
 <Footer />
 <Header />
-
-<CookieConsent />

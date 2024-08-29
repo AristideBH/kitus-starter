@@ -11,7 +11,7 @@
 	<DropdownMenu.SubTrigger class="gap-2">
 		{label}
 	</DropdownMenu.SubTrigger>
-	<DropdownMenu.SubContent class="bg-red">
+	<DropdownMenu.SubContent>
 		{#each children as child}
 			{#if child.type === 'list'}
 				<svelte:self item={child} />

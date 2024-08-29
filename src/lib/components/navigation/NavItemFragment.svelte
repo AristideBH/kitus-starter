@@ -26,7 +26,7 @@
 
 <style lang="postcss">
 	a {
-		@apply flex w-fit grow text-foreground;
+		@apply flex w-fit grow text-foreground hover:no-underline;
 	}
 	a.active {
 		@apply flex flex-nowrap items-center gap-2;
