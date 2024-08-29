@@ -1,9 +1,11 @@
 <script lang="ts">
 	import AnimatedHeading from '$lib/components/editor/components/AnimatedHeading.svelte';
+
 	import Image from '$lib/components/image/Image.svelte';
 	import Section from '$lib/components/layout/Section.svelte';
 
 	import * as Accordion from '$lib/components/ui/accordion';
+	import { Button } from '$lib/components/ui/button/index.js';
 
 	let { data } = $props();
 	let { home } = data;
@@ -12,6 +14,7 @@
 <Section content={{ width: 'full-width', color: 'none' }}>
 	<Image item={home?.img!} class="max-h-96" loading="eager" />
 </Section>
+
 <Section>
 	<AnimatedHeading class="mb-0 ~text-6xl/9xl">Kitus Starter</AnimatedHeading>
 	<p class="lead mb-10 italic text-primary">A custom starter template for Sveltekit & Directus</p>
@@ -39,4 +42,9 @@
 			</Accordion.Content>
 		</Accordion.Item>
 	</Accordion.Root>
+
+	<div class="mt-4 flex gap-2">
+		<Button variant="border" href="/work">Work</Button>
+		<Button variant="border" href="/work/services">Services</Button>
+	</div>
 </Section>

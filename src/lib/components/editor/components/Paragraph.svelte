@@ -16,7 +16,17 @@
 					{@const sup = findSup(item.marks)}
 					{#if link}
 						{@const { rel, href, target } = link.attrs}
-						<a class={setMarks(item.marks)} {rel} {href} {target}>{item.text}</a>
+						<a class={setMarks(item.marks)} {rel} {href} {target}>
+							{#if sub}
+								<sub>
+									{item.text}
+								</sub>
+							{:else if sup}
+								<sup>{item.text}</sup>
+							{:else}
+								{item.text}
+							{/if}
+						</a>
 					{:else if code}
 						<code>{item.text}</code>
 					{:else if sub}

@@ -11,15 +11,15 @@
 <section>
 	<Card.Root class="bg-muted">
 		<Card.Header>
-			<h1>Oups !</h1>
+			<h1>Oops !</h1>
 			<Card.Description>Erreur {status} : {error?.message}</Card.Description>
 		</Card.Header>
 		<Card.Content>
-			<p>On dirait que la page que vous recherchez n'existe pas !</p>
+			<p>Seems like the page you are looking doesn't exist !</p>
 		</Card.Content>
 		<Card.Footer class="flex gap-2">
 			<Button
-				variant="outline"
+				variant="border"
 				size="icon"
 				title="Page précédente"
 				onclick={() => {
@@ -29,7 +29,7 @@
 			>
 				<ArrowLeftFromLine class="size-4" />
 			</Button>
-			<Button variant="default" href="/">Retour à l'accueil</Button>
+			<Button variant="default" href="/">Go back home</Button>
 		</Card.Footer>
 	</Card.Root>
 </section>

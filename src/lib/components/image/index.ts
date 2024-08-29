@@ -35,7 +35,9 @@ const getFileInfos = async (client: DirectusClient, id: string) => {
                 'focal_point_y',
                 'focal_point_x',
                 'thumbhash',
-                'description'
+                'description',
+                'type'
+
             ]
         })
     )

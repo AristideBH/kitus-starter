@@ -49,10 +49,6 @@ Props:
 			scrollTo({ top: 0, behavior: 'instant' });
 		}, duration);
 	});
-
-	export function getState() {
-		return loading;
-	}
 </script>
 
 {#key transitionKey}

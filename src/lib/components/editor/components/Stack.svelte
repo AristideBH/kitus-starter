@@ -18,7 +18,7 @@
 
 		if (isGapSet) node.classList.add(`gap-${gap}`);
 		if (isColorSet) node.classList.add(`bg-${color}`, 'p-5', 'rounded');
-		if (color === 'primary') node.classList.add('text-primary-foreground');
+		if (color === 'primary') node.classList.add('text-primary-background');
 		if (direction) node.classList.add(`flex-${direction}`);
 		if (isHeightFit) node.classList.add('h-fit');
 	};

@@ -44,6 +44,7 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 	let inView = $state(false);
 	let fetchedFile = $state<CustomDirectusFile>({});
 	let imgContainer: HTMLElement;
+	let imgEl: HTMLImageElement;
 	let id = typeof item === 'string' ? item : item?.id;
 	let src = $state('');
 	let srcset = $state('');
@@ -52,33 +53,26 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 	let elWidth = $state<number>(0);
 	let elHeight = $derived(elWidth / aspectRatio);
 
-	// * COMPONENTS INITIALIZATION
 	onMount(() => {
 		if (typeof id === 'string') {
-			// Get full file informations if provided id is a string
 			getFileInfos(directus, id).then((data) => {
+				// Get full file informations if provided id is a string
 				fetchedFile = data;
 			});
 		} else {
-			// Else, just use the item
-			fetchedFile = item as CustomDirectusFile;
+			fetchedFile = item as CustomDirectusFile; // Else, just use the item
 		}
 
-		// If loading is set to eager, set inView to true
 		if (loading === 'eager') {
-			inView = true;
-			return;
+			inView = true; // If loading is set to eager, set inView to true
 		}
 
 		// Run intersection observer to detect if ImgContainer is in viewport
 		if (imgContainer) {
-			return setIntersectionObserver(imgContainer, () => {
-				inView = true;
-			});
+			return setIntersectionObserver(imgContainer, () => (inView = true));
 		}
 	});
 
-	// * COMPONENTS EFFECTS
 	$effect(() => {
 		if (!inView && fetchedFile?.thumbhash) {
 			// By default, set src to thumbhash url
@@ -89,11 +83,15 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 			src = getImgUrl(id ?? '', preset ?? null, transformations ?? null);
 			srcset = getImgSrcSet(id ?? '');
 		}
+		if (fetchedFile?.type !== 'image/png') {
+			imgEl.style.backgroundImage = `url(${thumbhashUrl})`;
+		}
+		if (fetchedFile?.focal_point_x && fetchedFile?.focal_point_y) {
+			imgEl.style.objectPosition = `${fetchedFile?.focal_point_x}% ${fetchedFile?.focal_point_y}%`;
+		}
 	});
 </script>
 
-<!-- <pre>{JSON.stringify(fetchedFile.focal_point_x, null, 2)}</pre>
-<pre>{JSON.stringify(fetchedFile.focal_point_y, null, 2)}</pre> -->
 <figure class={`${className ?? ''}`} bind:this={imgContainer} bind:offsetWidth={elWidth}>
 	<img
 		{src}
@@ -105,10 +103,8 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 		height={elHeight}
 		class:not-loaded={!inView}
 		class="aspect-video"
-		style={`object-position: ${fetchedFile?.focal_point_x}% ${fetchedFile?.focal_point_y}%;`}
+		bind:this={imgEl}
 	/>
-	<!-- Problem when using transparent images -->
-	<!-- style="background-image:url({thumbhashUrl})" -->
 	{#if showCaption && inView && fetchedFile?.description}
 		<figcaption class="small">
 			{alt || fetchedFile?.description || ''}
@@ -137,6 +133,7 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 		object-fit: cover;
 		max-height: 70dvh;
 	}
+
 	.not-loaded {
 		filter: blur(100px);
 	}
@@ -148,7 +145,7 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 		position: absolute;
 		transition: opacity 0.175s ease-in-out;
 		backdrop-filter: blur(100px) brightness(0.35);
-		/* background-color: hsl(var(--background)); */
+		background-color: hsl(var(--background));
 		opacity: 0;
 		width: 100%;
 		z-index: 5;
