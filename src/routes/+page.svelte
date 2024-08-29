@@ -6,6 +6,7 @@
 
 	import * as Accordion from '$lib/components/ui/accordion';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { ChevronRight, ChevronUp } from 'lucide-svelte';
 
 	let { data } = $props();
 	let { home } = data;
@@ -44,7 +45,9 @@
 	</Accordion.Root>
 
 	<div class="mt-4 flex gap-2">
-		<Button variant="border" href="/work">Work</Button>
-		<Button variant="border" href="/work/services">Services</Button>
+		<Button variant="secondary" href="/work">Work<ChevronRight class="ms-2 size-4" /></Button>
+		<Button variant="border" href="/work/services"
+			>Services<ChevronRight class="ms-2 size-4" /></Button
+		>
 	</div>
 </Section>
