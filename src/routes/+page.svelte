@@ -20,7 +20,7 @@
 	<p class="lead mb-10 italic text-primary">A custom starter template for Sveltekit & Directus</p>
 
 	<Accordion.Root class="rounded-sm bg-muted" value="item-1">
-		<Accordion.Item value="item-1" class="rounded-sm px-6">
+		<Accordion.Item value="item-1" class="mx-6 rounded-sm">
 			<Accordion.Trigger class="!no-underline">Details</Accordion.Trigger>
 			<Accordion.Content>
 				<ul class="ms-0 border-t border-secondary pt-4 text-base">

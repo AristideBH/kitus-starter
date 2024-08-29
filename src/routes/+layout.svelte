@@ -9,6 +9,7 @@
 	import Main from '$lib/components/layout/Main.svelte';
 	import Header from '$lib/components/layout/Header.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
+	import CookieConsent from '$lib/components/layout/CookieConsent.svelte';
 
 	let { children, data } = $props();
 	const directus = client(fetch, data.token);
@@ -23,5 +24,8 @@
 <Main transitionKey={data.pathName} options={{ duration: 100, y: 20, delta: 0 }}>
 	{@render children?.()}
 </Main>
+
 <Footer />
 <Header />
+
+<CookieConsent />
