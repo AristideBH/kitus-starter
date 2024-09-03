@@ -144,7 +144,6 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 		padding: 0.5em 0.75em;
 		position: absolute;
 		transition: opacity 0.175s ease-in-out;
-		backdrop-filter: blur(100px) brightness(0.35);
 		background-color: hsl(var(--background));
 		opacity: 0;
 		width: 100%;

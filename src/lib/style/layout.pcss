@@ -14,4 +14,17 @@
 			@apply mb-24;
 		}
 	}
+
+	figure {
+		&:has(+ .block-wrapper) {
+			@apply mb-4;
+		}
+	}
+	section figure {
+		@apply rounded;
+	}
+
+	section.layout-full:not([data-template='inherit-main']) > figure {
+		@apply rounded-none;
+	}
 }

@@ -73,6 +73,16 @@ footer,
 
 	[data-template='cols-2'] {
 		grid-template-columns: var(--cols-2);
+
+		& > .block-wrapper + .block-wrapper {
+			@apply mt-3;
+		}
+
+		@media (min-width: 540px) {
+			& > .block-wrapper + .block-wrapper {
+				@apply mt-0;
+			}
+		}
 	}
 
 	[data-template='cols-3'] {
@@ -159,6 +169,7 @@ footer,
 					[side-end main-end]
 					minmax(var(--side-padding), 1fr)
 					[full-end];
+
 				& > .block-wrapper {
 					grid-column: main;
 				}
