@@ -67,14 +67,14 @@
 				<Form.Field {form} name="message">
 					<Form.Control let:attrs>
 						<Form.Label>Message</Form.Label>
-						<Textarea class="text-md" {...attrs} bind:value={$formData.message} />
+						<Textarea class="text-md" {...attrs} bind:value={$formData.message!} />
 					</Form.Control>
 					<Form.FieldErrors />
 				</Form.Field>
 
 				<Form.Field {form} name="honeypot" class="hidden">
 					<Form.Control let:attrs>
-						<Checkbox {...attrs} bind:checked={$formData.honeypot} />
+						<Checkbox {...attrs} bind:checked={$formData.honeypot as boolean} />
 						<Form.Label class="!mt-0">Honeypot</Form.Label>
 						<input name={attrs.name} value={$formData.honeypot} hidden />
 					</Form.Control>
@@ -83,7 +83,7 @@
 
 				<Form.Field {form} name="terms" class="flex items-center gap-2">
 					<Form.Control let:attrs>
-						<Checkbox {...attrs} bind:checked={$formData.terms} />
+						<Checkbox {...attrs} bind:checked={$formData.terms as boolean} />
 						<Form.Label class="!mt-0 text-balance leading-4 ">
 							I agree to the
 							<a href="/terms-and-conditions" target="_blank"> terms and conditions </a>
