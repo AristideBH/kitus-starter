@@ -39,7 +39,7 @@
 				</Stack>
 			{/if}
 
-			<!-- Todo : fix gallery -->
+			<!-- Todo : fix gallery variants -->
 		{:else}
 			{@const { type, content, attrs } = node}
 			{#if 'content' in node}
@@ -47,10 +47,10 @@
 					{#if attrs.level && attrs.level.toString() === '1'}
 						<AnimatedHeading {content} />
 					{:else}
-						<Heading level={attrs.level} {content} />
+						<Heading {content} {attrs} />
 					{/if}
 				{:else if type === 'paragraph'}
-					<Paragraph {content} />
+					<Paragraph {content} {attrs} />
 				{:else if type === 'bulletList'}
 					<BulletList {content} />
 				{:else if type === 'orderedList'}

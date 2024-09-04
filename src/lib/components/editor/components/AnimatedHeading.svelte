@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { TipTapNode } from '..';
 	import IntersectionObserver from 'svelte-intersection-observer';
-	import { setMarks } from '../index.svelte';
-	import { spring } from 'svelte/motion';
 	import type { Snippet } from 'svelte';
+	import type { Attrs, TipTapNode } from '..';
+	import { setMarks, setTextAlign } from '../index.svelte';
+	import { spring } from 'svelte/motion';
 
-	type Props = { content?: TipTapNode[]; class?: string; children?: Snippet };
+	type Props = { content?: TipTapNode[]; class?: string; children?: Snippet; attrs?: Attrs };
 	let start = 200;
 	let end = 900;
 	let weight = $state(start);
@@ -27,11 +27,11 @@
 		}
 	});
 
-	let { content, class: className, children }: Props = $props();
+	let { content, class: className, children, attrs }: Props = $props();
 </script>
 
 <IntersectionObserver {element} bind:intersecting rootMargin={'0% 0% -17.5% 0%'}>
-	<h1 style="--wght:{weight}" class={className ?? ''} bind:this={element}>
+	<h1 style="--wght:{weight}" class=" {setTextAlign(attrs)} {className ?? ''}" bind:this={element}>
 		{#if content}
 			{#each content as item}
 				{#if item.marks}

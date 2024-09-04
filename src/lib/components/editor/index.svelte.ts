@@ -1,5 +1,5 @@
 // - Types
-import type { Mark, LinkMark, GenericMark, CustomAttrs, EditorNodesCollections, ProcessedContent, TipTapEditor, TipTapNode } from './index.d';
+import type { Mark, LinkMark, GenericMark, CustomAttrs, EditorNodesCollections, ProcessedContent, TipTapEditor, TipTapNode, Attrs } from './index.d';
 import type { DirectusClient } from '$lib/logic/directus';
 import type { Collections } from '$lib/types/client';
 import { readItem } from '@directus/sdk';
@@ -150,6 +150,7 @@ const findSub = (marks: Mark[]): GenericMark | null => findMark<GenericMark>(mar
 const findSup = (marks: Mark[]): GenericMark | null => findMark<GenericMark>(marks, 'superscript');
 
 
+
 // - Layout
 /**
  * Generates a string of CSS class names based on the provided marks.
@@ -175,8 +176,19 @@ const setMarks = (marks: Mark[]) => {
 };
 
 
+const setTextAlign = (attrs: Attrs | undefined) => {
+    if (!attrs) {
+        return '';
+    }
+    if (attrs?.textAlign) {
+        return `text-${attrs.textAlign}`;
+    }
+    return '';
+};
+
+
 export {
-    LoadingState, setMarks, findCode, findLink, findSub, findSup, adaptToTipTapNodes, processContent,
+    LoadingState, setMarks, findCode, findLink, findSub, findSup, adaptToTipTapNodes, processContent, setTextAlign,
     BulletList, Heading, Paragraph, OrderedList, Blockquote, TaskList, Button,
     Quote, Gallery, Image, AnimatedHeading, Stack, Video,
 }

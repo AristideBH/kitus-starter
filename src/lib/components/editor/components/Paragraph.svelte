@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { TipTapNode } from '../index.d';
-	import { findLink, findCode, setMarks, findSub, findSup } from '../index.svelte';
+	import type { Attrs, TipTapNode } from '../index.d';
+	import { findLink, findCode, setMarks, findSub, findSup, setTextAlign } from '../index.svelte';
 
-	let { content }: { content: TipTapNode[] } = $props();
+	let { content, attrs }: { content: TipTapNode[]; attrs?: Attrs } = $props();
 </script>
 
 {#if content}
-	<p>
+	<p class={setTextAlign(attrs)}>
 		{#each content as item}
 			{#if item.type === 'text'}
 				{#if item.marks}

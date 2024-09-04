@@ -16,7 +16,7 @@
 		"diffSchema": "node scripts/directus-sync.js diff"
 	},
 	"devDependencies": {
-		"@directus/sdk": "^17.0.0",
+		"@directus/sdk": "^17.0.1",
 		"@sveltejs/adapter-node": "^5.2.2",
 		"@sveltejs/kit": "^2.5.25",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0-next.6",
@@ -28,7 +28,7 @@
 		"bits-ui": "^0.21.13",
 		"clsx": "^2.1.1",
 		"cookie": "^0.6.0",
-		"embla-carousel-svelte": "^8.2.0",
+		"embla-carousel-svelte": "^8.2.1",
 		"eslint": "^9.9.1",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.43.0",
@@ -41,9 +41,9 @@
 		"prettier": "^3.3.3",
 		"prettier-plugin-svelte": "^3.2.6",
 		"prettier-plugin-tailwindcss": "^0.6.6",
-		"runed": "^0.15.1",
+		"runed": "^0.15.2",
 		"svelte": "5.0.0-next.243",
-		"svelte-check": "^4.0.0",
+		"svelte-check": "^4.0.1",
 		"svelte-intersection-observer": "^1.0.0",
 		"svelte-sonner": "^0.3.27",
 		"sveltekit-embed": "^0.0.12",
@@ -55,7 +55,7 @@
 		"typescript": "^5.5.4",
 		"typescript-eslint": "^8.4.0",
 		"vaul-svelte": "^0.3.2",
-		"vite": "^5.4.2",
+		"vite": "^5.4.3",
 		"zod": "^3.23.8",
 		"vanilla-cookieconsent": "3.0.1"
 	},

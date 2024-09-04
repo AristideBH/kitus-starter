@@ -5,7 +5,7 @@
 		.a {
 			fill: none;
 			stroke: #0d0e0b;
-			stroke-width: 1;
+			stroke-width: 1.5;
 			stroke-linecap: round;
 			stroke-linejoin: round;
 		}

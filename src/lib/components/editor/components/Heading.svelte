@@ -1,19 +1,19 @@
 <script lang="ts">
-	import type { TipTapNode } from '../index.d';
-	import { setMarks } from '../index.svelte';
+	import type { Attrs, TipTapNode } from '../index.d';
+	import { setMarks, setTextAlign } from '../index.svelte';
 
 	let {
 		content,
 		class: className,
-		level = '1'
+		attrs
 	}: {
 		content: TipTapNode[];
 		class?: string;
-		level: '1' | '2' | '3' | '4' | '5' | '6' | undefined;
+		attrs?: Attrs;
 	} = $props();
 </script>
 
-<svelte:element this={'h' + level} class={className ?? ''}>
+<svelte:element this={'h' + attrs?.level} class=" {setTextAlign(attrs)} {className ?? ''}">
 	{#each content as item}
 		{#if item.marks}
 			<span class={setMarks(item.marks)}>{item.text}</span>

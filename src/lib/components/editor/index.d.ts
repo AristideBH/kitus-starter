@@ -13,11 +13,14 @@ interface BaseNode {
     marks: Mark[];
     text: ?string;
     content: TipTapNode[];
-    attrs?: CustomAttrs & {
-        checked?: boolean;
-        level?: '1' | '2' | '3' | '4' | '5' | '6';
-    };
+    attrs?: CustomAttrs & Attrs;
     editor: TipTapEditor;
+}
+
+type Attrs = {
+    checked?: boolean;
+    level?: '1' | '2' | '3' | '4' | '5' | '6';
+    textAlign?: "center" | "left" | "right" | 'justify'
 }
 
 type TipTapNode = BaseNode & CustomElementNode;
@@ -53,4 +56,4 @@ type Mark = LinkMark | GenericMark;
 
 type EditorNodesCollections = 'pages_editor_nodes' | 'section_editor_nodes';
 
-export { TipTapEditor, TipTapNode, CustomAttrs, LinkMark, GenericMark, EditorNodesCollections, Mark, ProcessedContent }
+export { TipTapEditor, TipTapNode, CustomAttrs, Attrs, LinkMark, GenericMark, EditorNodesCollections, Mark, ProcessedContent }
