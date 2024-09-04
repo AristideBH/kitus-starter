@@ -1,0 +1,46 @@
+{
+  "collection": "homepage",
+  "field": "seo_detail",
+  "type": "integer",
+  "meta": {
+    "collection": "homepage",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "seo_detail",
+    "group": null,
+    "hidden": false,
+    "interface": "seo_analyzer",
+    "note": null,
+    "options": {
+      "isSEOAdvanced": false
+    },
+    "readonly": false,
+    "required": false,
+    "sort": 8,
+    "special": [
+      "m2o"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  },
+  "schema": {
+    "name": "seo_detail",
+    "table": "homepage",
+    "data_type": "integer",
+    "default_value": null,
+    "max_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": "seo_detail",
+    "foreign_key_column": "id"
+  }
+}

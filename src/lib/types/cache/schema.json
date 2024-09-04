@@ -16906,6 +16906,56 @@
       }
     },
     {
+      "collection": "homepage",
+      "field": "seo_detail",
+      "type": "integer",
+      "schema": {
+        "name": "seo_detail",
+        "table": "homepage",
+        "schema": "public",
+        "data_type": "integer",
+        "is_nullable": true,
+        "generation_expression": null,
+        "default_value": null,
+        "is_generated": false,
+        "max_length": null,
+        "comment": null,
+        "numeric_precision": 32,
+        "numeric_scale": 0,
+        "is_unique": false,
+        "is_primary_key": false,
+        "has_auto_increment": false,
+        "foreign_key_schema": "public",
+        "foreign_key_table": "seo_detail",
+        "foreign_key_column": "id"
+      },
+      "meta": {
+        "id": 220,
+        "collection": "homepage",
+        "field": "seo_detail",
+        "special": [
+          "m2o"
+        ],
+        "interface": "seo_analyzer",
+        "options": {
+          "isSEOAdvanced": false
+        },
+        "display": null,
+        "display_options": null,
+        "readonly": false,
+        "hidden": false,
+        "sort": 8,
+        "width": "full",
+        "translations": null,
+        "note": null,
+        "conditions": null,
+        "required": false,
+        "group": null,
+        "validation": null,
+        "validation_message": null
+      }
+    },
+    {
       "collection": "image",
       "field": "id",
       "type": "uuid",
@@ -23728,6 +23778,33 @@
         "junction_field": "directus_files_id",
         "sort_field": null,
         "one_deselect_action": "delete"
+      }
+    },
+    {
+      "collection": "homepage",
+      "field": "seo_detail",
+      "related_collection": "seo_detail",
+      "schema": {
+        "constraint_name": "homepage_seo_detail_foreign",
+        "table": "homepage",
+        "column": "seo_detail",
+        "foreign_key_schema": "public",
+        "foreign_key_table": "seo_detail",
+        "foreign_key_column": "id",
+        "on_update": "NO ACTION",
+        "on_delete": "SET NULL"
+      },
+      "meta": {
+        "id": 34,
+        "many_collection": "homepage",
+        "many_field": "seo_detail",
+        "one_collection": "seo_detail",
+        "one_field": null,
+        "one_collection_field": null,
+        "one_allowed_collections": null,
+        "junction_field": null,
+        "sort_field": null,
+        "one_deselect_action": "nullify"
       }
     },
     {

@@ -1,0 +1,25 @@
+{
+  "collection": "homepage",
+  "field": "seo_detail",
+  "related_collection": "seo_detail",
+  "meta": {
+    "junction_field": null,
+    "many_collection": "homepage",
+    "many_field": "seo_detail",
+    "one_allowed_collections": null,
+    "one_collection": "seo_detail",
+    "one_collection_field": null,
+    "one_deselect_action": "nullify",
+    "one_field": null,
+    "sort_field": null
+  },
+  "schema": {
+    "table": "homepage",
+    "column": "seo_detail",
+    "foreign_key_table": "seo_detail",
+    "foreign_key_column": "id",
+    "constraint_name": "homepage_seo_detail_foreign",
+    "on_update": "NO ACTION",
+    "on_delete": "SET NULL"
+  }
+}

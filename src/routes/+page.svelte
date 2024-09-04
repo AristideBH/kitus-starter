@@ -1,16 +1,19 @@
 <script lang="ts">
 	import AnimatedHeading from '$lib/components/editor/components/AnimatedHeading.svelte';
-
 	import Image from '$lib/components/image/Image.svelte';
 	import Section from '$lib/components/layout/Section.svelte';
 
 	import * as Accordion from '$lib/components/ui/accordion';
 	import { Button } from '$lib/components/ui/button/index.js';
-	import { ChevronRight, ChevronUp } from 'lucide-svelte';
+	import { ChevronRight } from 'lucide-svelte';
+
+	import Seo from '@archangelgca/sk-seo';
 
 	let { data } = $props();
 	let { home } = data;
 </script>
+
+<Seo title={home!.seo_detail?.meta_title!} description={home!.seo_detail?.meta_description!} />
 
 <Section content={{ width: 'full-width', color: 'none' }}>
 	<Image item={home?.img!} class="max-h-96" loading="eager" />

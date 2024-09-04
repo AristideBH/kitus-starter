@@ -119,7 +119,7 @@
     "project_descriptor": "Directus & Sveltekit",
     "default_language": "en-US",
     "custom_aspect_ratios": null,
-    "default_appearance": "auto",
+    "default_appearance": "light",
     "default_theme_light": "Directus Minimal",
     "theme_light_overrides": null,
     "default_theme_dark": null,

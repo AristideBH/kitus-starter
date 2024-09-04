@@ -267,6 +267,7 @@ export namespace Collections {
     user_updated: Types.Optional<Types.UUID | Collections.DirectusUser>;
     date_updated: Types.Optional<Types.DateTime>;
     img: Types.Optional<Types.UUID | Collections.DirectusFile>;
+    seo_detail: Types.Optional<Types.Integer | Collections.SeoDetail>;
   }
 
   /**

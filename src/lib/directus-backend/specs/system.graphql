@@ -1538,6 +1538,7 @@ type homepage {
   date_updated: Date
   date_updated_func: datetime_functions
   img(filter: directus_files_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): directus_files
+  seo_detail(filter: seo_detail_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): seo_detail
 }
 
 type homepage_mutated {

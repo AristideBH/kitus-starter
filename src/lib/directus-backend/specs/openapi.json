@@ -17619,6 +17619,17 @@
                 "$ref": "#/components/schemas/Files"
               }
             ]
+          },
+          "seo_detail": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "$ref": "#/components/schemas/ItemsSEODetail"
+              }
+            ]
           }
         },
         "x-collection": "homepage"
