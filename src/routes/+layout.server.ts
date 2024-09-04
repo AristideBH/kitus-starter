@@ -21,7 +21,6 @@ export const load = (async ({ fetch, locals, url }) => {
         // Auth
         user,
         token,
-
         // Data
         headerNav,
         footerNav,
