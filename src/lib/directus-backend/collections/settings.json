@@ -113,11 +113,6 @@
       {
         "type": "module",
         "id": "seo-settings",
-        "enabled": false
-      },
-      {
-        "type": "module",
-        "id": "schema-management-module",
         "enabled": true
       }
     ],

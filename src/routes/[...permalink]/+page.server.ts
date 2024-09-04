@@ -21,13 +21,11 @@ export const load = (async ({ params, fetch }) => {
 
                 ]
             },
-            fields: ["title", "editor",]
+            fields: ["title", "editor", { seo_detail: ["*"] }]
         }
     ))
 
-    if (pages.length === 0) {
-        error(404, "Page not found");
-    }
+    if (pages.length === 0) error(404, "Page not found");
 
     const editor = await processContent(pages[0].editor.content, directus);
 

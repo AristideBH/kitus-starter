@@ -9,7 +9,7 @@
     "display_options": null,
     "field": "seo_detail",
     "group": null,
-    "hidden": true,
+    "hidden": false,
     "interface": "seo_analyzer",
     "note": null,
     "options": {

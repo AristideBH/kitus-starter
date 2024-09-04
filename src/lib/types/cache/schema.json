@@ -551,7 +551,7 @@
         "icon": null,
         "note": null,
         "display_template": null,
-        "hidden": true,
+        "hidden": false,
         "singleton": false,
         "translations": null,
         "archive_field": null,
@@ -18410,7 +18410,7 @@
         "display": null,
         "display_options": null,
         "readonly": false,
-        "hidden": true,
+        "hidden": false,
         "sort": 12,
         "width": "full",
         "translations": null,
@@ -18903,7 +18903,9 @@
             "link",
             "removeLink",
             "autolink",
+            "hardBreak",
             "horizontalRule",
+            "textAlign",
             "bulletList",
             "orderedList",
             "blockquote"
@@ -20874,7 +20876,9 @@
             "link",
             "removeLink",
             "autolink",
+            "hardBreak",
             "horizontalRule",
+            "textAlign",
             "bulletList",
             "orderedList",
             "blockquote"
@@ -23765,7 +23769,7 @@
         "foreign_key_table": "menus",
         "foreign_key_column": "title",
         "on_update": "RESTRICT",
-        "on_delete": "CASCADE"
+        "on_delete": "SET NULL"
       },
       "meta": {
         "id": 22,
@@ -23777,7 +23781,7 @@
         "one_allowed_collections": null,
         "junction_field": null,
         "sort_field": "sort",
-        "one_deselect_action": "delete"
+        "one_deselect_action": "nullify"
       }
     },
     {
@@ -23804,7 +23808,7 @@
         "one_allowed_collections": null,
         "junction_field": null,
         "sort_field": "sort",
-        "one_deselect_action": "delete"
+        "one_deselect_action": "nullify"
       }
     },
     {

@@ -16,6 +16,7 @@
 		"diffSchema": "node scripts/directus-sync.js diff"
 	},
 	"devDependencies": {
+		"@archangelgca/sk-seo": "^0.2.8",
 		"@directus/sdk": "^17.0.1",
 		"@sveltejs/adapter-node": "^5.2.2",
 		"@sveltejs/kit": "^2.5.25",
@@ -54,11 +55,10 @@
 		"thumbhash": "^0.1.1",
 		"typescript": "^5.5.4",
 		"typescript-eslint": "^8.4.0",
+		"vanilla-cookieconsent": "3.0.1",
 		"vaul-svelte": "^0.3.2",
 		"vite": "^5.4.3",
-		"zod": "^3.23.8",
-		"vanilla-cookieconsent": "3.0.1"
+		"zod": "^3.23.8"
 	},
-	"type": "module",
-	"dependencies": {}
+	"type": "module"
 }

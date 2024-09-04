@@ -9,7 +9,7 @@
     "one_allowed_collections": null,
     "one_collection": "menus",
     "one_collection_field": null,
-    "one_deselect_action": "delete",
+    "one_deselect_action": "nullify",
     "one_field": "items",
     "sort_field": "sort"
   },
@@ -20,6 +20,6 @@
     "foreign_key_column": "title",
     "constraint_name": "menu_items_menu_foreign",
     "on_update": "RESTRICT",
-    "on_delete": "CASCADE"
+    "on_delete": "SET NULL"
   }
 }

@@ -1,12 +1,11 @@
 <script lang="ts">
 	import Builder from '$lib/components/editor/Builder.svelte';
+	import Seo from '@archangelgca/sk-seo';
 	let { data } = $props();
 	let { page, editor } = data;
 </script>
 
-<svelte:head>
-	<title>{page.title}</title>
-</svelte:head>
+<Seo title={page.seo_detail?.meta_title!} description={page.seo_detail?.meta_description!} />
 
 {#if editor}
 	<Builder nodes={editor} />
