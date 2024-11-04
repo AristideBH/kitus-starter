@@ -58,8 +58,7 @@
 	</div>
 </div>
 
-<Button class="layout-side-right ms-auto mt-6 w-fit self-end" on:click={updateProfile}
-	>Update</Button
+<Button class="layout-side-right ms-auto mt-6 w-fit self-end" onclick={updateProfile}>Update</Button
 >
 
 <style lang="postcss">

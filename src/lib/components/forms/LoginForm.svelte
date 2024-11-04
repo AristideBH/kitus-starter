@@ -5,8 +5,8 @@
 	import { zodClient } from 'sveltekit-superforms/adapters';
 
 	import { toast } from 'svelte-sonner';
-	import * as Form from '$lib/components/ui/form';
-	import { Input } from '$lib/components/ui/input';
+	import * as Form from '$lib/components/ui/form/index.ts';
+	import { Input } from '$lib/components/ui/input/index.ts';
 	import { Loader2 } from 'lucide-svelte';
 
 	let { data }: { data: SuperValidated<Infer<FormSchema>> } = $props();
@@ -27,17 +27,21 @@
 
 <form method="POST" use:enhance class="flex flex-col gap-4">
 	<Form.Field {form} name="email">
-		<Form.Control let:attrs>
-			<Form.Label>Email</Form.Label>
-			<Input {...attrs} bind:value={$formData.email} required />
+		<Form.Control>
+			{#snippet children({ props })}
+				<Form.Label>Email</Form.Label>
+				<Input {...props} bind:value={$formData.email} required />
+			{/snippet}
 		</Form.Control>
 		<Form.FieldErrors />
 	</Form.Field>
 
 	<Form.Field {form} name="password">
-		<Form.Control let:attrs>
-			<Form.Label>Password</Form.Label>
-			<Input {...attrs} bind:value={$formData.password} type="password" required />
+		<Form.Control>
+			{#snippet children({ props })}
+				<Form.Label>Password</Form.Label>
+				<Input {...props} bind:value={$formData.password} type="password" required />
+			{/snippet}
 		</Form.Control>
 		<Form.FieldErrors />
 	</Form.Field>

@@ -37,7 +37,7 @@
 			<Card.Description>We will get back to you ASAP !</Card.Description>
 			<Button
 				class="!mt-4 w-fit"
-				on:click={() => {
+				onclick={() => {
 					formStatus = 'new';
 				}}>Send another message</Button
 			>
@@ -49,46 +49,56 @@
 		<form method="POST" use:enhance>
 			<Card.Content class="flex flex-col gap-4 ">
 				<Form.Field {form} name="name">
-					<Form.Control let:attrs>
-						<Form.Label>Name</Form.Label>
-						<Input {...attrs} bind:value={$formData.name} />
+					<Form.Control>
+						{#snippet children({ props })}
+							<Form.Label>Name</Form.Label>
+							<Input {...props} bind:value={$formData.name} />
+						{/snippet}
 					</Form.Control>
 					<Form.FieldErrors />
 				</Form.Field>
 
 				<Form.Field {form} name="email">
-					<Form.Control let:attrs>
-						<Form.Label>Email</Form.Label>
-						<Input {...attrs} bind:value={$formData.email} />
+					<Form.Control>
+						{#snippet children({ props })}
+							<Form.Label>Email</Form.Label>
+							<Input {...props} bind:value={$formData.email} />
+						{/snippet}
 					</Form.Control>
 					<Form.FieldErrors />
 				</Form.Field>
 
 				<Form.Field {form} name="message">
-					<Form.Control let:attrs>
-						<Form.Label>Message</Form.Label>
-						<Textarea class="text-md" {...attrs} bind:value={$formData.message!} />
+					<Form.Control>
+						{#snippet children({ props })}
+							<Form.Label>Message</Form.Label>
+							<Textarea class="text-md" {...props} bind:value={$formData.message!} />
+						{/snippet}
 					</Form.Control>
 					<Form.FieldErrors />
 				</Form.Field>
 
 				<Form.Field {form} name="honeypot" class="hidden">
-					<Form.Control let:attrs>
-						<Checkbox {...attrs} bind:checked={$formData.honeypot as boolean} />
-						<Form.Label class="!mt-0">Honeypot</Form.Label>
-						<input name={attrs.name} value={$formData.honeypot} hidden />
+					<Form.Control>
+						{#snippet children({ props })}
+							<Checkbox {...props} bind:checked={$formData.honeypot as boolean} />
+							<Form.Label class="!mt-0">Honeypot</Form.Label>
+							<input name={props.name} value={$formData.honeypot} hidden />
+						{/snippet}
 					</Form.Control>
 					<Form.FieldErrors />
 				</Form.Field>
 
 				<Form.Field {form} name="terms" class="flex items-center gap-2">
-					<Form.Control let:attrs>
-						<Checkbox {...attrs} bind:checked={$formData.terms as boolean} />
-						<Form.Label class="!mt-0 text-balance leading-4 ">
-							I agree to the
-							<a href="/terms-and-conditions" target="_blank"> terms and conditions </a>
-						</Form.Label>
-						<input name={attrs.name} value={$formData.terms} hidden />
+					<Form.Control>
+						{#snippet children({ props })}
+							<Checkbox {...props} bind:checked={$formData.terms as boolean} />
+							<Form.Label class="!mt-0 text-balance leading-4 ">
+								I agree to the
+								<a href="/terms-and-conditions" target="_blank"> terms and conditions </a>
+							</Form.Label>
+							<input name={props.name} value={$formData.terms} hidden />
+						{/snippet}
 					</Form.Control>
 					<Form.FieldErrors />
 				</Form.Field>

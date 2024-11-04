@@ -26,25 +26,31 @@
 
 <form method="POST" use:enhance class="flex flex-col gap-4">
 	<Form.Field {form} name="email">
-		<Form.Control let:attrs>
-			<Form.Label>Email</Form.Label>
-			<Input {...attrs} bind:value={$formData.email} required />
+		<Form.Control>
+			{#snippet children({ props })}
+				<Form.Label>Email</Form.Label>
+				<Input {...props} bind:value={$formData.email} required />
+			{/snippet}
 		</Form.Control>
 		<Form.FieldErrors />
 	</Form.Field>
 
 	<Form.Field {form} name="password">
-		<Form.Control let:attrs>
-			<Form.Label>Password</Form.Label>
-			<Input {...attrs} bind:value={$formData.password} type="password" required />
+		<Form.Control>
+			{#snippet children({ props })}
+				<Form.Label>Password</Form.Label>
+				<Input {...props} bind:value={$formData.password} type="password" required />
+			{/snippet}
 		</Form.Control>
 		<Form.FieldErrors />
 	</Form.Field>
 
 	<Form.Field {form} name="confirm">
-		<Form.Control let:attrs>
-			<Form.Label>Confirm password</Form.Label>
-			<Input {...attrs} bind:value={$formData.confirm} type="password" required />
+		<Form.Control>
+			{#snippet children({ props })}
+				<Form.Label>Confirm password</Form.Label>
+				<Input {...props} bind:value={$formData.confirm} type="password" required />
+			{/snippet}
 		</Form.Control>
 		<Form.FieldErrors />
 	</Form.Field>
