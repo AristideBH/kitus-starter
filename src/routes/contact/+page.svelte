@@ -2,7 +2,7 @@
 	import ContactForm from '$lib/components/forms/ContactForm.svelte';
 	import Section from '$lib/components/layout/Section.svelte';
 
-	export let data;
+	let { data } = $props();
 </script>
 
 <Section>

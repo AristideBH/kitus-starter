@@ -6,12 +6,19 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
+	import * as Card from '$lib/components/ui/card';
+
 	import { toast } from 'svelte-sonner';
 	import { page } from '$app/stores';
+	import Footer from '../layout/Footer.svelte';
 
 	const directus = getContext<DirectusClient>('directus');
+	let user = $state($page.data.user);
 
-	$: ({ user } = $page.data);
+	type Props = {
+		class?: string;
+	};
+	let { class: className }: Props = $props();
 
 	async function updateProfile() {
 		try {
@@ -39,27 +46,32 @@
 	/>
 {/if} -->
 
-<div class="layout-center flex flex-col gap-4">
-	<div class="inputWrapper">
-		<Label for="first_name">Prénom</Label>
-		<Input id="first_name" bind:value={user.first_name} />
-	</div>
-	<div class="inputWrapper">
-		<Label for="last_name">Nom</Label>
-		<Input id="last_name" bind:value={user.last_name} />
-	</div>
-	<div class="inputWrapper">
-		<Label for="email">Email</Label>
-		<Input id="email" disabled={true} required type="email" bind:value={user.email} />
-	</div>
-	<div class="inputWrapper">
-		<Label for="title">Titre</Label>
-		<Input id="title" bind:value={user.title} />
-	</div>
-</div>
-
-<Button class="layout-side-right ms-auto mt-6 w-fit self-end" onclick={updateProfile}>Update</Button
->
+<Card.Root class="mx-auto w-full max-w-xl bg-muted">
+	<Card.Header>
+		<Card.Title class="mt-0 text-3xl">Profile</Card.Title>
+	</Card.Header>
+	<Card.Content class="flex flex-col gap-4 ">
+		<div class="inputWrapper">
+			<Label for="first_name">Prénom</Label>
+			<Input id="first_name" bind:value={user.first_name} />
+		</div>
+		<div class="inputWrapper">
+			<Label for="last_name">Nom</Label>
+			<Input id="last_name" bind:value={user.last_name} />
+		</div>
+		<div class="inputWrapper">
+			<Label for="email">Email</Label>
+			<Input id="email" disabled={true} required type="email" bind:value={user.email} />
+		</div>
+		<div class="inputWrapper">
+			<Label for="title">Titre</Label>
+			<Input id="title" bind:value={user.title} />
+		</div>
+	</Card.Content>
+	<Card.Footer>
+		<Button class="ms-auto w-fit " onclick={updateProfile}>Update profile</Button>
+	</Card.Footer>
+</Card.Root>
 
 <style lang="postcss">
 	.inputWrapper {
