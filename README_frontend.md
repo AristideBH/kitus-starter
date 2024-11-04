@@ -31,8 +31,10 @@ Head over to your CapRover dashboard, and navigate to the **Apps** section
     - **Save & Restart** your app
 
 4.  Head over to the **Deployment** tab
+
     - Find **Method 3: Deploy from Github/Bitbucket/Gitlab**
     - Fill in the required fields :
+
       - **repo** : This is the main HTTPS address of repo, in case of github, it is in `github.com/someone/something` format. Make sure it does NOT include `https://` prefix and `.git` suffix.
       - **branch** : The branch you want to be tracked, for example master or staging or release...
       - **github/bitbucket username(email address)** : This is username that will be used when Captain downloads the repo.
@@ -44,7 +46,9 @@ Head over to your CapRover dashboard, and navigate to the **Apps** section
         ```bash
         ssh-keygen -m PEM -t ed25519 -C "yourname@example.com" -f ./deploykey -q -N ""
         ```
+
     - **Save & Restart** your app, then copy the newly generated webhook
+
 5.  Head to your GitHub repository and create a webhook in Settings > Add Webhook
     - **URL** : Captain Webhook from your apps page,
     - **Content Type** : `application/json`,
@@ -56,5 +60,5 @@ Head over to your CapRover dashboard, and navigate to the **Apps** section
 Change directory to the `frontend` folder and run :
 
 ```bash
-pnpm pullTyes
+pnpm pullTypes
 ```
