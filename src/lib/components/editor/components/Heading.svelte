@@ -2,15 +2,13 @@
 	import type { Attrs, TipTapNode } from '../index.d';
 	import { setMarks, setTextAlign } from '../index.svelte';
 
-	let {
-		content,
-		class: className,
-		attrs
-	}: {
+	type Props = {
 		content: TipTapNode[];
 		class?: string;
 		attrs?: Attrs;
-	} = $props();
+	};
+
+	let { content, class: className, attrs }: Props = $props();
 </script>
 
 <svelte:element this={'h' + attrs?.level} class=" {setTextAlign(attrs)} {className ?? ''}">

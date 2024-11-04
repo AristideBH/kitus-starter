@@ -12,7 +12,6 @@
 <style>
 	span {
 		animation: indeterminateAnimation 0.75s infinite linear;
-		/* transform-origin: 0% 50%; */
 	}
 
 	@keyframes indeterminateAnimation {

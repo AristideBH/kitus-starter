@@ -2,13 +2,13 @@
 	import type { Collections } from '$lib/types/client';
 	import type { Snippet } from 'svelte';
 
-	type BlockProps = {
+	type Props = {
 		class?: string;
 		content: Partial<Collections.Stack>;
 		children: Snippet;
 	};
 
-	let { class: className, content, children }: BlockProps = $props();
+	let { class: className, content, children }: Props = $props();
 	let { color, fit_height, direction, gap } = content;
 
 	const setStyles = (node: HTMLElement) => {

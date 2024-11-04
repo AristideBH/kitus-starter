@@ -5,7 +5,13 @@
 	import { setMarks, setTextAlign } from '../index.svelte';
 	import { spring } from 'svelte/motion';
 
-	type Props = { content?: TipTapNode[]; class?: string; children?: Snippet; attrs?: Attrs };
+	type Props = {
+		content?: TipTapNode[];
+		class?: string;
+		children?: Snippet;
+		attrs?: Attrs;
+	};
+
 	let start = 200;
 	let end = 900;
 	let weight = $state(start);

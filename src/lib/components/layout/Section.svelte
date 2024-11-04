@@ -15,20 +15,23 @@
 		content
 	}: SectionProps = $props();
 
-	let template = $state(content?.template),
-		color = $state(content?.color),
-		width = $state(content?.width),
-		align = $state(content?.align);
+	let template = $derived(content?.template),
+		color = $derived(content?.color),
+		width = $derived(content?.width),
+		align = $derived(content?.align);
 
 	const setStyles = (node: HTMLElement) => {
-		let isFullWidth = width === 'full-width';
-		let isColorSet = !!color;
+		const classes = {
+			[`bg-${color}`]: !!color,
+			[`items-${align}`]: !!align,
+			'layout-full py-10': width === 'full-width',
+			'p-7 rounded': width !== 'full-width' && !!color
+		};
 
 		node.setAttribute('data-template', template || 'none');
-		if (isColorSet) node.classList.add(`bg-${color}`);
-		if (align) node.classList.add(`items-${align}`);
-		if (isFullWidth) node.classList.add('layout-full', 'py-10');
-		if (!isFullWidth && isColorSet) node.classList.add('p-7', 'rounded');
+		Object.entries(classes).forEach(([className, condition]) => {
+			if (condition) node.classList.add(...className.split(' '));
+		});
 	};
 </script>
 

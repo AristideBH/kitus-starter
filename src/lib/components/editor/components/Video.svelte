@@ -1,20 +1,17 @@
 <script lang="ts">
 	import type { Collections } from '$lib/types/client';
-	import { readCollections } from '@directus/sdk';
 	import { YouTube, Vimeo } from 'sveltekit-embed';
-	let { content }: { content: Collections.Video } = $props();
 
-	type VideoService = 'youtube' | 'vimeo';
-
-	const {
-		service,
-		id,
-		autoplay: autoPlay
-	} = content.video_link as {
-		service: VideoService;
+	type Props = { content: Collections.Video };
+	type VideoLink = {
+		service: 'youtube' | 'vimeo';
 		id: string;
 		autoplay: boolean;
 	};
+
+	let { content }: Props = $props();
+
+	const { service, id, autoplay: autoPlay } = content.video_link as VideoLink;
 </script>
 
 {#if service === 'youtube'}

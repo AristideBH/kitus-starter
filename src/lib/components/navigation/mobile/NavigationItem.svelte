@@ -1,10 +1,15 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
-	let { href, text }: { href: string; text: string } = $props();
+	type Props = {
+		href: string;
+		text: string;
+	};
+
+	let { href, text }: Props = $props();
 </script>
 
-<li class="font-heading w-fit">
+<li class="w-fit font-heading">
 	<a
 		{href}
 		class:decoration-4={$page.url.pathname === href}

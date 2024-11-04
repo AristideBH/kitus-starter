@@ -1,6 +1,9 @@
 <script lang="ts">
+	import type { TipTapNode } from '.';
+	import type { Collections } from '$lib/types/client';
+
 	import Section from '../layout/Section.svelte';
-	import { onMount } from 'svelte';
+	import Builder from './Builder.svelte';
 	import {
 		Heading,
 		Paragraph,
@@ -16,13 +19,11 @@
 		Video,
 		Button
 	} from './index.svelte';
-	import type { TipTapNode } from '.';
-	import { type Collections } from '$lib/types/client';
 
 	const renderState = new LoadingState();
 
 	let { nodes }: { nodes: TipTapNode[] } = $props();
-	onMount(() => renderState.ready());
+	$effect(() => renderState.ready());
 </script>
 
 {#if renderState.state === 'ready'}
@@ -31,11 +32,11 @@
 			{@const { type, editor } = node}
 			{#if type === 'section'}
 				<Section content={node}>
-					<svelte:self nodes={editor.content} />
+					<Builder nodes={editor.content} />
 				</Section>
 			{:else if type === 'stack' && editor.content}
 				<Stack content={node}>
-					<svelte:self nodes={editor.content} />
+					<Builder nodes={editor.content} />
 				</Stack>
 			{/if}
 

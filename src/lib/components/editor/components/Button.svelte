@@ -2,8 +2,9 @@
 	import { Button } from '$lib/components/ui/button';
 
 	import type { Collections } from '$lib/types/client';
+	type Props = { content: Collections.Button };
 
-	let { content }: { content: Collections.Button } = $props();
+	let { content }: Props = $props();
 	let { label, variant, size, link, url, page, new_tab } = content;
 	const href = () => {
 		if (link === 'page' && typeof page != 'string') {

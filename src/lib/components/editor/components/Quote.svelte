@@ -1,7 +1,9 @@
 <script lang="ts">
 	import type { Collections } from '$lib/types/client';
 
-	let { content }: { content: Collections.Quote } = $props();
+	type Props = { content: Collections.Quote };
+
+	let { content }: Props = $props();
 	let { text, author } = content;
 </script>
 

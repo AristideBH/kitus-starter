@@ -2,7 +2,12 @@
 	import type { Attrs, TipTapNode } from '../index.d';
 	import { findLink, findCode, setMarks, findSub, findSup, setTextAlign } from '../index.svelte';
 
-	let { content, attrs }: { content: TipTapNode[]; attrs?: Attrs } = $props();
+	type Props = {
+		content: TipTapNode[];
+		attrs?: Attrs;
+	};
+
+	let { content, attrs }: Props = $props();
 </script>
 
 {#if content}

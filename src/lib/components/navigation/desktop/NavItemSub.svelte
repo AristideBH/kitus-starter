@@ -1,9 +1,15 @@
 <script lang="ts">
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import type { Collections } from '$lib/types/client';
-	import NavItemFragment from '../NavItemFragment.svelte';
 
-	let { item }: { item: Collections.MenuItems } = $props();
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+	import NavItemFragment from '../NavItemFragment.svelte';
+	import NavItemSub from './NavItemSub.svelte';
+
+	type Props = {
+		item: Collections.MenuItems;
+	};
+
+	let { item }: Props = $props();
 	let { label, children } = item;
 </script>
 
@@ -14,7 +20,7 @@
 	<DropdownMenu.SubContent>
 		{#each children as child}
 			{#if child.type === 'list'}
-				<svelte:self item={child} />
+				<NavItemSub item={child} />
 			{:else}
 				<DropdownMenu.Item>
 					<NavItemFragment item={child} class="no-underline" />

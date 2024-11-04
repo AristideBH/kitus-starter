@@ -38,7 +38,9 @@
 		}
 	});
 
-	let { content }: { content: Collections.Gallery } = $props();
+	type Props = { content: Collections.Gallery };
+
+	let { content }: Props = $props();
 	let { images, type } = content;
 </script>
 
@@ -73,7 +75,7 @@
 			>
 				{#each images as _, i}
 					<span
-						class="border-muted-foreground/30 bg-muted h-2 w-2 rounded border"
+						class="h-2 w-2 rounded border border-muted-foreground/30 bg-muted"
 						class:shadow={i + 1 === current}
 						class:bg-primary={i + 1 === current}
 					></span>

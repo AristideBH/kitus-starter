@@ -3,7 +3,11 @@
 	import Builder from '../Builder.svelte';
 	import { Checkbox } from '$components/ui/checkbox';
 
-	let { content }: { content: TipTapNode[] } = $props();
+	type Props = {
+		content: TipTapNode[];
+	};
+
+	let { content }: Props = $props();
 </script>
 
 <ul>

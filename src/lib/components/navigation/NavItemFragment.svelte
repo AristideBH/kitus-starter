@@ -2,7 +2,12 @@
 	import type { Collections } from '$types/client';
 	import { page } from '$app/stores';
 
-	let { item, class: className }: { item: Collections.MenuItems; class?: string } = $props();
+	type Props = {
+		item: Collections.MenuItems;
+		class?: string;
+	};
+
+	let { item, class: className }: Props = $props();
 </script>
 
 {#if item.type === 'url'}

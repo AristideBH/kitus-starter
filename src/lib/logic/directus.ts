@@ -1,5 +1,5 @@
 import type { Schema, Collections, Types } from '$lib/types/client';
-import type { CookieSerializeOptions } from 'cookie';
+import type { SerializeOptions } from 'cookie';
 
 import { createDirectus, rest, authentication, readFile } from '@directus/sdk';
 import { PUBLIC_DIRECTUS_URL, PUBLIC_COOKIE_DOMAIN } from '$env/static/public';
@@ -118,7 +118,7 @@ export const loginUser = async (
  * @param age - Max age of the cookie in seconds
  * @returns Cookie options with domain, path, security settings, and maxAge set
  */
-export const constructCookieOpts = (age: number): CookieSerializeOptions & { path: string } => {
+export const constructCookieOpts = (age: number): SerializeOptions & { path: string } => {
     return {
         domain: PUBLIC_COOKIE_DOMAIN,
         // send cookie for every page

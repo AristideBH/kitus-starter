@@ -1,15 +1,19 @@
 <script lang="ts">
 	import type { Collections } from '$lib/types/client';
+
+	import { page } from '$app/stores';
 	import { Button } from '$lib/components/ui/button';
 	import Menu from 'lucide-svelte/icons/menu';
 	import * as Drawer from '$lib/components/ui/drawer';
-
 	import NavItemFragment from '../NavItemFragment.svelte';
 	import NavItemSub from '../mobile/NavItemSub.svelte';
-	import { page } from '$app/stores';
-	let { project_name, project_descriptor } = $page.data.global;
 
-	let { menu }: { menu: Collections.Menus } = $props();
+	type Props = {
+		menu: Collections.Menus;
+	};
+
+	let { menu }: Props = $props();
+	let { project_name, project_descriptor } = $page.data.global;
 
 	let open = $state(false);
 </script>

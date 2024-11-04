@@ -5,9 +5,13 @@
 	import NavItemFragment from '../NavItemFragment.svelte';
 	import NavItemSub from './NavItemSub.svelte';
 	import ChevronUp from 'lucide-svelte/icons/chevron-up';
-	let open: boolean = $state(false);
 
-	let { menu }: { menu: Collections.Menus } = $props();
+	type Props = {
+		menu: Collections.Menus;
+	};
+
+	let open: boolean = $state(false);
+	let { menu }: Props = $props();
 </script>
 
 <div class="flex gap-6 xl:gap-8">

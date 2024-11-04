@@ -2,7 +2,12 @@
 	import type { TipTapNode } from '../index.d';
 	import Builder from '../Builder.svelte';
 
-	let { content, class: className }: { content: TipTapNode[]; class?: string } = $props();
+	type Props = {
+		content: TipTapNode[];
+		class?: string;
+	};
+
+	let { content, class: className }: Props = $props();
 </script>
 
 <blockquote class="{className ?? ''} lead">
