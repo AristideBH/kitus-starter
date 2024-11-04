@@ -43,6 +43,7 @@
 		transition:flyAndScale={{ y: -20, start: 0.975 }}
 		use:setStyles
 		class={className ?? ''}
+		data-template="none"
 	>
 		{@render children()}
 	</svelte:element>
