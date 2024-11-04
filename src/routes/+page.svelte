@@ -23,7 +23,7 @@
 	<AnimatedHeading class="mb-0 ~text-6xl/9xl">Kitus Starter</AnimatedHeading>
 	<p class="lead mb-10 italic text-primary">A custom starter template for Sveltekit & Directus</p>
 
-	<Accordion.Root class="rounded-sm bg-muted" value="item-1">
+	<Accordion.Root type="single" class="rounded-sm bg-muted" value={'item-1'}>
 		<Accordion.Item value="item-1" class="mx-6 rounded-sm">
 			<Accordion.Trigger class="!no-underline">Details</Accordion.Trigger>
 			<Accordion.Content>
@@ -42,15 +42,16 @@
 							<li>Flexible Builder</li>
 						</ul>
 					</li>
-				</ul>
-			</Accordion.Content>
+				</ul></Accordion.Content
+			>
 		</Accordion.Item>
 	</Accordion.Root>
 
 	<div class="mt-4 flex gap-2">
 		<Button variant="secondary" href="/work">Work<ChevronRight class="ms-2 size-4" /></Button>
-		<Button variant="border" href="/work/services"
-			>Services<ChevronRight class="ms-2 size-4" /></Button
-		>
+		<Button variant="border" href="/work/services">
+			Services
+			<ChevronRight class="ms-2 size-4" />
+		</Button>
 	</div>
 </Section>
