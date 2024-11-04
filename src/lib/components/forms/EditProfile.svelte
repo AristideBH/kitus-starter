@@ -52,11 +52,11 @@
 	</Card.Header>
 	<Card.Content class="flex flex-col gap-4 ">
 		<div class="inputWrapper">
-			<Label for="first_name">Prénom</Label>
+			<Label for="first_name">First name</Label>
 			<Input id="first_name" bind:value={user.first_name} />
 		</div>
 		<div class="inputWrapper">
-			<Label for="last_name">Nom</Label>
+			<Label for="last_name">Last name</Label>
 			<Input id="last_name" bind:value={user.last_name} />
 		</div>
 		<div class="inputWrapper">
@@ -64,7 +64,7 @@
 			<Input id="email" disabled={true} required type="email" bind:value={user.email} />
 		</div>
 		<div class="inputWrapper">
-			<Label for="title">Titre</Label>
+			<Label for="title">Title</Label>
 			<Input id="title" bind:value={user.title} />
 		</div>
 	</Card.Content>
