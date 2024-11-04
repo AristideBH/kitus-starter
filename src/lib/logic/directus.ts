@@ -70,7 +70,7 @@ export const directusError = (err: unknown, showToast: boolean = false) => {
         if (showToast) toast.error(parsedErr.errors[0].message);
         error(401, parsedErr.errors[0].message);
     } else {
-        error(401, 'Unknown error');
+        error(401, 'Error while using SDK');
     }
 }
 

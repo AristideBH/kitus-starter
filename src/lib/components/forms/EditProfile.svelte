@@ -22,14 +22,14 @@
 					title: user.title
 				})
 			);
-			toast.success('user updated successfully');
+			toast.success('Profile updated successfully');
 		} catch (e) {
 			directusError(e, true);
 		}
 	}
 </script>
 
-<pre>{JSON.stringify($page.data.user, null, 2)}</pre>
+<!-- <pre>{JSON.stringify($page.data.user, null, 2)}</pre> -->
 
 <!-- {#if user.avatar}
 	<img
