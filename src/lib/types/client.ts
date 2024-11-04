@@ -359,6 +359,7 @@ export namespace Collections {
     editor: Types.Optional<Types.JSON | Types.JSON>;
     editor_nodes: Collections.SectionEditorNodes[];
     type: Types.String;
+    border: Types.Optional<"muted" | "secondary" | "primary" | Types.String>;
   }
 
   /**

@@ -233,9 +233,9 @@ type Subscription {
   pages_mutated(event: EventEnum): pages_mutated
   homepage_mutated(event: EventEnum): homepage_mutated
   section_editor_nodes_mutated(event: EventEnum): section_editor_nodes_mutated
-  section_mutated(event: EventEnum): section_mutated
   pages_editor_nodes_mutated(event: EventEnum): pages_editor_nodes_mutated
   quote_mutated(event: EventEnum): quote_mutated
+  section_mutated(event: EventEnum): section_mutated
   gallery_files_mutated(event: EventEnum): gallery_files_mutated
   gallery_mutated(event: EventEnum): gallery_mutated
   seo_setting_mutated(event: EventEnum): seo_setting_mutated
@@ -1655,6 +1655,7 @@ type section {
   template: String
   align: String
   type: String
+  border: String
   editor_nodes(filter: section_editor_nodes_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [section_editor_nodes]
   editor_nodes_func: count_functions
 }
@@ -2704,6 +2705,7 @@ input section_filter {
   template: string_filter_operators
   align: string_filter_operators
   type: string_filter_operators
+  border: string_filter_operators
   editor_nodes: section_editor_nodes_filter
   editor_nodes_func: count_function_filter_operators
   _and: [section_filter]
