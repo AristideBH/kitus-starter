@@ -21,12 +21,13 @@
 	} from './index.svelte';
 
 	const renderState = new LoadingState();
+	type Props = { nodes?: TipTapNode[] };
 
-	let { nodes }: { nodes: TipTapNode[] } = $props();
+	let { nodes }: Props = $props();
 	$effect(() => renderState.ready());
 </script>
 
-{#if renderState.state === 'ready'}
+{#if renderState.state === 'ready' && nodes}
 	{#each nodes as node}
 		{#if node?.editor}
 			{@const { type, editor } = node}

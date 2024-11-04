@@ -17,7 +17,7 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 
 <script lang="ts">
 	import type { CustomDirectusFile, DirectusClient } from '$lib/logic/directus';
-	import { onMount, getContext } from 'svelte';
+	import { getContext } from 'svelte';
 	import {
 		getFileInfos,
 		getImgSrcSet,
@@ -37,7 +37,8 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 		transformations,
 		class: className,
 		showCaption = false,
-		loading = 'lazy'
+		loading = 'lazy',
+		aspectOverwrite = false
 	}: ImageProps = $props();
 
 	// * COMPONENTS STATE
@@ -53,7 +54,7 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 	let elWidth = $state<number>(0);
 	let elHeight = $derived(elWidth / aspectRatio);
 
-	onMount(() => {
+	$effect(() => {
 		if (typeof id === 'string') {
 			getFileInfos(directus, id).then((data) => {
 				// Get full file informations if provided id is a string
@@ -102,7 +103,7 @@ The component uses the `getFileInfos`, `getImgSrcSet`, `getImgUrl`, `getThumbhas
 		width={elWidth}
 		height={elHeight}
 		class:not-loaded={!inView}
-		class="aspect-video"
+		class:aspect-video={!aspectOverwrite}
 		bind:this={imgEl}
 	/>
 	{#if showCaption && inView && fetchedFile?.description}

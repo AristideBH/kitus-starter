@@ -23,17 +23,15 @@
 	});
 
 	// - Carousel settings
-	let api: CarouselAPI | undefined = $state();
-	let count = $state(0);
+	let api = $state<CarouselAPI>();
 	let current = $state(0);
+	let count = $derived(api ? api.scrollSnapList().length : 0);
 
 	$effect(() => {
 		if (api) {
-			count = api.scrollSnapList().length;
 			current = api.selectedScrollSnap() + 1;
-
 			api.on('select', () => {
-				if (api) current = api.selectedScrollSnap() + 1;
+				current = api!.selectedScrollSnap() + 1;
 			});
 		}
 	});
@@ -44,10 +42,10 @@
 	let { images, type } = content;
 </script>
 
-{#snippet img(image: Collections.GalleryFiles)}
+{#snippet img(image: Collections.GalleryFiles, aspectOverwrite?: true)}
 	{#await getImgData(image.directus_files_id) then res}
 		{#if res}
-			<Image item={res} />
+			<Image item={res} {aspectOverwrite} />
 		{/if}
 	{/await}
 {/snippet}
@@ -58,7 +56,7 @@
 	<Image item={images[0].directus_files_id} />
 {:else if images.length > 1}
 	{#if type === 'slider'}
-		<Carousel.Root bind:api class="group" opts={{ align: 'start' }}>
+		<Carousel.Root setApi={(emblaApi) => (api = emblaApi)} class="group" opts={{ align: 'start' }}>
 			<Carousel.Content>
 				{#each images as image}
 					<Carousel.Item class="basis-5/6 ">
@@ -86,9 +84,7 @@
 		<Masonry {colWidth}>
 			{#each images as image}
 				{#if image && typeof image != 'string'}
-					<span>
-						{@render img(image)}
-					</span>
+					{@render img(image, true)}
 				{/if}
 			{/each}
 		</Masonry>

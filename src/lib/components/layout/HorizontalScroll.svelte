@@ -25,11 +25,13 @@
 				left: '0px'
 			},
 			{
+				//@ts-expect-error TS does not yet include the ViewTimeline API type
 				timeline: new ViewTimeline({
 					subject: section,
 					axis: 'block'
 				}),
 				fill: 'forwards',
+				//@ts-expect-error TS does not yet include the ViewTimeline API type
 				rangeStart: `contain 0%`,
 				rangeEnd: `contain 100%`
 			}

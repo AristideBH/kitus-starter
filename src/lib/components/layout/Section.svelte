@@ -18,6 +18,7 @@
 	let template = $derived(content?.template),
 		color = $derived(content?.color),
 		width = $derived(content?.width),
+		border = $derived(content?.border),
 		align = $derived(content?.align);
 
 	const setStyles = (node: HTMLElement) => {
@@ -25,7 +26,8 @@
 			[`bg-${color}`]: !!color,
 			[`items-${align}`]: !!align,
 			'layout-full py-10': width === 'full-width',
-			'p-7 rounded': width !== 'full-width' && !!color
+			'p-7 rounded': width !== 'full-width' && !!color,
+			[`border-${border} border p-7 rounded`]: !!border
 		};
 
 		node.setAttribute('data-template', template || 'none');

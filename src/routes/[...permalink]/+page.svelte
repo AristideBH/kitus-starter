@@ -7,6 +7,4 @@
 
 <Seo title={page.seo_detail?.meta_title!} description={page.seo_detail?.meta_description!} />
 
-{#if editor}
-	<Builder nodes={editor} />
-{/if}
+<Builder nodes={editor} />
