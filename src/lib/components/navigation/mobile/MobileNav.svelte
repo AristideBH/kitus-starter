@@ -7,6 +7,7 @@
 	import * as Drawer from '$lib/components/ui/drawer';
 	import NavItemFragment from '../NavItemFragment.svelte';
 	import NavItemSub from '../mobile/NavItemSub.svelte';
+	import { closeDrawer, isDrawerOpen } from './index.svelte';
 
 	type Props = {
 		menu: Collections.Menus;
@@ -14,11 +15,9 @@
 
 	let { menu }: Props = $props();
 	let { project_name, project_descriptor } = $page.data.global;
-
-	let open = $state(false);
 </script>
 
-<Drawer.Root bind:open>
+<Drawer.Root bind:open={$isDrawerOpen}>
 	<Drawer.Trigger>
 		<Button variant="border" size="icon" aria-label="Open menu">
 			<Menu class="s-4" />
@@ -26,7 +25,7 @@
 	</Drawer.Trigger>
 	<Drawer.Content class="max-h-full min-h-[33vh] ">
 		<Drawer.Header class="flex items-start gap-3 px-8 pt-8 text-left">
-			<a href="/">
+			<a href="/" onclick={closeDrawer}>
 				<img
 					class="size-11"
 					height="44"
@@ -46,9 +45,7 @@
 				{#if item.type === 'list'}
 					<NavItemSub {item} />
 				{:else}
-					<Drawer.Close>
-						<NavItemFragment {item} class="!w-full" />
-					</Drawer.Close>
+					<NavItemFragment {item} onclick={closeDrawer} class="!w-full" />
 				{/if}
 			{/each}
 		</nav>

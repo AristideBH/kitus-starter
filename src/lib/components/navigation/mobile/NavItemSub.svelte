@@ -3,6 +3,7 @@
 	import * as Drawer from '$lib/components/ui/drawer';
 	import NavItemFragment from '../NavItemFragment.svelte';
 	import NavItemSub from './NavItemSub.svelte';
+	import { closeDrawer } from './index.svelte';
 
 	type Props = {
 		item: Collections.MenuItems;
@@ -21,9 +22,7 @@
 			{#if child.type === 'list'}
 				<NavItemSub item={child} labelTag="h6" class="text-2xl" />
 			{:else}
-				<Drawer.Close>
-					<NavItemFragment item={child} class="!w-full" />
-				</Drawer.Close>
+				<NavItemFragment item={child} class="!w-full" onclick={closeDrawer} />
 			{/if}
 		{/each}
 	</div>

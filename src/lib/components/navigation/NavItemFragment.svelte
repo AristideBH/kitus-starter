@@ -5,9 +5,10 @@
 	type Props = {
 		item: Collections.MenuItems;
 		class?: string;
+		onclick?: () => void;
 	};
 
-	let { item, class: className }: Props = $props();
+	let { item, class: className, onclick }: Props = $props();
 </script>
 
 {#if item.type === 'url'}
@@ -16,6 +17,7 @@
 		href={item.url}
 		target={item.open_in_new_tab ? '_blank' : ''}
 		class:active={$page.url.pathname === item.url}
+		{...onclick ? { onclick } : {}}
 	>
 		{item.label}
 	</a>
@@ -24,6 +26,7 @@
 		class={className ?? ''}
 		href="/{item.page?.permalink}"
 		class:active={$page.url.pathname.replace('/', '') === item.page?.permalink}
+		{...onclick ? { onclick } : {}}
 	>
 		{item.label}
 	</a>
