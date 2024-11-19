@@ -32,6 +32,7 @@
 					<li>Directus SDK and decicated functions</li>
 					<li>Client Types & Schema sync</li>
 					<li>Authentification & account page</li>
+					<li>Sitemap.xml generation</li>
 					<li>Tailwind, shadcn-svelte and fluid plugin</li>
 					<li>Pages transitions & animated sections</li>
 					<li>
