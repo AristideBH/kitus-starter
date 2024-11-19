@@ -11,6 +11,7 @@ WORKDIR /app
 ARG TZ=Europe/Paris
 ARG PUBLIC_DIRECTUS_URL
 ARG PUBLIC_COOKIE_DOMAIN
+ARG PUBLIC_SITE_URL
 
 COPY . /app
 RUN apk --no-cache add curl tzdata

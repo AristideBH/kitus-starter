@@ -1,15 +1,12 @@
 import type { RequestHandler } from './$types';
 import { client } from '$lib/logic/directus';
 import { listPages } from '$lib/types/client';
-import { readSettings } from '@directus/sdk';
+import { PUBLIC_SITE_URL } from '$env/static/public';
 
 export const GET: RequestHandler = async ({ fetch }) => {
     const directus = client(fetch);
     const frequency = "weekly";
     const priority = "0.8";
-
-    const infos = await directus.request(readSettings())
-    console.log('🩺: GET:RequestHandler -> infos', infos)
 
     const conditions = {
         "_and": [
@@ -80,7 +77,7 @@ export const GET: RequestHandler = async ({ fetch }) => {
             .map((entry) => {
                 return `
                 <url>
-                    <loc>${infos.project_url}${entry.path}</loc>
+                    <loc>${PUBLIC_SITE_URL}${entry.path}</loc>
                     <lastmod>${entry.lastmod}</lastmod>
                     <changefreq>${entry.frequency}</changefreq>
                     <priority>${entry.priority}</priority>
