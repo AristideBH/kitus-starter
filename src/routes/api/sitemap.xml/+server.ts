@@ -7,7 +7,6 @@ export const GET: RequestHandler = async ({ fetch }) => {
     const directus = client(fetch);
     const frequency = "weekly";
     const priority = "0.8";
-
     const conditions = {
         "_and": [
             {
@@ -27,6 +26,12 @@ export const GET: RequestHandler = async ({ fetch }) => {
         },
         {
             path: "/kitchen",
+            lastmod: new Date().toISOString(),
+            frequency,
+            priority,
+        },
+        {
+            path: "/layout",
             lastmod: new Date().toISOString(),
             frequency,
             priority,
@@ -60,9 +65,6 @@ export const GET: RequestHandler = async ({ fetch }) => {
                 }
             })
     }
-
-
-
 
     const pagesAndPosts = [
         ...manualEntries,
