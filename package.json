@@ -16,7 +16,6 @@
 		"diffSchema": "node scripts/directus-sync.js diff"
 	},
 	"devDependencies": {
-		"@archangelgca/sk-seo": "^0.2.8",
 		"@directus/sdk": "^18.0.0",
 		"@sveltejs/adapter-node": "^5.2.9",
 		"@sveltejs/kit": "^2.8.1",

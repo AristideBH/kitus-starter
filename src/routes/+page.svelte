@@ -7,13 +7,13 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { ChevronRight } from 'lucide-svelte';
 
-	import Seo from '@archangelgca/sk-seo';
+	// import Seo from '@archangelgca/sk-seo';
 
 	let { data } = $props();
 	let { home } = data;
 </script>
 
-<Seo title={home!.seo_detail?.meta_title!} description={home!.seo_detail?.meta_description!} />
+<!-- <Seo title={home!.seo_detail?.meta_title!} description={home!.seo_detail?.meta_description!} /> -->
 
 <Section content={{ width: 'full-width', color: 'none' }}>
 	<Image item={home?.img!} class="max-h-96" loading="eager" />

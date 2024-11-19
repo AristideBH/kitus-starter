@@ -8,9 +8,6 @@ importers:
 
   .:
     devDependencies:
-      '@archangelgca/sk-seo':
-        specifier: ^0.2.8
-        version: 0.2.8
       '@directus/sdk':
         specifier: ^18.0.0
         version: 18.0.0
@@ -147,9 +144,6 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
-
-  '@archangelgca/sk-seo@0.2.8':
-    resolution: {integrity: sha512-Tr0Kzvz8ErEiqFvO6oeFKy1fhEcZ/9ZrOR3sCxFIsJSo7Ut8KwoYh05Syf++wROMUD/7BXgwJn1XKkXOMyif9w==}
 
   '@ark/schema@0.23.0':
     resolution: {integrity: sha512-406Zx0te3ICd7PkGise4XIxOfmjFzK64tEuiN5rmJDg14AqhySXygMk8QcHqHORDJ7VXhel7J41iduw8eyiFPg==}
@@ -2151,8 +2145,6 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
-
-  '@archangelgca/sk-seo@0.2.8': {}
 
   '@ark/schema@0.23.0':
     dependencies:
