@@ -1,7 +1,8 @@
 import type { RequestHandler } from './$types';
 import { client } from '$lib/logic/directus';
 import { listPages } from '$lib/types/client';
-import { PUBLIC_SITE_URL } from '$env/static/public';
+// import { PUBLIC_SITE_URL } from '$env/static/public';
+import { SITE_URL } from '$env/static/private';
 import type { Collections } from '$lib/types/client';
 
 export const GET: RequestHandler = async ({ fetch }) => {
@@ -78,7 +79,7 @@ export const GET: RequestHandler = async ({ fetch }) => {
             .map((entry) => {
                 return `
                 <url>
-                    <loc>${PUBLIC_SITE_URL}${entry.path}</loc>
+                    <loc>${SITE_URL}${entry.path}</loc>
                     <lastmod>${entry.lastmod}</lastmod>
                     <changefreq>${entry.frequency}</changefreq>
                     <priority>${entry.priority}</priority>
