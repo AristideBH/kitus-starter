@@ -42,8 +42,8 @@
 							<li>Flexible Builder</li>
 						</ul>
 					</li>
-				</ul></Accordion.Content
-			>
+				</ul>
+			</Accordion.Content>
 		</Accordion.Item>
 	</Accordion.Root>
 
