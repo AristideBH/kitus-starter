@@ -16978,6 +16978,18 @@
           },
           "flow_manager_categories": {
             "nullable": true
+          },
+          "maintenance_state": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "maintenance_description": {
+            "nullable": true,
+            "type": "string"
+          },
+          "maintenance_title": {
+            "nullable": true,
+            "type": "string"
           }
         },
         "x-collection": "directus_settings"

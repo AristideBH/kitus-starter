@@ -1210,6 +1210,9 @@ type directus_settings {
   public_registration_email_filter_func: count_functions
   flow_manager_categories: JSON
   flow_manager_categories_func: count_functions
+  maintenance_state: Boolean
+  maintenance_description: String
+  maintenance_title: String
 }
 
 type directus_settings_mutated {
@@ -3000,6 +3003,9 @@ input update_directus_settings_input {
   """$t:fields.directus_settings.public_registration_email_filter_note"""
   public_registration_email_filter: JSON
   flow_manager_categories: JSON
+  maintenance_state: Boolean
+  maintenance_description: String
+  maintenance_title: String
 }
 
 input update_directus_shares_input {

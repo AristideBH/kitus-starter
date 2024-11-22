@@ -1,46 +1,32 @@
 {
-  "collection": "section",
-  "field": "template",
+  "collection": "directus_settings",
+  "field": "maintenance_title",
   "type": "string",
   "meta": {
-    "collection": "section",
+    "collection": "directus_settings",
     "conditions": null,
-    "display": "labels",
+    "display": null,
     "display_options": null,
-    "field": "template",
-    "group": null,
+    "field": "maintenance_title",
+    "group": "maintenance_mode",
     "hidden": false,
-    "interface": "select-dropdown",
+    "interface": "input",
     "note": null,
     "options": {
-      "allowNone": true,
-      "choices": [
-        {
-          "text": "Content | Sidebar",
-          "value": "inherit-main"
-        },
-        {
-          "text": "2 columns",
-          "value": "cols-2"
-        },
-        {
-          "text": "3 columns",
-          "value": "cols-3"
-        }
-      ]
+      "placeholder": "The site is not yet ready !"
     },
     "readonly": false,
     "required": false,
-    "sort": 5,
+    "sort": 2,
     "special": null,
     "translations": null,
     "validation": null,
     "validation_message": null,
-    "width": "half"
+    "width": "full"
   },
   "schema": {
-    "name": "template",
-    "table": "section",
+    "name": "maintenance_title",
+    "table": "directus_settings",
     "data_type": "character varying",
     "default_value": null,
     "max_length": 255,

@@ -1,23 +1,25 @@
 {
-  "collection": "section",
-  "field": "editor_nodes",
+  "collection": "directus_settings",
+  "field": "maintenance_mode",
   "type": "alias",
   "meta": {
-    "collection": "section",
+    "collection": "directus_settings",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "editor_nodes",
+    "field": "maintenance_mode",
     "group": null,
-    "hidden": true,
-    "interface": null,
+    "hidden": false,
+    "interface": "group-detail",
     "note": null,
     "options": null,
     "readonly": false,
     "required": false,
-    "sort": 8,
+    "sort": 2,
     "special": [
-      "m2a"
+      "alias",
+      "group",
+      "no-data"
     ],
     "translations": null,
     "validation": null,

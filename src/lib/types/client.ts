@@ -352,6 +352,7 @@ export namespace Collections {
     id: Types.PrimaryKey<Types.UUID>;
     width: Types.Optional<Types.String>;
     color: Types.Optional<"muted" | "secondary" | "primary" | Types.String>;
+    border: Types.Optional<"muted" | "secondary" | "primary" | Types.String>;
     template: Types.Optional<
       "cols-3" | "cols-2" | "inherit-main" | Types.String
     >;
@@ -359,7 +360,6 @@ export namespace Collections {
     editor: Types.Optional<Types.JSON | Types.JSON>;
     editor_nodes: Collections.SectionEditorNodes[];
     type: Types.String;
-    border: Types.Optional<"muted" | "secondary" | "primary" | Types.String>;
   }
 
   /**
@@ -621,6 +621,9 @@ export interface System {
    */
   directus_settings: {
     flow_manager_categories: Types.Optional<Types.JSON | Types.JSON>;
+    maintenance_state: Types.Optional<Types.Boolean>;
+    maintenance_title: Types.Optional<Types.String>;
+    maintenance_description: Types.Optional<Types.String>;
   };
 
   /**

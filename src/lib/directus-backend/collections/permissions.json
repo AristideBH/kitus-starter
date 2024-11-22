@@ -536,7 +536,11 @@
     "fields": [
       "project_name",
       "project_descriptor",
-      "project_url"
+      "project_url",
+      "maintenance_mode",
+      "maintenance_state",
+      "maintenance_title",
+      "maintenance_description"
     ],
     "_syncId": "a8c66bc6-61e4-490a-bcff-795170afa4c8"
   },

@@ -2,6 +2,7 @@ import type { LayoutServerLoad } from './$types';
 import { client } from '$logic/directus';
 import { readMenus } from '$lib/types/client';
 import { readSettings } from '@directus/sdk';
+import { redirect } from '@sveltejs/kit';
 
 export const load = (async ({ fetch, locals, url }) => {
     const user = locals.user;
@@ -15,6 +16,13 @@ export const load = (async ({ fetch, locals, url }) => {
     const global = await directus.request(readSettings());
 
 
+    if (global.maintenance_state && url.pathname !== "/maintenance") {
+        redirect(307, "/maintenance");
+    } else if (url.pathname === "/maintenance" && !global.maintenance_state) {
+        redirect(307, "/");
+    }
+
+
     return {
         // Transition
         pathName: url.pathname,
@@ -25,5 +33,10 @@ export const load = (async ({ fetch, locals, url }) => {
         headerNav,
         footerNav,
         global,
+        maintenance: {
+            state: global.maintenance_state,
+            title: global.maintenance_title,
+            description: global.maintenance_description
+        }
     };
 }) satisfies LayoutServerLoad;

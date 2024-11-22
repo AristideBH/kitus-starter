@@ -1,49 +1,36 @@
 {
-  "collection": "section",
-  "field": "border",
-  "type": "string",
+  "collection": "directus_settings",
+  "field": "maintenance_description",
+  "type": "text",
   "meta": {
-    "collection": "section",
+    "collection": "directus_settings",
     "conditions": null,
     "display": null,
     "display_options": null,
-    "field": "border",
-    "group": null,
+    "field": "maintenance_description",
+    "group": "maintenance_mode",
     "hidden": false,
-    "interface": "select-dropdown",
+    "interface": "input-multiline",
     "note": null,
     "options": {
-      "allowNone": true,
-      "choices": [
-        {
-          "text": "Primary",
-          "value": "primary"
-        },
-        {
-          "text": "Secondary",
-          "value": "secondary"
-        },
-        {
-          "text": "Muted",
-          "value": "muted"
-        }
-      ]
+      "placeholder": "The site is currlty behind worked on. Please come back later !",
+      "trim": true
     },
     "readonly": false,
     "required": false,
-    "sort": 4,
+    "sort": 3,
     "special": null,
     "translations": null,
     "validation": null,
     "validation_message": null,
-    "width": "half"
+    "width": "full"
   },
   "schema": {
-    "name": "border",
-    "table": "section",
-    "data_type": "character varying",
+    "name": "maintenance_description",
+    "table": "directus_settings",
+    "data_type": "text",
     "default_value": null,
-    "max_length": 255,
+    "max_length": null,
     "numeric_precision": null,
     "numeric_scale": null,
     "is_nullable": true,

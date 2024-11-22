@@ -749,6 +749,9 @@ type directus_settings {
   public_registration_email_filter_func: count_functions
   flow_manager_categories: JSON
   flow_manager_categories_func: count_functions
+  maintenance_state: Boolean
+  maintenance_description: String
+  maintenance_title: String
 }
 
 type directus_settings_mutated {

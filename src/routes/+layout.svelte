@@ -19,12 +19,14 @@
 <!-- UTILITIES -->
 <ModeWatcher darkClassNames={['dark', 'cc--darkmode']} />
 <Toaster />
-<CookieConsent />
 
 <!-- MARKUP -->
 <Main transitionKey={data.pathName} options={{ duration: 100, y: 20, delta: 0 }}>
 	{@render children?.()}
 </Main>
 
-<Footer />
-<Header />
+{#if !data.global.maintenance_state}
+	<Footer />
+	<Header />
+	<CookieConsent />
+{/if}
