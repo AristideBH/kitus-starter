@@ -41,7 +41,7 @@ export const inView = (node: HTMLElement, params: Partial<InViewParams> = inView
     if (!('ViewTimeline' in window)) {
         return;
     }
-    //@ts-expect-error ViewTimeline is still very supported
+    // @ts-expect-error ViewTimeline is still not very supported
     const timeline = new ViewTimeline({
         subject: node,
         axis: 'block'
